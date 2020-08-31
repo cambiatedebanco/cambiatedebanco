@@ -1,0 +1,47 @@
+.color-white{
+   color: #ffffff;
+}
+.btn-nav[_ngcontent-unx-c100] {
+    border: 0;
+    background: none;
+    text-decoration: none;
+    padding: 0;
+    height: 36px;
+}
+
+
+.avatar-login {
+    vertical-align: middle;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+
+.navbar-right .dropdown-menu {
+    right: 0;
+    left: auto;
+}
+
+.contact-panel img {
+    width: 30px;
+    height: 30px;
+}
+
+.m-b {
+    margin-bottom: 0px;
+}
+.img-circle {
+    vertical-align: middle;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+}
+img {
+    vertical-align: middle;
+}
+img {
+    border: 0;
+}
+
+

@@ -1,0 +1,81 @@
+<div class="col-md-12 col-lg-4 col-sm-12">
+    <div class="white-box" style="border-top: 2px solid #ff4337;">
+        <h3 class="box-title">
+            <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">Proteccion
+                </font>
+            </font>
+            <div class="col-md-2 col-sm-4 col-xs-6 pull-right">
+                <i class="fa fa-umbrella fa-2x"></i>
+            </div>
+        </h3>
+        <div class="row sales-report">
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <h2>
+                    <font style="vertical-align: inherit;">
+                        <font style="vertical-align: inherit;">Penetración</font>
+                    </font>
+                </h2>
+
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-6 ">
+                <h2 class="text-right">
+                    <font style="vertical-align: inherit;">
+                        <font style="vertical-align: inherit;"> {{ (empresas.n_afiliados_seguro/ empresas.n_afiliados | percent)}}</font>
+                    </font>
+                </h2>
+            </div>
+        </div>
+        <div class="row sales-report">
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <h2>
+                    <font style="vertical-align: inherit;">
+                        <font style="vertical-align: inherit;">Prima</font>
+                    </font>
+                </h2>
+
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-6 ">
+                <h2 class="text-right">
+                    <font style="vertical-align: inherit;">
+                        <font style="vertical-align: inherit;"> {{ (empresas.seguro_stock) | number:'1.0-0':'es'}} UF</font>
+                    </font>
+                </h2>
+            </div>
+        </div>
+        <div class="row sales-report">
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <h2>
+                    <font style="vertical-align: inherit;">
+                        <font style="vertical-align: inherit;">N° Afiliados</font>
+                    </font>
+                </h2>
+
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-6 ">
+                <h2 class="text-right">
+                    <font style="vertical-align: inherit;">
+                        <font style="vertical-align: inherit;"> {{ (empresas.n_afiliados_seguro) | number:'1.0-0':'es'}}</font>
+                    </font>
+                </h2>
+            </div>
+        </div>
+        <div class="row sales-report">
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <h2>
+                    <font style="vertical-align: inherit;">
+                        <font style="vertical-align: inherit;">Por Afiliado</font>
+                    </font>
+                </h2>
+
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-6 ">
+                <h2 class="text-right">
+                    <font style="vertical-align: inherit;">
+                        <font style="vertical-align: inherit;"> {{ (empresas.seguro_stock) / (empresas.n_afiliados_seguro) | number:'1.1-2':'es'}}UF</font>
+                    </font>
+                </h2>
+            </div>
+        </div>
+    </div>
+</div>

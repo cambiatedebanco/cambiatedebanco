@@ -1,0 +1,107 @@
+<app-navbar (idEmmiter)="onIdEmmiter($event)"></app-navbar>
+<app-left-bar></app-left-bar>
+<app-idle></app-idle>
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row bg-title">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                <h3 class="page-title">{{lead?.nombre_campana}}</h3>
+            </div>
+            <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                <ol class="breadcrumb">
+                    <li><a [routerLink]="['/mi-cartera-home']">Mi <i  class="fa fa-heart" style="color:#f1a5a3;"></i> Cartera</a></li>
+                </ol>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <div class="row">
+
+            <div class="white-box">
+                <div class="panel">
+
+                    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+                        <div class="form-group col-md-12">
+                            <h3 class="box-title m-b-0">
+                                Leads
+                            </h3>
+                            <p class="text-muted m-b-30"></p>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label for="id">Id</label>
+                            <input type="text" class="form-control" id="id" formControlName="id">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="date">Fecha Solicitud</label>
+                            <input type="text" class="form-control" id="create_time" formControlName="created_time">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="rut">Rut</label>
+                            <input type="text" class="form-control" id="rut" formControlName="rut">
+                        </div>
+                        <div class="form-group col-md-8">
+                            <label for="txtnombre">Nombre</label>
+                            <input type="text" class="form-control" id="txtnombre" formControlName="nombre">
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label for="txtphone">Comuna</label>
+                            <input type="text" class="form-control" id="txtcomuna" formControlName="comuna" placeholder="Ingrese Comuna">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputState">Región</label>
+                            <select id="inputState" name="id_region" class="form-control" formControlName="id_region">
+                                      <option value='0' selected>Seleccione Región...</option>
+                                      <option *ngFor="let region of regiones" value="{{region.id_region}}"  [attr.selected]="lead?.id_region==region.id_region ? true : null">
+
+                          {{region.nombre_region?.toUpperCase()}}
+                        </option>
+                                    </select>
+
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="txtphone">Teléfono</label>
+                            <input type="text" class="form-control" id="txtphone" formControlName="phone_number" placeholder="Ingrese Teléfono">
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="txtemail">Email</label>
+                            <input type="text" class="form-control" id="txtemail" formControlName="email" placeholder="Ingrese Email">
+                        </div>
+
+                        <div class="form-group col-md-12">
+                            <label for="inputState">Estado</label>
+                            <select id="inputState" name="id_estado" class="form-control" formControlName="id_estado">
+                                      <option value='0' selected>Seleccione Estado...</option>
+                                      <option *ngFor="let estado of estados" value="{{estado.idestado}}"  [attr.selected]="lead?.id_estado==estado.idestado ? true : null">
+
+                          {{estado.nombre_estado}}
+                        </option>
+                                    </select>
+
+                            <div *ngIf="formGroup.controls['id_estado'].errors?.required">Campo obligatorio.</div>
+
+                        </div>
+
+                        <div class="form-group col-md-12" *ngIf="isMonto">
+                            <label for="inputState">Monto Formalizado</label>
+                            <input type="text" class="form-control" id="txtmontocursado" formControlName="monto_cursado" placeholder="Monto Cursado">
+                        </div>
+                        <div class="form-group  col-md-12">
+                            <label for="exampleFormControlTextarea1">Observaciones</label>
+                            <textarea name="observaciones" class="form-control" formControlName="observaciones" id="exampleFormControlTextarea1" rows="10"></textarea>
+                        </div>
+
+                        <div class="form-group  col-md-12">
+                            <button *ngIf="user_cla?.id_cargo != 4" type="submit" class="btn btn-primary">Actualizar</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+</div>

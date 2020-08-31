@@ -1,0 +1,25 @@
+{
+    "hosting": {
+        "public": "dist/appPilot",
+        "ignore": [
+            "firebase.json",
+            "**/.*",
+            "**/node_modules/**"
+        ],
+        "headers": [{
+            "source": "**/*",
+            "headers": [
+                { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" },
+                { "key": "X-Content-Type-Options", "value": "nosniff" },
+                { "key": "X-Frame-Options", "value": "ALLOW-FROM  https://firestore.googleapis.com/" },
+                { "key": "X-Frame-Options", "value": "ALLOW-FROM https://cambiatedebanco.cl/" },
+                { "key": "x-xss-protection", "value": "1" }
+
+            ]
+        }],
+        "rewrites": [{
+            "source": "**",
+            "destination": "/index.html"
+        }]
+    }
+}

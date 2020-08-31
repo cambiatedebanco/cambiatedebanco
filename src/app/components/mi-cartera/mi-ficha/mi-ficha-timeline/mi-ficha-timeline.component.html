@@ -1,0 +1,43 @@
+<div class="col-lg-6">
+    <button type="button" class="btn btn-secondary btn-sm" (click)="filterBy('Presencial')"> <b>({{countPresencial}})</b> Presencial</button>
+    <button type="button" class="btn btn-secondary btn-sm" (click)="filterBy('Redes Sociales')"><b>({{countRedesSociales}})</b>&nbsp;Redes Sociales</button>
+    <button type="button" class="btn btn-secondary btn-sm" (click)="filterBy('Leads')"><b>({{countLeads}})</b>&nbsp;Leads</button>
+    <button type="button" class="btn btn-secondary btn-sm" (click)="filterBy('CallCenter')"><b>({{countCallCenter}})</b>&nbsp;Callcenter</button>
+    <button type="button" class="btn btn-secondary btn-sm" (click)="filterBy('E-mail')"><b>({{countEmail}})</b>&nbsp;E-mail</button>
+    <button type="button" class="btn btn-secondary btn-sm" (click)="filterBy('CEO')"><b>({{countCEO}})</b>&nbsp;CEOCrm</button>
+    <div class="hpanel">
+        <div class="v-timeline vertical-container animate-panel" data-child="vertical-timeline-block" data-delay="1">
+            <cdk-virtual-scroll-viewport itemSize="3">
+                <ul style="list-style-type:none;  margin-left: 0px; padding-left: 0px;padding-right: 20px;">
+                    <li class="vertical-timeline-block" *ngFor="let data of viewData">
+                        <div class="vertical-timeline-icon navy-bg">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        <div class="vertical-timeline-content">
+                            <div class="p-sm">
+                                <span class="vertical-date pull-right"><small> {{data.hora_contacto | date:'dd/MM/yy H:mm'}}</small> </span>
+                                <!--<div class="timeline-em" *ngIf="data.canal=='E-mail'"><i class="fa em fa-envelope"></i></div>
+                            <div class="timeline-fa" *ngIf="data.canal=='Facebook'"><i class="fa fc fa-facebook-square"></i></div>
+                            <div class="timeline-ws" *ngIf="data.canal=='WhatsApp'"><i class="fa ws fa-whatsapp"></i></div>
+                            <div class="timeline-fa" *ngIf="data.canal=='Credito Digital'"><i class="fa fc fa-globe"></i></div>-->
+                                <div class="timeline-em" *ngIf="data.canal=='E-mail'"><i class="fa em fa-envelope"></i></div>
+                                <div class="timeline-ws" *ngIf="data.canal=='Redes Sociales'"><i class="fa em fa-share-alt-square"></i></div>
+                                <div class="timeline-fa" *ngIf="data.canal=='Leads'"><i class="fa fc fa-globe"></i></div>
+                                &nbsp; <span class="timeline-t">{{data.canal | uppercase }}</span>
+                                <p class="timeline-p" *ngIf="data.tipo_interaccion"><b>Tipo Interacción:</b> {{data.tipo_interaccion | titlecase }} </p>
+                                <p class="timeline-p" *ngIf="data.id_operador || data.ejecutivo"><b>Ejecutivo:</b> <span *ngIf="data.id_operador">{{data.id_operador}} -</span> <span *ngIf="data.ejecutivo?.includes('@')"> {{data.ejecutivo | split:'@'}}</span> <span *ngIf="!data.ejecutivo?.includes('@')">{{data.ejecutivo  | titlecase }}</span></p>
+                                <p class="timeline-p" *ngIf="data.tipo_gestion"><b>Tipo Gestión:</b> {{data.tipo_gestion | titlecase }} </p>
+                                <p class="timeline-p" *ngIf="data.campana"><b>Campaña:</b> {{data.campana | titlecase }} </p>
+                                <p class="timeline-p" *ngIf="data.estado_gestion"><b>Estado Gestión:</b> {{data.estado_gestion | titlecase }} </p>
+                                <p class="timeline-p" *ngIf="data.comentario"><b>Comentarios:</b> {{data.comentario | titlecase }} </p>
+                            </div>
+
+                        </div>
+                    </li>
+                </ul>
+            </cdk-virtual-scroll-viewport>
+
+        </div>
+    </div>
+
+</div>

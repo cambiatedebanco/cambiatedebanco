@@ -1,0 +1,18 @@
+<app-navbar></app-navbar>
+<app-left-bar></app-left-bar>
+<app-idle></app-idle>
+<div id="page-wrapper">
+    <!--<div class="btn-group" role="group" aria-label="Basic example">
+      
+     
+        <button type="button" class="btn btn-secondary">Gestión Campaña</button>
+      </div>-->
+
+    <a [routerLink]="['gestion-socio']">
+        <button type="button" class="btn btn-secondary">Gestion Socio</button>
+    </a>
+    <a [routerLink]="['gestion-agente']">
+        <button type="button" class="btn btn-secondary">Gestion Agente</button>
+    </a>
+    <router-outlet></router-outlet>
+</div>

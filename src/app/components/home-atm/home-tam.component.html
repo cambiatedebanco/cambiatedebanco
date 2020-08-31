@@ -1,0 +1,99 @@
+<app-navbar></app-navbar>
+<app-left-bar></app-left-bar>
+<app-idle></app-idle>
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row bg-title">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                <h4 class="page-title">TAM</h4>
+            </div>
+            <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                <ol class="breadcrumb">
+                    <li class="active">{{ hoy | date :'fullDate'}}</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="row bg-title-search">
+            <div class="cs-page-sec-652772">
+                <div>
+                    <div class="col-lg-12">
+                        <div class="element-title align-center">
+                            <h1 style="color:#ffffff !important; font-size: 55px !important; letter-spacing: 0px !important; line-height: 61px !important; font-weight: 700 !important; text-align:center; font-style:normal;">Búsqueda de Afiliado CLA</h1>
+                            <span style="color: #ffffff;">Esta información es confidencial y de propiedad de CLA</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="wp-dp-listing-content fancy-search">
+
+                            <div class="header-search-form">
+                                <form [formGroup]="searchForm" (ngSubmit)="onSubmitRut()">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="col-lg-10">
+                                                <div class="form-group">
+                                                    <input type="text" formControlName="rut" class="form-control" placeholder="Rut: (Ingrese el run sin dígito verificador, sin puntos ni guión)">
+
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <button class="btn btn-info" type="submit">Buscar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </form>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+        <div #mapContainer>
+            <div class="row" *ngIf="isData">
+                <h1>Resultados</h1>
+                <div class="col-md-12 col-lg-12 col-sm-12">
+                    <div class="calendar-widget m-b-30">
+                        <div class="cal-left">
+                            <h2>{{nombre_ap}}</h2>
+                            <h4>{{afiliado.rut}}-{{afiliado.dv}}</h4> <span></span>
+                            <div class="cal-btm-text">
+                                <a (click)="onGestion(afiliado.rut)" class="btn btn-rounded btn-success">
+                                    <i class="ti-plus m-r-5"></i> GESTIONAR
+                                </a>
+                            </div>
+                        </div>
+                        <div class="cal-right bg-info">
+                            <agm-map [latitude]="lat" [longitude]="lng" [zoom]="13">
+                                <agm-marker [latitude]="lat" [longitude]="lng" [iconUrl]="icon">
+                                    <agm-info-window>
+                                        <strong>Dirección</strong>
+
+                                        <p>
+                                            {{ direccion }}, {{ comuna }}
+                                        </p>
+                                    </agm-info-window>
+                                </agm-marker>
+                            </agm-map>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+</div>

@@ -1,0 +1,109 @@
+<div class="white-box">
+    <span class="font-bold p-b-1">Productos Vigentes</span>
+
+    <ul class="nav nav-tabs  m-t-1" role="tablist">
+        <li role="presentation" class="active"><a href="#pills-credito" aria-controls="pills-credito" role="tab" data-toggle="tab" aria-expanded="true"><span><b>({{_creditos.length}})</b>&nbsp; Creditos &nbsp;<i class="fa fa-credit-card-alt"></i></span></a></li>
+        <li role="presentation" class=""><a href="#pills-secure" aria-controls="pills-secure" role="tab" data-toggle="tab" aria-expanded="false"><span><b>({{_seguros.length}})</b>&nbsp;Seguros &nbsp;<i class="fa fa-shield"></i></span> </a></li>
+        <li role="presentation" class=""><a href="#pills-ahorro" aria-controls="pills-ahorro" role="tab" data-toggle="tab" aria-expanded="false"><span><b>({{_ahorros.length}})</b>&nbsp;Ahorro &nbsp;<i class="fa fa-money"></i></span></a></li>
+    </ul>
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="pills-credito">
+            <label *ngIf="_creditos.length == 0"> No existen productos vigentes.</label>
+            <div class="table-responsive" *ngIf="_creditos.length > 0">
+                <table cellpadding="1" cellspacing="1" class="table table-condensed table-striped">
+                    <thead>
+                        <tr>
+                            <th>Fecha Otorg.</th>
+                            <th>Tipo</th>
+
+                            <th align="center">Nro Cuotas</th>
+                            <th style="text-align:right">Valor Cuota</th>
+                            <th style="text-align:right">Saldo Capital</th>
+                            <th style="text-align:right">Monto Otorgado</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let credito of _creditos; index as i;">
+                            <td>{{credito.fecha_otorgamiento | slice:0:10 }}</td>
+                            <td>{{credito.tipo_credito}}</td>
+                            <td align="center"> {{credito.numero_cuotas_pagadas}}/{{credito.numero_cuotas_autorizadas}}</td>
+                            <td align="right"> {{credito.monto_cuota | number}}</td>
+                            <td align="right"> ${{credito.saldo_capital_final | number}}</td>
+                            <td align="right"><b>${{ credito.monto_otorgado | number}}</b></td>
+
+                        </tr>
+
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="pills-secure">
+            <label *ngIf="_seguros.length == 0">No existen productos vigentes.</label>
+            <div class="table-responsive" *ngIf="_seguros.length > 0">
+                <table cellpadding="1" cellspacing="1" class="table table-condensed table-striped">
+                    <thead>
+                        <tr>
+                            <th>Fecha Contr.</th>
+                            <th>Tipo</th>
+                            <th>Tipo de Plan</th>
+                            <th style="text-align:right">Prima Uf</th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let seguro of _seguros; index as i;">
+                            <td> {{seguro.fecha_contrata_seguro | slice:0:10}}</td>
+                            <td>{{seguro.tipo_de_seguro}}</td>
+                            <td> {{seguro.tipo_de_plan_seguro}}</td>
+                            <td align="right"> {{seguro.prima_seguro_uf}}</td>
+                        </tr>
+
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="pills-ahorro">
+            <label *ngIf="_ahorros.length == 0">No existen productos vigentes.</label>
+            <div class="table-responsive" *ngIf="_ahorros.length > 0">
+                <table cellpadding="1" cellspacing="1" class="table table-condensed table-striped">
+                    <thead>
+                        <tr>
+                            <th>Fecha Apertura</th>
+                            <th>Tipo</th>
+
+                            <th>Descripción</th>
+                            <th>Fondo</th>
+                            <th style="text-align:right">Saldo Acumulado</th>
+                            <th style="text-align:right">Monto Apertura</th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let ahorro of _ahorros; index as i;">
+                            <td> {{ahorro.fecha_apertura_cta | slice:0:10}}</td>
+                            <td>{{ahorro.tipo_de_cuenta}}</td>
+
+                            <td> {{ahorro.descripcion}}</td>
+                            <td> {{ahorro.tipo_de_fondo}}</td>
+                            <td align="right"> ${{ahorro.saldo_acumulado_pesos | number}}</td>
+                            <td align="right"> ${{ahorro.monto_apertura_en_pesos | number}}</td>
+
+                        </tr>
+
+
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+</div>

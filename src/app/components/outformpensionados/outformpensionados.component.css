@@ -1,0 +1,12 @@
+.form-titulo {
+    font-size: 29px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: #019ee1;
+    font-family: 'open_sansbold', sans-serif;
+}
+
+.invalid-feedback{
+color:red;
+
+}

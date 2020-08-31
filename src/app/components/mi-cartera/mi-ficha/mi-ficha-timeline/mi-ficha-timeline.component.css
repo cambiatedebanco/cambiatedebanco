@@ -1,0 +1,253 @@
+.btn-secondary {
+    background-color: #e8f8fb;
+    box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0);
+    border: 1px solid #1d849c;
+    height: 12px;
+    font-size: 12px;
+    font-family: open sans;
+    line-height: 0px;
+}
+
+.vertical-container {
+    /* this class is used to give a max-width to the element it is applied to, and center it horizontally when it reaches that max-width */
+    width: 98%;
+    margin: 0 auto;
+}
+
+.vertical-container::after {
+    /* clearfix */
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.v-timeline {
+    position: relative;
+    padding: 0;
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+.v-timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 18px;
+    height: 100%;
+    width: 4px;
+    background: #e8ebf0;
+}
+
+.vertical-timeline-content .btn {
+    float: right;
+}
+
+.vertical-timeline-block {
+    position: relative;
+    margin: 2em 0;
+}
+
+.vertical-timeline-block:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.vertical-timeline-block:first-child {
+    margin-top: 0;
+}
+
+.vertical-timeline-block:last-child {
+    margin-bottom: 0;
+}
+
+.vertical-timeline-icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 16px;
+    border: 1px solid #0e7b95;
+    text-align: center;
+    background: #a2e3f1;
+}
+
+.vertical-timeline-icon i {
+    display: block;
+    width: 24px;
+    height: 24px;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    margin-left: -12px;
+    margin-top: -9px;
+    color: #ffffff;
+}
+
+.vertical-timeline-content {
+    position: relative;
+    margin-left: 60px;
+    background: white;
+    border-radius: 10px;
+    border: 1px solid #e4e5e7;
+}
+
+.vertical-timeline-content:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.vertical-timeline-content h2 {
+    font-weight: 400;
+    margin-top: 4px;
+}
+
+.vertical-timeline-content p {
+    margin: 1em 0 0 0;
+    line-height: 1.6;
+}
+
+.vertical-timeline-content .vertical-date {
+    font-weight: 500;
+    text-align: right;
+    font-size: 13px;
+}
+
+.vertical-date small {
+    color: #606371;
+    font-weight: 600;
+    font-family: open sans;
+}
+
+.vertical-timeline-content:after,
+.vertical-timeline-content:before {
+    right: 100%;
+    top: 20px;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+}
+
+.vertical-timeline-content:after {
+    border-color: transparent;
+    border-right-color: #fff;
+    border-width: 10px;
+    margin-top: -10px;
+}
+
+.vertical-timeline-content:before {
+    border-color: transparent;
+    border-right-color: #ffffff;
+    border-width: 11px;
+    margin-top: -11px;
+}
+
+@media only screen and (min-width: 768px) {
+    .vertical-timeline-content h2 {
+        font-size: 18px;
+    }
+    .vertical-timeline-content p {
+        font-size: 13px;
+    }
+}
+
+.p-sm {
+    padding: 15px !important;
+}
+
+.timeline-em {
+    background: #fef2f3;
+    width: 25px;
+    padding: 5px;
+    margin-bottom: 0px;
+    box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0);
+    border-radius: 5px;
+    display: inline;
+}
+
+.timeline-fa {
+    background: #eef2fd;
+    width: 25px;
+    padding: 5px;
+    margin-bottom: 0px;
+    box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0);
+    border-radius: 5px;
+    display: inline;
+}
+
+.timeline-ws {
+    background: #f2fef5;
+    width: 25px;
+    padding: 5px;
+    margin-bottom: 0px;
+    box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0);
+    border-radius: 5px;
+    display: inline;
+}
+
+.timeline-p {
+    margin: 0px !important;
+    font-size: 12px !important;
+    color: #606371;
+    font-family: open sans;
+}
+
+.timeline-t {
+    color: #181b30;
+    font-size: 13px !important;
+    ;
+    font-weight: 600;
+    font-family: open sans;
+}
+
+.em {
+    font-size: 18px;
+    color: #fe7a84;
+}
+
+.fc {
+    font-size: 18px;
+    color: #1e88e5;
+}
+
+.ws {
+    font-size: 18px;
+    color: #54d957;
+}
+
+cdk-virtual-scroll-viewport {
+    height: 480px;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+
+/* Track */
+
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+}
+
+
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+    background: #1e88e5;
+    border-radius: 10px;
+}
+
+
+/* Handle on hover */
+
+::-webkit-scrollbar-thumb:hover {
+    background: grey;
+}

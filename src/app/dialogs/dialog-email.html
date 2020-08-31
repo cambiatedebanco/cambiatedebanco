@@ -1,0 +1,40 @@
+<div style="overflow-y: scroll; max-height: 450px;">
+    <img src="./assets/images/logo_gmail.png">
+    <form [formGroup]="sendEmailGroup" class="container-fluid">
+    <div class="modal-body">
+        <div class="form-group" [ngClass]="{'has-error': sendEmailGroup.controls.email.errors }">
+            <label>Para:</label>
+            <input type="email" class="form-control" id="compose-to" placeholder="Para" formControlName="email" />
+            <div *ngIf="sendEmailGroup.controls.email.errors" class="invalid-feedback">
+                <div *ngIf="sendEmailGroup.controls.email.errors.required">Campo obligatorio.</div>
+                <div *ngIf="sendEmailGroup.controls.email.errors.email">Formato incorrecto.</div>
+            </div>
+        </div>
+        <div class="form-group" [ngClass]="{'has-error': sendEmailGroup.controls.conCopia.errors }">
+            <label>Desde:</label>
+            <input type="email" class="form-control" id="compose-cc" placeholder="Cc" formControlName="conCopia" />
+            <div *ngIf="sendEmailGroup.controls.conCopia.errors" class="invalid-feedback">
+                <div *ngIf="sendEmailGroup.controls.conCopia.errors.required">Campo obligatorio.</div>
+                <div *ngIf="sendEmailGroup.controls.conCopia.errors.email">Formato incorrecto.</div>
+
+            </div>
+        </div>
+
+        <div class="form-group" [ngClass]="{'has-error': sendEmailGroup.controls.subject.errors }">
+            <label>Asunto:</label>
+            <input type="text" class="form-control" id="compose-subject" placeholder="Asunto" formControlName="subject" />
+            <div *ngIf="sendEmailGroup.controls.subject.errors" class="invalid-feedback">
+                <div *ngIf="sendEmailGroup.controls.subject.errors.required">Campo obligatorio.</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+        </div>
+        <ckeditor [editor]="Editor" [config]="config" formControlName="message"></ckeditor>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="swal2-confirm swal2-styled" style="display: inline-block; border-left-color: rgb(48, 133, 214); border-right-color: rgb(48, 133, 214);" (click)="confirmSelect()">Enviar</button>
+        <button type="button" class="swal2-cancel swal2-styled" style="display: inline-block; background-color: rgb(255, 67, 55);" (click)="onNoClick()">Cancelar</button>
+    </div>
+</form>
+</div>

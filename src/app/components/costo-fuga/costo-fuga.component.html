@@ -1,0 +1,57 @@
+<div class="hpanel stats" *ngFor="let empresa of empresas">
+    <div class="panel-heading">
+
+        <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">
+                Costo de Fuga
+            </font>
+        </font>
+    </div>
+    <div class="panel-body list">
+        <div class="stats-title pull-left">
+            <h4>
+                <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;"> {{empresa.data.SEGMENTO_VALOR}}</font>
+                </font>
+            </h4>
+        </div>
+        <div class="stats-icon pull-right">
+            <i *ngIf="empresa.data.SEGMENTO_VALOR=='DIAMOND'" class="fa fa-diamond fa-4x"></i>
+            <i *ngIf="empresa.data.SEGMENTO_VALOR=='PLATINUM'" class="fa fa-star fa-4x"></i>
+            <i *ngIf="empresa.data.SEGMENTO_VALOR=='GOLDEN'" class="fa fa-trophy fa-4x"></i>
+        </div>
+        <br>
+        <br>
+        <div class="row m-t-md">
+            <div class="col-lg-12" style="">
+                <h3 class="no-margins font-extra-bold text-success">
+                    <font style="vertical-align: inherit;">
+                        <font style="vertical-align: inherit;">{{empresa.data.MONTO_STOCK/ 1000000 | number:'1.0-0'}}MM</font>
+                    </font>
+                </h3>
+
+                <div class="font-bold">
+                    <font style="vertical-align: inherit;">
+                        <font style="vertical-align: inherit;">Saldo Capital</font>
+                    </font><i class="fa fa-level-up text-success"></i></div>
+            </div>
+
+        </div>
+        <div class="row m-t-md">
+            <div class="col-lg-12" style="">
+                <h3 class="no-margins font-extra-bold  text-danger">
+                    <font style="vertical-align: inherit;">
+                        <font style="vertical-align: inherit;">{{empresa.data.COSTO_FUGA_VIGENTE/ 1000000 | number:'1.0-0'}}MM</font>
+                    </font>
+                </h3>
+
+                <div class="font-bold">
+                    <font style="vertical-align: inherit;">
+                        <font style="vertical-align: inherit;">Costo Fuga</font>
+                    </font><i class="fa fa-level-down"></i></div>
+            </div>
+
+
+        </div>
+    </div>
+</div>

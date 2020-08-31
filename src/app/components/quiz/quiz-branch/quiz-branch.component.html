@@ -1,0 +1,32 @@
+<app-navbar></app-navbar>
+<app-left-bar></app-left-bar>
+<app-idle></app-idle>
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="col-md-12 col-lg-12 col-sm-12">
+<div class="row">
+    <div class="col-sm-8">
+        <div class="white-box">
+            <h3 class="box-title m-b-0">¿Tienes un crédito vigente en caja los andes ?</h3>
+            <form class="form-horizontal" [formGroup]="form">
+
+                <div class="radio">
+                    <input type="radio" name="isCredit" formControlName="isCredit" [value]="true" (click)="checked()"/>
+                    <label for="radio14"> Si</label>
+                </div>
+                <div class="radio">
+                    <input type="radio" name="isCredit" formControlName="isCredit" [value]="false" (click)="checked()"/>
+                    <label for="radio15">No</label>
+                </div>
+            </form>
+        <p class="m-b-30 font-13" *ngIf="isValue && flag"> En base a tus respuestas, entendemos que tu necesidad es: REFINANCIAMIENTO
+        </p>
+        <p class="m-b-30 font-13" *ngIf="!isValue && flag"> En base a tus respuestas, entendemos que tu necesidad es:
+            SOLICITUD DE CRÉDITO
+        </p>
+        <button *ngIf="flag" type="button" class="btn waves-effect waves-light btn-info">Enviar</button>
+
+        </div>
+    </div>
+</div>
+</div>

@@ -1,0 +1,58 @@
+<button type="button" #closebuttonMora class="close" data-dismiss="modal">&times;</button>
+<div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+        <div class="modal-header text-center">
+            <h4 class="modal-title"><strong>Detalle Oferta</strong> </h4>
+        </div>
+        <div class="modal-body">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Operación</th>
+                            <th>Mora</th>
+                            <th>Oferta</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let moras of mora;  let i=index">
+                            <td>
+                                <span class="text-success font-bold">{{moras.operacion}}</span>
+                            </td>
+                            <td>
+                                <div class="col-lg-12">
+                                    ${{ (moras.mora_op ) | number:'1.0-0':'es'}}
+                                </div>
+                            </td>
+                            <td>
+                                <div class="col-lg-12">
+                                    ${{ (moras.oferta ) | number:'1.0-0':'es'}}
+                                </div>
+                            </td>
+                            <td>
+                                <div class="col-lg-12">
+                                    <ul class="common-list">
+                                        <li><a href="javascript:void(0)"><i class="fa fa-check" style="color: green;"></i> {{moras.prioridad_1}}</a></li>
+                                        <li><a href="javascript:void(0)"><i class="fa fa-check" style="color: green;"></i>  {{moras.prioridad_2}}</a></li>
+                                        <li><a href="javascript:void(0)"><i class="fa fa-check" style="color: green;"></i>  {{moras.prioridad_3}}</a></li>
+                                        <li><a href="javascript:void(0)"><i class="fa fa-check" style="color: green;"></i>  {{moras.prioridad_4}}</a></li>
+                                    </ul>
+
+                                </div>
+                            </td>
+                        </tr>
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="swal2-actions">
+                <button type="button" class="swal2-confirm swal2-styled" style="display: inline-block; border-left-color: rgb(48, 133, 214); border-right-color: rgb(48, 133, 214);" (click)="saveTimelineAlerta()"> <i class="fa fa-check"></i>&nbsp;Gestionar</button>
+                <button type="button" class="swal2-cancel swal2-styled" style="display: inline-block; background-color: rgb(255, 67, 55);" data-dismiss="modal"><i class="fa fa-times"></i>&nbsp;Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>

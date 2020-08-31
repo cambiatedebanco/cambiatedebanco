@@ -1,0 +1,43 @@
+<app-navbar></app-navbar>
+<app-left-bar></app-left-bar>
+<app-idle></app-idle>
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="col-md-12 col-lg-12 col-sm-12">
+            <div class="white-box">
+                <h3 class="box-title">Mis Referidos</h3>
+                <span class="text-success">                                    
+                    <button class="btn btn-primary btn-rounded waves-effect waves-light"  [routerLink]="['/referidos-seguro-auto']"><span class="btn-label"><i class="fa fa-pencil"></i></span>Referir</button>
+                </span>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>FECHA</th>
+                                <th>RUT </th>
+                                <th>NOMBRE</th>
+                                <th>MODELO</th>
+                                <th>DEDUCIBLE</th>
+                                <th>SEGURO</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let referidos of misReferidos; let indice=index">
+                                <td width="5%">
+                                    <span>{{indice+1}}&nbsp;</span>
+                                </td>
+                                <td class="txt-oflo"> {{ referidos.data.create_time.toDate() | date:'dd/MM/yyyy hh:mm a' }}</td>
+                                <td class="txt-oflo">{{ referidos.data.rut_referido }}</td>
+                                <td class="txt-oflo">{{ referidos.data.nombre_referido }}</td>
+                                <td class="txt-oflo">{{ referidos.data.modelo_auto }}</td>
+                                <td class="txt-oflo">{{ referidos.data.valor_deducible }} UF</td>
+                                <td class="txt-oflo">{{ referidos.data.valor_seguro }} UF</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

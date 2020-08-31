@@ -1,0 +1,67 @@
+<app-navbar></app-navbar>
+<app-left-bar></app-left-bar>
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <section id="wrapper" style="background: #ffffff;">
+            <div class="row">
+                <div class="col-sm-12 col-md-6 offset-md-3">
+                    <div class="white-box">
+                        <div class="form-titulo">Formulario de Afiliación de Pensionados</div>
+                        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                            <div class="form-group">
+                                <label>Rut:</label>
+                                <input type="text" formControlName="rut" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.rut.errors }" />
+                                <div *ngIf="submitted && f.rut.errors" class="invalid-feedback">
+                                    <div *ngIf="f.rut.errors.required">RUT es obligatorio</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Nombre Completo</label>
+                                <input type="text" formControlName="nombre" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.nombre.errors }" />
+                                <div *ngIf="submitted && f.nombre.errors" class="invalid-feedback">
+                                    <div *ngIf="f.nombre.errors.required">Nombre es obligatorio</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Comuna</label>
+                                <input type="text" formControlName="comuna" #searchInput placeholder="Buscar..." (keyup)="search($event)" name="buscador" class="form-control" [matAutocomplete]="auto" [ngClass]="{ 'is-invalid': submitted && f.comuna.errors }">
+                                <a href=""><i class="fa fa-search"></i></a>
+                                <div *ngIf="submitted && f.comuna.errors" class="invalid-feedback">
+                                    <div *ngIf="f.comuna.errors.required">Comuna es obligatorio</div>
+                                </div>
+                                <mat-autocomplete #auto="matAutocomplete">
+                                    <mat-option (onSelectionChange)="onEnter($event)" *ngFor="let emp of allemps" [value]="emp.nombre">
+                                        <div><small><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{emp?.nombre }}</font></font></small>
+                                        </div>
+
+                                    </mat-option>
+                                </mat-autocomplete>
+                            </div>
+                            <div class="form-group">
+                                <label>Telefono</label>
+                                <input type="text" formControlName="telefono" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.telefono.errors }" />
+                                <div *ngIf="submitted && f.telefono.errors" class="invalid-feedback">
+                                    <div *ngIf="f.telefono.errors.required">Telefono es obligatorio</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                    <div *ngIf="f.email.errors.email">Ingrese un email correcto</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <button class="btn btn-primary">Enviar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+    </div>
+</div>

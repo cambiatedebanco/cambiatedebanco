@@ -1,0 +1,27 @@
+<table class="table table-hover" width="100%">
+
+
+
+    <ng-container *ngIf="infinite | async as empresas">
+        <cdk-virtual-scroll-viewport itemSize="10" (scrolledIndexChange)="nextBatch($event, (empresas[empresas.length - 1].RUT_EMPRESA))">
+            <thead>
+                <tr>
+                    <th scope="col">Rut</th>
+                    <th scope="col">Razon Social</th>
+                    <th scope="col">Segmento</th>
+                    <th scope="col">Accion</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *cdkVirtualFor="let empresa of empresas; let i = index; trackBy: trackByIdx">
+                    <th scope="row">{{empresa.RUT_EMPRESA}}</th>
+                    <td>{{empresa.RAZON_SOCIAL_EMPRESA}}</td>
+                    <td>{{empresa.SEGMENTO_EMPRESA}}</td>
+                    <td><button type="button" class="btn btn-primary" [routerLink]="['/empresa',empresa.RUT_EMPRESA]" skipLocationChange><i class="fa fa-industry mr-1"></i> Ver</button></td>
+                </tr>
+            </tbody>
+        </cdk-virtual-scroll-viewport>
+
+    </ng-container>
+
+</table>

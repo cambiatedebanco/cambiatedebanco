@@ -1,0 +1,119 @@
+<div class="col-md-6">
+    <div class="panel">
+        <div class="p-30">
+            <div class="row">
+                <div class="col-xs-3 col-sm-3">
+
+                    <img *ngIf="afiliados.sexo_persona=='M'" src="./assets/images/boss.png"
+                        class="img-circle img-responsive">
+                    <img *ngIf="afiliados.sexo_persona=='F'" src="./assets/images/woman.png"
+                        class="img-circle img-responsive">
+                </div>
+                <div class="col-xs-12 col-sm-9">
+                    <h2 class="m-b-0">
+                        <font style="vertical-align: inherit;">
+                            <font style="vertical-align: inherit;">{{ afiliados.nombres }}</font>
+                        </font>
+                    </h2>
+                    <h4>
+                        <font style="vertical-align: inherit;">
+                            <font style="vertical-align: inherit;">
+                                {{ afiliados.rut_persona | number:'1.0-0':'es' }}-{{ afiliados.dv_rut_persona }}</font>
+                        </font>
+                    </h4>
+                    <br><br>
+                    <address>
+                        <font style="vertical-align: inherit;">
+                            <strong>
+                                <font style="vertical-align: inherit;">Email: </font>
+                            </strong> {{ afiliados.correo_elect_persona}}
+
+                        </font>
+                        <br>
+                        <font style="vertical-align: inherit;">
+                            <strong>
+                                <font style="vertical-align: inherit;">
+                                    Fecha Nacimiento : </font>
+                            </strong>{{ afiliados.fecha_nacimiento_persona | date: "yyyy-MM-dd"}}
+
+                        </font>
+                        <br>
+                        <font style="vertical-align: inherit;">
+                            <strong>
+                                <font style="vertical-align: inherit;">
+                                    Estado Civil: </font>
+                            </strong>{{ afiliados.estado_civil}}
+
+                        </font>
+                        <br>
+                        <font style="vertical-align: inherit;">
+                            <strong>
+                                <font style="vertical-align: inherit;">
+                                    Dirección: </font>
+                            </strong>{{ afiliados.direccion_persona}}
+
+                        </font><br>
+                        <font style="vertical-align: inherit;">
+                            <strong>
+                                <font style="vertical-align: inherit;">
+                                    Ciudad:
+                                </font>
+                            </strong>{{ afiliados.ciudad_persona}}
+                        </font><br>
+                        <font style="vertical-align: inherit;">
+                            <strong>
+                                <font style="vertical-align: inherit;">
+                                    Comuna: </font>
+                            </strong>{{ afiliados.comuna_persona}}
+
+                        </font><br>
+                        <font style="vertical-align: inherit;">
+                            <strong>
+                                <font style="vertical-align: inherit;">
+                                    Fono:
+                                </font>
+                            </strong>
+                            {{ afiliados.fono_movil}}
+                        </font><br>
+                        <font style="vertical-align: inherit;">
+                            <font style="vertical-align: inherit;">
+                                <ng-container *ngIf="afiliados.codigo_of_virtual == 2">
+                                    <strong>
+                                        <font style="vertical-align: inherit;">Oficina Virtual: </font>
+                                    </strong>
+                                    <font style="vertical-align: inherit;">ENROLADO</font>
+                                </ng-container>
+                                <ng-container *ngIf="afiliados.codigo_of_virtual != 2">
+                                    <strong>
+                                        <font style="vertical-align: inherit;">Oficina Virtual: </font>
+                                    </strong>
+                                    <font style="vertical-align: inherit;">NO ENROLADO</font>
+                                </ng-container>
+                            </font>
+                        </font><br>
+                        <font style="vertical-align: inherit;">
+                            <strong>
+                                <font style="vertical-align: inherit;">
+                                    Numero de Cargas: </font>
+                            </strong>{{ afiliados.n_carga }} </font><br>
+                        <font style="vertical-align: inherit;">
+                            <strong>
+                                <font style="vertical-align: inherit;">
+                                    GSE: </font>
+                            </strong>{{ afiliados.gse }} </font><br>
+                    </address>
+                </div>
+
+            </div>
+        </div>
+        <hr class="m-t-10" />
+
+        <ul class="dp-table profile-social-icons">
+            <li><a href="javascript:void(0)"><i class="fa fa-globe"></i></a></li>
+            <li><a href="javascript:void(0)"><i class="fa fa-twitter"></i></a></li>
+            <li><a href="javascript:void(0)"><i class="fa fa-facebook"></i></a></li>
+            <li><a href="javascript:void(0)"><i class="fa fa-youtube"></i></a></li>
+            <li><a href="javascript:void(0)"><i class="fa fa-linkedin"></i></a></li>
+        </ul>
+    </div>
+</div>

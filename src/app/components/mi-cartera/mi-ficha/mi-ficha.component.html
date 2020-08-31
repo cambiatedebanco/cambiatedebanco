@@ -1,0 +1,60 @@
+<app-navbar></app-navbar>
+<app-left-bar></app-left-bar>
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row bg-title">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                <h4 class="page-title">Mi Ficha</h4>
+            </div>
+            <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                <ol class="breadcrumb">
+                    <li><a [routerLink]="['/mi-cartera-home']">Mi <i  class="fa fa-heart" style="color:#f1a5a3;"></i> Cartera</a></li>
+                    <li class="active">Mi Ficha</li>
+                    <li>
+                        <a href="javascript:;" id="sidebar" (click)="toggleSidebar()">
+                            <i class="fa fa-calendar fa-blue" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                </ol>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <app-mi-ficha-demografico [afiliado]="afiliado" [empresa]="afiliadoEmpresa" [headers]="headers"></app-mi-ficha-demografico>
+        <app-mi-ficha-ofertas [rut]="afiliado_id" [ofertasBBSS]="ofertasBBSS" [ofertasPPFF]="ofertasPPFF" [ofertasAlerta]="ofertasAlerta" (completeGestion)="pushUpdateTimeline($event)" [afiliado]="afiliado" [ejecutivo]="ejecutivo" [item]="item" [showMainContent]="showMainContent"></app-mi-ficha-ofertas>
+
+        <div class="col-lg-6">
+            <app-mi-ficha-productos [creditosAfiliado]="creditosAfiliado" [segurosAfiliado]="segurosAfiliado" [ahorroAfiliado]="ahorroAfiliado"></app-mi-ficha-productos>
+
+            <app-mi-ficha-mktg [carouselMarketing]="carouselMarketing"></app-mi-ficha-mktg>
+
+
+            <!-- <app-mi-ficha-encuesta [afiliado]="afiliado" [ejecutivo]="ejecutivo"></app-mi-ficha-encuesta> -->
+
+
+        </div>
+        <app-mi-ficha-timeline [timeLineData]="timeLineData" *ngIf="afiliado"></app-mi-ficha-timeline>
+
+    </div>
+    <!-- <div class="form-box" [ngClass]="{'open': isSimulador}">
+        <app-simulador-cartera [id]="afiliado_id" (completeSimulation)="completeSimulation($event)" [ejecutivo]="ejecutivo"></app-simulador-cartera>
+    </div> -->
+    <!-- <button class="floating-btn" (click)="toggleSimulador()">
+        <i class="fa fa-calculator fa-5x" style="color:#ffffff;font-size: 26px;"></i>
+    </button> -->
+    <div id="right-sidebar" class="animated fadeInRight" [ngClass]="{'sidebar-open': sidebar}">
+
+        <div class="p-m">
+            <div>
+                <button id="sidebar-close" (click)="toggleSidebar()" class="right-sidebar-toggle sidebar-button btn btn-default m-b-md">
+            <i class="fa fa-times fa-gris"></i>
+            </button>
+                <span>Calendario</span>
+            </div>
+            <app-calendar class="calendar"></app-calendar>
+        </div>
+
+
+    </div>
+
+</div>

@@ -1,0 +1,49 @@
+<div class="col-sm-6 col-sm-12">
+    <div class="white-box">
+        <div class="panel-wrapper collapse in" aria-expanded="true">
+            <div class="panel-body">
+                <div class="chat-box" style="height: 510px; ">
+                    <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 100%;">
+                        <ul class="chat-list slimscroll" #scroller style="overflow: visible; overflow-y: scroll; width: auto; height: 100%;" tabindex="5005">
+                            <ng-container *ngFor="let talk of chatTalks;let i=index">
+
+                                <li *ngIf="talk.data.rut != params.rutEjec">
+                                    <div class="chat-image"> <img src="./assets/images/boss.png"> </div>
+                                    <div class="chat-body">
+                                        <div class="chat-text">
+                                            <h4>{{params.nomCli}}</h4>
+                                            <p> {{talk.data.texto}} </p> <b>{{talk.data.fecha_mensaje.toMillis() | date:'yyyy/MM/dd H:mm:ss'}}</b> </div>
+                                    </div>
+                                </li>
+                                <li *ngIf="talk.data.rut == params.rutEjec" class="odd">
+                                    <div class="chat-image"> <img src="./assets/images/woman.png"> </div>
+                                    <div class="chat-body">
+                                        <div class="chat-text">
+                                            <h4>{{params.nomEjec}}</h4>
+                                            <p> {{talk.data.texto}} </p> <b>{{talk.data.fecha_mensaje.toMillis() | date:'yyyy/MM/dd H:mm:ss'}}</b> </div>
+                                    </div>
+                                </li>
+                            </ng-container>
+                        </ul>
+                        <div class="slimScrollBar" style="background: rgb(220, 220, 220); width: 0px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 510px;"></div>
+                        <div class="slimScrollRail" style="width: 0px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-xs-8">
+                        <textarea placeholder="Escriba su mensaje aquí" class="chat-box-input" [(ngModel)]="mensaje" (keydown)="onSubmitEnter($event,params.idDoc, params.rutEjec)"></textarea>
+                    </div>
+                    <div class="col-xs-4 text-right">
+                        <button class="btn btn-success btn-circle btn-xl" type="button" (click)="sendMessage(params.idDoc, params.rutEjec)"><i class="fa fa-paper-plane-o"></i></button>
+                    </div>
+                </div>
+                <div class="btn-group m-b-20">
+                    <button type="button" class="btn btn-warning waves-effect"><i class="fa fa-clock-o"></i></button>
+                    <button type="button" class="btn btn-default waves-effect">Ignorar Ticket</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,82 @@
+<app-navbar></app-navbar>
+<app-left-bar></app-left-bar>
+<app-idle></app-idle>
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="col-lg-3 col-md-4 col-sm-4">
+            <h4 class="page-title" *ngIf="!toModifyIdSucursal">
+                Crear <small class="subTitleSlider">agente</small>
+            </h4>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="white-box ">
+
+            <div class="panel-body p-t-0">
+                <div class="col-col-lg-12 col-md-12">
+                    <div class="col-lg-6">
+                        <input type="text" placeholder="Buscar..." [formControl]="searchControl" name="buscador" class="form-control" [matAutocomplete]="auto">
+                        <mat-autocomplete #auto="matAutocomplete">
+                            <mat-option (onSelectionChange)="onEnterSearch($event.source.value)" *ngFor="let emp of filteredOptions | async" [value]="emp.rut">
+                                <div><small>
+                                    <font style="vertical-align: inherit;">
+                                        <font style="vertical-align: inherit;">{{emp?.rut }}
+                                        </font>
+                                    </font>
+                                    <font style="vertical-align: inherit;">
+                                        <font style="vertical-align: inherit;">{{ emp?.nombres }}</font>
+                                    </font>
+                                </small>
+                                </div>
+
+                            </mat-option>
+                        </mat-autocomplete>
+                    </div>
+                    <div class="col-lg-6">
+
+                        <button class="btn btn-success btn-rounded waves-effect waves-light" type="button" [routerLink]="['/crear-usuario']">Añadir nuevo usuario</button>
+                    </div>
+                </div>
+                <div class="col-lg-12" *ngIf="selectedUser">
+
+                    <ol class="hbreadcrumb breadcrumb">
+                        <li>Nombre :{{selectedUser?.nombres}}</li>
+                        <li> RUT: {{ selectedUser?.rut | number:'1.0-0':'es' }}-{{ selectedUser?.dv }} </li>
+                        <li *ngIf="selectedUser.id_cargo">
+                            NIVEL : {{selectedUser?.nombre_cargo}}
+                        </li>
+                        <li *ngIf="!selectedUser.id_cargo">
+                            NIVEL : INDEFINIDO
+                        </li>
+
+                    </ol>
+                    <button class="btn btn-primary" *ngIf="selectedUser.id_cargo != ID_CARGO_AGENTE" (click)="turnIntoAgente()">Convertir en agente</button>
+                    <button class="btn btn-primary" *ngIf="selectedUser.id_cargo == ID_CARGO_AGENTE" (click)="turnIntoAgente()">Quitar permisos agente</button>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="white-box" *ngIf="sucursalUsuario">
+            <div class="row" *ngIf="selectedUser.id_cargo == ID_CARGO_AGENTE">
+                <div class="col">{{sucursalUsuario.nombre_sucursal}}</div>
+
+                <div class="col" *ngIf="selectedUser">
+                    <div class="col-sm-12">
+                        <label>Asignar dotación</label>
+                        <dual-list [source]="source" key="rut" display="nombres" [(destination)]="confirmed" [sort]="keepSorted" [filter]="filter" [format]="format"></dual-list>
+                    </div>
+                    <div class="col-sm-12">
+                        <br>
+                    </div>
+
+                    <div class="col">
+                        <button class="btn btn-success" (click)="submitDotacion()">Confirmar</button>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>

@@ -1,0 +1,153 @@
+<form [formGroup]="referidoForm" (ngSubmit)="submitReferido()">
+    <ng-container *ngIf="indice ==0">
+        <h3 class="h3azul"> Afiliado tiene Oferta de Auto disponible en www.cajalosandes.cl/autofull</h3>
+        <div class="txtbajadastits"> Solo por pocos días, super oferta para el automóvil <strong>{{oferta.data.MODELO_AUTO}}</strong>,patente <strong>{{oferta.data.PATENTE}}</strong> .</div>
+
+        <br>
+    </ng-container>
+    <ng-container *ngIf="indice==1">
+        <br><br><br>
+        <h3 class="h3azul"> Afiliado tiene ofertas adicionales <b>( PERO NO SE ENCUENTRA CARGADO EN LA PÁGINA)</b></h3>
+        <br>
+    </ng-container>
+    <ng-container *ngIf="indice>=1">
+        <br>
+        <div class="txtbajadastits"> Solo por pocos días, super oferta para el automóvil <strong>{{oferta.data.MODELO_AUTO}}</strong> ,patente <strong>{{oferta.data.PATENTE}}</strong> .</div>
+        <br>
+    </ng-container>
+    <br>
+    <div class="row">
+
+        <div class="col-lg-3 text-center">
+            <div class="priceboxnormal">
+                <div class="topazulpricebox">
+                    <div class="text-top-pbox-vis">
+                        NO PAGA DEDUCIBLE
+                    </div>
+
+                </div>
+                <div class="precios-pbox">
+                    <div class="precioazulgr">${{((oferta.data.deducible_0)*(valorUf)) | number:'1.0-0':'es'}}</div>
+                    <div class="txtbajadaufpbox">12 Cuotas {{(oferta.data.deducible_0) | number:'1.0-2':'es'}} UF mensuales </div>
+                    <div class="txtprimaanualpbox">Prima anual {{(oferta.data.deducible_0*12 | number:'1.0-2':'es')}} UF</div>
+                </div>
+                <div class="div-deduciblepboxnorm">
+                    <div class="txtdeduciblepbox">Deducible</div>
+                    <div class="valordeduciblepbox">0 UF
+                    </div>
+                </div>
+                <div class="div-btm-pbox">
+                    <div class="form-check form-check-inline ">
+                        <input class="form-check-input" type="radio" id="inlineRadio1" formControlName="deducible" value="0_{{oferta.data.deducible_0}}">
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="col-lg-3 text-center">
+            <div class="priceboxnormal">
+                <div class="topazulpricebox">
+                    <div class="text-top-pbox-vis">
+                        DEDUCIBLE 3 UF
+                    </div>
+
+                </div>
+                <div class="precios-pbox">
+                    <div class="precioazulgr">${{((oferta.data.deducible_3)*(valorUf)) | number:'1.0-0':'es'}}</div>
+                    <div class="txtbajadaufpbox">12 Cuotas {{(oferta.data.deducible_3) | number:'1.0-2':'es'}} UF mensuales </div>
+                    <div class="txtprimaanualpbox">Prima anual {{(oferta.data.deducible_3*12 | number:'1.0-2':'es')}} UF</div>
+                </div>
+                <div class="div-deduciblepboxnorm">
+                    <div class="txtdeduciblepbox">Deducible</div>
+                    <div class="valordeduciblepbox">3 UF
+                    </div>
+                </div>
+                <div class="div-btm-pbox">
+                    <div class="form-check form-check-inline ">
+                        <input class="form-check-input" type="radio" id="inlineRadio2" formControlName="deducible" value="3_{{oferta.data.deducible_3}}">
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+        <div class="col-lg-3">
+            <div class="pricebox1 animated bounceInLeft">
+                <div class="topazulpricebox">
+                    <div class="text-top-pbox-vis">
+                        DEDUCIBLE 5 UF
+                    </div>
+
+                </div>
+                <div class="precios-pbox">
+                    <div class="precioazulgr">${{((oferta.data.deducible_5)*(valorUf)) | number:'1.0-0':'es'}}</div>
+                    <div class="txtbajadaufpbox">12 Cuotas {{(oferta.data.deducible_5) | number:'1.0-2':'es'}} UF mensuales </div>
+                    <div class="txtprimaanualpbox">Prima anual {{(oferta.data.deducible_5*12 | number:'1.0-2':'es')}} UF</div>
+                </div>
+                <div class="div-deduciblepbox">
+                    <div class="txtdeduciblepbox">Deducible</div>
+                    <div class="valordeduciblepbox">5 UF
+                    </div>
+                </div>
+                <div class="div-btm-pbox">
+                    <div class="form-check form-check-inline ">
+                        <input class="form-check-input" type="radio" id="inlineRadio3" formControlName="deducible" value="5_{{oferta.data.deducible_5}}">
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="col-lg-3 text-center">
+
+            <div class="priceboxnormal">
+                <div class="topazulpricebox">
+                    <div class="text-top-pbox-vis">
+                        DEDUCIBLE 10 UF
+                    </div>
+
+                </div>
+                <div class="precios-pbox">
+                    <div class="precioazulgr">${{((oferta.data.deducible_10)*(valorUf)) | number:'1.0-0':'es'}}</div>
+                    <div class="txtbajadaufpbox">12 Cuotas {{(oferta.data.deducible_10) | number:'1.0-2':'es'}} UF mensuales </div>
+                    <div class="txtprimaanualpbox">Prima anual {{(oferta.data.deducible_10*12 | number:'1.0-2':'es')}} UF</div>
+                </div>
+                <div class="div-deduciblepboxnorm">
+                    <div class="txtdeduciblepbox">Deducible</div>
+                    <div class="valordeduciblepbox">10 UF
+                    </div>
+                </div>
+                <div class="div-btm-pbox">
+                    <div class="form-check form-check-inline ">
+                        <input class="form-check-input" type="radio" id="inlineRadio4" formControlName="deducible" value="10_{{oferta.data.deducible_10}}">
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-lg-4 text-center"></div>
+            <div class="col-lg-4 text-center">
+                <ng-container *ngIf="oferta.data.PREDETERMINADO==1">
+                    Al hacer click en el botón referir, se enviará un correo a Afiliado informando que fue referido por ti.
+                </ng-container>
+                <ng-container *ngIf="oferta.data.PREDETERMINADO == 0">
+                    Al hacer click en el botón referir, se enviará un correo a Cardif para que se ponga en contacto con Afiliado y se concrete la venta vía mail.
+                </ng-container>
+                <span class="text-success">
+                    <br>
+                      <button [ngClass]="{'btn-success': isRefered==false, 'btn-warning': isRefered}" class="btn btn-primary btn-rounded waves-effect waves-light btn-block" >Referir</button>
+                <br>
+                    </span>
+            </div>
+            <div class="col-lg-4 text-center"></div>
+        </div>
+
+    </div>
+</form>

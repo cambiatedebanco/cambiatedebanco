@@ -1,0 +1,441 @@
+<app-navbar></app-navbar>
+<app-left-bar></app-left-bar>
+<app-idle></app-idle>
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row bg-title">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                <h4 class="page-title">MI
+                    <i class="fa fa-heart" style="color:#FF0000;"></i> CARTERA</h4>
+            </div>
+            <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                <ol class="breadcrumb">
+                    <li class="active">{{ hoy | date :'fullDate'}}</li>
+                </ol>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+
+
+        <div class="white-box">
+            <div class="row">
+                <div class="col-lg-3 text-center">
+
+                    <h4><b>GESTION CAMPAÑA</b></h4>
+
+                    <div class="col-lg-12">
+                        <div [chart]="chart" style="height:170px; text-align:center;">
+
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="col-lg-6 text-right">
+                            <h4>{{diasRestantes[0]?.n_dias}}</h4>
+                        </div>
+                        <div class="col-lg-6 text-left">
+                            <h6>DÍAS HABILES <br> RESTANTES</h6>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="col-lg-9">
+                    <div class="row row-in">
+
+                        <div class="col-lg-2 col-sm-6 row-in-br text-center">
+                            <ul class="col-in text-center col-middle">
+                                <li class="col-middle text-center">
+
+                                    <h4><b>CREDITO</b></h4>
+                                    <i class="fa fa-credit-card-alt" style="color:#1e88e5;"></i>
+                                    <br><br>
+                                    <h4>{{dataUsers[0]?.n_gestion | number }}/{{dataUsers[0]?.n_total | number }}</h4>
+                                    <h4><b>{{dataUsers[0]?.n_gestion / dataUsers[0]?.n_total | percent }}</b> <small> Gestión</small></h4>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-2 col-sm-6 row-in-br  b-r-none">
+                            <ul class="col-in text-center">
+                                <li class="col-middle">
+                                    <h4><b>SEGURO</b></h4>
+                                    <i class="fa fa-shield" style="color:#9d9fa2;"></i>
+                                    <br><br>
+                                    <h4>0</h4>
+                                    <h4><b>0%</b> <small>Gestión</small></h4>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-2 col-sm-6 row-in-br b-r-none">
+                            <ul class="col-in text-center">
+                                <li class="col-middle">
+                                    <h4><b>AHORRO</b></h4>
+                                    <i class="fa fa-money" style="color:#9d9fa2;"></i>
+                                    <br><br>
+                                    <h4>0</h4>
+                                    <h4><b>0%</b> <small>Gestión</small></h4>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-2 col-sm-6 row-in-br ">
+                            <ul class="col-in text-center">
+                                <li class="col-middle">
+                                    <h4><b>MORA</b></h4>
+                                    <i class="fa fa-edit" style="color:#9d9fa2;"></i>
+                                    <br><br>
+                                    <h4>0/0</h4>
+                                    <h4><b>0%</b> <small>Gestión</small></h4>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-4 col-sm-6 b-0">
+                            <ul class="col-in text-center">
+                                <li class="col-middle">
+                                    <h4><b>LEADS</b></h4>
+                                    <i class="fa fa-bell" style="color:#09da78;"></i>
+                                    <br><br>
+                                    <h4>{{dataUsersLeads[0]?.n_gestion | number }}/{{dataUsersLeads[0]?.n_total | number }}</h4>
+                                    <h4><b>{{dataUsersLeads[0]?.n_gestion / dataUsersLeads[0]?.n_total | percent }}</b> <small> Gestión</small></h4>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="col-lg-9">
+
+                </div>
+            </div>
+        </div>
+        <ng-container *ngIf="user_cla?.id_cargo==1 || user_cla?.id_cargo ==2">
+            <div class="white-box">
+                <div class="row">
+                    <ng-container *ngFor="let ejecutivo of ejecutivosc">
+                        <div class="col-lg-4">
+                            <div class="white-box">
+                                <h3 class="box-title">{{ ejecutivo.nombre }}</h3>
+                                <div class="text-right"> <span class="text-muted">Gestion</span>
+                                    <h3><b>{{ ejecutivo.gestionados / ejecutivo.registros | percent }}</b> ({{ ejecutivo.gestionados }}/{{ ejecutivo.registros }})</h3>
+
+                                </div>
+
+                                <div class="progress m-b-0">
+
+                                    <div *ngIf="(ejecutivo.gestionados / ejecutivo.registros)>=0.6" class="progress-bar bg-success" role="progressbar" [style.width]=" ((ejecutivo.gestionados / ejecutivo.registros) * 100 | number:'1.0-0')+ '%'" aria-valuemax="100">
+                                    </div>
+
+                                    <div *ngIf="(ejecutivo.gestionados / ejecutivo.registros)>=0.3 && (ejecutivo.gestionados / ejecutivo.registros)<0.6" class="progress-bar bg-info" role="progressbar" [style.width]=" ((ejecutivo.gestionados / ejecutivo.registros) * 100 | number:'1.0-0')+ '%'"
+                                        aria-valuemax="100">
+                                    </div>
+
+
+                                    <div *ngIf="(ejecutivo.gestionados / ejecutivo.registros)<0.3" class="progress-bar bg-warning" role="progressbar" [style.width]=" ((ejecutivo.gestionados / ejecutivo.registros) * 100 | number:'1.0-0')+ '%'" aria-valuemax="100">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </ng-container>
+                </div>
+            </div>
+        </ng-container>
+        <div class="row">
+
+            <div class="col-lg-12 col-sm-6 col-xs-12">
+                <div class="white-box">
+                    <h4>AFILIADOS A GESTIONAR</h4>
+                    <p class="text-muted m-b-40">Lista de Afiliados para gestionar este mes de <b>{{ hoy | date :'LLLL' | titlecase }}</b> estan ordenados en forma de mayor a menor propensión.
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" #creditLit [ngClass]="{'active':cookieTab === 'default' }" (click)="updateCookieTab('default')">
+                                <a href="#ihome" aria-controls="home" role="tab" data-toggle="tab" aria-expanded="true">
+                                    <span><i class="fa fa-credit-card-alt" style="color:#606060;"></i></span>
+                                </a>
+                            </li>
+                            <li role="presentation" [ngClass]="{'active':cookieTab === 'shield' }">
+                                <a href="#iprofile" aria-controls="profile" role="tab" data-toggle="tab" aria-expanded="false" (click)="updateCookieTab('shield')">
+                                    <span><i class="fa fa-shield" style="color:#606060;"></i></span>
+                                </a>
+                            </li>
+                            <li role="presentation" [ngClass]="{'active':cookieTab === 'money' }" (click)="updateCookieTab('money')">
+                                <a href="#imessages" aria-controls="messages" role="tab" data-toggle="tab" aria-expanded="false ">
+                                    <span><i class="fa fa-money" style="color:#606060;"></i></span>
+                                </a>
+                            </li>
+                            <li role="presentation" [ngClass]="{'active':cookieTab === 'edit' }" (click)="updateCookieTab('edit')">
+                                <a href="#iedit" aria-controls="messages" role="tab" data-toggle="tab" aria-expanded="false"><span><i class="fa fa-edit" style="color:#606060;"></i></span></a></li>
+                            <li role="presentation" #bellLi [ngClass]="{'active':cookieTab === 'bell'}" (click)="updateCookieTab('bell')">
+                                <a href="#isettings" aria-controls="settings" role="tab" data-toggle="tab" aria-expanded="false"><span><i class="fa fa-bell" style="color:#606060;"></i></span></a>
+                            </li>
+
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div role="tabpanel2" class="tab-pane" [ngClass]="{'active':cookieTab === 'default'}" id="ihome">
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li role="presentation2" class="active"><a href="#nuevos" (click)="filterBase(1)" aria-controls="home" role="tab" data-toggle="tab" aria-expanded="true"><span>Nuevos</span></a></li>
+                                    <li role="presentation2" class=""><a href="#pendientes" (click)="filterBase(2)" aria-controls="profile" role="tab" data-toggle="tab" aria-expanded="false"><span>Pendientes</span> </a></li>
+                                    <li role="presentation2" class=""><a href="#gestionados" (click)="filterBase(3)" aria-controls="messages" role="tab" data-toggle="tab" aria-expanded="false"><span>Gestionados</span></a></li>
+
+                                </ul>
+                                <div class="tab-content">
+                                    <div role="tabpanel2" class="tab-pane active" id="nuevos">
+                                        <mat-card>
+                                            <div class="example-header">
+                                                <mat-form-field>
+                                                    <input matInput #filter placeholder="Buscar" (keyup)="applyFilterBase($event.target.value)">
+                                                </mat-form-field>
+                                                <mat-form-field *ngIf="tabFilter === 3">
+                                                    <mat-label>Estado</mat-label>
+                                                    <mat-select (selectionChange)="applyFilterChangeBase($event.value)">
+                                                        <mat-option *ngFor="let state of states" [value]="state.idestado">
+                                                            {{state.nombre_estado}}</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+                                            <table mat-table #table [dataSource]="dataSource" style="height:200px;" class="mat-elevation-z8" width="100%" align="center" #sort="matSort" matSort>
+                                                <ng-container matColumnDef="rut_persona_b">
+                                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> RUT </th>
+                                                    <td mat-cell *matCellDef="let element">{{ element.rut }} </td>
+                                                </ng-container>
+                                                <ng-container matColumnDef="nombres_b">
+                                                    <th mat-header-cell *matHeaderCellDef> NOMBRE</th>
+                                                    <td mat-cell *matCellDef="let element"><span style="text-transform: capitalize"> {{ element.nombres?.toLowerCase() }} </span></td>
+                                                </ng-container>
+                                                <ng-container matColumnDef="monto_b">
+                                                    <th mat-header-cell *matHeaderCellDef> MONTO</th>
+                                                    <td mat-cell *matCellDef="let element"><span style=""> ${{element.monto | number}} </span></td>
+                                                </ng-container>
+                                                <ng-container matColumnDef="campana_b">
+                                                    <th mat-header-cell *matHeaderCellDef> CAMPAÑA</th>
+                                                    <td mat-cell *matCellDef="let element"><span style="text-transform: capitalize"> {{ element.nombre?.toLowerCase() }} </span></td>
+                                                </ng-container>
+                                                <ng-container matColumnDef="probabilidad_b">
+                                                    <th mat-header-cell *matHeaderCellDef> PROBABILIDAD </th>
+                                                    <td mat-cell *matCellDef="let element">
+
+                                                        <div class="progress" style='height:10px;'>
+
+                                                            <div *ngIf="element.probabilidad>=0.6" class="progress-bar bg-success" role="progressbar" [style.width]=" (element.probabilidad * 100 | number:'1.0-0')+ '%'" aria-valuemax="100">
+                                                                {{ element.probabilidad | number:'1.0-2' }}
+                                                            </div>
+
+                                                            <div *ngIf="element.probabilidad>=0.3 && element.probabilidad<0.6" class="progress-bar bg-info" role="progressbar" [style.width]=" (element.probabilidad * 100 | number:'1.0-0')+ '%'" aria-valuemax="100">
+                                                                {{ element.probabilidad | number:'1.0-2' }}
+                                                            </div>
+
+                                                            <div *ngIf="element.probabilidad<0.3" class="progress-bar bg-warning" role="progressbar" [style.width]=" (element.probabilidad * 100 | number:'1.0-0')+ '%'" aria-valuemax="100">
+                                                                {{ element.probabilidad | number:'1.0-2' }}
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </ng-container>
+                                                <ng-container matColumnDef="variable_b">
+                                                    <th mat-header-cell *matHeaderCellDef> VARIABLE </th>
+                                                    <td mat-cell *matCellDef="let element">{{ element.email_colaborador | split:'@' }} </td>
+                                                </ng-container>
+                                                <ng-container matColumnDef="modifica_b">
+                                                    <th mat-header-cell *matHeaderCellDef> ACCIONES </th>
+                                                    <td mat-cell *matCellDef="let element" align="center">
+                                                        <button type="button" class="btn btn-primary btn-rounded waves-effect waves-light" style="height: 40px;" (click)="onFichaAfiliado(element.rutint)">
+                                                        <span class="btn-label"><i
+                                                          class="fa fa-pencil"></i></span>
+                                                          <span *ngIf="user_cla.id_cargo==2 || user_cla.id_cargo==1">Revisar</span>
+                                                          <span *ngIf="user_cla.id_cargo!=2 && user_cla.id_cargo!=1">Gestionar</span>
+                                                        </button>
+
+
+                                                    </td>
+                                                </ng-container>
+
+
+                                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                                            </table>
+
+                                            <mat-paginator #paginator="matPaginator" [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true">
+                                            </mat-paginator>
+                                        </mat-card>
+
+                                    </div>
+
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" [ngClass]="{'active':cookieTab === 'shield'}" class="tab-pane" id="iprofile">
+                                <div class="col-md-6">
+                                    <h3>Todos los día Gestionados!!</h3>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div role="tabpanel" [ngClass]="{'active':cookieTab === 'edit'}" class="tab-pane" id="iedit">
+                                <div class="col-md-6">
+                                    <h3>Todos los día Gestionados!!</h3>
+                                </div>
+
+                                <div class="clearfix"></div>
+                            </div>
+                            <div role="tabpanel" [ngClass]="{'active':cookieTab === 'money'}" class="tab-pane" id="imessages">
+                                <div class="col-md-6">
+                                    <h3>Todos los día Gestionados!!</h3>
+                                </div>
+
+                                <div class="clearfix"></div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" [ngClass]="{'active':cookieTab === 'bell'}" id="isettings">
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li role="presentation2" class="active"><a href="#nuevos" (click)="onClickTabLead(1)" aria-controls="home" role="tab" data-toggle="tab" aria-expanded="true"><span class="label label-success label-rounded">{{ resumen?.nuevos }}</span>&nbsp;<span>Nuevos</span></a></li>
+                                    <li role="presentation2" class=""><a href="#propensos" (click)="onClickTabLead(2)" aria-controls="home" role="tab" data-toggle="tab" aria-expanded="true"><span class="label label-default label-rounded">{{ resumen?.propensos }}</span>&nbsp;<span> Propensos</span></a></li>
+                                    <li role="presentation2" class=""><a href="#pendientes" (click)="onClickTabLead(3)" aria-controls="profile" role="tab" data-toggle="tab" aria-expanded="false"><span class="label label-warning label-rounded">{{ resumen?.pendientes }}</span>&nbsp;<span> Pendientes</span> </a></li>
+                                    <li role="presentation2" class=""><a href="#gestionados" (click)="onClickTabLead(4)" aria-controls="messages" role="tab" data-toggle="tab" aria-expanded="false"><span class="label label-info label-rounded">{{ resumen?.gestionados }}</span>&nbsp;<span> Gestionados</span></a></li>
+
+                                </ul>
+                                <div class="tab-content">
+                                    <div role="tabpanel2" class="tab-pane active" id="nuevos">
+                                        <mat-card class="example-container">
+                                            <div class="example-header col-sm-12 col-md-12">
+                                                <div class="row">
+                                                    <div class="col-sm-6 col-md-6">
+                                                        <mat-form-field>
+                                                            <input matInput #filter placeholder="Buscar" (keyup)="applyFilterLead($event.target.value)">
+                                                        </mat-form-field>
+                                                        <mat-form-field *ngIf="tabFilterLead === 4">
+                                                            <mat-label>Estado</mat-label>
+                                                            <mat-select (selectionChange)="applyFilterChangeLead($event.value)">
+                                                                <mat-option *ngFor="let state of states" [value]="state.idestado">
+                                                                    {{state.nombre_estado}}</mat-option>
+                                                            </mat-select>
+                                                        </mat-form-field>
+                                                    </div>
+                                                    <form [formGroup]="filtroFechaForm" (ngSubmit)="onSubmit()">
+                                                        <div class="col-sm-6 col-md-6">
+                                                            <ul class="list-inline">
+                                                                <li>
+                                                                    <div class="form-group">
+                                                                        <mat-form-field color="accent">
+                                                                            <mat-label>Fecha Inicio</mat-label>
+                                                                            <input matInput class="form-control" formControlName="startDate" [matDatepicker]="picker1" readonly>
+                                                                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                                                            <mat-datepicker #picker1 color="primary" [disabled]="false">
+                                                                            </mat-datepicker>
+                                                                            <mat-error *ngIf="filtroFechaForm.controls['startDate'].errors?.required">
+                                                                                Fecha Inicio es Requerida</mat-error>
+                                                                        </mat-form-field>
+
+                                                                    </div>
+                                                                </li>
+                                                                <li>
+                                                                    <div class="form-group">
+                                                                        <mat-form-field color="accent">
+                                                                            <mat-label>Fecha Finalización</mat-label>
+                                                                            <input matInput class="form-control" formControlName="endDate" [matDatepicker]="picker2" readonly>
+                                                                            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                                                            <mat-datepicker #picker2 color="primary" [disabled]="false">
+                                                                            </mat-datepicker>
+                                                                            <mat-error *ngIf="filtroFechaForm.controls['endDate'].errors?.required">
+                                                                                Fecha Finalización es Requerida</mat-error>
+                                                                        </mat-form-field>
+
+                                                                    </div>
+                                                                </li>
+                                                                <li><button class="btn btn-danger" type="submit">Aplicar</button></li>
+
+                                                            </ul>
+                                                            <code *ngIf="filtroFechaForm.hasError('notValid')">La fecha de finalización es anterior a la fecha de inicio</code>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <table mat-table #table2 [dataSource]="dataSourceLeads" style="height:200px;" class="mat-elevation-z8" width="100%" align="center" #sortLeads="matSort" matSort>
+                                                <ng-container matColumnDef="fecha">
+                                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> FECHA </th>
+                                                    <td mat-cell *matCellDef="let element">{{ element.created_time | date:'dd/MM/yy H:mm'}} </td>
+                                                </ng-container>
+                                                <ng-container matColumnDef="rut">
+                                                    <th mat-header-cell *matHeaderCellDef> RUT </th>
+                                                    <td mat-cell *matCellDef="let element">
+                                                        {{ element.rut }}
+                                                        <ng-container *ngIf="element.star==1"> <img src="../../../assets/images/star.png" width="32">
+                                                        </ng-container>
+                                                    </td>
+                                                </ng-container>
+                                                <ng-container matColumnDef="nombre">
+                                                    <th mat-header-cell *matHeaderCellDef> NOMBRE </th>
+                                                    <td mat-cell *matCellDef="let element">{{ element.nombre }} </td>
+                                                </ng-container>
+                                                <ng-container matColumnDef="campana">
+                                                    <th mat-header-cell *matHeaderCellDef> CAMPAÑA </th>
+                                                    <td mat-cell *matCellDef="let element">{{ element.nombre_campana }} </td>
+                                                </ng-container>
+                                                <ng-container matColumnDef="variable">
+                                                    <th mat-header-cell *matHeaderCellDef> VARIABLE </th>
+                                                    <td mat-cell *matCellDef="let element">
+                                                        <span *ngIf="element.tipo_campana==1"><b>{{element?.comuna}}</b></span>
+                                                        <span *ngIf="element.tipo_campana==2 && element.califica==1"><b>${{element.monto | number}}</b></span>
+                                                        <span *ngIf="element.califica==0 && element.tipo_campana==2"><b>NO CALIFICA</b></span>
+                                                        <span *ngIf="element.tipo_campana==3 || element.tipo_campana==9 || element.tipo_campana==10"><b>${{element.monto | number}}</b></span>
+                                                        <span *ngIf="element.tipo_campana==4 && element.estado_base == 1"><b>SIN CAMPAÑA <span *ngIf="element.monto_simulado">/ SIM. ${{element?.monto_simulado | number}}</span></b>
+                                                        </span>
+                                                        <span *ngIf="element.tipo_campana==4 && element.estado_base == 2"><b>APR.
+                                                                ${{element.monto | number}} <span *ngIf="element.monto_simulado">/ SIM. ${{element?.monto_simulado | number}}</span></b>
+                                                        </span>
+                                                        <span *ngIf="element.tipo_campana==4 && element.estado_base == 3"><b>PRE.
+                                                                ${{element.monto | number}} <span *ngIf="element.monto_simulado">/ SIM. ${{element?.monto_simulado | number}}</span></b>
+                                                        </span>
+                                                    </td>
+                                                </ng-container>
+                                                <ng-container matColumnDef="asignado">
+                                                    <th mat-header-cell *matHeaderCellDef> ASIGNADO A </th>
+                                                    <td mat-cell *matCellDef="let element"> {{ element.email_colaborador | split:'@' }}
+                                                        <ng-container *ngIf="user_cla.id_cargo==4 &&  element.tipo_campana!=4 && element.tipo_campana!=10"> -
+                                                            <select (change)="onChange($event.target.value)">
+                                                                <option selected>Seleccione Ejecutivo...</option>
+                                                                <option *ngFor="let ejecutivo of ejecutivos | filterArray:element.tipo_campana"
+                                                                    [value]="element.id+'-'+ejecutivo.rut+'-'+ejecutivo.email">
+                                                                    {{ejecutivo.email | split:'@' }}
+                                                                </option>
+                                                            </select>
+                                                        </ng-container>
+                                                    </td>
+                                                </ng-container>
+
+                                                <ng-container matColumnDef="modifica">
+                                                    <th mat-header-cell *matHeaderCellDef> ACCIONES </th>
+                                                    <td mat-cell *matCellDef="let element" align="center">
+                                                        <button *ngIf="user_cla.id_cargo!=4" type="button" class="btn btn-primary btn-rounded waves-effect waves-light" (click)="onLead(element.id)">
+                                                  <span class="btn-label"><i
+                                                          class="fa fa-pencil"></i></span>Gestionar</button>
+                                                        <button *ngIf="user_cla.id_cargo==4" type="button" class="btn btn-primary btn-rounded waves-effect waves-light" (click)="onLead(element.id)">
+                                                            <span class="btn-label"><i
+                                                                    class="fa fa-pencil"></i></span>Revisar</button>
+
+
+                                                    </td>
+                                                </ng-container>
+
+
+                                                <tr mat-header-row *matHeaderRowDef="displayedColumnsLeads"></tr>
+                                                <tr mat-row *matRowDef="let row; columns: displayedColumnsLeads;"></tr>
+
+                                            </table>
+
+                                            <mat-paginator #paginatorLeads="matPaginator" [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true">
+                                            </mat-paginator>
+                                        </mat-card>
+
+                                    </div>
+
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+
+                        </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>

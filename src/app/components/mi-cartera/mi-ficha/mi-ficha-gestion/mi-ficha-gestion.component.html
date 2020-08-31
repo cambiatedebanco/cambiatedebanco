@@ -1,0 +1,95 @@
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="white-box">
+                <h3 class="box-title m-b-0">{{_detailObjectPPFF?.tipo_producto}} {{_detailObjectPPFF?.oferta}} por ${{_detailObjectPPFF?.monto | number:'1.0-0':'es'}} </h3>
+                <br>
+                <form [formGroup]="testFromGroup" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-3">RUT
+                        </label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" formControlName="rut">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3">Nombre </label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" formControlName="nombres">
+                        </div>
+                    </div>
+                    <div class="form-group" [ngClass]="{'has-error': testFromGroup.controls.telefono.errors }">
+                        <label class="col-sm-3" for="example-phone">Telefono </label>
+                        <div class="col-sm-9">
+                            <input type="text" id="example-phone" name="example-phone" class="form-control" formControlName="telefono" placeholder="56992167890">
+                        </div>
+                    </div>
+                    <div class="form-group" [ngClass]="{'has-error': testFromGroup.controls.email.errors }">
+                        <label class="col-sm-3" for="example-email">Email </label>
+                        <div class="col-sm-9">
+                            <input type="text" id="example-email" name="example-email" formControlName="email" class="form-control" placeholder="ejemplo@gmail.com">
+                            <div *ngIf="testFromGroup.controls.email.errors" class="invalid-feedback">
+                                <div *ngIf="testFromGroup.controls.email.errors.required">Campo obligatorio.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" [ngClass]="{'has-error': testFromGroup.controls.estado.errors }">
+                        <label class="col-sm-3">Estado</label>
+                        <div class="col-sm-9">
+                            <select class="form-control" formControlName="estado" name="estado">
+                                <option [ngValue]="null" disabled>Seleccione el estado</option>
+                                <option *ngFor="let estado of estados" [ngValue]="estado">
+                                    {{estado.nombre_estado}}
+                                </option>
+
+                            </select>
+                            <div *ngIf="testFromGroup.controls.estado.errors" class="invalid-feedback">
+                                <div *ngIf="testFromGroup.controls.estado.errors.required">Campo obligatorio.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" *ngIf="isMonto">
+                        <label class="col-sm-3" for="inputState">Monto Cursado </label>
+                        <div class="col-sm-9">
+                            <input type="text" id="txtmontocursado" name="monto" formControlName="monto" class="form-control" placeholder="Monto Cursado">
+                        </div>
+                    </div>
+                    <div class="form-group" *ngIf="testFromGroup.controls.estado.value?.idestado == 15">
+                        <label class="col-sm-3"> Fecha agendamiento</label>
+                        <div class="col-sm-9">
+                            <div class="col">
+                                <div class="col-sm-9">
+                                    <input matInput [matDatepicker]="myDatepicker" formControlName="fechaAgendamiento" class="form-control">
+                                </div>
+                                <div class="col-xs-3">
+                                    <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <mat-datepicker #myDatepicker></mat-datepicker>
+                                <input [ngxTimepicker]="picker" class="form-control" formControlName="horaAgendamiento" placeholder="hh:mm">
+                                <ngx-material-timepicker #picker></ngx-material-timepicker>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-9">
+                            <textarea class="form-control" rows="3" placeholder="Comentarios..." formControlName="comentarios"></textarea>
+                            <div *ngIf="testFromGroup.controls.comentarios.errors" class="invalid-feedback">
+                                <div *ngIf="testFromGroup.controls.comentarios.errors.required">Campo obligatorio.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group m-b-0" *ngIf="user_cla?.id_cargo != 1 && user_cla?.id_cargo != 2">
+                        <div class="col-sm-offset-3 col-sm-9">
+                            <button type="button" class="swal2-cancel swal2-styled waves-light m-r-10" style="display: inline-block; background-color: rgb(255, 67, 55);" (click)="openDialogMail()"> <i class="fa fa-paper-plane-o"></i>Mail</button>
+                            <button type="button" class="swal2-confirm swal2-styled waves-light m-r-10" style="display: inline-block; border-left-color: rgb(48, 133, 214); border-right-color: rgb(48, 133, 214);" (click)="onSubmit()">Guardar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

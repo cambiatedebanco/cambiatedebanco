@@ -1,0 +1,146 @@
+<!-- ============================================================== -->
+<!-- Topbar header - style you can find in pages.scss -->
+<!-- ============================================================== -->
+<nav class="navbar navbar-default navbar-static-top m-b-0">
+    <div class="navbar-header" *ngIf="user_cla">
+        <div class="top-left-part">
+            <!-- Logo -->
+            <a class="logo" routerLink="{{defaultHome}}">
+                <!-- Logo icon image, you can use font-icon also -->
+                <!--This is dark logo icon-->
+
+                <span class="hidden-xs hidden-sm" style=""></span>
+                <!-- Logo text image you can use text also --><span style="padding-left:5px;">
+                    <!--This is dark logo text--><img src="./assets/images/admin-text.png" alt="home"
+                        class="dark-logo" />
+                    <!--This is light logo text-->
+                </span> </a>
+        </div>
+        <ul class="nav navbar-top-links navbar-left" *ngIf="user_cla.id_cargo != 5">
+            <li><a href="javascript:void(0)" class="open-close waves-effect waves-light visible-xs"><i
+                        class="ti-close ti-menu"></i></a></li>
+            <li class="dropdown">
+                <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#">
+
+                    <a href="#" class="button-badge">
+                        <i class="fa fa-bell"></i>
+                        <span class="badge red" *ngIf="notifica?.length  > 10">+10</span>
+                        <span class="badge red" *ngIf="notifica?.length  > 0 && notifica?.length  < 11">{{notifica?.length}}</span>
+                    </a>
+
+                </a>
+                <ul class="dropdown-menu mailbox animated bounceInDown">
+                    <li>
+                        <div class="drop-title">
+                            <span *ngIf="notifica?.length > 10">Tiene +10 nuevos mensajes</span>
+                            <span *ngIf="notifica?.length > 0 && notifica?.length < 11">Tiene {{notifica?.length}} nuevos mensajes</span>
+                        </div>
+                    </li>
+                    <li style="height: 200px; overflow: auto">
+                        <div class="message-center" *ngFor="let notificacion of notifica">
+                            <a (click)="onLead(notificacion.id)" skipLocationChange>
+
+                                <div class="mail-contnet">
+                                    <h5>{{notificacion.nombre}}</h5>
+
+                                    <span class="mail-desc">{{notificacion.nombre_campana}}</span>
+
+
+                                    <span class="time">{{notificacion.created_time | date:'dd/MM/yyyy hh:mm'}}</span>
+                                </div>
+                            </a>
+
+                        </div>
+                    </li>
+                    <li>
+                        <a *ngIf="notifica?.length > 0" class="text-center" (click)="onViewAll()"> <strong>Ver
+                                Todas</strong> <i class="fa fa-angle-right"></i> </a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-messages -->
+            </li>
+        </ul>
+        <!-- /Logo -->
+        <!-- Search input and Toggle icon -->
+
+        <ul class="nav navbar-top-links navbar-right pull-right" *ngIf="user_cla">
+            <li *ngIf="user_cla.id_cargo != 5">
+                <form role="search" class="app-search  m-r-10" #f="ngForm">
+                    <ng-container *ngIf="user_cla.nivel_acceso==1 || user_cla.nivel_acceso==4 || user_cla.nivel_acceso==99">
+                        <div class="radio radio-inline radio-success">
+                            <input type="radio" name="tipo" id="radio14" [(ngModel)]="myRadio" value=2 (click)="clearSearchInput()">
+                            <label for="radio14" class="color-white">Empr.</label>
+                        </div>
+                        <div class="radio radio-inline radio-success">
+                            <input type="radio" name="tipo" id="radio15" [(ngModel)]="myRadio" value=3 (click)="clearSearchInput()">
+                            <label for="radio15" class="color-white">Afil.</label>
+                        </div>
+                        &nbsp;&nbsp;
+                    </ng-container>
+                    <ng-container *ngIf="user_cla.nivel_acceso==2">
+                        <label class="color-white">Empresa</label> &nbsp;&nbsp;
+                    </ng-container>
+                    <ng-container *ngIf="user_cla.nivel_acceso==3">
+                        <label class="color-white">Afiliado</label> &nbsp;&nbsp;
+                    </ng-container>
+                    <input type="text" #searchInput placeholder="Buscar..." (keyup)="search($event,f)" name="buscador" class="form-control" [matAutocomplete]="auto">
+                    <a href=""><i class="fa fa-search"></i></a>
+                </form>
+
+                <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option (onSelectionChange)="onEnter($event)" *ngFor="let emp of allemps" [value]="emp.RUT_PERSONA || emp.RUT_EMPRESA">
+                        <div><small>
+                                <font style="vertical-align: inherit;">
+                                    <font style="vertical-align: inherit;">{{emp?.RUT_PERSONA || emp?.RUT_EMPRESA }}
+                                    </font>
+                                </font>
+                                <font style="vertical-align: inherit;">
+                                    <font style="vertical-align: inherit;">
+                                        {{ emp?.NOMBRES || emp?.RAZON_SOCIAL_EMPRESA}}</font>
+                                </font>
+                            </small>
+                        </div>
+
+                    </mat-option>
+                </mat-autocomplete>
+            </li>
+            <li class="dropdown hidden-xs" *ngIf="loggedIn">
+                <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#">
+                    <img *ngIf="user.photoURL" src="{{user.photoURL}}" alt="user-img" width="36" class="img-circle">
+                    <img *ngIf="!user.photoURL" src="./assets/images/boss.png" alt="user-img" width="36" height="36" class="img-circle">
+                    <b class="hidden-xs hidden-sm">{{user_cla.nombres}}</b><span class="caret"></span> </a>
+                <ul class="dropdown-menu dropdown-user animated flipInY">
+                    <li>
+                        <div class="dw-user-box">
+                            <div class="u-img" *ngIf="user.photoURL"><img src="{{user.photoURL}}" alt="user" /></div>
+                            <div class="u-img" *ngIf="!user.photoURL"><img src="./assets/images/boss.png" alt="user" width="36" height="70" /></div>
+
+                            <div class="u-text">
+                                <h4>{{user.displayName}}</h4>
+                                <p class="text-muted">{{user.email}}</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li role="separator" class="divider"></li>
+                    <li>
+                        <div class="dw-user-box">
+                            <div class="u-text">
+                                <h4>{{user_cla.puesto_real}}</h4>
+                                <p class="text-muted">{{user_cla.sucursal}}</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#" (click)="logout()"><i class="fa fa-power-off"></i> Logout</a></li>
+                </ul>
+                <!-- /.dropdown-user -->
+            </li>
+
+            <!-- /.dropdown -->
+        </ul>
+    </div>
+    <!-- /.navbar-header -->
+    <!-- /.navbar-top-links -->
+    <!-- /.navbar-static-side -->
+</nav>
+<!-- End Top Navigation -->

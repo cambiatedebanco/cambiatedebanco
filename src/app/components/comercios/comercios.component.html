@@ -1,0 +1,24 @@
+<nav class="navbar navbar-dark bg-warning">
+    <span class="navbar-brand mb-0 h1"><i class="fas fa-shopping-cart"></i> Comercios</span>
+</nav>
+<cdk-virtual-scroll-viewport style="height: 530px" itemSize="90">
+    <ng-container *cdkVirtualFor="let comercio of comercios">
+
+        <div class="card" style="margin-bottom: 15px; ">
+            <div class="card-header  d-flex align-items-left justify-content-left h-20" style="height: 30px; padding-top: 5px;">
+                <p class="text-right .small" *ngIf="comercio.data.estado=='Abierto'">
+                    <span class="label label-success pull-right">{{ comercio.data.estado }}</span>
+
+                </p>
+                <p class="text-right .small" *ngIf="comercio.data.estado=='Cerrado'">
+                    <span class="label label-danger pull-right"> {{ comercio.data.estado  }}</span>
+
+                </p>
+                <h5 class="text-left card-title">{{ comercio.data.cadena }}</h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text">{{comercio.data.region}} - {{comercio.data.ciudad}} - {{comercio.data.direccion}}</p>
+            </div>
+        </div>
+    </ng-container>
+</cdk-virtual-scroll-viewport>

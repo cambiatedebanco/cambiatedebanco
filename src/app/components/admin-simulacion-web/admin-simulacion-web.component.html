@@ -1,0 +1,74 @@
+<app-navbar></app-navbar>
+<app-left-bar></app-left-bar>
+<app-idle></app-idle>
+<div class="col-sm-12 col-sm-12">
+    <div id="page-wrapper">
+
+        <div class="container-fluid">
+            <div class="table-responsive">
+                <table class="table">
+                    <td>
+                        <div class="calcTitle">
+                            <h1 class="titleSlider">
+                                Administración <small class="subTitleSlider">asignación de campañas</small>
+                            </h1>
+                            <p>
+
+                            </p>
+                        </div>
+                    </td>
+                </table>
+            </div>
+            <div class="white-box">
+                <div class="row">
+                    <div class="col-sm-6 col-sm-6">
+                        <label for="inputState">Seleccione Campaña</label>
+                        <select id="inputState" name="id_campaign" class="form-control" (change)="selectInputCampaign($event.target.value)">
+                                      <option disabled value='0' selected>Seleccione Campaña...</option>
+                                      <option *ngFor="let campaign of campaigns" value="{{campaign.data.id_campaign}}">
+
+                          {{campaign.data.nombre_campaign}}
+                        </option>
+                                    </select>
+                    </div>
+                </div>
+                <br><br>
+                <div class="row">
+                    <div class="col-sm-6 col-sm-6">
+                        <label for="inputState">Sucursal Origen</label>
+                        <select [attr.disabled]="codigoCampaign == 0 ? '' : null" id="inputState" name="id_estado" class="form-control" (change)="selectInput($event.target.value)">
+                                      <option disabled value='0' selected>Seleccione Sucursal...</option>
+                                      <option *ngFor="let sucursal of sucursales" value="{{sucursal.data.cod_sucursal}}">
+
+                          {{sucursal.data.sucursal}}
+                        </option>
+                                    </select>
+                    </div>
+
+                    <div *ngIf="codigoCampaign == 4 && codigoSucursal != 0 ? true: false" class="col-sm-6 col-sm-6">
+                        <mat-checkbox [(ngModel)]="check" (ngModelChange)="modelChange($event)"></mat-checkbox>
+                        &nbsp;&nbsp;
+                        <label for="inputState">Sucursal Destino</label>
+                        <ng-container *ngIf="check">
+                            <select id="inputState" name="id_estado" class="form-control" (change)="selectInputDestino($event.target.value)">
+                                      <option disabled value='0' selected>Seleccione Sucursal...</option>
+                                      <option *ngFor="let sucursal of sucursales" value="{{sucursal.data.cod_sucursal}}">
+
+                          {{sucursal.data.sucursal}}
+                        </option>
+                                    </select>
+                        </ng-container>
+                    </div>
+                </div>
+                <br><br>
+                <div class="row">
+                    <div class="col-sm-12 col-sm-12">
+                        <label for="inputState">Administrar Ejecutivos</label>
+                        <dual-list [sort]="keepSorted" [source]="source" [key]="key" [display]="display" [filter]="filter" [(destination)]="confirmed" height="265px" [format]="format" [disabled]="disabled" (destinationChange)="echoDestination($event)"></dual-list>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

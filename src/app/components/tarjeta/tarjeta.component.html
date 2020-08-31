@@ -1,0 +1,33 @@
+<app-navbar></app-navbar>
+<app-left-bar></app-left-bar>
+<app-idle></app-idle>
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row bg-title">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                <h4 class="page-title">COMPRAR CREDITOS</h4>
+            </div>
+            <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                <ol class="breadcrumb">
+                    <li class="active">{{ hoy | date :'fullDate'}}</li>
+                </ol>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <div class="col-md-12 col-sm-12">
+            <div class="white-box">
+                <h3 class="box-title m-b-0">Sample Forms with icon</h3>
+                <p class="text-muted m-b-30 font-13"> Bootstrap Elements </p>
+                <div class="row">
+                    <div class="col-sm-12 col-xs-12">
+                        <form action="/procesar-pago" method="POST">
+                            <button type="button" (click)="onBuy()" class="mercadopago-button" id="mercadopago-button" target="_blank">
+                           Pagar
+                        </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

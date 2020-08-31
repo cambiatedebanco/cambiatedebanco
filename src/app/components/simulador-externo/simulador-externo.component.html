@@ -1,0 +1,282 @@
+<div class="background">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="calcTitle">
+                <h1 class="titleSlider">
+                    Calcula <small class="subTitleSlider">su crédito social</small>
+                </h1>
+                <p>
+
+                </p>
+            </div>
+            <mat-vertical-stepper [linear]="true" #stepper>
+                <mat-step [stepControl]="rutFormGroup" label="1">
+                    <ng-template matStepLabel>Datos del Afiliado</ng-template>
+                    <form [formGroup]="rutFormGroup" (ngSubmit)="onSubmitRutFormGroup(stepper)">
+                        <div class="form-group row">
+                            <div class="col-xs-12 form-inline">
+                                RUT:
+                                <font color="red">(*)</font>&nbsp;
+                                <input [ngClass]="{'has-error': rutFormGroup.controls.rut.errors}" type="text" formControlName="rut" class="form-control">
+                                <button class="btn  btn-info" type="submit" [disabled]="rutFormGroup.controls.rut.errors">Validar</button>
+
+                                <div *ngIf="rutFormGroup.controls.rut.errors" class="invalid-feedback error-text">
+                                    <div *ngIf="rutFormGroup.get('rut').hasError('required')">
+                                        (*) Debe Ingresar su RUT en formato 12345678-9
+                                    </div>
+                                    <div *ngIf="rutFormGroup.get('rut').hasError('validaRut')">
+                                        Debe Ingresar un RUT valido
+                                    </div>
+                                    &nbsp;
+                                </div>
+
+
+
+
+                            </div>
+
+
+                        </div>
+                        <div class="alerta-ohno" *ngIf="!isAfiliado">
+                            <h5 class="alert-heading"><b>Lo Sentimos</b></h5>
+                            Actualmente no estas afiliado a la Caja de los Andes.
+                        </div>
+
+
+
+                    </form>
+                </mat-step>
+                <mat-step [completed]="isCreditFormCompleted" label="2">
+                    <ng-template matStepLabel>Datos del Credito</ng-template>
+
+
+
+                    <form *ngIf="isOffers && isAfiliado" [formGroup]="creditFormGroup" (ngSubmit)="onSubmitCreditFormGroup(stepper)">
+                        <br>
+                        <div class="alerta">
+                            <h5 class="alert-heading"><b>Oferta Aprobada</b></h5>
+                            Estimado Afiliado, tenemos una oferta de crédito <b>APROBADA</b> de un monto máximo de <b>$ {{offert.data.MONTO |  number:'1.0-0' }}</b>.</div>
+
+
+                        <div class="form-group col-lg-12">
+                            <label>Monto</label>
+                            <input type="number" formControlName="amount" max="{{this.offert.MONTO}}" class="form-control" [ngClass]="{'has-error': creditFormGroup.controls.amount.errors}">
+                            <div *ngIf="creditFormGroup.controls.amount.errors" class="invalid-feedback error-text">
+                                <div *ngIf="creditFormGroup.controls.amount.errors.required">Campo obligatorio.</div>
+                                <div *ngIf="creditFormGroup.controls.amount.errors.min">Excede el minimo.</div>
+                                <div *ngIf="creditFormGroup.controls.amount.errors.max">Excede monto maximo.</div>
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-6">
+                            <label>Cuotas</label>
+                            <input type="number" formControlName="payments" class="form-control" value="1" min="1" max="24" [ngClass]="{'has-errors': creditFormGroup.controls.payments.errors}">
+                            <div *ngIf="creditFormGroup.controls.payments.errors" class="invalid-feedback error-text">
+                                <div *ngIf="creditFormGroup.controls.payments.errors.required">Campo obligatorio.</div>
+                                <div *ngIf="creditFormGroup.controls.payments.errors.min">Excede el minimo.</div>
+                                <div *ngIf="creditFormGroup.controls.payments.errors.max">Excede monto maximo.</div>
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-6">
+                            <label>Meses de gracia</label>
+                            <select class="form-control" formControlName="monthsToDelay">
+                                <!--Deberia funcionar-->
+                                <option *ngFor="let month of monthsToDelay index as i;" value="{{month}}" [selected]="month==1">{{ month }} </option>
+                            </select>
+                        </div>
+                        <div class="form-group col-lg-6">
+                            <input class="form-check-input" formControlName="isSecure" type="checkbox" value="" id="defaultCheck1">
+                            <label class="form-check-label" for="defaultCheck1">
+                              Seguro de cesantia
+                            </label>
+                        </div>
+                        <div class="col-lg-12">
+                            <button class="btn  btn-info" type="submit">Simular Crédito</button>
+                        </div>
+
+                    </form>
+                    <div class="alerta-ohno" *ngIf="isOffers==false && isAfiliado && isQueryReady">
+                        <!-- is query ready ? -->
+                        <h5 class="alert-heading"><b>Lo Sentimos</b></h5>
+                        Lamentablemente no encontramos ofertas asociadas a usted.
+                    </div>
+
+
+                </mat-step>
+                <mat-step [completed]="isDetailCompleted" label="3">
+                    <ng-template matStepLabel>Datos de la simulación</ng-template>
+                    <div class="row mb-30">
+                        <div class="datos-credito col-lg-12 col-md-12 col-sm-12">
+                            <div class="col-lg-12 col-md-12 col-sm-12 border br-3">
+                                <!-- Cabecera -->
+                                <div class="row pt-20 pb-20">
+                                    <div class="col-lg-2 col-md-2 col-sm-2 text-center"><span class=""><i  class="fa fa-dollar fa-4x" style="color: #25619c;"></i></span></div>
+                                    <div class="col-lg-10 col-md-10 col-sm-10">
+                                        <div class="row">
+                                            <div class="col-lg-3 col-md-3 col-sm-3">
+                                                <h6 class="text-default mb-0">Crédito de Consumo</h6>
+                                                <h3 class="text-info text-regular mb-0 ">$ {{monto | number:'1.0-0'}}</h3>
+                                            </div>
+                                            <div class="col-lg-3 col-md-3 col-sm-3">
+                                                <h6 class="text-default mb-0">Cuota Mensual</h6>
+                                                <h3 class="text-info text-regular mb-0 ">$ {{payment | number:'1.0-0' }}</h3>
+                                            </div>
+                                            <div class="col-lg-3 col-md-3 col-sm-3">
+                                                <h6 class="text-default mb-0">Plazo del Crédito</h6>
+                                                <h3 class="text-info text-regular mb-0 ">{{cuotas | number:'1.0-0' }}</h3>
+                                            </div>
+                                            <div class="col-lg-3 col-md-3 col-sm-3">
+                                                <h6 class="text-default mb-0">Tasa del Crédito</h6>
+                                                <h3 class="text-info text-regular mb-0 ">{{creditDetail.getInterestRate() | percent:'1.0-2' }}</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- fin Cabecera -->
+                                <!-- Cuerpo -->
+                                <div class="row pt-20 pb-20 border-top neutro">
+                                    <div class="col-lg-6 col-md-6 col-sm-6">
+                                        <div class="row mb-20">
+                                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                                <p class=" text-regular px-12 mb-0">Monto Solicitado</p>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-6 text-right">
+                                                <h6 class="text-info px-12 text-regular mb-0 ">$ {{monto | number:'1.0-0'}}</h6>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-20">
+                                            <div class="col-lg-4 col-md-4 col-sm-5">
+                                                <p class="text-regular px-12 mb-0">Seguros</p>
+                                            </div>
+                                            <div class="col-lg-8 col-md-8 col-sm-7 text-right">
+                                                <h6 class="text-regular mb-0 ">$ 43.725</h6>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-20">
+                                            <div class="col-lg-4 col-md-4 col-sm-5">
+                                                <p class="text-regular px-12 mb-0">Impuestos</p>
+                                            </div>
+                                            <div class="col-lg-8 col-md-8 col-sm-7 text-right">
+                                                <h6 class="text-regular px-12 mb-0 ">$ {{taxtAmount | number:'1.0-0'}} </h6>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-20">
+                                            <div class="col-lg-5 col-md-5 col-sm-5">
+                                                <p class="text-regular px-12 mb-0">Gastos Notariales</p>
+                                            </div>
+                                            <div class="col-lg-7 col-md-7 col-sm-7 text-right">
+                                                <h6 class="text-regular px-12 mb-0 ">$ {{gastoNotarial | number:'1.0-0'}}</h6>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                                <p class=" text-regular px-12 mb-0">Monto del Crédito</p>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-6 text-right">
+                                                <h6 class="text-info px-12 text-regular mb-0 ">$ {{initialCapital | number:'1.0-0'}} </h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6">
+                                        <div class="row mb-20">
+                                            <div class="col-lg-7 col-md-7 col-sm-7">
+                                                <p class="text-regular px-12 mb-0">Tasa de Interés mensual Internet</p>
+                                            </div>
+                                            <div class="col-lg-5 col-md-5 col-sm-5 text-right">
+                                                <h6 class="text-regular px-12 mb-0 "><span class="">{{creditDetail.getInterestRate() | percent:'1.0-2' }}</span> ({{creditDetail.getInterestRate() *12 | percent:'1.0-2' }} anual)</h6>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-20">
+                                            <div class="col-lg-5 col-md-5 col-sm-5">
+                                                <p class="text-regular px-12 mb-0">Meses de No Pago</p>
+                                            </div>
+                                            <div class="col-lg-7 col-md-7 col-sm-7 text-right text-regular">
+                                                <h6 class="text-regular px-12 mb-0 "> {{creditFormGroup.controls.monthsToDelay.value}}</h6>
+
+                                            </div>
+                                        </div>
+                                        <div class="row mb-20">
+                                            <div class="col-lg-7 col-md-7 col-sm-7">
+                                                <p class="text-regular px-12 mb-0">Costo Total del Crédito</p>
+                                            </div>
+                                            <div class="col-lg-5 col-md-5 col-sm-5 text-right">
+                                                <h6 class="text-regular px-12 mb-0 ">$ {{totalCuota | number:'1.0-0' }}</h6>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-8 col-md-8 col-sm-8">
+                                                <p class="text-regular px-12 mb-0">Carga Anual Equivalente (CAE)</p>
+                                            </div>
+                                            <div class="col-lg-4 col-md-4 col-sm-4 text-right">
+                                                <h6 class="text-regular mb-0 "> {{irrValue | number }}%</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                                <!-- Cuerpo -->
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="col-lg-12">
+
+                        <button class="btn  btn-info" (click)="onClickDetail(stepper)">Lo quiero!</button>
+
+                    </div>
+                </mat-step>
+                <mat-step [completed]="isDetailCompleted" label="4">
+                    <ng-template matStepLabel>Datos del solicitante</ng-template>
+
+                    <form [formGroup]="contactForm" (ngSubmit)="onSubmitContactForm(stepper)">
+                        <div class="form-group col-lg-12 col-md-12">
+                            <label>Nombres: </label>
+                            <input type="text" class="form-control" formControlName="nombres">
+                        </div>
+                        <div class="form-group col-lg-6 col-md-6">
+                            <label>Rut:</label>
+                            <input type="text" class="form-control" formControlName="rut">
+                        </div>
+                        <div class="form-group col-lg-6">
+                            <label>Email: </label>
+                            <input type="text" class="form-control" formControlName="email">
+                            <div *ngIf="contactForm.controls.email.errors" class="invalid-feedback error-text">
+                                <div *ngIf="contactForm.controls.email.errors.required">Campo obligatorio.</div>
+                                <div *ngIf="contactForm.controls.email.errors.email">Formato de correo no valido.</div>
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-6">
+                            <label>Telefono:</label>
+                            <input type="text" class="form-control" formControlName="telefono">
+                            <div *ngIf="contactForm.controls.telefono.errors" class="invalid-feedback error-text">
+                                <div *ngIf="contactForm.get('telefono').hasError('required')">
+                                   Campo requerido.
+                                </div>
+                                <div *ngIf="contactForm.get('telefono').hasError('pattern')">
+                                    Solo numeros y largo maximo 10.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-12">
+                            <button class="btn btn-success " type="submit">Solicitar Crédito</button>
+                        </div>
+
+                    </form>
+                </mat-step>
+
+            </mat-vertical-stepper>
+            <br>
+            <div class="col-lg-12 col-md-12 col-sm-12 text-default pt-10 border-top">
+                <p class="px-10">
+                    La tasa de interés y los gastos informados son referenciales y están sujetos a confirmación de parte de la Caja. El valor de la cuota, la CAE y el costo final del crédito son igualmente referenciales y se han calculado considerando todos los conceptos
+                    y montos que constan precedentemente en esta simulación.</p>
+                <p class="px-10">La presente simulación sólo es de carácter informativa y no constituye aprobación del crédito ni oferta de tasa de interés. El otorgamiento del crédito, así como sus condiciones de plazo y tasa de interés, están sujetos a evaluación previa
+                    de la Caja.</p>
+
+            </div>
+
+        </div>
+    </div>

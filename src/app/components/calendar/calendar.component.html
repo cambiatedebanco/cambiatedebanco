@@ -1,0 +1,52 @@
+<div class="container-fluid">
+    <div *ngIf="isListView">
+        <div class="row">
+            <div class="col-xs-12" *ngFor="let group of groupArrays">
+                <div class="col-xs-12">
+                    <div class="group-date">{{group.date | date: "EEEE d M y"}}</div>
+                    <div class="col-xs" *ngFor="let event of group.events">
+                        <div [ngClass]="event.title === 'Volver a llamar' ? 'event-recall' : 'event'" role="alert" (click)="toggleDetail(event)">
+                            <div class="event-title">
+                                {{event.title}}
+                            </div>
+                            <div class="event-time">
+                                {{event.start | date: "HH a"}}
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="!isListView">
+        <button class="btn close-btn" (click)="toggleDetail(null)">&times;</button>
+        <div class="col-xs-12" *ngIf="selectedEvent">
+            <div class="col-xs">
+                <div [ngClass]="selectedEvent.title === 'Volver a llamar' ? 'event-detail-box-g' : 'event-detail-box-b'">
+                    <div class="event-detail-heading">
+                        {{selectedEvent.title}}
+                    </div>
+                </div>
+            </div>
+            <div class="event-detail-items">
+                <div>
+                    {{selectedEvent.start | date: "dd-MM-yyyy, HH:mm:ss"}}
+                </div>
+                <div class="event-detail-description">
+                    {{selectedEvent.description}}
+                </div>
+                <div *ngIf="selectedEvent.url != ''">
+                    <a href="{{selectedEvent.url}}">Mi Ficha</a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+</div>
+<!-- Everything you see below is just for the demo, you don't need to include it in your app -->

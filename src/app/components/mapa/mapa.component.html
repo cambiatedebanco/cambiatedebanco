@@ -1,0 +1,84 @@
+<mat-card>
+    <mat-card-content>
+        <agm-map #mapContainer [latitude]="lat" [longitude]="lng" [zoom]="zoom">
+            <div *ngFor="let marcador of marcadores">
+                <agm-marker *ngIf="marcador.estado=='Operativa'" [latitude]="marcador.lat" [longitude]="marcador.lng" [iconUrl]="icon">
+                    <agm-info-window>
+                        <strong>{{marcador.title}}</strong>
+                        <p>
+                            <span class="badge badge-primary">{{ marcador.estado }}</span>
+                        </p>
+                        <p>
+                            {{ marcador.direccion }}
+                        </p>
+                    </agm-info-window>
+                </agm-marker>
+                <agm-marker *ngIf="marcador.estado=='Cerrada'" [latitude]="marcador.lat" [longitude]="marcador.lng" [iconUrl]="icon_disabled">
+                    <agm-info-window>
+                        <strong>{{marcador.title}}</strong>
+                        <p>
+                            <span class="badge badge-danger">{{ marcador.estado }}</span>
+                        </p>
+                        <p>
+                            {{ marcador.direccion }}
+                        </p>
+                    </agm-info-window>
+                </agm-marker>
+            </div>
+
+            <div *ngFor="let marcador of marcadorFarmacia">
+                <agm-marker *ngIf="marcador.title=='AHUMADA' && IscheckedAhumada" [latitude]="marcador.lat" [longitude]="marcador.lng" [iconUrl]="icon_ahumada">
+                    <agm-info-window>
+                        <strong>{{marcador.title}}</strong>
+                        <p>
+                            <span class="badge badge-primary">{{ marcador.estado }}</span>
+                        </p>
+                        <p>
+                            {{ marcador.direccion }}
+                        </p>
+                    </agm-info-window>
+                </agm-marker>
+                <agm-marker *ngIf="marcador.title=='CRUZ VERDE' && IscheckedCverde" [latitude]="marcador.lat" [longitude]="marcador.lng" [iconUrl]="icon_cruzverde">
+                    <agm-info-window>
+                        <strong>{{marcador.title}}</strong>
+                        <p>
+                            <span class="badge badge-primary">{{ marcador.estado }}</span>
+                        </p>
+                        <p>
+                            {{ marcador.direccion }}
+                        </p>
+                    </agm-info-window>
+                </agm-marker>
+                <agm-marker *ngIf="marcador.title=='SALCOBRAND' && IscheckedSalco" [latitude]="marcador.lat" [longitude]="marcador.lng" [iconUrl]="icon_salcobrand">
+                    <agm-info-window>
+                        <strong>{{marcador.title}}</strong>
+                        <p>
+                            <span class="badge badge-primary">{{ marcador.estado }}</span>
+                        </p>
+                        <p>
+                            {{ marcador.direccion }}
+                        </p>
+                    </agm-info-window>
+                </agm-marker>
+            </div>
+
+            <agm-marker *ngFor="let contagio of contagios" [latitude]="contagio.data.latitud" [longitude]="contagio.data.longitud" [iconUrl]="icon_codvid" [label]="{color: 'black', fontWeight: 'bold', fontSize: '12px',  text: contagio.data.contagios_com.toString()}">
+            </agm-marker>
+
+
+            <agm-marker-cluster [imagePath]="'assets/images/m'" *ngIf="_filtro_tipo==1">
+                <agm-marker *ngFor="let colaborador of colaboradores" [latitude]="colaborador.lat" [longitude]="colaborador.lng">
+                </agm-marker>
+            </agm-marker-cluster>
+            <ng-container *ngIf="_filtro_tipo==2">
+                <agm-circle *ngFor="let afiliado of afiliados" [latitude]="afiliado.lat" [longitude]="afiliado.lng" [radius]="afiliado.radius" [fillColor]="'blue'" [circleDraggable]="false" [editable]="false" [fillOpacity]="0.15">
+                </agm-circle>
+            </ng-container>
+
+            <agm-polygon [fillOpacity]="0.1" [paths]="paths" [strokeWeight]="0.5">
+            </agm-polygon>
+
+        </agm-map>
+    </mat-card-content>
+
+</mat-card>

@@ -1,0 +1,104 @@
+.cs-page-sec-652772 {
+    padding-top: 180px;
+    padding-bottom: 300px;
+}
+
+.cs-nomargin {
+    margin: 0 !important;
+}
+
+.bg-title {
+    background: #ffffff;
+    overflow: hidden;
+    padding: 15px 10px 9px;
+    margin-bottom: 0px;
+    margin-left: -25.5px;
+    margin-right: -25.5px;
+}
+
+.bg-title-search {
+    overflow: hidden;
+    margin-bottom: 25px;
+    margin-left: -25.5px;
+    margin-right: -25.5px;
+}
+
+.element-title-bottom-spacing,
+.element-title {
+    margin-bottom: 20px !important;
+}
+
+.element-title {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    margin: 0 0 40px;
+}
+
+.align-center {
+    text-align: center;
+}
+
+.fancy-search {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    padding: 18px 15px 20px;
+    margin: 0 auto 30px;
+    width: 890px;
+}
+
+@media screen and (max-width: 992px) {
+    .fancy-search,
+    .fancy-search .search-header-holder {
+        width: 100%;
+    }
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body,
+.main-section p,
+.mce-content-body p {
+    font: normal 13px/20px "Varela Round", sans-serif;
+    letter-spacing: 0.5px;
+    text-transform: none;
+    color: #363f48 !important;
+}
+
+.header-search-form .location-loader-wrapper .fancy-spinner:before {
+    right: 0;
+    left: auto;
+    margin-right: 10px;
+    margin-top: -8px;
+    height: 16px;
+    width: 16px
+}
+
+.field-holder {
+    position: relative
+}
+
+agm-map {
+    height: 350px;
+}
+
+.tp-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #eee;
+}
+
+.tp-section {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    height: 60px;
+    width: 100px;
+}

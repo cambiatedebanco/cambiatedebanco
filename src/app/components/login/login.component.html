@@ -1,0 +1,40 @@
+<section id="wrapper" class="login-register{{numero}}">
+        <div class="login-box login-sidebar">
+          <div class="white-box">
+               <a href="javascript:void(0)" class="text-center db"><img src="../../../assets/images/logo-ceo-cla.png" alt="Home" /><br/>
+             </a> 
+              <div class="form-group m-t-40">
+                <div class="col-xs-12">
+                 
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-xs-12">
+                 
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-md-12">
+                         Para Ingresar debe ser Colaborador de Caja Los Andes
+                        <p class="help-block small">(Debe tener cuenta de @cajalosandes.cl)</p>
+                 
+                </div>
+            </div>
+              <div class="form-group text-center m-t-20">
+                <div class="col-xs-12">
+                  <button class="btn btn-warning btn-lg btn-block text-uppercase waves-effect waves-light" (click)="googleLogin()"><i class="fa fa-google fa-1x" ></i> Ingresar</button>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 m-t-10 text-center">
+                        <div class="alert alert-{{responseMessageType}}" role="alert" *ngIf="responseMessage.length">
+                                {{responseMessage}}
+                        </div>
+                 </div>
+              </div>
+     
+   
+    
+          </div>
+        </div>
+      </section>

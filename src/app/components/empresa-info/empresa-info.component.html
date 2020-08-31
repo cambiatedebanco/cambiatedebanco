@@ -1,0 +1,95 @@
+<div class="white-box-2">
+    <div class="row text-center ">
+        <div class="col-xs-4 b-r">
+            <h2>
+                <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;"><b>{{empresas.potencial}}</b></font>
+                </font>
+            </h2>
+            <h4>
+                <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">Potencial</font>
+                </font>
+            </h4>
+        </div>
+        <div class="col-xs-4 b-r">
+            <h2>
+                <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">
+                        <b><span *ngIf="empresas.CLUSTER==1">Alta Criticidad</span>
+                            <span *ngIf="empresas.CLUSTER==2">Alivio</span>
+                            <span *ngIf="empresas.CLUSTER==3">Ordenamiento</span>
+                            <span *ngIf="empresas.CLUSTER==4">Contingencia</span>
+                            <span *ngIf="empresas.CLUSTER==0">Potencial</span>
+                        </b>
+                    </font>
+                </font>
+            </h2>
+            <h4>
+                <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;"><span class="mytooltip tooltip-effect-4">
+                            <span class="tooltip-item">CLUSTER</span> <span class="tooltip-content clearfix" style="border-radius: 2%;">
+                              <span class="tooltip-text" >
+                                    
+                                            <h1 class="text-center" *ngIf="empresas.CLUSTER==1" style="color:white;">Alta Criticidad</h1>
+                                            <h1 class="text-center" *ngIf="empresas.CLUSTER==2" style="color:white;">Alivio</h1>
+                                            <h1 class="text-center" *ngIf="empresas.CLUSTER==3" style="color:white;">Ordenamiento</h1>
+                                            <h1 class="text-center" *ngIf="empresas.CLUSTER==4" style="color:white;">Contingencia</h1>
+                                            <h1 class="text-center" *ngIf="empresas.CLUSTER==0" style="color:white;">Potencial</h1>
+                                            <hr class="m-t-10">
+                                            <div class="p-20 text-center" *ngIf="empresas.CLUSTER == 1 ">
+                                                    Combinación de Stress Financiero(Liquidez), mora y deterioro alto, alta participacion de BBSS
+                                                                 <hr>
+                                                            Agrupa al 4% de los afiliados concentrados en aprox. 2.900 empresas
+                                                            <hr>Actividad Económiza principal es transporte
+                                            </div>
+                                             <div class="p-20 text-center" *ngIf="empresas.CLUSTER == 2 ">
+                                                            Necesidad de liquidez, alto stress financiero, alta participación de BBSS
+                                                            
+                                                             <hr>
+                                                             Agrupa al 25% de los afiliados concentrados en aprox. 10.500 empresas
+                                                             
+                                                             <hr>Actividad Económiza principal corresponde a comercio y SSFF
+                                                    </div>
+                                                    <div class="p-20 text-center" *ngIf="empresas.CLUSTER == 3 ">
+                                                           Organización de deudas y educación financiera, por presencia de mora. Participación considerable de PPFF y BBSS
+                                                        <hr>Agrupa al 37% de los afiliados concentrados en aprox. 20.600 empresas<hr>
+                                                                Actividad Económiza principal Comercio
+                                                    </div>
+                                                    <div class="p-20 text-center" *ngIf="empresas.CLUSTER == 4 ">
+                                                        Aún no presentan signos altos de deterioro pero existe exposición a mora. Alta participación de BBSS.
+                                                        <hr class="">
+                                                        Agrupa al 26% de los afiliados concentrados en aprox. 13.700 empresas
+                                                        <hr>
+                                                        Actividad Económiza principal Comercio y SSFF
+                                                    </div>
+                                                    <div class="p-20 text-center" *ngIf="empresas.CLUSTER == 0 ">
+                                                            Baja mora y stress financiero. Poca participacion PPFF y baja participacion en BBSS
+                                                            
+                                                                 <hr>Agrupa al 8% de los afiliados concentrados en aprox. 19.000 empresas
+                                                                 <hr>
+                                                                 Presencia Alta de PYMES en Comercio y Servicios.
+                                                    </div>
+                                             
+                                           
+                                      
+                              </span> </span>
+                        </span>
+                    </font>
+                </font>
+            </h4>
+        </div>
+        <div class="col-xs-4">
+            <h2>
+                <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;"><b>{{empresas.segmento_valor}}</b></font>
+                </font>
+            </h2>
+            <h4>
+                <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">Segmento Valor</font>
+                </font>
+            </h4>
+        </div>
+    </div>
+</div>

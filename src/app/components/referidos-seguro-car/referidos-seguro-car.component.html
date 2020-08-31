@@ -1,0 +1,145 @@
+<app-navbar></app-navbar>
+<app-left-bar></app-left-bar>
+<app-idle></app-idle>
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <section id="wrapper" style="background: #ffffff;">
+            <div class="row">
+                <div class="col-sm-12 col-md-12 offset-md-3">
+
+                    <div class="white-box">
+                        <h3 class="h3azul"> Ingresa el Rut de tu referido</h3>
+                        <div class="txtbajadastits"> Y le podrás dar una gran sorpresa, en el seguro de su automóvil.</div>
+
+                        <div class="form-titulo">
+                            <form [formGroup]="searchForm" (ngSubmit)="onSubmitRut()">
+                                <div class="form-group">
+                                    <label>Rut: (Ingrese rut sin dígito verificador, sin puntos ni guión) </label>
+                                    <input type="text" formControlName="rut" class="form-control">
+                                </div>
+                                <button class="btn btn-primary" type="submit">Buscar</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div *ngIf="afiliado && ofertSeguroAuto.length > 0" class="white-box">
+                        <form [formGroup]="contactForm">
+                            <div class="row">
+                                <div class="form-group col-lg-6">
+                                    <label>Nombres: </label>
+                                    <input type="text" formControlName="nombre_referido" class="form-control" id="nombre_referido" name="nombre_referido" value="{{afiliado.data.nombres}}">
+                                </div>
+                                <div class="form-group col-lg-6">
+                                    <label>Fecha Nacimiento: </label>
+                                    <input type="text" class="form-control" formControlName="fecha_nacimiento_persona" id="fecha_nacimiento_persona" name="fecha_nacimiento_persona" value="{{afiliado.data.fecha_nacimiento_persona}}">
+                                </div>
+                                <div class="form-group col-lg-6">
+                                    <label>Telefono: </label>
+                                    <input type="text" class="form-control" formControlName="FONO_MOVIL" id="FONO_MOVIL" name="FONO_MOVIL" value="{{afiliado.data.fono_movil}}">
+                                </div>
+                                <div class="form-group col-lg-6" [ngClass]="{'has-error': isContactFormInValid.emailFormat || isContactFormInValid.emailRequired}">
+                                    <label>Email: </label>
+                                    <input type="text" formControlName="correo_elect" class="form-control" #correo_elect id="correo_elect" name="correo_elect" value="{{afiliado.data.correo_elect_persona}}" [ngClass]="{'is-invalid': isContactFormInValid.emailFormat || isContactFormInValid.emailRequired}">
+                                    <div *ngIf="isContactFormInValid.emailFormat || isContactFormInValid.emailRequired" class="invalid-feedback">
+                                        <div *ngIf="isContactFormInValid.emailRequired">Campo obligatorio.</div>
+                                        <div *ngIf="isContactFormInValid.emailFormat">Formato no valido.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div *ngIf="afiliado && ofertSeguroAuto.length > 0" class="white-box">
+                        <div *ngFor="let oferta of ofertSeguroAuto; let indice=index">
+                            <app-auto-referido (wrongMailFocus)="onWrongMailFocus()" (mailStatusEmmiter)="onMailStatusEmmiter($event)" [oferta]="oferta" [afiliado]="afiliado" [valorUf]="valorUf" [indice]="indice" [contactForm]="contactForm">
+                            </app-auto-referido>
+                        </div>
+                    </div>
+
+                    <div *ngIf="isAfiliado && afiliado && ofertSeguroAuto.length == 0" class="white-box">
+                        <h3 class="h3azul"> Lamentablemente No Tiene Oferta</h3>
+                        <div class="txtbajadastits"> Pronto tendremos novedades....</div>
+                    </div>
+                    <div *ngIf="!isAfiliado" class="white-box">
+                        <h3 class="h3azul"> Lamentablemente No esta afiliado</h3>
+                        <div class="txtbajadastits"> Pronto tendremos novedades....</div>
+                    </div>
+                    <div class="white-box" *ngIf="afiliado">
+                        <h3 class="h3azul"> Si no encuentras el automóvil</h3>
+                        <div class="txtbajadastits"> puedes enviarnos los datos en este formulario....</div>
+                        <div class="row">
+                            <form [formGroup]="sinAutoForm" (ngSubmit)="onSubmitSinAuto()">
+                                <div class="form-group col-lg-6">
+                                    <label>Nombres: </label>
+                                    <input type="text" formControlName="nombre_referido" class="form-control" id="nombre_referido" name="nombre_referido">
+                                </div>
+                                <div class="form-group col-lg-6">
+                                    <label>Fecha Nacimiento: </label>
+                                    <input type="text" formControlName="fecha_nacimiento_persona" class="form-control" id="fecha_nacimiento_persona" name="fecha_nacimiento_persona">
+                                </div>
+                                <div class="form-group col-lg-6" [ngClass]="{'has-error': sinAForm.FONO_MOVIL.errors && submitted }">
+                                    <label>Telefono: </label>
+                                    <input type="text" formControlName="FONO_MOVIL" class="form-control" id="FONO_MOVIL" name="FONO_MOVIL" [ngClass]="{'is-valid': submitted && sinAForm.FONO_MOVIL.errors}">
+                                    <div *ngIf="submitted && sinAForm.FONO_MOVIL.errors" class="invalid-feedback">
+                                        <div *ngIf="submitted && sinAForm.FONO_MOVIL.errors.required">Campo obligatorio.</div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-lg-6" [ngClass]="{'has-error': sinAForm.correo_elect_persona.errors}">
+                                    <label>Email: </label>
+                                    <input type="text" formControlName="correo_elect_persona" class="form-control" id="correo_elect_persona" name="correo_elect_persona" [ngClass]="{'is-invalid': submitted && sinAForm.correo_elect_persona.errors}">
+                                    <div *ngIf="sinAForm.correo_elect_persona.errors" class="invalid-feedback">
+                                        <div *ngIf="sinAForm.correo_elect_persona.errors.required">Campo obligatorio.</div>
+                                        <div *ngIf="sinAForm.correo_elect_persona.errors.email">Formato no valido.</div>
+                                    </div>
+                                </div>
+                                <div>
+                                </div>
+                                <div class="form-group col-lg-6" [ngClass]="{'has-error': sinAForm.marca.errors && submitted}">
+                                    <label>Marca</label>
+                                    <select class="form-control" [ngClass]="{'is-invalid': submitted && sinAForm.marca.errors}" formControlName="marca">
+                                        <option value ="" selected>Seleccione Marca...</option>
+                                        <option *ngFor="let marca of dummyMarcas" value="{{marca}}">{{marca}}</option>
+                                    </select>
+                                    <div *ngIf="submitted && sinAForm.marca.errors" class="invalid-feedback">
+                                        <div *ngIf="submitted && sinAForm.marca.errors.required">Campo obligatorio.</div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-lg-6" [ngClass]="{'has-error': sinAForm.modelo_auto.errors && submitted }">
+                                    <label>Modelo: </label>
+                                    <input type="text" formControlName="modelo_auto" class="form-control" [ngClass]="{'is-invalid': submitted && sinAForm.modelo_auto.errors}" placeholder="Nombre del modelo">
+                                    <div *ngIf="submitted && sinAForm.modelo_auto.errors" class="invalid-feedback">
+                                        <div *ngIf="submitted && sinAForm.modelo_auto.errors.required">
+                                            Campo obligatorio.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-lg-6" [ngClass]="{'has-error': sinAForm.anio.errors && submitted }">
+                                    <label>Año: </label>
+                                    <input type="number" formControlName="anio" class="form-control" placeholder="Año" min="2005">
+                                    <div *ngIf="submitted && sinAForm.anio.errors" class="invalid-feedback">
+                                        <div *ngIf="submitted && sinAForm.anio.errors.required">
+                                            Campo obligatorio.
+                                        </div>
+                                        <div *ngIf="submitted && sinAForm.anio.errors.min">
+                                            El año debe ser a partil del 2005.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-lg-6" [ngClass]="{'has-error': sinAForm.patente.errors && submitted }">
+                                    <label>Patente: </label>
+                                    <input type="text" formControlName="patente" class="form-control">
+                                    <div *ngIf="submitted && sinAForm.patente.errors" class="invalid-feedback">
+                                        <div *ngIf="submitted && sinAForm.patente.errors.required">
+                                            Campo obligatorio.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-10 col-lg-6">
+                                    <button class="btn btn-primary" type="submit">Referir</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

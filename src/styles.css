@@ -1,0 +1,11 @@
+
+
+@import "~ng-pick-datetime/assets/style/picker.min.css";
+
+.calcTitle .titleSlider {
+    font-family: 'Open Sans', Verdana;
+    color: #25619c !important;
+    font-size: 3.5rem !important;
+    font-weight: 500;
+    line-height: 1.1;
+}

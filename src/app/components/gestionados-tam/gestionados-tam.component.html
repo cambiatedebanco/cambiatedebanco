@@ -1,0 +1,100 @@
+<app-navbar></app-navbar>
+<app-left-bar></app-left-bar>
+<app-idle></app-idle>
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="table-responsive">
+            <table class="table">
+                <td>
+                    <div class="calcTitle">
+                        <h1 class="titleSlider">
+                            Gestionados <small class="subTitleSlider">TAM</small>
+                        </h1>
+                    </div>
+                </td>
+            </table>
+        </div>
+        <mat-card class="example-container">
+            <div class="example-header col-lg-12 col-md-12 col-sm-12">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <mat-form-field>
+                            <input matInput #filter (keyup)="applyFilterGestion($event.target.value)"
+                                placeholder="Buscar">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Estado</mat-label>
+                            <mat-select (selectionChange)="applyFilterChange($event.value)">
+                                <mat-option *ngFor="let state of states" [value]="state.nombre_estado">
+                                    {{state.nombre_estado}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <form [formGroup]="filtroFechaForm" (ngSubmit)="onSubmitDateRange()">
+                            <ul class="list-inline">
+                                <li>
+                                    <div class="form-group">
+                                        <mat-form-field appearance="fill">
+                                            <mat-label>Desde</mat-label>
+                                            <input matInput [matDatepicker]="startPicker" formControlName="startPicker">
+                                            <mat-datepicker-toggle matSuffix [for]="startPicker">
+                                            </mat-datepicker-toggle>
+                                            <mat-datepicker #startPicker></mat-datepicker>
+                                        </mat-form-field>
+                                    </div>
+                                </li>
+                                <li>
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Hasta</mat-label>
+                                        <input matInput [matDatepicker]="endPicker" formControlName="endPicker">
+                                        <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+                                        <mat-datepicker #endPicker></mat-datepicker>
+                                    </mat-form-field>
+                                </li>
+                                <li>
+                                    <button class="btn btn-danger" type="submit">Aplicar filtro</button>
+                                    <button class="btn" type="button" (click)="exportCsv()">exportar</button>
+                                </li>
+                            </ul>
+                            <code
+                                *ngIf="filtroFechaForm.hasError('notValid')">La fecha de finalización es anterior a la fecha de inicio</code>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <table mat-table matSort [dataSource]="dataSourceGestion" class="mat-elevation-z8" width="80%"
+                align="center">
+                <ng-container matColumnDef="nombre">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> NOMBRE </th>
+                    <td mat-cell *matCellDef="let element">{{ element.nombres }} </td>
+                </ng-container>
+                <ng-container matColumnDef="rut">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> RUT </th>
+                    <td mat-cell *matCellDef="let element">{{ element.rut }} </td>
+                </ng-container>
+                <ng-container matColumnDef="estado">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> ESTADO </th>
+                    <td mat-cell *matCellDef="let element">{{ element.nombre_estado }} </td>
+                </ng-container>
+                <ng-container matColumnDef="fecha">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> FECHA SOLICITUD </th>
+                    <td mat-cell *matCellDef="let element">
+                        {{element.fecha_solicitud | date:'dd-MM-yyyy'}} </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumnsGestion"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumnsGestion;">
+                </tr>
+            </table>
+            <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true">
+            </mat-paginator>
+
+        </mat-card>
+
+
+
+    </div>
+
+
+
+</div>

@@ -1,0 +1,174 @@
+<app-navbar></app-navbar>
+<app-left-bar></app-left-bar>
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row bg-title">
+            <table class="table">
+                <td>
+                    <h3 class="page-title">Notificaciones</h3>
+                </td>
+                <td *ngIf="!isPensionado">
+                    <button class="btn btn-default btn-rounded waves-effect waves-light" type="button" (click)="filterLead(2)"><span class="btn-label">{{ resumen?.propensos }}</span>Propensos
+                        <img src="../../../assets/images/star.png" width="20"></button>
+                </td>
+                <td>
+                    <button class="btn btn-success btn-rounded waves-effect waves-light" type="button" (click)="filterLead(1)"><span class="btn-label">{{ resumen?.nuevos }}</span>Nuevos</button>
+                </td>
+                <td>
+                    <button class="btn btn-warning btn-rounded waves-effect waves-light" type="button" (click)="filterLead(3)"><span
+                            class="btn-label">{{ resumen?.pendientes }}</span>Pendientes</button>
+                </td>
+                <td>
+                    <button class="btn btn-info btn-rounded waves-effect waves-light" type="button" (click)="filterLead(4)"><span
+                            class="btn-label">{{ resumen?.gestionados }}</span>Gestionados</button>
+                </td>
+            </table>
+        </div>
+
+
+        <mat-card class="example-container">
+            <div class="example-header col-sm-12 col-md-12">
+                <div class="row">
+                    <div class="col-sm-6 col-md-6">
+                        <mat-form-field>
+                            <input matInput #filter (keyup)="applyFilter($event.target.value)" placeholder="Buscar">
+                        </mat-form-field>
+                        <mat-form-field *ngIf="!isPensionado && filterLeadTipo === 4">
+                            <mat-label>Estado</mat-label>
+                            <mat-select (selectionChange)="applyFilterChange($event.value)">
+                                <mat-option *ngFor="let state of states" [value]="state.idestado">
+                                    {{state.nombre_estado}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <form [formGroup]="filtroFechaForm" (ngSubmit)="onSubmit()">
+                        <div class="col-sm-6 col-md-6">
+                            <ul class="list-inline">
+                                <li>
+                                    <div class="form-group">
+                                        <mat-form-field color="accent">
+                                            <mat-label>Fecha Inicio</mat-label>
+                                            <input matInput class="form-control" formControlName="startDate" [matDatepicker]="picker1">
+                                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                            <mat-datepicker #picker1 [disabled]="false"></mat-datepicker>
+                                            <mat-error *ngIf="filtroFechaForm.controls['startDate'].errors?.required">
+                                                Fecha Inicio es Requerida</mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="form-group">
+                                        <mat-form-field color="accent">
+                                            <mat-label>Fecha Finalización</mat-label>
+                                            <input matInput class="form-control" formControlName="endDate" [matDatepicker]="picker2" readonly>
+                                            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                            <mat-datepicker #picker2 color="primary" [disabled]="false">
+                                            </mat-datepicker>
+                                            <mat-error *ngIf="filtroFechaForm.controls['endDate'].errors?.required">
+                                                Fecha Finalización es Requerida</mat-error>
+                                        </mat-form-field>
+
+                                    </div>
+                                </li>
+                                <li><button class="btn btn-danger" type="submit">Aplicar</button></li>
+
+                            </ul>
+                            <code *ngIf="filtroFechaForm.hasError('notValid')">La fecha de finalización es anterior a la fecha de inicio</code>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <table mat-table #table [dataSource]="dataSource" matSort class="mat-elevation-z8" width="80%" align="center">
+                <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+                    <td mat-cell *matCellDef="let element">
+                        <span class="label label-success label-rounded" *ngIf="element.nuevo==1 && element.gestionado==0">&nbsp;</span>
+                        <span class="label label-warning label-rounded" *ngIf="element.nuevo==0 && element.gestionado==0">&nbsp;</span>
+                        <span class="label label-info label-rounded" *ngIf="element.nuevo==0 && element.gestionado==1">&nbsp;</span>
+
+
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="fecha">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> FECHA </th>
+                    <td mat-cell *matCellDef="let element">{{ element.created_time | date:'dd/MM/yy H:mm'}} </td>
+                </ng-container>
+                <ng-container matColumnDef="rut">
+                    <th mat-header-cell *matHeaderCellDef> RUT </th>
+                    <td mat-cell *matCellDef="let element">
+                        {{ element.rut }}
+                        <ng-container *ngIf="element.star==1"> <img src="../../../assets/images/star.png" width="32">
+                        </ng-container>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="nombre">
+                    <th mat-header-cell *matHeaderCellDef> NOMBRE </th>
+                    <td mat-cell *matCellDef="let element">{{ element.nombre }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="campana">
+                    <th mat-header-cell *matHeaderCellDef> CAMPAÑA </th>
+                    <td mat-cell *matCellDef="let element">{{ element.nombre_campana }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="variable">
+                    <th mat-header-cell *matHeaderCellDef> VARIABLE </th>
+                    <td mat-cell *matCellDef="let element">
+                        <span *ngIf="element.tipo_campana==1"><b>{{element?.comuna}}</b></span>
+                        <span *ngIf="element.tipo_campana==2 && element.califica==1"><b>${{element.monto | number}}</b></span>
+                        <span *ngIf="element.califica==0 && element.tipo_campana==2"><b>NO CALIFICA</b></span>
+                        <span *ngIf="element.tipo_campana==3 || element.tipo_campana==9 || element.tipo_campana==10"><b>${{element.monto | number}}</b></span>
+                        <span *ngIf="element.tipo_campana==4 && element.estado_base == 1"><b>SIN CAMPAÑA <span *ngIf="element.monto_simulado">/ SIM. ${{element?.monto_simulado | number}}</span></b>
+                        </span>
+                        <span *ngIf="element.tipo_campana==4 && element.estado_base == 2"><b>APR.
+                                ${{element.monto | number}} <span *ngIf="element.monto_simulado">/ SIM. ${{element?.monto_simulado | number}}</span></b>
+                        </span>
+                        <span *ngIf="element.tipo_campana==4 && element.estado_base == 3"><b>PRE.
+                                ${{element.monto | number}} <span *ngIf="element.monto_simulado">/ SIM. ${{element?.monto_simulado | number}}</span></b>
+                        </span>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="asignado">
+                    <th mat-header-cell *matHeaderCellDef> ASIGNADO A </th>
+                    <td mat-cell *matCellDef="let element"> {{ element.email_colaborador | split:'@' }}
+                        <ng-container *ngIf="user_cla.id_cargo==4 &&  element.tipo_campana!=4 && element.tipo_campana!=10"> -
+                            <select (change)="onChange($event.target.value)">
+                                <option selected>Seleccione Ejecutivo...</option>
+                                <option *ngFor="let ejecutivo of ejecutivos | filterArray:element.tipo_campana"
+                                    [value]="element.id+'-'+ejecutivo.rut+'-'+ejecutivo.email">
+                                    {{ejecutivo.email | split:'@' }}
+                                </option>
+                            </select>
+                        </ng-container>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="tools">
+                    <th mat-header-cell *matHeaderCellDef> TOOLS </th>
+                    <td mat-cell *matCellDef="let element" align="center">
+                        <button *ngIf="user_cla.id_cargo!=4" type="button" class="btn btn-primary btn-rounded waves-effect waves-light" (click)="onLead(element.id)">
+                  <span class="btn-label"><i
+                          class="fa fa-pencil"></i></span>Gestionar</button>
+                        <button *ngIf="user_cla.id_cargo==4" type="button" class="btn btn-primary btn-rounded waves-effect waves-light" (click)="onLead(element.id)">
+                            <span class="btn-label"><i
+                                    class="fa fa-pencil"></i></span>Revisar</button>
+
+
+                    </td>
+                </ng-container>
+
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            </table>
+
+
+
+            <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true">
+            </mat-paginator>
+        </mat-card>
+
+    </div>
+</div>

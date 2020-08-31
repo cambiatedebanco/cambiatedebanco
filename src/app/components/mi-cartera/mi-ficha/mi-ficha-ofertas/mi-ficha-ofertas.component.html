@@ -1,0 +1,232 @@
+<div class="row">
+    <div class="col-lg-2">
+        <div class="oferta-cla-box">
+            <div id="carouselPPFF" class="carousel slide" data-interval="false">
+                <ul class="carousel-indicators">
+                    <li *ngFor="let ofPPF of ofertasPPFF; let i = index" [attr.data-index]="i" data-slide-to="{i}" [className]="i==0 ? 'active' : 'inactive'">
+                    </li>
+                </ul>
+                <div class="carousel-inner">
+
+                    <div class="item " [ngClass]="{'active': i === 0}" *ngFor="let ofPPF of ofertasPPFF; let i = index" (click)="showDetailPPFF(ofPPF,$event)">
+                        <div class="text-center">
+                            <font class="box-title">
+                                <font style="vertical-align: inherit;">{{ofPPF.tipo_producto}}</font>
+
+                            </font>
+
+                            <div class="font-light icon-back icon-color-ppff text-medium">
+                                <i class="fa {{ofPPF.icono}} faicon"></i>
+
+                            </div>
+                            <font class="box-title2">
+                                <font style="vertical-align: inherit;">{{ofPPF.oferta}}</font>
+                            </font>
+                        </div>
+                    </div>
+                    <div class="item active" *ngIf="ofertasPPFF.length == 0">
+                        <div class="text-center">
+
+                            <font class="box-title">
+                                <font style="vertical-align: inherit;">Sin Ofertas</font>
+
+                            </font>
+                            <div class=" font-light icon-back icon-color-ppff-disabled text-medium">
+                                <i class="fa fa-credit-card faicon"></i>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="#carouselPPFF" (click)="Showh()" role="button" data-slide="prev" class="left carousel-control" style="background-image:linear-gradient(to right,rgba(0,0,0,.0001) 100%,rgba(0,0,0,.5) 100%);"> <span aria-hidden="true" class="fa fa-angle-left"></span> <span class="sr-only">Previous</span> </a>
+                <a href="#carouselPPFF" (click)="Showh()" role="button" data-slide="next" class="right carousel-control" style="background-image:linear-gradient(to right,rgba(0,0,0,.0001) 100%,rgba(0,0,0,.5) 100%);"> <span aria-hidden="true" class="fa fa-angle-right"></span> <span class="sr-only">Next</span> </a>
+
+            </div>
+
+        </div>
+
+
+    </div>
+    <div class="col-lg-2">
+
+        <div class="oferta-cla-box">
+            <div id="carouselBBSS" class="carousel slide" data-interval="false">
+                <ul class="carousel-indicators">
+                    <li *ngFor="let ofbbss of ofertasBBSS; let i = index" [attr.data-index]="i" data-slide-to="{i}" [className]="i==0 ? 'active' : 'inactive'">
+                    </li>
+                </ul>
+                <div role="listbox" class="carousel-inner">
+                    <div class="item" [ngClass]="{'active': i === 0}" *ngFor="let ofbbss of ofertasBBSS; let i = index">
+                        <div class="text-center">
+                            <h2 style="color:#ffffff;">{{ofbbss}}</h2>
+                            <p class="text-medium font-light">
+                            </p>
+                            <font class="box-title">
+                                <font style="vertical-align: inherit;">Ofertas de BBSS</font>
+                            </font>
+                        </div>
+                    </div>
+                    <div class="item active" *ngIf="ofertasBBSS.length == 0">
+                        <div class="text-center">
+                            <font class="box-title">
+                                <font style="vertical-align: inherit;">Sin Beneficios</font>
+                                <br>
+                            </font>
+                            <div class=" font-light icon-back icon-color-bbss-disabled text-medium">
+                                <i class="fa fa-gift faicon"></i>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <a href="#carouselBBSS" role="button" data-slide="prev" class="left carousel-control" style="background-image:linear-gradient(to right,rgba(0,0,0,.0001) 100%,rgba(0,0,0,.5) 100%);"> <span aria-hidden="true" class="fa fa-angle-left"></span> <span class="sr-only">Previous</span> </a>
+                <a href="#carouselBBSS" role="button" data-slide="next" class="right carousel-control" style="background-image:linear-gradient(to right,rgba(0,0,0,.0001) 100%,rgba(0,0,0,.5) 100%);"> <span aria-hidden="true" class="fa fa-angle-right"></span> <span class="sr-only">Next</span> </a>
+
+            </div>
+        </div>
+
+
+    </div>
+    <div class="col-lg-2">
+        <div class="oferta-cla-box ">
+            <div id="carouselAlerta" class="carousel slide" data-interval="false">
+                <ul class="carousel-indicators">
+                    <li *ngFor="let ofAlerta of ofertasAlerta; let i = index" [attr.data-index]="i" data-slide-to="{i}" [className]="i==0 ? 'active' : 'inactive'">
+                    </li>
+                </ul>
+                <div role="listbox" class="carousel-inner">
+
+                    <div class="item" [ngClass]="{'active': i === 0}" *ngFor="let ofAlerta of ofertasAlerta; let i = index" (click)="showDetailAlerta(ofAlerta)">
+                        <div class="text-center">
+                            <font class="box-title">
+                                <font style="vertical-align: inherit;">{{ofAlerta.tipo_producto}}</font>
+
+                            </font>
+
+                            <div class="font-light icon-back icon-color-alerta text-medium">
+                                <i class="fa {{ofAlerta.icono}} faicon3"></i>
+
+                            </div>
+                            <font class="box-title2">
+                                <font style="vertical-align: inherit;">{{ofAlerta.alerta}}</font>
+                            </font>
+                        </div>
+                    </div>
+                    <div class="item active" *ngIf="ofertasAlerta.length == 0">
+                        <div class="text-center">
+                            <font class="box-title">
+                                <font style="vertical-align: inherit;">Sin Alertas</font>
+                                <br>
+                            </font>
+                            <div class=" font-light icon-back  icon-color-alerta-disabled text-medium">
+                                <i class="fa fa-bullhorn faicon"></i>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <a href="#carouselAlerta" role="button" (click)="Showh()" data-slide="prev" class="left carousel-control" style="background-image:linear-gradient(to right,rgba(0,0,0,.0001) 100%,rgba(0,0,0,.5) 100%);"> <span aria-hidden="true" class="fa fa-angle-left"></span> <span class="sr-only">Previous</span> </a>
+                <a href="#carouselAlerta" role="button" (click)="Showh()" data-slide="next" class="right carousel-control" style="background-image:linear-gradient(to right,rgba(0,0,0,.0001) 100%,rgba(0,0,0,.5) 100%);"> <span aria-hidden="true" class="fa fa-angle-right"></span> <span class="sr-only">Next</span> </a>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="col-lg-6">
+
+        <div class="script-cla-box">
+            <ng-container *ngIf="detailObjectPPFF">
+                <span class="font-bold ">{{detailObjectPPFF?.tipo_producto}} {{detailObjectPPFF?.oferta}}:&nbsp;</span>
+                <div [innerHTML]="detailObjectPPFF?.script"></div>
+
+            </ng-container>
+            <ng-container *ngIf="detailObjectAlerta">
+                <span class="font-bold ">{{detailObjectAlerta?.tipo_producto}} {{detailObjectAlerta?.alerta}}:&nbsp;</span>
+                <div [innerHTML]="detailObjectAlerta?.script"></div>
+            </ng-container>
+
+
+
+        </div>
+
+        <div *ngIf="detailObjectPPFF" id="detailPPFF" class="btn-gestion">
+
+            <button *ngIf="detailObjectPPFF.oferta == 'Auto Full'" class="btn btn-info btn-circle  pull-right" type="button" data-toggle="modal" data-target=".modal-auto-full"><i class="ti-plus"></i></button>
+            <button *ngIf="detailObjectPPFF.oferta != 'Auto Full'" class="btn btn-info btn-circle  pull-right" type="button" data-toggle="modal" data-target=".modal-gestion"><i class="ti-plus"></i></button>
+        </div>
+        <div *ngIf="detailObjectAlerta" id="detailAlerta" class="btn-gestion">
+            <button *ngIf="detailObjectAlerta.alerta == 'Mora'" class="btn btn-info btn-circle  pull-right" type="button" data-toggle="modal" data-target=".modal-mora"><i class="ti-plus"></i></button>
+            <div *ngIf="detailObjectAlerta.alerta != 'Mora'">
+                <button (click)="changeItem(detailObjectAlerta)" class="btn btn-info btn-circle  pull-right" type="button" data-toggle="modal" data-target=".modal-ConfirmGestion"><i class="ti-check"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div [hidden]="IsmodelShow" class="modal modal-auto-full" id="myModalSegAuto" tabindex="-1" role="dialog" aria-labelledby="myModalAHTitle" aria-hidden="true">
+    <button type="button" #closebuttonAuto class="close" data-dismiss="modal">&times;</button>
+    <app-form-auto-full [afiliado]="afiliado" [ejecutivo]="ejecutivo" [rut]="rut" (completeGestion)="solicitarActualizacion($event)"></app-form-auto-full>
+</div>
+<div [hidden]="IsmodelShow" class="modal modal-mora" id="myModalSegAuto" tabindex="-1" role="dialog" aria-labelledby="myModalAHTitle" aria-hidden="true">
+    <app-form-mora [afiliado]="afiliado" [ejecutivo]="ejecutivo" [rut]="rut" (completeGestion)="solicitarActualizacion($event)"></app-form-mora>
+</div>
+
+
+<!-- sample modal content -->
+<div [hidden]="IsmodelShow" class="modal modal-gestion" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <button type="button" #closebutton class="close" data-dismiss="modal">&times;</button>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <app-mi-ficha-gestion [detailObjectPPFF]="detailObjectPPFF" [afiliado]="afiliado" [ejecutivo]="ejecutivo" [rut]="rut" (completeGestion)="solicitarActualizacion($event)">
+                </app-mi-ficha-gestion>
+            </div>
+        </div>
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+
+<!-- /.modal -->
+<div class="modal modal-email" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <img src="./assets/images/logo_gmail.png">
+                <app-email [ejecutivo]="ejecutivo" [afiliado]="afiliado" [item]="item" (completeGestion)="solicitarActualizacion($event)"></app-email>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- /.modal Permite abrir modal de gestion crédito-->
+<div data-toggle="modal" data-target=".modal-gestion" #openButtonFormGestion></div>
+<!---->
+<div class="modal modal-ConfirmGestion" id="modalConfirm" tabindex="-1" role="dialog" aria-labelledby="modalConfirmTitle" aria-hidden="true">
+    <button type="button" #closebuttonConfirmGestion class="close" data-dismiss="modal">&times;</button>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="swal2-header">
+                    <div class="swal2-icon swal2-info swal2-animate-info-icon" style="display: flex;">
+
+                    </div>
+                    <h2 class="swal2-title" id="swal2-title" style="display: flex;">Confirmar Gestión</h2>
+
+                </div>
+                <div class="swal2-content">
+                    <div id="swal2-content" style="display: block;">El afiliado fue informado?</div>
+                </div>
+                <div class="swal2-actions">
+                    <button (click)="closeModalObject()" type="button" class="swal2-sendEmail swal2-styled" aria-label="" style="display: inline-block; border-left-color: rgb(0, 189, 112); border-right-color: rgb(0, 189, 112);" data-toggle="modal" data-target=".modal-email"><i class="fa fa-envelope" style="font-size:15px;"></i>&nbsp;Enviar Mail</button>
+                    <button (click)="saveTimelineAlerta()" type="button" class="swal2-confirm swal2-styled" aria-label="" style="display: inline-block; border-left-color: rgb(48, 133, 214); border-right-color: rgb(48, 133, 214);"><i class="fa fa-check" style="font-size:15px;"></i>&nbsp;Sí, Gestionar!</button>
+                    <button type="button" class="swal2-cancel swal2-styled" aria-label="" style="display: inline-block; background-color: rgb(255, 67, 55);" data-dismiss="modal"><i class="fa fa-times" style="font-size:15px;"></i>&nbsp;No, Cancelar</button></div>
+
+            </div>
+        </div>
+    </div>

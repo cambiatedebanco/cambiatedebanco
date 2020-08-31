@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>Asignar agente</h1>
+
+<div mat-dialog-content>
+    <mat-label *ngIf="data.actualAgent" >
+        <div *ngFor="let ag of data.actualAgent">
+            <p>Agente actual  <small>{{ag.nombres}} {{ag.rut}}</small ></p>
+        </div>
+    </mat-label>
+    <mat-label><p>Nuevo agente</p></mat-label>
+    <mat-select [(ngModel)]="selected">
+        <mat-option *ngFor="let d of data.agentes" [value]="d.rut">
+            {{d.nombres}} {{d.rut}}
+        </mat-option>
+    </mat-select>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">No</button>
+    <button mat-button (click)="confirmSelect()" cdkFocusInitial>Si</button>
+  </div>

@@ -1,0 +1,30 @@
+<!-- ============================================================== -->
+<!-- Left Sidebar - style you can find in sidebar.scss  -->
+<!-- ============================================================== -->
+<div class="navbar-default sidebar" role="navigation">
+    <div class="sidebar-nav slimscrollsidebar">
+        <div class="sidebar-head">
+            <h3><span class="fa-fw open-close"><i class="ti-menu hidden-xs"></i><i class="ti-close visible-xs"></i></span> <span class="hide-menu">Apps</span></h3>
+        </div>
+        <ul class="nav" id="side-menu">
+            <li><a *ngIf="userPerfil?.nivel_acceso==99 || idcargo == 7" [routerLink]="['/admin-roles']" class="waves-effect"><i class="fa fa-users"></i> <span class="hide-menu">  Adminitración Usuarios</span></a></li>
+            <!--<li><a *ngIf="userPerfil?.NIVEL_ACCESO==99" [routerLink]="['/simulacion_web']" class="waves-effect"><i class="fa fa-volume-up"></i> <span class="hide-menu">  Adminitración Campañas</span></a></li>-->
+            <li><a [routerLink]="['/tarjeta']" class=" waves-effect "><i class="fa fa-credit-card "></i> <span class="hide-menu ">  Comprar Creditos</span></a></li>
+            <!--<li><a *ngIf="userPerfil?.NIVEL_ACCESO==99" [routerLink]="['/ticket-home']" class="waves-effect"><i class="fa fa-comments"></i> <span class="hide-menu">  Atención Virtual </span></a></li>-->
+            <!--<li><a *ngIf="userPerfil?.NIVEL_ACCESO==99" [routerLink]="['/crud-campana']" class="waves-effect"><i class="fa fa-other"></i> <span class="hide-menu">  Gestion campañas </span></a></li>-->
+            <li><a *ngIf="view" [routerLink]="['/mi-cartera-home']" class="waves-effect"><i class="fa fa-heart"></i> <span class="hide-menu">  Mi Cartera </span></a></li>
+            <li class="devider"></li>
+
+            <li><a *ngIf="idcargo == 5 || idcargo == 7" [routerLink]="['/home-tam']" class="waves-effect"><i class="fa fa-search"></i> <span class="hide-menu"> &nbsp;Gestión Afiliado</span></a></li>
+            <li><a *ngIf="idcargo == 5 || idcargo == 7" [routerLink]="['/gestionados-tam']" class="waves-effect"><i class="fa fa-download"></i> <span class="hide-menu">  &nbsp;Gestonar Base TAM</span></a></li>
+            <li><a *ngIf="idcargo == 1 || idcargo == 2 || idcargo == 4 || userPerfil?.nivel_acceso==99" class="waves-effect"><i class="fa fa-volume-up"></i> <span class="hide-menu">  &nbsp;Gestión Campañas</span></a></li>
+            <li><a href="#" *ngIf="userPerfil?.nivel_acceso==99" [routerLink]="['/main-gestion-campana']"><i class="fa-fw">J</i><span class="hide-menu">Gestión Jerarquía</span></a></li>
+            <li><a *ngIf="idcargo==6 || idcargo ==4 || userPerfil?.nivel_acceso==99" href="#" [routerLink]="['/campana-celula']"><i class="fa-fw">C</i><span class="hide-menu">Campaña Célula</span></a></li>
+        </ul>
+
+
+    </div>
+</div>
+<!-- ============================================================== -->
+<!-- End Left Sidebar -->
+<!-- ============================================================== -->

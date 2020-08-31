@@ -1,0 +1,26 @@
+<div class="row bg-title">
+    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+        <h4 class="page-title">Vista Afiliado</h4>
+    </div>
+    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+        <ol class="breadcrumb">
+
+            <li class="active">Afiliados</li>
+        </ol>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<div class="row">
+    <app-empresa-demografico [empresas]="afiliados"></app-empresa-demografico>
+
+    <div class="col-lg-7 col-sm-6">
+        <app-ofertas-uno [usoOferta]="usoOferta"></app-ofertas-uno>
+        <app-ofertas-dos [usoOferta]="usoOferta2"></app-ofertas-dos>
+        <app-ofertas-tres [usoOferta]="usoOferta3"></app-ofertas-tres>
+    </div>
+    <div class="col-lg-7 col-sm-6">
+        <app-empresa-info [empresas]="afiliados"></app-empresa-info>
+
+    </div>
+
+</div>

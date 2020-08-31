@@ -1,0 +1,20 @@
+<app-navbar></app-navbar>
+<app-left-bar></app-left-bar>
+<app-idle></app-idle>
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-5 col-lg-4 col-sm-2 col-xs-12">
+                <app-region-confirmed (IscheckedSalco)="setCheckedSalco($event)" (IscheckedCverde)="setCheckedCverde($event)" (IscheckedAhumada)="setCheckedAhumada($event)" (filtro_tipo)="setTipo($event)" [tipo]="tipo" (filtro_region)="setRegion($event)" (coordenadasDesdeRegion)="setFocusMap($event)"></app-region-confirmed>
+                <app-valores-total-covid [colaboradores]="colaboradoresComuna" [region]="region" [tipo]="tipo" [total_colaboradores]="total_colaboradores" (coordenadasDesdeComuna)="setFocusMap($event)"></app-valores-total-covid>
+            </div>
+
+            <div class="col-md-7 col-lg-8 col-sm-8 col-xs-12 ">
+                <!--<a [routerLink]="['/referidos-auto-lista']"><img src="../../../assets/images/Header-autofull-com-itern.jpg"></a>-->
+                <app-mapa [IscheckedSalco]='IscheckedSalco' [IscheckedCverde]='IscheckedCverde' [IscheckedAhumada]='IscheckedAhumada' [filtro_tipo]="tipo" [marcadores]='marcador' [marcadorFarmacia]='marcadorFarmacia' [colaboradores]='colaborador' [afiliados]="afiliados"
+                    [contagios]="contagios" [zoom]="zoom" [lat]='lat' [lng]='lng'>
+                </app-mapa>
+            </div>
+        </div>
+    </div>
+</div>

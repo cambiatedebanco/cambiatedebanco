@@ -1,0 +1,80 @@
+<app-navbar></app-navbar>
+<app-left-bar></app-left-bar>
+<app-idle></app-idle>
+<div id="page-wrapper">
+    <div class="container-fluid">
+      
+            <div class="white-box">
+                <div class="table-responsive">
+                <table class="table">
+                    <td>
+                        <h3 class="box-title">Notificaciones</h3>
+                    </td>
+                    <td>
+                        <button class="btn btn-success btn-rounded waves-effect waves-light" type="button" (click)="filterLead('nuevo')"><span class="btn-label">{{ leadsNuevos }}</span>Nuevos</button>
+
+                    </td>
+                    <td>
+                        <button class="btn btn-warning btn-rounded waves-effect waves-light" type="button" (click)="filterLead('pendiente')"><span class="btn-label">{{ leadsPendientes }}</span>Pendientes</button>
+
+
+                    </td>
+                    <td>
+                        <button class="btn btn-info btn-rounded waves-effect waves-light" type="button" (click)="filterLead('gestionado')"><span class="btn-label">{{ leadsGestionados }}</span>Gestionados</button>
+
+
+                    </td>
+                </table>
+            </div>
+                <div class="table-responsive">
+                    <table class="table" width="100%">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th class="hidden-md">FECHA</th>
+                                <th>Rut</th>
+                                <th>NOMBRE</th>
+                                <th>VARIABLE</th>
+                                <th>ASIGNADO A
+                                    <ng-container *ngIf="nivel_acceso==4"> / REASIGNAR</ng-container>
+                                </th>
+                                <th>TOOLS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let notificacion of notificaciones">
+                                <td width="5%">
+                                    <span class="label label-success label-rounded" *ngIf="notificacion.data.nuevo==1 && notificacion.data.gestionado==0">&nbsp;</span>
+                                    <span class="label label-warning label-rounded" *ngIf="notificacion.data.nuevo==0 && notificacion.data.gestionado==0">&nbsp;</span>
+                                    <span class="label label-info label-rounded" *ngIf="notificacion.data.nuevo==0 && notificacion.data.gestionado==1">&nbsp;</span>
+                                </td>
+                                <td  width="5%" class="txt-oflo hidden-md"> {{ notificacion.data.created_time.toDate() | date:'dd/MM/yy hh:mm a' }}</td>
+                                <td  width="5%" class="txt-oflo">{{ notificacion.data.rut }}</td>
+                                <td width="5%" class="txt-oflo">{{ notificacion.data.nombre | truncate:['10', '...'] }}</td>
+                                <td width="15%" class="txt-oflo">{{ notificacion.data.comuna }}
+                                    <span *ngIf="notificacion.data.califica==0"><b>NO CALIFICA</b></span>
+                                    <span *ngIf="notificacion.data.califica==1">${{notificacion.data.monto | number}}</span>
+                                </td>
+                                <td width="15%">{{ notificacion.data.email_colaborador | split:'@' }}
+                                    <ng-container *ngIf="nivel_acceso==4"> -
+                                        <select (change)="onChange($event.target.value)">
+                                            <option selected>Seleccione Ejecutivo...</option>
+                                            <option *ngFor="let ejecutivo of ejecutivos" [value]="notificacion.id+'-'+ejecutivo.data.RUT" >
+                                                {{ejecutivo.data.EMAIL | split:'@' }}
+                                            </option>
+                                        </select>
+                                    </ng-container>
+                                </td>
+                                <td>
+                                    <span class="text-success">                                    
+                                         <button class="btn btn-primary btn-rounded waves-effect waves-light"  (click)="onLead(notificacion.id)"><span class="btn-label"><i class="fa fa-pencil"></i></span>Gestionar</button>
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+       
+    </div>
+</div>

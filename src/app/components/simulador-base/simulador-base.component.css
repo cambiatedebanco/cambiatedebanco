@@ -1,0 +1,97 @@
+.calcTitle .titleSlider {
+    font-family: 'Open Sans', Verdana;
+    color: #25619c !important;
+    font-size: 3.5rem !important;
+    font-weight: 500;
+    line-height: 1.1;
+}
+
+.text-info {
+    color: #25619c;
+    font-weight: 500;
+}
+.error-text {
+    color:red
+}
+
+.calcTitle .titleSlider .subTitleSlider {
+    font-family: 'Open Sans', Verdana !important;
+    color: #25619c;
+    font-size: 65%;
+    font-weight: 700;
+    font-style: italic;
+    line-height: 1;
+}
+
+::ng-deep .mat-step-icon {
+    width: 30px !important;
+    height: 30px !important;
+}
+
+::ng-deep .mat-vertical-content-container {
+    margin-left: 39px !important;
+}
+
+::ng-deep .mat-step-header .mat-step-icon-selected {
+    font-family: 'Open Sans', Verdana !important;
+    background-color: #f9bd02;
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+::ng-deep .mat-step-label {
+    font-family: 'Open Sans', Verdana !important;
+    font-size: 2.1rem;
+}
+
+::ng-deep .mat-stepper-vertical {
+    font-family: 'Open Sans', Verdana !important;
+}
+
+::ng-deep .mat-step-header .mat-step-icon-state-edit {
+    background-color: #1492c6;
+}
+
+.border,
+.border:focus {
+    border: 1px solid #d2d2d4!important;
+}
+
+.neutro {
+    background: #f6f6f8;
+    color: #333334;
+}
+
+.border-top {
+    border-top: 1px solid #d2d2d4!important;
+}
+
+.alerta {
+    position: relative;
+    padding: .75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    color: #1492c6;
+    background-color: #e7f4f9;
+    border-color: #d0e9f4;
+}
+
+.alerta-ohno {
+    position: relative;
+    padding: .75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    color: #ff4337;
+    background-color: #fce9e8;
+    border-color: #fdd7d5;
+}
+
+.alert-heading {
+    color: inherit;
+}
+
+.px-10 {
+    font-size: 10px!important;
+}

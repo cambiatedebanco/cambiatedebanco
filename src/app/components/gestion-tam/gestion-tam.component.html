@@ -1,0 +1,279 @@
+<app-navbar></app-navbar>
+<app-left-bar></app-left-bar>
+<app-idle></app-idle>
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="table-responsive">
+            <table class="table">
+                <td>
+                    <div class="calcTitle">
+                        <h1 class="titleSlider">
+                            Gestionar <small class="subTitleSlider">TAM</small>
+                        </h1>
+                    </div>
+                </td>
+            </table>
+        </div>
+        <section id="wrapper" style="background: #ffffff;">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="white-box">
+                        <h3 class="box-title m-b-0">Formulario tam</h3>
+                        <p class="text-muted m-b-30 font-13"> </p>
+                        <div class="row">
+                            <div class="col-sm-12 col-xs-12 col-lg-12">
+                                <form [formGroup]="authForm" class="container-fluid">
+                                    <div class="form-group col-lg-12">
+                                        <label>Rut</label>
+                                        <input type="text" class="form-control" formControlName="rut" [attr.disabled]="true">
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                        <label>Nombres</label>
+                                        <input type="text" class="form-control" formControlName="names" [attr.disabled]="true">
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                        <label>Apellido paterno</label>
+                                        <input type="text" class="form-control" formControlName="ap_paterno" [attr.disabled]="true">
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                        <label>Apellido materno</label>
+                                        <input type="text" class="form-control" formControlName="ap_materno" [attr.disabled]="true">
+                                    </div>
+                                    <div class="form-group col-lg-6" [ngClass]="{'has-error': authForm.controls.email.errors && isSubmit }">
+                                        <label>E-mail: </label>
+                                        <input type="email" class="form-control" placeholder="E-mail" formControlName="email">
+                                        <div *ngIf="authForm.controls.email.errors && isSubmit" class="invalid-feedback">
+                                            <div *ngIf="authForm.controls.email.errors.required">Campo obligatorio.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-6" [ngClass]="{'has-error': authForm.controls.phone.errors && isSubmit }">
+                                        <label>Telefono: </label>
+                                        <input type="text" class="form-control" formControlName="phone">
+                                        <div *ngIf="authForm.controls.phone.errors && isSubmit" class="invalid-feedback">
+                                            <div *ngIf="authForm.controls.phone.errors.required">Campo obligatorio.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-6" [ngClass]="{'has-error': authForm.controls.address.errors && isSubmit }">
+                                        <label>Dirección</label>
+                                        <input type="text" class="form-control" formControlName="address" placeholder="Buscar dirección cercana" (keydown.enter)="$event.preventDefault()" #search autocorrect="off" autocapitalize="off" spellcheck="off">
+                                        <div *ngIf="authForm.controls.address.errors && isSubmit" class="invalid-feedback">
+                                            <div *ngIf="authForm.controls.address.errors.required">Campo obligatorio.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-6" [ngClass]="{'has-error': authForm.controls.regionAddress.errors  && isSubmit }">
+                                        <label>Región</label>
+                                        <input class="form-control" type="text" formControlName="regionAddress">
+                                        <div *ngIf="authForm.controls.regionAddress.errors && isSubmit" class="invalid-feedback">
+                                            <div *ngIf="authForm.controls.regionAddress.errors.required">Campo obligatorio.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-6" [ngClass]="{'has-error': authForm.controls.communeAddress.errors  && isSubmit }">
+                                        <label>Comuna</label>
+                                        <input class="form-control" type="text" formControlName="communeAddress">
+                                        <div *ngIf="authForm.controls.communeAddress.errors && isSubmit" class="invalid-feedback">
+                                            <div *ngIf="authForm.controls.communeAddress.errors.required">Campo obligatorio.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-6" [ngClass]="{'has-error': authForm.controls.routeAddress.errors  && isSubmit }">
+                                        <label>Calle</label>
+                                        <input class="form-control" type="text" formControlName="routeAddress">
+                                        <div *ngIf="authForm.controls.routeAddress.errors && isSubmit" class="invalid-feedback">
+                                            <div *ngIf="authForm.controls.routeAddress.errors.required">Campo obligatorio.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-6" [ngClass]="{'has-error': authForm.controls.numberAddress.errors  && isSubmit }">
+                                        <label>Nº CASA/DEPTO</label>
+                                        <input class="form-control" type="text" formControlName="numberAddress">
+                                        <div *ngIf="authForm.controls.numberAddress.errors && isSubmit" class="invalid-feedback">
+                                            <div *ngIf="authForm.controls.numberAddress.errors.required">Campo obligatorio.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-6" [ngClass]="{'has-error': authForm.controls.complementAddress.errors  && isSubmit }">
+                                        <label>Dirección complemento</label>
+                                        <input class="form-control" type="text" formControlName="complementAddress">
+                                        <div *ngIf="authForm.controls.complementAddress.errors && isSubmit" class="invalid-feedback">
+                                            <div *ngIf="authForm.controls.complementAddress.errors.required">Campo obligatorio.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-6" [ngClass]="{'has-error': authForm.controls.referenceAddress.errors  && isSubmit }">
+                                        <label>Dirección referencia</label>
+                                        <textarea rows="2" class="form-control" type="text" formControlName="referenceAddress"></textarea>
+                                        <div *ngIf="authForm.controls.referenceAddress.errors && isSubmit" class="invalid-feedback">
+                                            <div *ngIf="authForm.controls.referenceAddress.errors.required">Campo obligatorio.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-6" [ngClass]="{'has-error': authForm.controls.postalCode.errors  && isSubmit }">
+                                        <label>Codigo postal</label>
+                                      
+                                        <input type="text" class="form-control" formControlName="postalCode">
+                                        <div *ngIf="authForm.controls.postalCode.errors && isSubmit" class="invalid-feedback">
+                                            <div *ngIf="authForm.controls.postalCode.errors.required">Campo obligatorio.
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 col-form-label">
+                                            <a href="https://www.correos.cl/web/guest/codigo-postal" target="_blank">Correos de chile</a>
+                                        </div>
+                                      
+                                    </div>
+                                    <div class="form-group col-lg-6" [ngClass]="{'has-error': authForm.controls.estado.errors && isSubmit}">
+                                        <label>Estado</label>
+                                        <select class="form-control" formControlName="estado">
+                                            <option [ngValue]="null" selected>Seleccione Estado...</option>
+                                            <option *ngFor="let estado of estadosTam" value="{{estado.id_estado}}">{{estado.nombre_estado}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                        <label>Tiene BIP :</label>
+                                        <span>
+                                            <h4 class="m-t-0" *ngIf="persona?.tiene_bip != 1" >
+                                               <b>No</b>
+                                            </h4>
+                                            <h4 class="m-t-0" *ngIf="persona?.tiene_bip == 1" >
+                                               <b>Si</b>
+                                            </h4>
+                                        </span>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <div class="checkbox checkbox-primary p-t-0">
+                                                <input id="lastYearVisite" type="checkbox" formControlName="quitBip" value="true">
+                                                <label for="lastYearVisite">¿ Desea Renunciar a BIP Metro?</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <div class="checkbox checkbox-primary p-t-0">
+                                                <input id="lastYearVisite" type="checkbox" formControlName="quitBip" value="true">
+                                                <label for="lastYearVisite">¿Desea Renunciar a Mandato?</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-lg-6">
+                                        <div class="col-lg">
+                                            <button class="btn btn-inverse waves-effect waves-light" type="button" (click)="onCancel()">Cancelar</button>
+                                            <button class="btn btn-success waves-effect waves-light" type="button" (click)="submitTam()">Confirmar</button>
+                                        </div>
+
+                                    </div>
+
+
+
+                                </form>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <button class="floating-btn" (click)="toogleIsOpen()">
+            <i class="fa fa-question fa-5x" style="color:#1e88e5;font-size: 26px;" aria-hidden="true"></i>
+        </button>
+
+    </div>
+
+
+</div>
+
+<div *ngIf="isOpen" class="form-box" [ngClass]="{'open': isOpen}" (clickOutside)="onClickedOutside($event)">
+    <div class="white-box">
+        <h3 class="box-title"> Cuestionario </h3>
+        <div class="row" *ngIf="persona">
+
+
+            <div class="form-group col-lg-6">
+                <label>Credito, año mes del ultimo credito colocado:</label>
+                <span><h5 class="m-t-0">
+                    {{persona.credito_mes}}
+                </h5></span>
+            </div>
+            <div class="form-group col-lg-6">
+                <label>Monto del credito cuota, plazo:</label>
+                <span><h5 class="m-t-0">Monto:
+                   ${{persona.credito_monto | number:'1.0-0':'es' }}
+                     Nº Cuotas {{persona.credito_cuota || 0}}
+                    </h5></span>
+            </div>
+
+            <!-- PENSIONADO -->
+            <div class="form-group col-lg-6" *ngIf="persona.tipo_trabajador!='AFILIADO'">
+                <label>Entidad Pagadora de pension:</label>
+                <span><h5 class="m-t-0">
+                    {{persona.entidad_pagadora}}
+                </h5></span>
+            </div>
+            <div class="form-group col-lg-6" *ngIf="persona.tipo_trabajador!='AFILIADO'">
+                <label>Monto Pensión:</label>
+                <span><h5 class="m-t-0">
+                   $ {{persona.monto_pension| number:'1.0-0':'es'}}
+                </h5></span>
+            </div>
+            <!-- PENSIONADO -->
+            <div class="form-group col-lg-6">
+                <label>Fecha de Nacimiento: </label>
+                <span><h5 class="m-t-0">
+                    {{persona.fecha_nacimiento | date: 'dd-MM-yyyy'}}
+                </h5></span>
+            </div>
+            <!-- TRABAJADOR -->
+
+            <div class="form-group col-lg-6" *ngIf="persona.tipo_trabajador == 'AFILIADO'">
+                <label>¿Ha tenido Licencia medica los ultimos 6 meses?</label>
+                <span>
+                    <h5 class="m-t-0">
+                        {{persona.licencia_medica_6m}}
+                    </h5>
+                </span>
+            </div>
+            <!-- FIN TRABAJADOR -->
+
+            <div class="form-group col-lg-6">
+                <label>¿Ha usado algún beneficio de la Caja en los años 2019 y/o
+                    2020?</label>
+                <span>
+                        <h5 class="m-t-0" *ngIf="persona.beneficio != 1" >
+                            No
+                        </h5>
+                        <h5 class="m-t-0" *ngIf="persona.beneficio == 1" >
+                            Si
+                        </h5>
+                    </span>
+            </div>
+
+            <div class="form-group col-lg-6">
+                <label for="lastYearVisite">¿Ha concurrido a una sucursal de la Caja
+                    este año ?</label>
+                <span>
+                        <h5 class="m-t-0" *ngIf="persona.visita != 1" >
+                            No
+                        </h5>
+                        <h5 class="m-t-0" *ngIf="persona.visita == 1" >
+                            Si
+                        </h5>
+                    </span>
+            </div>
+            <div class="form-group col-lg-6">
+                <label>¿Has llamado a nuestro call centrer en los últimos 3
+                    meses?</label>
+                <span>
+                        <h5 class="m-t-0"> {{persona.callcenter_3m}}</h5>
+                    </span>
+            </div>
+        </div>
+        <button class="btn btn-inverse" (click)="toogleIsOpen()"> Cerrar</button>
+
+    </div>
+</div>

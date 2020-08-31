@@ -1,0 +1,96 @@
+<div class="hpanel" *ngFor="let empresa of empresas">
+    <div class="panel-heading">
+        <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">
+                Panel de información y estadísticas
+            </font>
+        </font>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-3 text-center" style="">
+                <div class="small">
+                    <i class="fa fa-bolt"></i>
+                    <font style="vertical-align: inherit;">
+                        <font style="vertical-align: inherit;"> Trabajadores Afiliados
+                        </font>
+                    </font>
+                </div>
+                <div>
+                    <h1 class="font-extra-bold m-t-xl m-b-xs">
+                        <font style="vertical-align: inherit;">
+                            <font style="vertical-align: inherit;">
+                                {{empresa.data.N_AFILIADOS | number:'1.0-0'}}
+                            </font>
+                        </font>
+                    </h1>
+                </div>
+                <div class="small m-t-xl">
+                    <i class="fa fa-clock-o"></i>
+                    <font style="vertical-align: inherit;">
+                        <font style="vertical-align: inherit;"> Ultimo Afiliado 15.10.2019
+                        </font>
+                    </font>
+                </div>
+            </div>
+            <div class="col-md-6" style="">
+                <div class="flot-chart" style="height: 160px">
+                    <img src="./assets/images/chart.png">
+                </div>
+            </div>
+            <div class="col-md-3 text-center" style="">
+                <div class="small">
+                    <i class="fa fa-bolt"></i>
+                    <font style="vertical-align: inherit;">
+                        <font style="vertical-align: inherit;"> Penetración CLA
+                        </font>
+                    </font>
+                </div>
+                <div>
+
+                    <div class="row">
+                        <div class="col-md-12" style="">
+                            <h1 class="font-extra-bold m-t-xl m-b-xs">
+                                <font style="vertical-align: inherit;">
+                                    <font style="vertical-align: inherit;">
+                                        {{empresa.data.Penetracion_CLA}}
+                                    </font>
+                                </font>
+                            </h1>
+                        </div>
+                        <div class="col-md-6" style="">
+                            <small class="stats-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">BBSS</font></font></small>
+                            <h4>
+                                <font style="vertical-align: inherit;">
+                                    <font style="vertical-align: inherit;">{{empresa.data.Penetracion_BS}}</font>
+                                </font>
+                            </h4>
+                        </div>
+
+                        <div class="col-md-6" style="">
+                            <small class="stats-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">PPFF</font></font></small>
+                            <h4>
+                                <font style="vertical-align: inherit;">
+                                    <font style="vertical-align: inherit;">{{empresa.data.Penetracion_PF}}</font>
+                                </font>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="panel-footer">
+        <span class="pull-right"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+          Ejecutiv(a) empresa </font></font><a href=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{empresa.data.EJECUTIVO_EMPRESA}}</font></font></a>
+    </span>
+        <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">
+                Última actualización: 11.2019
+            </font>
+        </font>
+    </div>
+    <br>
+</div>

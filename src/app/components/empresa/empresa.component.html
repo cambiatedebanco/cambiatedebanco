@@ -1,0 +1,60 @@
+<div class="row bg-title">
+    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+        <h4 class="page-title">Vista Empresa</h4>
+    </div>
+    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+        <ol class="breadcrumb">
+
+            <li class="active">Empresas</li>
+        </ol>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="white-box">
+            <div class="row row-in">
+                <div class="col-lg-3 col-sm-6 row-in-br">
+
+                    <app-kpi-uno [empresas]="empresas"></app-kpi-uno>
+
+                </div>
+                <div class="col-lg-3 col-sm-6 row-in-br  b-r-none">
+                    <app-kpi-dos [empresas]="empresas"></app-kpi-dos>
+                </div>
+                <div class="col-lg-3 col-sm-6 row-in-br">
+                    <app-kpi-tres [empresas]="empresas"></app-kpi-tres>
+                </div>
+                <div class="col-lg-3 col-sm-6  b-0">
+                    <app-kpi-cuatro [empresas]="empresas"></app-kpi-cuatro>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="row">
+    <app-empresa-demografico [empresas]="empresas"></app-empresa-demografico>
+
+    <div class="col-lg-7 col-sm-6">
+        <app-ofertas-uno [usoOferta]="usoOferta"  ></app-ofertas-uno>
+        <app-ofertas-dos [usoOferta]="usoOferta2"></app-ofertas-dos>
+        <app-ofertas-tres [usoOferta]="usoOferta3"></app-ofertas-tres>
+    </div>
+    <div class="col-lg-7 col-sm-6">
+        <app-empresa-info [empresas]="empresas"></app-empresa-info>
+
+    </div>
+
+</div>
+<div class="row">
+    <app-ppff-credito [empresas]="empresas" [usoCredito]="usoCredito"></app-ppff-credito>
+    <app-ppff-seguro [empresas]="empresas"></app-ppff-seguro>
+    <app-ppff-ahorro [empresas]="empresas" [usoAhorro]="usoAhorro"></app-ppff-ahorro>
+
+</div>
+<div class="row">
+    <app-uso-bss [usoBBSS]="usoBBSS"></app-uso-bss>
+
+
+</div>

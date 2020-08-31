@@ -1,0 +1,6 @@
+cd ./ceocrm-dev
+git checkout master
+git pull origin master
+ng build --prod
+echo "build prod"
+firebase use nicanor

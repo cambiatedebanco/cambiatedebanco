@@ -1,0 +1,59 @@
+:host ::ng-deep .ck-editor__editable {
+    min-height: 100px;
+    max-height: 200px;
+}
+
+:host ::ng-deep .ck-editor__editable_inline {
+    overflow: auto;
+    padding: 0 var(--ck-spacing-standard);
+}
+
+:host ::ng-deep .ck-content .image>img {
+    display: block;
+    margin: 0%;
+    width: 240px;
+    height: 113px
+}
+
+:host ::ng-deep .ck-widget .ck-widget__type-around__button {
+    display: none;
+}
+
+:host ::ng-deep .ck-content .image>figcaption {
+    display: none;
+}
+
+:host ::ng-deep .ck-content .image {
+    clear: both;
+    text-align: center;
+    margin: 0em;
+}
+
+:host ::ng-deep .ck-widget__selection-handle {
+    display: none;
+}
+
+:host ::ng-deep .ck-content .table {
+    margin: 0em;
+    display: table;
+    border: none;
+}
+
+:host ::ng-deep .ck-content.ck-editor__editable.ck-rounded-corners.ck-editor__editable_inline.ck-blurred>figure,
+.ck.ck-content.ck-editor__editable.ck-rounded-corners.ck-editor__editable_inline.ck-focused>figure {
+    margin: 16px 0;
+}
+
+:host ::ng-deep .ck-content .table table td,
+.ck-content .table table th {
+    min-width: 2em;
+    padding: .0em;
+    border: 0px solid #ffffff;
+}
+
+:host ::ng-deep .ck-widget.table td.ck-editor__nested-editable.ck-editor__nested-editable_focused,
+.ck table.ck-widget td.ck-editor__nested-editable:focus {
+    background-color: inherit;
+    color: inherit;
+    border: none;
+}

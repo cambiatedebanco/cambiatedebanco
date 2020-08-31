@@ -1,0 +1,78 @@
+<div class="container-fluid">
+    <div class="table-responsive">
+        <table class="table">
+            <td>
+                <div class="calcTitle">
+                    <h1 class="titleSlider">
+                        Administración <small class="subTitleSlider">agente</small>
+                    </h1>
+                    <p>
+
+                    </p>
+                </div>
+            </td>
+            <td>
+              <button class="btn btn-success btn-rounded waves-effect waves-light" type="button"
+                [routerLink]="['/create-agente']" skipLocationChange>Agregar agente</button>
+            </td>
+        </table>
+    </div>
+    <mat-card class="example-container">
+        <div class="example-header">
+            <mat-form-field>
+                <input matInput #filter placeholder="Buscar" (keyup)="applyFilter($event.target.value)">
+            </mat-form-field>
+        </div>
+        <table mat-table [dataSource]="dataSource"  matSort class="mat-elevation-z2" width="80%" align="center">
+
+            <!--- Note that these columns can be defined in any order.
+                  The actual rendered columns are set as a property on the row definition" -->
+          
+            <!-- Position Column -->
+            <ng-container matColumnDef="cod">
+              <th mat-header-cell *matHeaderCellDef> Codigo. </th>
+              <td mat-cell *matCellDef="let element"> {{element.idsucursal}} </td>
+            </ng-container>
+          
+            <!-- Name Column -->
+            <ng-container matColumnDef="origen">
+              <th mat-header-cell *matHeaderCellDef> Origen </th>
+              <td mat-cell *matCellDef="let element"> {{element.origen}} </td>
+            </ng-container>
+          
+            <!-- Weight Column -->
+            <ng-container matColumnDef="destino">
+              <th mat-header-cell *matHeaderCellDef> Destino </th>
+              <td mat-cell *matCellDef="let element"> {{element.destino}} </td>
+            </ng-container>
+            <ng-container matColumnDef="agente_detail">
+              <th mat-header-cell *matHeaderCellDef> Agente </th>
+              <td mat-cell *matCellDef="let element"> {{element.rut}} <small>{{element.nombres}}</small> </td>
+            </ng-container>
+          
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="modificar">
+              <th mat-header-cell *matHeaderCellDef>  </th>
+              <td mat-cell *matCellDef="let element"> <button class="btn btn-primary" (click)="openDialog(element)">Reasignar</button> </td>
+            </ng-container>
+            <ng-container matColumnDef="agente">
+                <th mat-header-cell *matHeaderCellDef>  </th>
+                <td mat-cell *matCellDef="let element"> 
+
+                  <button *ngIf="element.origen == element.destino" class="btn btn-primary" (click)="openDialogupdateAgente(element)">Cambiar agente</button>
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="dotacion">
+                <th mat-header-cell *matHeaderCellDef>  </th>
+                <td mat-cell *matCellDef="let element"> 
+                  <button *ngIf="element.rut" class="btn btn-secondary" [routerLink]="['/create-agente',{id:element.idsucursal}]"> Dotación</button>
+                </td>
+              </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+          <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true">
+        </mat-paginator>
+    </mat-card>
+
+</div>

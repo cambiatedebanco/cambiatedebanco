@@ -1,0 +1,241 @@
+.oferta-cla-box {
+    background: #f9fafa;
+    padding: 25px;
+    margin-bottom: 30px;
+    box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0);
+    border-radius: 10px;
+    border: 1px solid #e4e5e7;
+    height: 200px;
+}
+
+.radius-right {
+    border-radius: 0px 10px 0px 0px;
+}
+
+.oferta-cla-box:hover {
+    background: #282828;
+    cursor: pointer;
+}
+
+.oferta-cla-box .box-title {
+    vertical-align: inherit;
+    color: #181b30;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: open sans;
+}
+
+.oferta-cla-box .box-title2 {
+    vertical-align: inherit;
+    color: #606371;
+    font-size: 12px;
+    font-weight: 400;
+    font-family: open sans;
+}
+
+.oferta-cla-box:hover .box-title {
+    color: #ffffff;
+}
+
+.white-box {
+    box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0);
+    border-radius: 10px 0px 0px 0px;
+    border: 1px solid #e4e5e7;
+}
+
+.fa {
+    font-size: 30px;
+}
+
+.icon-back {
+    background: #edf1f5;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    line-height: 45px;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 14px;
+    margin-bottom: 15px;
+}
+
+.icon-color-alerta {
+    background: #9eddeb;
+    border: 1px solid #0e829b;
+}
+
+.icon-color-alerta-disabled {
+    background: #9d9fa2;
+}
+
+.oferta-cla-box:hover .icon-color-alerta {
+    background: #ffffff;
+    border: 1px solid #ffffff;
+}
+
+.icon-color-ppff {
+    background: #f9dcb0;
+    border: 1px solid #ea9514;
+    color: #ea9514;
+}
+
+.icon-color-ppff-disabled {
+    background: #9d9fa2;
+}
+
+.oferta-cla-box:hover .icon-color-ppff {
+    background: #ffffff;
+    border: 1px solid #ffffff;
+}
+
+.faicon {
+    color: #ffffff;
+    font-size: 23px;
+}
+
+.faicon3 {
+    color: #ffffff;
+    font-size: 23px;
+}
+
+.oferta-cla-box:hover .faicon {
+    color: #282828;
+}
+
+.oferta-cla-box:hover .faicon3 {
+    color: #282828;
+}
+
+.icon-color-bbss {
+    background: #cd25b0;
+}
+
+.icon-color-bbss-disabled {
+    background: #9d9fa2;
+}
+
+.oferta-cla-box:hover .icon-color-bbss {
+    background: #ffffff;
+}
+
+.speech-bubble {
+    position: relative;
+    background: #f5f5f5;
+    border-radius: .4em;
+}
+
+.speech-bubble:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 15%;
+    width: 0;
+    height: 0;
+    border: 11px solid transparent;
+    border-bottom-color: #f5f5f5;
+    border-top: 0;
+    margin-left: -5.5px;
+    margin-top: -11px;
+}
+
+.carousel-indicators {
+    bottom: -60px;
+}
+
+.carousel-indicators li {
+    border: 1px solid #6a6c6f;
+}
+
+.carousel-indicators .active {
+    background: #6a6c6f;
+}
+
+.oferta-cla-box:hover .carousel-indicators li {
+    border: 1px solid #ffff;
+}
+
+.oferta-cla-box:hover .carousel-indicators .active {
+    background: #ffff;
+}
+
+.script-cla-box {
+    background-color: rgba(163, 227, 241, 0.1);
+    padding: 10px;
+    margin-bottom: 5px;
+    box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0);
+    border-radius: 10px;
+    border: 1px dashed #2d97af;
+    height: 70px;
+}
+
+.demo-class {
+    font-family: open sans;
+    font-size: 14px;
+    color: #6a6c6f;
+}
+
+.btn-circle {
+    background-color: rgba(117, 213, 233, 1);
+    border: 1px solid #0a7993;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 20px;
+}
+
+.btn-gestion {
+    position: relative;
+    top: -30px;
+    left: -10px;
+}
+
+.swal2-styled.swal2-confirm {
+    border: 0;
+    border-radius: .25em;
+    background: initial;
+    background-color: #3085d6;
+    color: #fff;
+    font-size: 1.0625em;
+}
+
+.swal2-styled.swal2-sendEmail {
+    border: 0;
+    border-radius: .25em;
+    background: initial;
+    background-color: #00BD70;
+    color: #fff;
+    font-size: 1.0625em;
+}
+
+element.style {
+    display: inline-block;
+    border-left-color: rgb(48, 133, 214);
+    border-right-color: rgb(48, 133, 214);
+}
+
+element.style {
+    display: inline-block;
+    background-color: rgb(255, 67, 55);
+}
+
+.swal2-styled.swal2-cancel {
+    border: 0;
+    border-radius: .25em;
+    background: initial;
+    background-color: #aaa;
+    color: #fff;
+    font-size: 1.0625em;
+}
+
+.swal2-actions {
+    display: flex;
+    z-index: 1;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 1.25em auto 0;
+}

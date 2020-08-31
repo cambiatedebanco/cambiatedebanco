@@ -1,0 +1,118 @@
+.cdk-overlay-container {
+    z-index: 1051 ! important;
+}
+
+ ::ng-deep .cdk-overlay-container mat-datepicker-content {
+    z-index: 1051;
+}
+
+.mat-datepicker-content {
+    z-index: 1051
+}
+
+.cdk-overlay-container {
+    z-index: 1051 !important;
+}
+
+ ::ng-deep .cdk-overlay-container ngx-material-timepicker {
+    z-index: 1051;
+}
+
+.cdk-overlay-container {
+    z-index: 1051 !important;
+}
+
+.floating-btn {
+    width: 50px;
+    height: 50px;
+    background: #f9be00;
+    text-decoration: none;
+    border-radius: 50%;
+    color: #ffffff;
+    font-size: 40px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 2px 1px -1px rgba(0, 0, 0, .12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    transition: background-color 0.25s ease-out, box-shadow 0.25s ease-out;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+
+.floating-btn:hover {
+    box-shadow: 0 4px 5px -2px rgba(0, 0, 0, .2), 0 7px 10px 1px rgba(0, 0, 0, .14), 0 2px 16px 1px rgba(0, 0, 0, .12);
+}
+
+.floating-btn.clicked {
+    background-color: #4169cc;
+}
+
+.floating-btn i {
+    transition: transform 0.25s cubic-bezier(.4, 0, .2, 1);
+}
+
+.floating-btn.clicked i {
+    transform: rotate(315deg);
+}
+
+.form-box.open {
+    transform: translate(10px, 10px);
+    height: 60%;
+    width: 50%;
+    opacity: 1;
+    overflow: scroll;
+    z-index: 50 !important;
+}
+
+.form-box input {
+    padding: 10px 0;
+    margin-bottom: 30px;
+}
+
+.form-box {
+    margin: 16px auto;
+    font-size: 16px;
+    border-radius: 9px;
+    position: fixed;
+    opacity: 0;
+    overflow: hidden;
+    bottom: 0;
+    right: 10px;
+    transform: translate(-50%, -50%);
+    width: 30px;
+    height: 30px;
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    transition: all .25s ease-in-out;
+}
+
+.form-box form div {
+    position: relative;
+}
+
+.form-box form div .inputLabel {
+    position: absolute;
+    left: -1px;
+    top: 8px;
+    pointer-events: none;
+    color: #999;
+    transition: .2s ease-in-out;
+    font-size: 14px;
+}
+.form-box input:focus~.inputLabel,
+.form-box textarea:focus~.inputLabel,
+.form-box input:valid~.inputLabel,
+.form-box textarea:valid~.inputLabel {
+    top: -12px;
+    left: 0;
+    color: #4169cc;
+    font-size: 10px;
+    font-weight: bold;
+    transition: .2s ease-in-out;
+}
