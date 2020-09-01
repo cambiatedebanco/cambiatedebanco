@@ -1,7 +1,10 @@
 <header>
     <nav class="navbar navbar-expand-lg fixed-top py-3">
         <div class="container">
-            <a class="navbar-brand" href="#">cambiatedebanco.cl</a>
+            <a class="navbar-brand" href="#">
+                <img src="../../../assets/images/logo.svg" width="50" height="50" class="d-inline-block align-top" alt=""> cambiatedebanco.cl
+            </a>
+
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -11,10 +14,10 @@
                         <a class="nav-link" href="#">HOME <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">LEY PORTABILIDAD</a>
+                        <a class="nav-link" href="#portabilidad">LEY PORTABILIDAD</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Contactenos</a>
+                        <a class="nav-link" href="#contacto">Contactenos</a>
                     </li>
 
                 </ul>
@@ -38,9 +41,9 @@
                         </h4>
                     </div>
                 </div>
-                <div class="col-lg-7" style="margin-top:214px;padding-right:142px;">
+                <div class="col-lg-7 padding-stepper" style="margin-top:214px;">
 
-                    <div class="col-lg-12">
+                    <div class="col-lg-12 col-md-12">
                         <mat-horizontal-stepper linear #stepper>
                             <mat-step [completed]="isPaso1_completado" label="1">
 
@@ -89,7 +92,7 @@
 
                                             </div>
 
-                                            <div class="col-lg-6>">
+                                            <div class="col-lg-6 col-md-6>">
                                                 <button mat-raised-button matStepperNext color="accent">Siguiente</button>
                                             </div>
                                         </div>
@@ -180,7 +183,7 @@
                     </div>
                     <div class="col-lg-12">
 
-                        <img src="../../../assets/images/bancos.png" width="900">
+                        <img src="../../../assets/images/bancos.png" class="width-bancos">
                     </div>
 
 
@@ -191,8 +194,10 @@
     </div>
 
 </header>
+<a id="portabilidad"></a>
 <main>
     <!--/.Navbar-->
+
     <div id="contenido" class="view">
         <div class="full-bg-img">
 
@@ -212,11 +217,11 @@
         </div>
     </div>
 </main>
-
+<a id="contacto"></a>
 <footer id="myFooter" class="pt-md-5">
     <div class="row">
         <div class="col-12 col-md">
-            <img class="mb-2" src="../../assets/brand/bootstrap-solid.svg" alt="" width="24" height="24">
+            <img class="mb-2" src="../../../assets/images/alogo.svg" alt="" width="24" height="24">
             <small class="d-block mb-3 text-muted">© 2020</small>
         </div>
         <div class="col-6 col-md">
