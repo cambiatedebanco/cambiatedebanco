@@ -677,6 +677,11 @@ export class PostgresService {
           retry(1),catchError(this.errorHandl))
       }
 
+      getLeadByBanco(idbanco: any, headers): Observable<any>{
+        let complete_uri = `${this.BASE_URI}/cambiate_leads/banco?idbanco=${idbanco}`;
+        return this.httpGet(complete_uri, headers);
+      }
+
   errorHandl(error: any) {
     let errorMessage = '';
     if(error.error instanceof ErrorEvent) {

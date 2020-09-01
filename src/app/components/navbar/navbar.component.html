@@ -64,46 +64,7 @@
         <!-- Search input and Toggle icon -->
 
         <ul class="nav navbar-top-links navbar-right pull-right" *ngIf="user_cla">
-            <li *ngIf="user_cla.id_cargo != 5">
-                <form role="search" class="app-search  m-r-10" #f="ngForm">
-                    <ng-container *ngIf="user_cla.nivel_acceso==1 || user_cla.nivel_acceso==4 || user_cla.nivel_acceso==99">
-                        <div class="radio radio-inline radio-success">
-                            <input type="radio" name="tipo" id="radio14" [(ngModel)]="myRadio" value=2 (click)="clearSearchInput()">
-                            <label for="radio14" class="color-white">Empr.</label>
-                        </div>
-                        <div class="radio radio-inline radio-success">
-                            <input type="radio" name="tipo" id="radio15" [(ngModel)]="myRadio" value=3 (click)="clearSearchInput()">
-                            <label for="radio15" class="color-white">Afil.</label>
-                        </div>
-                        &nbsp;&nbsp;
-                    </ng-container>
-                    <ng-container *ngIf="user_cla.nivel_acceso==2">
-                        <label class="color-white">Empresa</label> &nbsp;&nbsp;
-                    </ng-container>
-                    <ng-container *ngIf="user_cla.nivel_acceso==3">
-                        <label class="color-white">Afiliado</label> &nbsp;&nbsp;
-                    </ng-container>
-                    <input type="text" #searchInput placeholder="Buscar..." (keyup)="search($event,f)" name="buscador" class="form-control" [matAutocomplete]="auto">
-                    <a href=""><i class="fa fa-search"></i></a>
-                </form>
 
-                <mat-autocomplete #auto="matAutocomplete">
-                    <mat-option (onSelectionChange)="onEnter($event)" *ngFor="let emp of allemps" [value]="emp.RUT_PERSONA || emp.RUT_EMPRESA">
-                        <div><small>
-                                <font style="vertical-align: inherit;">
-                                    <font style="vertical-align: inherit;">{{emp?.RUT_PERSONA || emp?.RUT_EMPRESA }}
-                                    </font>
-                                </font>
-                                <font style="vertical-align: inherit;">
-                                    <font style="vertical-align: inherit;">
-                                        {{ emp?.NOMBRES || emp?.RAZON_SOCIAL_EMPRESA}}</font>
-                                </font>
-                            </small>
-                        </div>
-
-                    </mat-option>
-                </mat-autocomplete>
-            </li>
             <li class="dropdown hidden-xs" *ngIf="loggedIn">
                 <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#">
                     <img *ngIf="user.photoURL" src="{{user.photoURL}}" alt="user-img" width="36" class="img-circle">
