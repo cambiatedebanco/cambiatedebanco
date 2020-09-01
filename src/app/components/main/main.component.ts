@@ -47,15 +47,20 @@ export class MainComponent implements OnInit {
   private postgresService: PostgresService){ }
   // if user switch from admin to blog need to update theme css.
   ngOnInit() {
- 
+    var elem = this.document.getElementById('bootstrap4min');
+    elem.setAttribute('href','assets/bootstrap/dist/css/bootstrap.min40.css');
+    elem.setAttribute('rel','stylesheet');
+    elem.setAttribute('type','text/css');
+
+   
 
     var elem = this.document.getElementById('theme');
     elem.setAttribute('href','assets/css/style_main.css');
     elem.setAttribute('rel','stylesheet');
     elem.setAttribute('type','text/css');
 
-
-
+    
+ 
 
   this.postgresService.getBancos().subscribe(resp=>{
     this.bancos=resp;
