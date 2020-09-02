@@ -137,9 +137,6 @@ import { RegionConfirmedComponent } from './components/region-confirmed/region-c
 import { ValoresTotalCovidComponent } from './components/valores-total-covid/valores-total-covid.component';
 import { Home2Component } from './components/home2/home2.component';
 import { EncuestaDiferidosComponent } from './components/encuestas/encuesta-diferidos/encuesta-diferidos.component';
-import { QuizMainComponent } from './components/quiz/quiz-main/quiz-main.component';
-import { QuizBranchComponent } from './components/quiz/quiz-branch/quiz-branch.component';
-import { SurveyComponent } from './components/quiz/survey/survey.component';
 import { CampaignHomeComponent } from './components/admin-campaign/campaign-home/campaign-home.component';
 import { DesuscribirComponent } from './components/encuestas/desuscribir/desuscribir.component';
 import { EncuestaEmpresasComponent } from './components/encuestas/encuesta-empresas/encuesta-empresas.component';
@@ -284,9 +281,6 @@ export function provideConfig() {
     ValoresTotalCovidComponent,
     Home2Component,
     EncuestaDiferidosComponent,
-    QuizMainComponent,
-    QuizBranchComponent,
-    SurveyComponent,
     CampaignHomeComponent,
     DesuscribirComponent,
     EncuestaEmpresasComponent,
