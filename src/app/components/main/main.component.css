@@ -370,7 +370,7 @@
         display: none !important;
     }
     .navbar .navbar-brand {
-        margin-left: 40px !important;
+        margin-left: 10px !important;
     }
     .title {
         padding-left: 20px;
@@ -436,10 +436,10 @@
         font-family: 'Montserrat' !important;
         color: #ffffff !important;
         font-weight: 500 !important;
-        font-size: 22px !important;
-        border-radius: 10px !important;
-        height: 66px !important;
-        width: 272px !important;
+        font-size: 16px !important;
+        border-radius: 5px !important;
+        height: 50px !important;
+        width: 200px !important;
     }
      ::ng-deep .mat-fab.mat-accent,
     .mat-flat-button.mat-accent,
@@ -450,10 +450,11 @@
         font-family: 'Montserrat' !important;
         color: #ffffff !important;
         font-weight: 500 !important;
-        font-size: 22px !important;
-        border-radius: 10px !important;
-        height: 66px !important;
-        width: 172px !important;
+        font-size: 16px !important;
+        border-radius: 5px !important;
+        height: 50px !important;
+        width: 120px !important;
+        margin-right: -90px !important;
     }
      ::ng-deep .mat-fab.mat-warn,
     .mat-flat-button.mat-warn,
@@ -465,16 +466,17 @@
         font-family: 'Montserrat' !important;
         color: #ffffff !important;
         font-weight: 500 !important;
-        font-size: 22px !important;
-        border-radius: 10px !important;
-        height: 66px !important;
-        width: 172px !important;
+        font-size: 16px !important;
+        border-radius: 5px !important;
+        height: 50px !important;
+        width: 120px !important;
+        margin-left: -60px !important;
     }
      ::ng-deep .mat-step-header .mat-step-label.mat-step-label-active {
         color: #3E3E3E !important;
         font-family: 'Montserrat' !important;
-        font-weight: 600 !important;
-        font-size: 23px !important;
+        font-weight: 500 !important;
+        font-size: 18px !important;
     }
     .example-box:last-child {
         border: none !important;
