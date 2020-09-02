@@ -29,70 +29,7 @@
                 </div>
             </div>
 
-            <mat-card class="example-container">
-                <div class="example-header col-sm-12 col-md-12">
-                    <div class="row">
-                        <div class="col-sm-6 col-md-6">
-                            <mat-form-field>
-                                <input matInput #filter (keyup)="applyFilter($event.target.value)" placeholder="Buscar">
-                            </mat-form-field>
-                        </div>
 
-
-                    </div>
-                </div>
-                <table mat-table #table [dataSource]="dataSource" matSort class="mat-elevation-z8" width="80%" align="center">
-                    <ng-container matColumnDef="fecha">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> FECHA </th>
-                        <td mat-cell *matCellDef="let element">{{ element.created_time | date:'dd/MM/yy H:mm'}} </td>
-                    </ng-container>
-                    <ng-container matColumnDef="id">
-                        <th mat-header-cell *matHeaderCellDef> ID </th>
-                        <td mat-cell *matCellDef="let element">
-                            {{ element.id }}
-                        </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="campana">
-                        <th mat-header-cell *matHeaderCellDef> CAMPAÑA </th>
-                        <td mat-cell *matCellDef="let element">{{ element.nombre_campana }} </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="bco_origen">
-                        <th mat-header-cell *matHeaderCellDef> BANCO ORIGEN </th>
-                        <td mat-cell *matCellDef="let element">
-                            <span><b>{{element.banco_origen}}</b></span>
-                        </td>
-                    </ng-container>
-                    <ng-container matColumnDef="bco_destino">
-                        <th mat-header-cell *matHeaderCellDef> BANCO DESTINO </th>
-                        <td mat-cell *matCellDef="let element">
-                            <span><b>{{element.nombre_banco}}</b></span>
-                        </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="tools">
-                        <th mat-header-cell *matHeaderCellDef> TOOLS </th>
-                        <td mat-cell *matCellDef="let element" align="center">
-                            <button type="button" class="btn btn-primary btn-rounded waves-effect waves-light">
-                      <span class="btn-label"><i
-                              class="fa fa-pencil"></i></span>Comprar</button>
-
-
-                        </td>
-                    </ng-container>
-
-
-                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-                </table>
-
-
-
-                <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true">
-                </mat-paginator>
-            </mat-card>
         </div>
 
 

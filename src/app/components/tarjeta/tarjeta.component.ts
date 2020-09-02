@@ -51,7 +51,6 @@ export class TarjetaComponent implements OnInit {
         if(resp){
           this.user = resp[0];
           console.log(this.user);
-          this.getLeadByBanco();
         }
       });
   /*  this.postgresqlService.getFlow(this.items).subscribe(res=>{
@@ -87,14 +86,7 @@ export class TarjetaComponent implements OnInit {
       });*/
   }
 
-  getLeadByBanco(){
-      this.getLeadByBancoSubscription = this.postgresqlService.getLeadByBanco(this.user.idbanco, this.headers).subscribe((data: any) => {
-        console.log(data);
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.data = data;
-      });
-  }
+
   
   
 

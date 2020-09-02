@@ -28,7 +28,7 @@ export class CarteraHomeComponent implements OnInit, OnDestroy {
   @ViewChild(NavbarComponent, {static: false}) navbar:NavbarComponent;
 
   dataSource: MatTableDataSource<any> = new MatTableDataSource();
-  displayedColumns: string[] = ['rut_persona_b', 'nombres_b', 'monto_b', 'campana_b', 'probabilidad_b', 'variable_b', 'modifica_b'];
+  displayedColumns: string[] = ['fecha', 'id', 'campana', 'bco_origen','bco_destino', 'monto', 'tools'];
 
   dataSourceLeads: MatTableDataSource<any> = new MatTableDataSource();
   displayedColumnsLeads: string[] = ['fecha', 'rut', 'nombre', 'campana', 'variable', 'asignado', 'modifica'];
@@ -47,7 +47,6 @@ export class CarteraHomeComponent implements OnInit, OnDestroy {
   getLeads_totalSubscription: Subscription;
   getDiasRestantesSubscription: Subscription;
   getCampanasByColaboradorSubscription: Subscription;
-  getLeadsPropensosColaboradorSubscription: Subscription;
   getLeadsColaboradorSubscription: Subscription;
   getMicarteraCreditosPendientesSubscription: Subscription;
   getMicarteraCreditosGestionadoSubacription: Subscription;
@@ -65,6 +64,7 @@ export class CarteraHomeComponent implements OnInit, OnDestroy {
   cleanData = [];
   cleanDataLead = [];
   getAllEjecutivosCampanaSubscription: Subscription;
+  getLeadByBancoSubscription: Subscription;
   campanas: [];
   filtroFechaForm: FormGroup;
   tabFilterLead = 1;
@@ -118,12 +118,12 @@ export class CarteraHomeComponent implements OnInit, OnDestroy {
 
  initialiseInvites(user_cla:any){
 
-      this.getMicarteraCreditosSubscription = this.postgresqlService.getMicarteraCreditos(user_cla.rut , user_cla.id_cargo, this.headers).subscribe((data: any) => {
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.data = data;
+    this.getLeadByBancoSubscription = this.postgresqlService.getLeadByBanco(user_cla.idbanco, this.headers).subscribe((data: any) => {
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.data = data;
+    });
 
-      });
 
       this.getMicarteraCreditosTotalSubscription = this.postgresqlService.getMicarteraCreditosTotal(user_cla.rut , user_cla.id_cargo, this.headers).subscribe((data: any) => {
          this.dataUsers = data;  
@@ -213,20 +213,6 @@ export class CarteraHomeComponent implements OnInit, OnDestroy {
         if (tipoFiltro === 1) {
           this.getLeadsColaborador(1, 0);
           this.getResumenLeadsColaborador();
-        }
-        if (tipoFiltro === 2) {
-          const data = {
-            rut_colaborador: parseInt(this.user_cla.rut),
-            fechaInicio: this.startDate,
-            fechaFin: this.endDate,
-            idcargo: parseInt(this.user_cla.id_cargo)
-          }
-          this.getLeadsPropensosColaboradorSubscription = this.postgresqlService.getLeadsPropensosColaborador(data, this.headers).subscribe((data: any) => {
-            this.dataSourceLeads.sort = this.sortLeads;
-            this.dataSourceLeads.paginator = this.paginatorLeads;
-            this.dataSourceLeads.data = data;
-            this.getResumenLeadsColaborador();
-          });
         }
         if (tipoFiltro === 3) {
           this.getLeadsColaborador(0, 0);
@@ -579,10 +565,6 @@ export class CarteraHomeComponent implements OnInit, OnDestroy {
         
         if (this.getCampanasByColaboradorSubscription) {
           this.getCampanasByColaboradorSubscription.unsubscribe();
-        }
-
-        if (this.getLeadsPropensosColaboradorSubscription) {
-          this.getLeadsPropensosColaboradorSubscription.unsubscribe();
         }
 
         if (this.getResumenLeadsColaboradorSubscription) {
