@@ -77,15 +77,8 @@ export class LoginComponent {
       resp => {
         if (resp) {
           this.showMessage("success", this.successMessage);
-          this.postgresService.getVistaUsuarioCantidad(resp[0].rut, resp[0].id_cargo, getHeaderStts(this.user)).subscribe((data: any) => {
-            console.log(data);
-            if (data[0].n_total>0){
-              this.router.navigate([`/mi-cartera-home`]);
-            } else {
-              this.router.navigate([`/home2`]);
-            }
 
-          });
+              this.router.navigate([`/mi-cartera-home`]);
 
         } else {
           this.onWrongLogin();
