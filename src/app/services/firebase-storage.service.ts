@@ -45,10 +45,17 @@ export class FirebaseStorageService {
       })
     ).subscribe();*/
 
-    this.storage.upload("graphite-maker-287716.appspot.com", '1599015035132425116.jpg').then(rst => {
-      rst.ref.getDownloadURL().then(url => {
-        console.log(url);
-      })
+
+    this.storage.storage.refFromURL("https://storage.cloud.google.com/graphite-maker-287716.appspot.com/1599015035132425116.jpg?authuser=1").getDownloadURL().then(url => {
+      const xhr = new XMLHttpRequest();
+      
+      xhr.responseType = "blob";
+      xhr.onload = function(event) {
+        const blob = xhr.response;
+      };
+      xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+      xhr.open("GET", url);
+      xhr.send();
     })
 
 
