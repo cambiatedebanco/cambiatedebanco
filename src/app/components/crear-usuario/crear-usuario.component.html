@@ -53,19 +53,10 @@
                     <div *ngIf="!userExist && lengthRut" class="white-box">
                         <div class="row">
                             <form [formGroup]="agregarForm" (ngSubmit)="onSubmit()">
-                                <div class="form-group col-lg-6">
-                                    <label>Tipo de colaborador</label>
-                                    <mat-checkbox class="form-control" formControlName="es_caja" (click)="toggleCaja()">Colaborador caja!</mat-checkbox>
-                                </div>
                                 <!--  -->
                                 <div class="form-group col-lg-6" [ngClass]="{'has-error': agregarForm.controls.email.errors && submitted }">
                                     <label>E-mail: </label>
-                                    <div class="input-group" *ngIf="agregarForm.value.es_caja">
-                                        <input type="text" formControlName="email" class="form-control" id="email" name="email">
-                                        <span class="input-group-addon" *ngIf="agregarForm.value.es_caja">@cajalosandes.cl</span>
-
-                                    </div>
-                                    <input type="text" formControlName="email" class="form-control" id="email" name="email" *ngIf="!agregarForm.value.es_caja">
+                                    <input type="text" formControlName="email" class="form-control" id="email" name="email">
                                     <div *ngIf="agregarForm.controls.email.errors" class="invalid-feedback error-text">
                                         <div *ngIf="agregarForm.controls.email.errors.required">Campo obligatorio.</div>
                                         <div *ngIf="agregarForm.get('email').hasError('pattern')">
@@ -97,40 +88,21 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group col-lg-6" [ngClass]="{'has-error': agregarForm.controls.puesto_real.errors && submitted }">
-                                    <label>Puesto: </label>
-                                    <input type="text" formControlName="puesto_real" class="form-control" id="puesto_real" name="puesto_real">
-                                    <div *ngIf="agregarForm.controls.puesto_real.errors" class="invalid-feedback">
-                                        <div *ngIf="agregarForm.controls.puesto_real.errors.required">Campo obligatorio.
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group col-lg-6" [ngClass]="{'has-error': agregarForm.controls.sucursal.errors && submitted }">
+
+                                <div class="form-group col-lg-6" [ngClass]="{'has-error': agregarForm.controls.banco.errors && submitted}">
                                     <label>Banco</label>
-                                    <input type="text" formControlName="sucursal" #searchInput placeholder="Buscar..." (keyup)="search($event)" name="buscador" class="form-control" [matAutocomplete]="auto" [ngClass]="{ 'is-invalid': submitted && agregarForm.controls.sucursal.errors }">
-                                    <a href=""><i class="fa fa-search"></i></a>
-                                    <div *ngIf="submitted && agregarForm.controls.sucursal.errors" class="invalid-feedback">
-                                        <div *ngIf="agregarForm.controls.sucursal.errors.required">Campo obligatorio.
+                                    <select class="form-control" formControlName="banco" [ngClass]="{'is-invalid': submitted && agregarForm.controls.banco.errors}">
+                                        <option [value]='null'>Seleccione Banco...</option>
+                                        <option *ngFor="let banco of bancos" [value]="banco.idbanco">
+                                            {{banco.nombre}}</option>
+                                    </select>
+                                    <div *ngIf="submitted && agregarForm.controls.banco.errors" class="invalid-feedback">
+                                        <div *ngIf="submitted && agregarForm.controls.banco.errors.required">Campo obligatorio.
                                         </div>
                                     </div>
-                                    <mat-autocomplete #auto="matAutocomplete">
-                                        <mat-option (onSelectionChange)="onEnter($event)" *ngFor="let emp of allemps" [value]="emp.nombre_sucursal+'-'+emp.idsucursal">
-                                            <div><small>
-                                                    <font style="vertical-align: inherit;">
-                                                        <font style="vertical-align: inherit;">{{emp?.nombre_sucursal }}</font>
-                                                    </font>
-                                                </small>
-                                            </div>
-                                        </mat-option>
-                                    </mat-autocomplete>
-                                </div>
-                                <div class="form-group col-lg-6">
-                                    <label>Tipo</label>
-                                    <mat-checkbox [(ngModel)]="Ischecked" [checked]="Ischecked" class="form-control" formControlName="es_ejec" (ngModelChange)="modelChange($event)"><label>ES
-                                            EJECUTIVO</label></mat-checkbox>
                                 </div>
 
-                                <div class="form-group col-lg-12" [ngClass]="{'has-error': agregarForm.controls.nivel_acceso.errors && submitted}">
+                                <div class="form-group col-lg-6" [ngClass]="{'has-error': agregarForm.controls.nivel_acceso.errors && submitted}">
                                     <label>Nivel Acceso</label>
                                     <select class="form-control" [ngClass]="{'is-invalid': submitted && agregarForm.controls.nivel_acceso.errors}" formControlName="nivel_acceso" name="nivel_acceso">
                                         <option [value]="" [selected] = "true" [disabled]="true">Seleccione nivel acceso...</option>

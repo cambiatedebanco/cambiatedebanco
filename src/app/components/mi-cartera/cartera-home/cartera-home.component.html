@@ -17,96 +17,7 @@
         </div>
 
 
-        <div class="white-box">
-            <div class="row">
-                <div class="col-lg-3 text-center">
 
-                    <h4><b>GESTION CAMPAÑA</b></h4>
-
-                    <div class="col-lg-12">
-                        <div [chart]="chart" style="height:170px; text-align:center;">
-
-                        </div>
-                    </div>
-                    <div class="col-lg-12">
-                        <div class="col-lg-6 text-right">
-                            <h4>{{diasRestantes[0]?.n_dias}}</h4>
-                        </div>
-                        <div class="col-lg-6 text-left">
-                            <h6>DÍAS HABILES <br> RESTANTES</h6>
-                        </div>
-                    </div>
-
-
-                </div>
-                <div class="col-lg-9">
-                    <div class="row row-in">
-
-                        <div class="col-lg-2 col-sm-6 row-in-br text-center">
-                            <ul class="col-in text-center col-middle">
-                                <li class="col-middle text-center">
-
-                                    <h4><b>CREDITO</b></h4>
-                                    <i class="fa fa-credit-card-alt" style="color:#1e88e5;"></i>
-                                    <br><br>
-                                    <h4>{{dataUsers[0]?.n_gestion | number }}/{{dataUsers[0]?.n_total | number }}</h4>
-                                    <h4><b>{{dataUsers[0]?.n_gestion / dataUsers[0]?.n_total | percent }}</b> <small> Gestión</small></h4>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-2 col-sm-6 row-in-br  b-r-none">
-                            <ul class="col-in text-center">
-                                <li class="col-middle">
-                                    <h4><b>SEGURO</b></h4>
-                                    <i class="fa fa-shield" style="color:#9d9fa2;"></i>
-                                    <br><br>
-                                    <h4>0</h4>
-                                    <h4><b>0%</b> <small>Gestión</small></h4>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-2 col-sm-6 row-in-br b-r-none">
-                            <ul class="col-in text-center">
-                                <li class="col-middle">
-                                    <h4><b>AHORRO</b></h4>
-                                    <i class="fa fa-money" style="color:#9d9fa2;"></i>
-                                    <br><br>
-                                    <h4>0</h4>
-                                    <h4><b>0%</b> <small>Gestión</small></h4>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-2 col-sm-6 row-in-br ">
-                            <ul class="col-in text-center">
-                                <li class="col-middle">
-                                    <h4><b>MORA</b></h4>
-                                    <i class="fa fa-edit" style="color:#9d9fa2;"></i>
-                                    <br><br>
-                                    <h4>0/0</h4>
-                                    <h4><b>0%</b> <small>Gestión</small></h4>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-4 col-sm-6 b-0">
-                            <ul class="col-in text-center">
-                                <li class="col-middle">
-                                    <h4><b>LEADS</b></h4>
-                                    <i class="fa fa-bell" style="color:#09da78;"></i>
-                                    <br><br>
-                                    <h4>{{dataUsersLeads[0]?.n_gestion | number }}/{{dataUsersLeads[0]?.n_total | number }}</h4>
-                                    <h4><b>{{dataUsersLeads[0]?.n_gestion / dataUsersLeads[0]?.n_total | percent }}</b> <small> Gestión</small></h4>
-                                </li>
-                            </ul>
-                        </div>
-
-                    </div>
-
-                </div>
-                <div class="col-lg-9">
-
-                </div>
-            </div>
-        </div>
         <ng-container *ngIf="user_cla?.id_cargo==1 || user_cla?.id_cargo ==2">
             <div class="white-box">
                 <div class="row">
@@ -145,8 +56,8 @@
 
             <div class="col-lg-12 col-sm-6 col-xs-12">
                 <div class="white-box">
-                    <h4>AFILIADOS A GESTIONAR</h4>
-                    <p class="text-muted m-b-40">Lista de Afiliados para gestionar este mes de <b>{{ hoy | date :'LLLL' | titlecase }}</b> estan ordenados en forma de mayor a menor propensión.
+                    <h4>CLIENTES A GESTIONAR</h4>
+                    <p class="text-muted m-b-40">Lista de Clientes para gestionar este mes de <b>{{ hoy | date :'LLLL' | titlecase }}</b> estan ordenados por fecha de recepción de la solicitud de portabilidad.
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs" role="tablist">
                             <li role="presentation" #creditLit [ngClass]="{'active':cookieTab === 'default' }" (click)="updateCookieTab('default')">
@@ -175,7 +86,7 @@
                         <div class="tab-content">
                             <div role="tabpanel2" class="tab-pane" [ngClass]="{'active':cookieTab === 'default'}" id="ihome">
 
-                                <mat-card>
+                                <!--<mat-card>
                                     <div class="example-header">
                                         <mat-form-field>
                                             <input matInput #filter placeholder="Buscar" (keyup)="applyFilterBase($event.target.value)">
@@ -244,7 +155,7 @@
 
                                     <mat-paginator #paginator="matPaginator" [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true">
                                     </mat-paginator>
-                                </mat-card>
+                                </mat-card>-->
 
 
                             </div>
@@ -270,13 +181,88 @@
                             </div>
                             <div role="tabpanel" class="tab-pane" [ngClass]="{'active':cookieTab === 'bell'}" id="isettings">
                                 <ul class="nav nav-tabs" role="tablist">
-                                    <li role="presentation2" class="active"><a href="#nuevos" (click)="onClickTabLead(1)" aria-controls="home" role="tab" data-toggle="tab" aria-expanded="true"><span class="label label-success label-rounded">{{ resumen?.nuevos }}</span>&nbsp;<span>Nuevos</span></a></li>
+                                    <li role="presentation2" class="active"><a href="#enventa" (click)="getCreditosByRut()" aria-controls="venta" role="tab" data-toggle="tab" aria-expanded="true">&nbsp;<span>En Venta</span></a></li>
+                                    <li role="presentation2" class=""><a href="#nuevos" (click)="onClickTabLead(1)" aria-controls="home" role="tab" data-toggle="tab" aria-expanded="false"><span class="label label-success label-rounded">{{ resumen?.nuevos }}</span>&nbsp;<span>Nuevos</span></a></li>
                                     <li role="presentation2" class=""><a href="#pendientes" (click)="onClickTabLead(3)" aria-controls="profile" role="tab" data-toggle="tab" aria-expanded="false"><span class="label label-warning label-rounded">{{ resumen?.pendientes }}</span>&nbsp;<span> Pendientes</span> </a></li>
                                     <li role="presentation2" class=""><a href="#gestionados" (click)="onClickTabLead(4)" aria-controls="messages" role="tab" data-toggle="tab" aria-expanded="false"><span class="label label-info label-rounded">{{ resumen?.gestionados }}</span>&nbsp;<span> Gestionados</span></a></li>
 
                                 </ul>
                                 <div class="tab-content">
-                                    <div role="tabpanel2" class="tab-pane active" id="nuevos">
+                                    <div role="tabpanel2" class="tab-pane active" id="enventa">
+                                        <mat-card>
+                                            <div class="example-header">
+                                                <mat-form-field>
+                                                    <input matInput #filter placeholder="Buscar" (keyup)="applyFilterBase($event.target.value)">
+                                                </mat-form-field>
+                                                <mat-form-field *ngIf="tabFilter === 3">
+                                                    <mat-label>Estado</mat-label>
+                                                    <mat-select (selectionChange)="applyFilterChangeBase($event.value)">
+                                                        <mat-option *ngFor="let state of states" [value]="state.idestado">
+                                                            {{state.nombre_estado}}</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+                                            <table mat-table #table [dataSource]="dataSource" style="height:200px;" class="mat-elevation-z8" width="100%" align="center" #sort="matSort" matSort>
+                                                <ng-container matColumnDef="fecha">
+                                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> FECHA </th>
+                                                    <td mat-cell *matCellDef="let element">{{ element.created_time | date:'dd/MM/yy H:mm'}} </td>
+                                                </ng-container>
+                                                <ng-container matColumnDef="id">
+                                                    <th mat-header-cell *matHeaderCellDef> ID </th>
+                                                    <td mat-cell *matCellDef="let element">
+                                                        {{ element.id }}
+                                                    </td>
+                                                </ng-container>
+
+                                                <ng-container matColumnDef="campana">
+                                                    <th mat-header-cell *matHeaderCellDef> CAMPAÑA </th>
+                                                    <td mat-cell *matCellDef="let element">{{ element.nombre_campana }} </td>
+                                                </ng-container>
+
+                                                <ng-container matColumnDef="bco_origen">
+                                                    <th mat-header-cell *matHeaderCellDef> BANCO ORIGEN </th>
+                                                    <td mat-cell *matCellDef="let element">
+                                                        <span><b>{{element.banco_origen}}</b></span>
+                                                    </td>
+                                                </ng-container>
+                                                <ng-container matColumnDef="bco_destino">
+                                                    <th mat-header-cell *matHeaderCellDef> BANCO DESTINO </th>
+                                                    <td mat-cell *matCellDef="let element">
+                                                        <span><b>{{element.nombre_banco}}</b></span>
+                                                    </td>
+                                                </ng-container>
+
+                                                <ng-container matColumnDef="monto">
+                                                    <th mat-header-cell *matHeaderCellDef> MONTO </th>
+                                                    <td mat-cell *matCellDef="let element">
+                                                        <span><b>${{element.monto | number}}</b></span>
+                                                    </td>
+                                                </ng-container>
+
+                                                <ng-container matColumnDef="tools">
+                                                    <th mat-header-cell *matHeaderCellDef> TOOLS </th>
+                                                    <td mat-cell *matCellDef="let element" align="center">
+                                                        <button type="button" class="btn btn-primary btn-rounded waves-effect waves-light" (click)="onComprar(element.id)">
+                                                  <span class="btn-label"><i
+                                                          class="fa fa-pencil"></i></span>Comprar</button>
+
+
+                                                    </td>
+                                                </ng-container>
+
+
+                                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                                            </table>
+
+                                            <mat-paginator #paginator="matPaginator" [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true">
+                                            </mat-paginator>
+                                        </mat-card>
+
+
+                                    </div>
+                                    <div role="tabpanel2" class="tab-pane" id="nuevos">
                                         <mat-card class="example-container">
                                             <div class="example-header col-sm-12 col-md-12">
                                                 <div class="row">
@@ -355,18 +341,7 @@
                                                 <ng-container matColumnDef="variable">
                                                     <th mat-header-cell *matHeaderCellDef> VARIABLE </th>
                                                     <td mat-cell *matCellDef="let element">
-                                                        <span *ngIf="element.tipo_campana==1"><b>{{element?.comuna}}</b></span>
-                                                        <span *ngIf="element.tipo_campana==2 && element.califica==1"><b>${{element.monto | number}}</b></span>
-                                                        <span *ngIf="element.califica==0 && element.tipo_campana==2"><b>NO CALIFICA</b></span>
-                                                        <span *ngIf="element.tipo_campana==3 || element.tipo_campana==9 || element.tipo_campana==10"><b>${{element.monto | number}}</b></span>
-                                                        <span *ngIf="element.tipo_campana==4 && element.estado_base == 1"><b>SIN CAMPAÑA <span *ngIf="element.monto_simulado">/ SIM. ${{element?.monto_simulado | number}}</span></b>
-                                                        </span>
-                                                        <span *ngIf="element.tipo_campana==4 && element.estado_base == 2"><b>APR.
-                                                                ${{element.monto | number}} <span *ngIf="element.monto_simulado">/ SIM. ${{element?.monto_simulado | number}}</span></b>
-                                                        </span>
-                                                        <span *ngIf="element.tipo_campana==4 && element.estado_base == 3"><b>PRE.
-                                                                ${{element.monto | number}} <span *ngIf="element.monto_simulado">/ SIM. ${{element?.monto_simulado | number}}</span></b>
-                                                        </span>
+                                                        <span><b>${{element.monto | number}}</b></span>
                                                     </td>
                                                 </ng-container>
                                                 <ng-container matColumnDef="asignado">

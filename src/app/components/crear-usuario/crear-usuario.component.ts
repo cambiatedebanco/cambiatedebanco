@@ -41,6 +41,7 @@ export class CrearUsuarioComponent implements OnInit, OnDestroy {
   rolesDisponibles
   DEFAULTDOMAIN: String = '@CAJALOSANDES.CL'
   EXTERNALDOMAIN: String = ''
+  bancos: any = [];
   constructor(
     private formBuilder: FormBuilder,
     public firestoreservice: FirestoreService,
@@ -65,31 +66,16 @@ export class CrearUsuarioComponent implements OnInit, OnDestroy {
       });
     this.agregarForm = this.formBuilder.group(
       {
-        email: new FormControl('', [Validators.required, Validators.pattern('^[a-z0-9\._]+')]),
+        email: new FormControl('', [Validators.required]),
         nombres: new FormControl('', [Validators.required]),
         apellido_paterno: new FormControl('', [Validators.required]),
         apellido_materno: new FormControl('', [Validators.required]),
-        puesto_real: new FormControl('', [Validators.required]),
-        es_ejec: new FormControl(''),
-        sucursal: ['', Validators.required],
         nivel_acceso: new FormControl(''),
         cargo: new FormControl('null' , [Validators.required]),
-        es_caja: new FormControl({ value: true })
+        banco: new FormControl('null' , [Validators.required])
       });
 
 
-
-
-    combineLatest(this.startobs, this.endobs).subscribe((value: any) => {
-      if(value[0].length === 0){
-        return;
-      }
-      this.postgresService.getSucursalLike(value[0], this.headers).subscribe(resp => {
-        this.allemps = resp;
-      }, error => {
-        console.error(error)})
-
-    });
 
     this.nivelAcceso = [
       { acceso: 1, name: 'Afiliado y Empresa' },
@@ -99,13 +85,9 @@ export class CrearUsuarioComponent implements OnInit, OnDestroy {
   }
 
   toggleCaja(){
-    let es_caja = this.agregarForm.value.es_caja;
-    if(!es_caja){
-      this.agregarForm.setControl('email', new FormControl('',[Validators.required, Validators.pattern('^[a-z0-9\._]+')]))
-    }
-    else{
+
       this.agregarForm.setControl('email', new FormControl('' ,[Validators.required, Validators.email]))
-    }
+
     
   }
 
@@ -127,23 +109,28 @@ export class CrearUsuarioComponent implements OnInit, OnDestroy {
     ).subscribe(
       _ => {
         this.getRolesDisponibles()
+        this.getBancos()
       }
     ), error => {
       console.error(error)
     }
   }
 
+  getBancos(){
+    this.postgresService.getBancos().subscribe(resp=>{
+      this.bancos=resp;
+      console.log(this.bancos);
+    })
+  }
+  
 
   public onSubmit() {
     this.submitted = true;
+    console.log(this.agregarForm.value)
 
-    let dataCheck: any = [];
-    dataCheck = {
-    };
-
-    if (this.agregarForm.invalid) {
-      return;
-    }
+if(this.agregarForm.invalid){
+return;
+}
 
     const formData = this.agregarForm.value;
 
@@ -151,29 +138,25 @@ export class CrearUsuarioComponent implements OnInit, OnDestroy {
     let dv = rut.substring(rut.length - 1, rut.length);
     rut = String(rut).replace('.', '').substring(0, String(rut).replace('.', '').length - 2);
     const date = new Date();
-    const domain = formData.es_caja ? this.DEFAULTDOMAIN : this.EXTERNALDOMAIN
-    let dato = formData.sucursal.split('-');
-    const banco = dato[0];
-    const idbanco = Number(dato[1]);
+
 
     const data = {
       rut: parseInt(rut),
-      email: formData.email.toUpperCase().trim() + domain,
+      email: formData.email.toUpperCase().trim(),
       nombres: formData.nombres.toUpperCase().trim(),
       apellido_paterno: formData.apellido_paterno.toUpperCase().trim(),
       apellido_materno: formData.apellido_materno.toUpperCase().trim(),
-      puesto_real: formData.puesto_real.toUpperCase().trim(),
-      es_ejecutivo: (formData.es_ejec ? 1 : 0),
-      sucursal: formData.sucursal.toUpperCase().trim(),
+      puesto_real: 'EJECUTIVO',
+      es_ejecutivo: 1,
+      sucursal: 'NA',
       nivel_acceso: parseInt(formData.nivel_acceso),
       marca_vigencia: 'S',
       dv: dv,
       fecha_actualizacion: date,
       usuario_actualiza: this.rutEjec,
       id_cargo: formData.cargo === 'null' ? null : formData.cargo,
-      es_caja: formData.es_caja ,
-      idbanco: idbanco,
-      banco: banco.toUpperCase().trim()
+      es_caja: 1 ,
+      idbanco: formData.banco
     };
     this.addUserPostgres(data);
 
@@ -243,7 +226,6 @@ export class CrearUsuarioComponent implements OnInit, OnDestroy {
 
   prepareForm() {
     this.agregarForm.reset();
-    this.agregarForm.controls['es_caja'].setValue(true)
   }
 
   getRolesDisponibles() {

@@ -28,6 +28,7 @@ export class ModificarUsuarioComponent implements OnInit, OnDestroy {
   emps: any;
   nivelAcceso: any;
   selected: any;
+  selectedBanco: any;
   navigationSubscription;
   user: any;
   campaignsEjecutivo: any = [];
@@ -40,6 +41,7 @@ export class ModificarUsuarioComponent implements OnInit, OnDestroy {
   currentUser = null
   isFormReady:boolean = false;
   toUpdateId = null;
+  bancos: any = [];
   constructor(
     private formBuilder: FormBuilder,
     public firestoreservice: FirestoreService,
@@ -69,15 +71,9 @@ export class ModificarUsuarioComponent implements OnInit, OnDestroy {
 
          this.getUsuarioPostgres(this.toUpdateId);
          this.getRolesDisponibles();
+         this.getBancos()
         }
       )
-  
-    combineLatest(this.startobs, this.endobs).subscribe((value: any) => {
-      this.postgresService.getSucursalLike(value[0], this.headers).subscribe(resp => {
-        this.allemps = resp;
-      }, error => {
-        console.error(error)})
-    });
 
     this.nivelAcceso = [
       { acceso: 1, name: 'Afiliado y Empresa' },
@@ -97,32 +93,37 @@ export class ModificarUsuarioComponent implements OnInit, OnDestroy {
   onSubmit() {
     this.submitted = true;
     if (this.modificarForm.invalid) {
-      console.log(this.modificarForm.errors)
       return;
     }
     const date = new Date();
     this.user = this.authService.isUserLoggedIn();
     const formData = this.modificarForm.value;
+
     const data = {
       rut: this.toUpdateId,
       email: formData.email,
       nombres: formData.nombres.trim(),
       apellido_paterno: formData.apellido_paterno,
       apellido_materno: formData.apellido_materno,
-      puesto_real: formData.puesto_real,
-      es_ejecutivo: (formData.es_ejec ? 1 : 0),
-      sucursal: formData.sucursal,
+      puesto_real: 'EJECUTIVO',
+      es_ejecutivo: 1,
+      sucursal: 'NA',
       nivel_acceso: parseInt(formData.nivel_acceso),
       marca_vigencia: 'S',
       fecha_actualizacion: date,
       usuario_actualiza: this.rutUsuario,
-      id_cargo : formData.cargo === 'null' ? null: formData.cargo
+      id_cargo : formData.cargo === 'null' ? null: formData.cargo,
+      idbanco: formData.banco
     };
 
     this.updateUsuarioPostgres(data)
 
   }
-
+  getBancos(){
+    this.postgresService.getBancos().subscribe(resp=>{
+      this.bancos=resp;
+    })
+  }
   getUsuarioPostgres(id: any) {
     this.postgresService.getUsuarioPorRut(id, this.headers).subscribe(res => {
       if (res.length > 0) {
@@ -172,14 +173,13 @@ export class ModificarUsuarioComponent implements OnInit, OnDestroy {
         nombres: new FormControl(data.nombres, [Validators.required]),
         apellido_paterno: new FormControl(data.apellido_paterno, [Validators.required]),
         apellido_materno: new FormControl(data.apellido_materno, [Validators.required]),
-        puesto_real: new FormControl(data.puesto_real, [Validators.required]),
-        es_ejec: new FormControl(data.es_ejecutivo),
-        sucursal: [data.sucursal, Validators.required],
         nivel_acceso: new FormControl(data.nivel_acceso, [Validators.required]),
-        cargo:new FormControl(cargo)
+        cargo:new FormControl(cargo),
+        banco: new FormControl(data.idbanco, [Validators.required])
       });
     this.Ischecked = data.es_ejecutivo === 1;
     this.selected = data.nivel_acceso;
+    this.selectedBanco = data.idbanco;
     this.rutEjec = data.rut;
     this.isFormReady = true;
   }
