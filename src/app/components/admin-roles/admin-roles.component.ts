@@ -104,7 +104,7 @@ export class AdminRolesComponent implements OnInit, OnDestroy {
     }).then((result) => {
       if (result.value) {
         //TO DO DELETE CAMPAIN
-        this.firestoreservice.deleteCampaignsEjec(id);
+      //  this.firestoreservice.deleteCampaignsEjec(id);
         this.postgresService.deleteUsuarioPorRut(id, this.headers).subscribe((_ => {
           this.deleteRowInDataSourceByRut(id);
         }))

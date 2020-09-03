@@ -60,23 +60,6 @@
                     <p class="text-muted m-b-40">Lista de Clientes para gestionar este mes de <b>{{ hoy | date :'LLLL' | titlecase }}</b> estan ordenados por fecha de recepción de la solicitud de portabilidad.
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs" role="tablist">
-                            <li role="presentation" #creditLit [ngClass]="{'active':cookieTab === 'default' }" (click)="updateCookieTab('default')">
-                                <a href="#ihome" aria-controls="home" role="tab" data-toggle="tab" aria-expanded="true">
-                                    <span><i class="fa fa-credit-card-alt" style="color:#606060;"></i></span>
-                                </a>
-                            </li>
-                            <li role="presentation" [ngClass]="{'active':cookieTab === 'shield' }">
-                                <a href="#iprofile" aria-controls="profile" role="tab" data-toggle="tab" aria-expanded="false" (click)="updateCookieTab('shield')">
-                                    <span><i class="fa fa-shield" style="color:#606060;"></i></span>
-                                </a>
-                            </li>
-                            <li role="presentation" [ngClass]="{'active':cookieTab === 'money' }" (click)="updateCookieTab('money')">
-                                <a href="#imessages" aria-controls="messages" role="tab" data-toggle="tab" aria-expanded="false ">
-                                    <span><i class="fa fa-money" style="color:#606060;"></i></span>
-                                </a>
-                            </li>
-                            <li role="presentation" [ngClass]="{'active':cookieTab === 'edit' }" (click)="updateCookieTab('edit')">
-                                <a href="#iedit" aria-controls="messages" role="tab" data-toggle="tab" aria-expanded="false"><span><i class="fa fa-edit" style="color:#606060;"></i></span></a></li>
                             <li role="presentation" #bellLi [ngClass]="{'active':cookieTab === 'bell'}" (click)="updateCookieTab('bell')">
                                 <a href="#isettings" aria-controls="settings" role="tab" data-toggle="tab" aria-expanded="false"><span><i class="fa fa-bell" style="color:#606060;"></i></span></a>
                             </li>
@@ -159,26 +142,9 @@
 
 
                             </div>
-                            <div role="tabpanel" [ngClass]="{'active':cookieTab === 'shield'}" class="tab-pane" id="iprofile">
-                                <div class="col-md-6">
-                                    <h3>Todos los día Gestionados!!</h3>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div role="tabpanel" [ngClass]="{'active':cookieTab === 'edit'}" class="tab-pane" id="iedit">
-                                <div class="col-md-6">
-                                    <h3>Todos los día Gestionados!!</h3>
-                                </div>
 
-                                <div class="clearfix"></div>
-                            </div>
-                            <div role="tabpanel" [ngClass]="{'active':cookieTab === 'money'}" class="tab-pane" id="imessages">
-                                <div class="col-md-6">
-                                    <h3>Todos los día Gestionados!!</h3>
-                                </div>
 
-                                <div class="clearfix"></div>
-                            </div>
+
                             <div role="tabpanel" class="tab-pane" [ngClass]="{'active':cookieTab === 'bell'}" id="isettings">
                                 <ul class="nav nav-tabs" role="tablist">
                                     <li role="presentation2" class="active"><a href="#enventa" (click)="getCreditosByRut()" aria-controls="venta" role="tab" data-toggle="tab" aria-expanded="true">&nbsp;<span>En Venta</span></a></li>

@@ -134,13 +134,7 @@ export class CarteraHomeComponent implements OnInit, OnDestroy {
 
       });
 
-      
-
-      this.getDiasRestantesSubscription = this.postgresqlService.getDiasRestantes(this.headers).subscribe((data: any) => {
-        this.diasRestantes = data;
-     });
-
-      if (user_cla.id_cargo==1 || user_cla.id_cargo ==2){
+       if (user_cla.id_cargo==1 || user_cla.id_cargo ==2){
         this.getMicarteraEjecutivosSubscription = this.postgresqlService.getMicarteraEjecutivos(user_cla.rut , user_cla.id_cargo, this.headers).subscribe((data: any) => {
       this.ejecutivosc = data;
 
@@ -274,6 +268,7 @@ export class CarteraHomeComponent implements OnInit, OnDestroy {
 
       onClickTabLead(tipoFiltro: any){
         this.tabFilterLead = tipoFiltro;
+        console.log(tipoFiltro);
         //this.initDate();
         this.filterLead(this.tabFilterLead);
       }
@@ -303,6 +298,7 @@ export class CarteraHomeComponent implements OnInit, OnDestroy {
           fechaFin: this.endDate,
           idcargo: parseInt(this.user_cla.id_cargo)
         }
+        console.log(data);
         this.getLeadsColaboradorSubscription = this.postgresqlService.getLeadsColaborador(data,this.headers).subscribe((data: any) => {
           this.dataSourceLeads.sort = this.sortLeads;
           this.dataSourceLeads.paginator = this.paginatorLeads;
