@@ -415,8 +415,8 @@
         background-color: #FF0073 !important;
         border: 6px solid #ffffff !important;
         border-radius: 50% !important;
-        height: 50px !important;
-        width: 50px !important;
+        height: 40px !important;
+        width: 40px !important;
     }
      ::ng-deep .mat-step-header {
         margin-top: -100px !important;
