@@ -411,6 +411,10 @@
         border-radius: 20px !important;
         background-color: rgba(255, 255, 255, 0.32) !important;
     }
+    .mat-horizontal-content-container {
+        overflow: hidden;
+        padding: 0 0px 0px 0px;
+    }
      ::ng-deep .mat-step-header .mat-step-icon-selected {
         background-color: #FF0073 !important;
         border: 6px solid #ffffff !important;
@@ -424,6 +428,26 @@
      ::ng-deep .mat-stepper-horizontal-line {
         margin-top: -100px !important;
         border-top-width: 6px !important;
+        border-top-width: 1px;
+        border-top-style: solid;
+        flex: auto;
+        height: 0;
+        margin: 0 -16px;
+        min-width: 60px !important;
+    }
+     ::ng-deep .mat-horizontal-stepper-header {
+        display: flex;
+        height: 72px;
+        overflow: hidden;
+        align-items: center;
+        padding: 0 0px;
+    }
+     ::ng-deep .mat-form-field {
+        font-size: inherit;
+        font-weight: 400;
+        line-height: 1.125;
+        font-size: 14px !important;
+        font-family: 'Montserrat' !important;
     }
      ::ng-deep .mat-checkbox-checked .mat-checkbox-background {
         background-color: #FF0073 !important;
@@ -476,7 +500,11 @@
         color: #3E3E3E !important;
         font-family: 'Montserrat' !important;
         font-weight: 500 !important;
-        font-size: 18px !important;
+        font-size: 16px !important;
+        visibility: hidden;
+    }
+     ::ng-deep .mat-step-header .mat-step-text-label {
+        visibility: hidden;
     }
     .example-box:last-child {
         border: none !important;
