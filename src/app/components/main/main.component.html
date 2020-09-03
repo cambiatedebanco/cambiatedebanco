@@ -1,8 +1,9 @@
 <header>
-    <nav class="navbar navbar-expand-lg fixed-top py-3">
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <img src="../../../assets/images/logo.svg" width="50" height="50" class="d-inline-block align-top" alt=""> cambiatedebanco.cl
+                <img src="../../../assets/images/logo.svg" width="50" height="50" class="d-inline-block align-top" alt="">
+                <span class="hidden-xs hidden-sm" style="">cambiatedebanco.cl</span>
             </a>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,8 +32,8 @@
         <div class="full-bg-img">
 
             <div class="row">
-                <div class="col-lg-5" style=" margin-top:214px;">
-                    <div style="padding-left:144px;">
+                <div class="col-lg-5 top-head">
+                    <div class="title">
                         <h2>
                             Cámbiate de <br><span class="h2-bold">banco ahora</span>
                         </h2>
@@ -41,15 +42,11 @@
                         </h4>
                     </div>
                 </div>
-                <div class="col-lg-7 padding-stepper" style="margin-top:214px;">
+                <div class="col-lg-7 padding-stepper top-stepper">
 
                     <div class="col-lg-12 col-md-12">
                         <mat-horizontal-stepper linear #stepper>
                             <mat-step [completed]="isPaso1_completado" label="1">
-
-
-
-
                                 <form [formGroup]="firstFormGroup" (ngSubmit)="onSubmitPaso1(stepper)">
                                     <div class="row px-5" style="height: 550px;">
                                         <div class="row align-items-start">
@@ -68,11 +65,21 @@
                                             </mat-form-field>
 
                                             <h2 class="example-h2">Que productos desea portar?</h2>
-                                            <section class="example-section">
-                                                <mat-checkbox formControlName='chkhipoteca' value=1 class="example-margin">Hipoteca</mat-checkbox>
-                                                <mat-checkbox formControlName='chkcredito' value=1 class="example-margin">Cuenta Corriente</mat-checkbox>
-                                                <mat-checkbox formControlName='chktarjeta' value=1 class="example-margin">Tarjeta de Crédito</mat-checkbox>
-                                            </section>
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <mat-checkbox formControlName='chkhipoteca' value=1 class="example-margin">Hipoteca</mat-checkbox>
+
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <mat-checkbox formControlName='chkcredito' value=1 class="example-margin">Cuenta Corriente</mat-checkbox>
+
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <mat-checkbox formControlName='chktarjeta' value=1 class="example-margin">Tarjeta de Crédito</mat-checkbox>
+
+                                                </div>
+                                            </div>
+
                                             <div class="example-button-row">
                                                 <h2 class="example-h2">Suba el certificado de deuda que le entrego su banco</h2>
                                                 <button mat-raised-button color="primary" (click)="archivo.click()">
@@ -92,7 +99,7 @@
 
                                             </div>
 
-                                            <div class="col-lg-6 col-md-6>">
+                                            <div class="col-6">
                                                 <button mat-raised-button matStepperNext color="accent">Siguiente</button>
                                             </div>
                                         </div>
@@ -121,11 +128,11 @@
                                         </div>
 
                                         <div class="row align-items-end justify-content-between" style="width:100%;">
-                                            <div class="col-lg-6>">
+                                            <div class="col-6">
                                                 <button mat-raised-button matStepperPrevious color="warn">Atras</button>
                                             </div>
 
-                                            <div class="col-lg-6>">
+                                            <div class="col-6">
                                                 <button mat-raised-button matStepperNext color="accent">Siguiente</button>
                                             </div>
                                         </div>
@@ -157,11 +164,11 @@
                                             </mat-form-field>
                                         </div>
                                         <div class="row align-items-end justify-content-between" style="width:100%;">
-                                            <div class="col-lg-6>">
+                                            <div class="col-6 ">
                                                 <button mat-raised-button matStepperPrevious color="warn">Atras</button>
                                             </div>
 
-                                            <div class="col-lg-6>">
+                                            <div class="col-6">
                                                 <button mat-raised-button matStepperNext color="accent">Siguiente</button>
                                             </div>
                                         </div>

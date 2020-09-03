@@ -2,17 +2,17 @@ export const environment = {
   production: false,
   //DEV
   firebase : {
-    apiKey: "AIzaSyApUpSwKIkgJ9yhCmgNYhvez4y2Sg1Qq4A",
-    authDomain: "graphite-maker-287716.firebaseapp.com",
-    databaseURL: "https://graphite-maker-287716.firebaseio.com",
-    projectId: "graphite-maker-287716",
-    storageBucket: "graphite-maker-287716.appspot.com",
-    messagingSenderId: "1002850217781",
-    appId: "1:1002850217781:web:9973358c51a4c2db91267c",
-    measurementId: "G-1WHM9K4W5Y"
+    apiKey: "AIzaSyDJbo3mV3SXqyNTmA6oJejWSK0JoRrexYo",
+    authDomain: "fenix-cp-286516.firebaseapp.com",
+    databaseURL: "https://fenix-cp-286516.firebaseio.com",
+    projectId: "fenix-cp-286516",
+    storageBucket: "fenix-cp-286516.appspot.com",
+    messagingSenderId: "481596145278",
+    appId: "1:481596145278:web:a4b573211abba8c2d9622f",
+    measurementId: "G-1M4YBZXFCE"
   },
   gcp:{
-    clientId:'1002850217781-4fqsv4j9lvlcthc47striovod92isnd9.apps.googleusercontent.com',
+    clientId:'481596145278-4d6b32o286k9bp6nmf6jiak1to8etp2p.apps.googleusercontent.com',
     mapsKey: 'AIzaSyAarjPy9Qk9bSEYvwY08o5rA4p_CVzMMSs'
   },
   //ceoapi_url: 'https://us-central1-nicanor.cloudfunctions.net/apiceocrm'
