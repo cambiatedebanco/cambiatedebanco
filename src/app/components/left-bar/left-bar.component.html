@@ -12,7 +12,7 @@
             <li><a [routerLink]="['/tarjeta']" class=" waves-effect "><i class="fa fa-credit-card "></i> <span class="hide-menu ">  Comprar Creditos</span></a></li>
             <!--<li><a *ngIf="userPerfil?.NIVEL_ACCESO==99" [routerLink]="['/ticket-home']" class="waves-effect"><i class="fa fa-comments"></i> <span class="hide-menu">  Atención Virtual </span></a></li>-->
             <!--<li><a *ngIf="userPerfil?.NIVEL_ACCESO==99" [routerLink]="['/crud-campana']" class="waves-effect"><i class="fa fa-other"></i> <span class="hide-menu">  Gestion campañas </span></a></li>-->
-            <li><a *ngIf="view" [routerLink]="['/mi-cartera-home']" class="waves-effect"><i class="fa fa-heart"></i> <span class="hide-menu">  Mi Cartera </span></a></li>
+            <li><a [routerLink]="['/mi-cartera-home']" class="waves-effect"><i class="fa fa-heart"></i> <span class="hide-menu">  Mi Cartera </span></a></li>
             <li class="devider"></li>
 
             <li><a *ngIf="idcargo == 5 || idcargo == 7" [routerLink]="['/home-tam']" class="waves-effect"><i class="fa fa-search"></i> <span class="hide-menu"> &nbsp;Gestión Afiliado</span></a></li>

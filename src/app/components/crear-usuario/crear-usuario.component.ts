@@ -152,6 +152,10 @@ export class CrearUsuarioComponent implements OnInit, OnDestroy {
     rut = String(rut).replace('.', '').substring(0, String(rut).replace('.', '').length - 2);
     const date = new Date();
     const domain = formData.es_caja ? this.DEFAULTDOMAIN : this.EXTERNALDOMAIN
+    let dato = formData.sucursal.split('-');
+    const banco = dato[0];
+    const idbanco = Number(dato[1]);
+
     const data = {
       rut: parseInt(rut),
       email: formData.email.toUpperCase().trim() + domain,
@@ -167,7 +171,9 @@ export class CrearUsuarioComponent implements OnInit, OnDestroy {
       fecha_actualizacion: date,
       usuario_actualiza: this.rutEjec,
       id_cargo: formData.cargo === 'null' ? null : formData.cargo,
-      es_caja: formData.es_caja 
+      es_caja: formData.es_caja ,
+      idbanco: idbanco,
+      banco: banco.toUpperCase().trim()
     };
     this.addUserPostgres(data);
 

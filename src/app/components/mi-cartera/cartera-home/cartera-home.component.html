@@ -174,96 +174,79 @@
                         <!-- Tab panes -->
                         <div class="tab-content">
                             <div role="tabpanel2" class="tab-pane" [ngClass]="{'active':cookieTab === 'default'}" id="ihome">
-                                <ul class="nav nav-tabs" role="tablist">
-                                    <li role="presentation2" class="active"><a href="#nuevos" (click)="filterBase(1)" aria-controls="home" role="tab" data-toggle="tab" aria-expanded="true"><span>Nuevos</span></a></li>
-                                    <li role="presentation2" class=""><a href="#pendientes" (click)="filterBase(2)" aria-controls="profile" role="tab" data-toggle="tab" aria-expanded="false"><span>Pendientes</span> </a></li>
-                                    <li role="presentation2" class=""><a href="#gestionados" (click)="filterBase(3)" aria-controls="messages" role="tab" data-toggle="tab" aria-expanded="false"><span>Gestionados</span></a></li>
 
-                                </ul>
-                                <div class="tab-content">
-                                    <div role="tabpanel2" class="tab-pane active" id="nuevos">
-                                        <mat-card>
-                                            <div class="example-header">
-                                                <mat-form-field>
-                                                    <input matInput #filter placeholder="Buscar" (keyup)="applyFilterBase($event.target.value)">
-                                                </mat-form-field>
-                                                <mat-form-field *ngIf="tabFilter === 3">
-                                                    <mat-label>Estado</mat-label>
-                                                    <mat-select (selectionChange)="applyFilterChangeBase($event.value)">
-                                                        <mat-option *ngFor="let state of states" [value]="state.idestado">
-                                                            {{state.nombre_estado}}</mat-option>
-                                                    </mat-select>
-                                                </mat-form-field>
-                                            </div>
-                                            <table mat-table #table [dataSource]="dataSource" style="height:200px;" class="mat-elevation-z8" width="100%" align="center" #sort="matSort" matSort>
-                                                <ng-container matColumnDef="rut_persona_b">
-                                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> RUT </th>
-                                                    <td mat-cell *matCellDef="let element">{{ element.rut }} </td>
-                                                </ng-container>
-                                                <ng-container matColumnDef="nombres_b">
-                                                    <th mat-header-cell *matHeaderCellDef> NOMBRE</th>
-                                                    <td mat-cell *matCellDef="let element"><span style="text-transform: capitalize"> {{ element.nombres?.toLowerCase() }} </span></td>
-                                                </ng-container>
-                                                <ng-container matColumnDef="monto_b">
-                                                    <th mat-header-cell *matHeaderCellDef> MONTO</th>
-                                                    <td mat-cell *matCellDef="let element"><span style=""> ${{element.monto | number}} </span></td>
-                                                </ng-container>
-                                                <ng-container matColumnDef="campana_b">
-                                                    <th mat-header-cell *matHeaderCellDef> CAMPAÑA</th>
-                                                    <td mat-cell *matCellDef="let element"><span style="text-transform: capitalize"> {{ element.nombre?.toLowerCase() }} </span></td>
-                                                </ng-container>
-                                                <ng-container matColumnDef="probabilidad_b">
-                                                    <th mat-header-cell *matHeaderCellDef> PROBABILIDAD </th>
-                                                    <td mat-cell *matCellDef="let element">
-
-                                                        <div class="progress" style='height:10px;'>
-
-                                                            <div *ngIf="element.probabilidad>=0.6" class="progress-bar bg-success" role="progressbar" [style.width]=" (element.probabilidad * 100 | number:'1.0-0')+ '%'" aria-valuemax="100">
-                                                                {{ element.probabilidad | number:'1.0-2' }}
-                                                            </div>
-
-                                                            <div *ngIf="element.probabilidad>=0.3 && element.probabilidad<0.6" class="progress-bar bg-info" role="progressbar" [style.width]=" (element.probabilidad * 100 | number:'1.0-0')+ '%'" aria-valuemax="100">
-                                                                {{ element.probabilidad | number:'1.0-2' }}
-                                                            </div>
-
-                                                            <div *ngIf="element.probabilidad<0.3" class="progress-bar bg-warning" role="progressbar" [style.width]=" (element.probabilidad * 100 | number:'1.0-0')+ '%'" aria-valuemax="100">
-                                                                {{ element.probabilidad | number:'1.0-2' }}
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </ng-container>
-                                                <ng-container matColumnDef="variable_b">
-                                                    <th mat-header-cell *matHeaderCellDef> VARIABLE </th>
-                                                    <td mat-cell *matCellDef="let element">{{ element.email_colaborador | split:'@' }} </td>
-                                                </ng-container>
-                                                <ng-container matColumnDef="modifica_b">
-                                                    <th mat-header-cell *matHeaderCellDef> ACCIONES </th>
-                                                    <td mat-cell *matCellDef="let element" align="center">
-                                                        <button type="button" class="btn btn-primary btn-rounded waves-effect waves-light" style="height: 40px;" (click)="onFichaAfiliado(element.rutint)">
-                                                        <span class="btn-label"><i
-                                                          class="fa fa-pencil"></i></span>
-                                                          <span *ngIf="user_cla.id_cargo==2 || user_cla.id_cargo==1">Revisar</span>
-                                                          <span *ngIf="user_cla.id_cargo!=2 && user_cla.id_cargo!=1">Gestionar</span>
-                                                        </button>
-
-
-                                                    </td>
-                                                </ng-container>
-
-
-                                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-                                            </table>
-
-                                            <mat-paginator #paginator="matPaginator" [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true">
-                                            </mat-paginator>
-                                        </mat-card>
-
+                                <mat-card>
+                                    <div class="example-header">
+                                        <mat-form-field>
+                                            <input matInput #filter placeholder="Buscar" (keyup)="applyFilterBase($event.target.value)">
+                                        </mat-form-field>
+                                        <mat-form-field *ngIf="tabFilter === 3">
+                                            <mat-label>Estado</mat-label>
+                                            <mat-select (selectionChange)="applyFilterChangeBase($event.value)">
+                                                <mat-option *ngFor="let state of states" [value]="state.idestado">
+                                                    {{state.nombre_estado}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
                                     </div>
+                                    <table mat-table #table [dataSource]="dataSource" style="height:200px;" class="mat-elevation-z8" width="100%" align="center" #sort="matSort" matSort>
+                                        <ng-container matColumnDef="fecha">
+                                            <th mat-header-cell *matHeaderCellDef mat-sort-header> FECHA </th>
+                                            <td mat-cell *matCellDef="let element">{{ element.created_time | date:'dd/MM/yy H:mm'}} </td>
+                                        </ng-container>
+                                        <ng-container matColumnDef="id">
+                                            <th mat-header-cell *matHeaderCellDef> ID </th>
+                                            <td mat-cell *matCellDef="let element">
+                                                {{ element.id }}
+                                            </td>
+                                        </ng-container>
 
-                                    <div class="clearfix"></div>
-                                </div>
+                                        <ng-container matColumnDef="campana">
+                                            <th mat-header-cell *matHeaderCellDef> CAMPAÑA </th>
+                                            <td mat-cell *matCellDef="let element">{{ element.nombre_campana }} </td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="bco_origen">
+                                            <th mat-header-cell *matHeaderCellDef> BANCO ORIGEN </th>
+                                            <td mat-cell *matCellDef="let element">
+                                                <span><b>{{element.banco_origen}}</b></span>
+                                            </td>
+                                        </ng-container>
+                                        <ng-container matColumnDef="bco_destino">
+                                            <th mat-header-cell *matHeaderCellDef> BANCO DESTINO </th>
+                                            <td mat-cell *matCellDef="let element">
+                                                <span><b>{{element.nombre_banco}}</b></span>
+                                            </td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="monto">
+                                            <th mat-header-cell *matHeaderCellDef> MONTO </th>
+                                            <td mat-cell *matCellDef="let element">
+                                                <span><b>${{element.monto | number}}</b></span>
+                                            </td>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="tools">
+                                            <th mat-header-cell *matHeaderCellDef> TOOLS </th>
+                                            <td mat-cell *matCellDef="let element" align="center">
+                                                <button type="button" class="btn btn-primary btn-rounded waves-effect waves-light" (click)="onComprar(element.id)">
+                                          <span class="btn-label"><i
+                                                  class="fa fa-pencil"></i></span>Comprar</button>
+
+
+                                            </td>
+                                        </ng-container>
+
+
+                                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                                    </table>
+
+                                    <mat-paginator #paginator="matPaginator" [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true">
+                                    </mat-paginator>
+                                </mat-card>
+
+
                             </div>
                             <div role="tabpanel" [ngClass]="{'active':cookieTab === 'shield'}" class="tab-pane" id="iprofile">
                                 <div class="col-md-6">
@@ -288,7 +271,6 @@
                             <div role="tabpanel" class="tab-pane" [ngClass]="{'active':cookieTab === 'bell'}" id="isettings">
                                 <ul class="nav nav-tabs" role="tablist">
                                     <li role="presentation2" class="active"><a href="#nuevos" (click)="onClickTabLead(1)" aria-controls="home" role="tab" data-toggle="tab" aria-expanded="true"><span class="label label-success label-rounded">{{ resumen?.nuevos }}</span>&nbsp;<span>Nuevos</span></a></li>
-                                    <li role="presentation2" class=""><a href="#propensos" (click)="onClickTabLead(2)" aria-controls="home" role="tab" data-toggle="tab" aria-expanded="true"><span class="label label-default label-rounded">{{ resumen?.propensos }}</span>&nbsp;<span> Propensos</span></a></li>
                                     <li role="presentation2" class=""><a href="#pendientes" (click)="onClickTabLead(3)" aria-controls="profile" role="tab" data-toggle="tab" aria-expanded="false"><span class="label label-warning label-rounded">{{ resumen?.pendientes }}</span>&nbsp;<span> Pendientes</span> </a></li>
                                     <li role="presentation2" class=""><a href="#gestionados" (click)="onClickTabLead(4)" aria-controls="messages" role="tab" data-toggle="tab" aria-expanded="false"><span class="label label-info label-rounded">{{ resumen?.gestionados }}</span>&nbsp;<span> Gestionados</span></a></li>
 
