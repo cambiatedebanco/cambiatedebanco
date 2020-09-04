@@ -28,7 +28,9 @@ export class MainComponent implements OnInit {
   user : any;
   confirmedBanco: Array<any>;
   bancos: any;
+  bancos2: any;
   lista:any;
+  editable: boolean = true;
   isPaso1_completado = false;
   isPaso2_completado= false;
   isPaso3_completado = false;
@@ -66,7 +68,7 @@ export class MainComponent implements OnInit {
     this.bancos=resp;
     this.lista = resp;
     const origen = this.bancos;
-    console.log(this.bancos);
+ 
     this.lista = origen;
 
     this.display = this.ejecutivosLabel;
@@ -142,7 +144,13 @@ export class MainComponent implements OnInit {
     //let tarea = this.firebaseStorage.tareaCloudStorage(this.nombreArchivo, archivo);
 //    this.firebaseStorage.tareaCloudStorage(this.nombreArchivo, archivo);
 this.isPaso1_completado = true;
-   
+let form1= this.firstFormGroup.value;
+this.postgresService.getBancos(form1.bancos).subscribe(resp=>{
+  this.bancos2=resp;
+ 
+});
+
+
 this.stepper.selected.completed = true;
     stepper.next();
     /*if (this.creditFormGroup.invalid) {
@@ -301,6 +309,8 @@ this.stepper.selected.completed = true;
   console.log(res);
  } 
   );
+
+  this.editable=false;
     stepper.next();
     /*if (this.creditFormGroup.invalid) {
       this.isCreditFormCompleted = false;

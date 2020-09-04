@@ -48,7 +48,7 @@
 
                     <div class="col-lg-12 col-md-12">
                         <mat-horizontal-stepper linear #stepper>
-                            <mat-step [completed]="isPaso1_completado" label="1">
+                            <mat-step [completed]="isPaso1_completado" [editable]="editable" label="1">
                                 <form [formGroup]="firstFormGroup" (ngSubmit)="onSubmitPaso1(stepper)">
                                     <div class="row px-5" style="height: 550px;">
                                         <div class="row align-items-start">
@@ -86,7 +86,7 @@
                                                 <h2 class="example-h2">Suba el certificado de deuda que le entrego su banco</h2>
                                                 <button mat-raised-button color="primary" (click)="archivo.click()">
                                                     Subir Certificado
-                                                      <input #archivo formControlName="archivo" type="file" (change)="cambioArchivo($event)" style="display:none;" />
+                                                      <input #archivo formControlName="archivo" type="file" accept="application/pdf" (change)="cambioArchivo($event)" style="display:none;" />
                                                 </button>
 
 
@@ -109,7 +109,7 @@
                                 </form>
 
                             </mat-step>
-                            <mat-step [completed]="isPaso2_completado" label="Elige Bancos">
+                            <mat-step [completed]="isPaso2_completado" [editable]="editable" label="Elige Bancos">
 
                                 <form [formGroup]="secondFormGroup" (ngSubmit)="onSubmitPaso2(stepper)">
                                     <div class="row px-5" style="height: 550px;">
@@ -119,7 +119,7 @@
                                             <mat-form-field class="example-full-width">
                                                 <mat-label>En que bancos desea cotizar?</mat-label>
                                                 <mat-select formControlName="sBancos" multiple>
-                                                    <mat-option *ngFor="let lC of bancos" [value]="lC.idbanco">{{lC.nombre}}</mat-option>
+                                                    <mat-option *ngFor="let lC of bancos2" [value]="lC.idbanco">{{lC.nombre}}</mat-option>
 
                                                 </mat-select>
                                             </mat-form-field>
@@ -142,7 +142,7 @@
                                 </form>
 
                             </mat-step>
-                            <mat-step [completed]="isPaso3_completado" label="Datos contacto">
+                            <mat-step [completed]="isPaso3_completado" [editable]="editable" label="Datos contacto">
 
                                 <form [formGroup]="thirdFormGroup" (ngSubmit)="onSubmitPaso3(stepper)">
                                     <div class="row px-5" style="height: 550px;">
@@ -180,11 +180,17 @@
                             </mat-step>
                             <mat-step [completed]="isPaso4_completado" label="Listo">
 
-                                <p>You are now done.</p>
-                                <div>
-                                    <button mat-button matStepperPrevious>Back</button>
-                                    <button mat-button (click)="stepper.reset()">Reset</button>
+                                <div class="col-12">
+                                    <h2 class="example-h2"> ¡Gracias! </h2>
+                                    <h4>Hemos enviado toda la información a los bancos que haz elegido, pronto ellos se contactaran contigo. Recuerda estar atento a tu celular y/o tu correo electronico.
+                                    </h4>
                                 </div>
+
+                                <div class="col-12">
+                                    <img src="../../../assets/images/envio_ok.gif" class="img-responsive center-block">
+
+                                </div>
+
                             </mat-step>
                         </mat-horizontal-stepper>
 

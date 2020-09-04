@@ -408,9 +408,14 @@ export class PostgresService {
         retry(1),catchError(this.errorHandl))
     }
 
-    getBancos():Observable<any>{
-      return this.http.get(this.BASE_URI+`/cla_bancos`).pipe(
+    getBancos(idbanco?:any):Observable<any>{
+      if (typeof idbanco === 'undefined') {
+        return this.http.get(this.BASE_URI+`/cla_bancos`).pipe(
+          retry(1),catchError(this.errorHandl))
+      }else{
+      return this.http.get(this.BASE_URI+`/cla_bancos?id=${idbanco}`).pipe(
         retry(1),catchError(this.errorHandl))
+      }
     }
 
     addOrUpdatePrioridad(data:any, headers: any):Observable<any>{
