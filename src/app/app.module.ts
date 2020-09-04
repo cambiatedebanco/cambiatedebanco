@@ -185,6 +185,9 @@ import { SuccessComponent } from './components/tarjeta/success/success.component
 import { PendingComponent } from './components/tarjeta/pending/pending.component';
 import { ErrorComponent } from './components/tarjeta/error/error.component';
 import { MainComponent } from './components/main/main.component';
+import {NgxMaterialToolsModule} from 'ngx-material-tools';
+
+
 registerLocaleData(localesEsCl, 'es-Cl');
 const config = new AuthServiceConfig([
   {
@@ -338,6 +341,7 @@ export function provideConfig() {
     FormsModule,
     MatSidenavModule,
     ReactiveFormsModule,
+    NgxMaterialToolsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,

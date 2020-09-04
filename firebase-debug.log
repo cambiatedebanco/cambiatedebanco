@@ -1,0 +1,43 @@
+[debug] [2020-09-04T04:25:04.168Z] ----------------------------------------------------------------------
+[debug] [2020-09-04T04:25:04.170Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\carlo\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2020-09-04T04:25:04.171Z] CLI Version:   8.9.0
+[debug] [2020-09-04T04:25:04.171Z] Platform:      win32
+[debug] [2020-09-04T04:25:04.171Z] Node Version:  v12.18.3
+[debug] [2020-09-04T04:25:04.172Z] Time:          Fri Sep 04 2020 00:25:04 GMT-0400 (GMT-04:00)
+[debug] [2020-09-04T04:25:04.173Z] ----------------------------------------------------------------------
+[debug] [2020-09-04T04:25:04.173Z] 
+[debug] [2020-09-04T04:25:04.187Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-09-04T04:25:04.188Z] > authorizing via signed-in user
+[debug] [2020-09-04T04:25:04.188Z] [iam] checking project graphite-maker-287716 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2020-09-04T04:25:04.190Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2020-09-04T04:25:04.190Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2020-09-04T04:25:04.340Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 04 Sep 2020 04:25:04 GMT","server":"scaffolding on HTTPServer2","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-09-04T04:25:04.346Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/graphite-maker-287716:testIamPermissions  
+ {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2020-09-04T04:25:05.431Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 04 Sep 2020 04:25:05 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=953","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-09-04T04:25:05.439Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/graphite-maker-287716  
+ 
+[debug] [2020-09-04T04:25:06.458Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 04 Sep 2020 04:25:06 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] 
+[info] === Deploying to 'graphite-maker-287716'...
+[info] 
+[info] i  deploying hosting 
+[debug] [2020-09-04T04:25:06.468Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/graphite-maker-287716/versions  
+ {"config":{"rewrites":[{"glob":"**","path":"/index.html"}],"headers":[{"glob":"**/*","headers":{"Cache-Control":"no-cache, no-store, must-revalidate","X-Content-Type-Options":"nosniff","X-Frame-Options":"ALLOW-FROM https://cambiatedebanco.cl/","x-xss-protection":"1"}}]},"labels":{"deployment-tool":"cli-firebase"}}
+[debug] [2020-09-04T04:25:08.114Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 04 Sep 2020 04:25:07 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] i  hosting[graphite-maker-287716]: beginning deploy... 
+[info] i  hosting[graphite-maker-287716]: found 2820 files in dist/appPilot 
+[debug] [2020-09-04T04:25:10.755Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/graphite-maker-287716/versions/f1a1d0b17182c3ca:populateFiles  
+ <request body omitted>
+[debug] [2020-09-04T04:25:11.882Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/graphite-maker-287716/versions/f1a1d0b17182c3ca:populateFiles  
+ <request body omitted>
+[debug] [2020-09-04T04:25:13.127Z] [hosting] hash cache [ZGlzdFxhcHBQaWxvdA] stored for 2820 files
+[debug] [2020-09-04T04:25:13.128Z] [hosting][hash queue][FINAL] {"max":3841,"min":22,"avg":67.26879432624112,"active":0,"complete":2820,"success":2820,"errored":0,"retried":0,"total":2820,"elapsed":3887}
+[debug] [2020-09-04T04:25:13.128Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/graphite-maker-287716/versions/f1a1d0b17182c3ca:populateFiles  
+ <request body omitted>
+[debug] [2020-09-04T04:25:13.214Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 04 Sep 2020 04:25:13 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-09-04T04:25:14.307Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 04 Sep 2020 04:25:14 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-09-04T04:25:15.495Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Fri, 04 Sep 2020 04:25:15 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-09-04T04:25:15.501Z] [hosting][populate queue][FINAL] {"max":2466,"min":2376,"avg":2422.6666666666665,"active":0,"complete":3,"success":3,"errored":0,"retried":0,"total":3,"elapsed":4752}
+[debug] [2020-09-04T04:25:15.502Z] [hosting] uploads queued: 6
