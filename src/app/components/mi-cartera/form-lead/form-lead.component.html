@@ -64,9 +64,16 @@
                             <label for="txtphone">Teléfono</label>
                             <input type="text" class="form-control" id="txtphone" formControlName="phone_number" placeholder="Ingrese Teléfono">
                         </div>
-                        <div class="form-group col-md-12">
+                        <div class="form-group col-md-6">
                             <label for="txtemail">Email</label>
                             <input type="text" class="form-control" id="txtemail" formControlName="email" placeholder="Ingrese Email">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputState">Monto Deuda</label>
+                            <input type="text" class="form-control" id="txtmonto" formControlName="monto" placeholder="Monto Deuda">
+                        </div>
+                        <div class="form-group col-md-12">
+                            <button (click)="downloadFile()" class="btn btn-success waves-effect waves-light" type="button"><span class="btn-label"><i class="fa fa-download"></i></span>Certificado Deuda</button>
                         </div>
 
                         <div class="form-group col-md-12">
@@ -83,10 +90,6 @@
 
                         </div>
 
-                        <div class="form-group col-md-12" *ngIf="isMonto">
-                            <label for="inputState">Monto Formalizado</label>
-                            <input type="text" class="form-control" id="txtmontocursado" formControlName="monto_cursado" placeholder="Monto Cursado">
-                        </div>
                         <div class="form-group  col-md-12">
                             <label for="exampleFormControlTextarea1">Observaciones</label>
                             <textarea name="observaciones" class="form-control" formControlName="observaciones" id="exampleFormControlTextarea1" rows="10"></textarea>
@@ -95,6 +98,8 @@
                         <div class="form-group  col-md-12">
                             <button *ngIf="user_cla?.id_cargo != 4" type="submit" class="btn btn-primary">Actualizar</button>
                         </div>
+
+
                     </form>
 
                 </div>

@@ -284,7 +284,8 @@ this.stepper.selected.completed = true;
     let extension=this.nombreArchivo.split('.');
     let nombre_archivo= String(timestamp)+ String(form3.rut).replace('-','').replace('.','') + '.' + extension[1];
     let archivo = this.datosFormulario.get('archivo');
-    
+    console.log('nombre_archivo ==> ', nombre_archivo);
+    console.log('archivo ==> ', archivo);
     let tarea = this.firebaseStorage.tareaCloudStorage(nombre_archivo, archivo);
  
     const payload={

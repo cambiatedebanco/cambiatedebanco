@@ -1,5 +1,6 @@
 import {Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router} from '@angular/router';
+import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from '@angular/fire/storage';
 import { Chart } from 'angular-highcharts';
 import { Options } from 'highcharts';
 import { Subscription } from 'rxjs';
@@ -75,13 +76,12 @@ export class CarteraHomeComponent implements OnInit, OnDestroy {
   tabFilter = null;
   resumen: any;
   creditos = null;
-
+  downloadURL = null;
   public cookieTab: string;
   constructor(   private route: ActivatedRoute,private _route: Router,
                  private authService: AuthService,
                  private postgresqlService: PostgresService,
-                 private formBuilder: FormBuilder,
-                 private firebaseStorage: FirebaseStorageService) {
+                 private formBuilder: FormBuilder) {
 
 
     /*this.navigationSubscription = this._route.events.subscribe((e: any) => {
@@ -92,7 +92,6 @@ export class CarteraHomeComponent implements OnInit, OnDestroy {
     });*/
   }
   ngOnInit() {
-
     const date = new Date();
     date.setDate(date.getDate() - 5);
 
@@ -140,7 +139,6 @@ export class CarteraHomeComponent implements OnInit, OnDestroy {
 
    });
   }
-  //this.firebaseStorage.downloadFile();
       this.prepareLocalStorage();
       this.initDate();
       this.getEstadosLeads(this.headers);

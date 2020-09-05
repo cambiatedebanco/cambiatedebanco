@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
 import { NavbarComponent } from '../../../components/navbar/navbar.component';
 import { DatePipe } from '@angular/common';
+import { FirebaseStorageService } from 'src/app/services/firebase-storage.service';
 
 const datePipe = new DatePipe('es-Cl');
 
@@ -31,11 +32,13 @@ export class FormLeadComponent implements OnInit, OnDestroy {
   isMonto: boolean;
   selectedEstado = null;
   estadoSubscription: Subscription;
+  file = null;
   constructor(private formBuilder: FormBuilder,
     private authService: AuthService,
                  private postgresqlService: PostgresService,
                  private _route: Router,
-                 private route: ActivatedRoute) { }
+                 private route: ActivatedRoute,
+                 private firebaseStorage: FirebaseStorageService) { }
 
   ngOnInit() {
     window.scrollTo(0, 0);
@@ -50,7 +53,7 @@ export class FormLeadComponent implements OnInit, OnDestroy {
       phone_number: new FormControl(),
       email: new FormControl({value: ''}),
       id_estado: new FormControl(null),
-      monto_cursado: new FormControl({value: 0}),
+      monto: new FormControl({value: 0}),
       observaciones: new FormControl({value: ''})
     });
     this.authService.getestado();
@@ -77,8 +80,14 @@ export class FormLeadComponent implements OnInit, OnDestroy {
   private getLeadById(id: string, headers) {
     this.getLeadByIdSubscription = this.postgresqlService.getLeadById(id, headers).subscribe((snap: any) => {
       this.lead = snap[0];
+      let rutArr = this.lead.rut.split('-');
+      this.file = this.lead.timestamp+rutArr[0]+rutArr[1];
       this.initForm(this.lead);
     })
+  }
+
+  downloadFile(){    
+    this.firebaseStorage.downloadFile(this.file,this.lead.rutint);
   }
 
   updatePendienteLead(data){
@@ -100,19 +109,9 @@ export class FormLeadComponent implements OnInit, OnDestroy {
     this.formGroup.controls.id_region.setValue(parseInt(lead.id_region || 0));
     this.formGroup.controls.phone_number.setValue(lead.phone_number);
     this.formGroup.controls.email.setValue(lead.email);
-    this.formGroup.controls.id_estado.setValue(parseInt(lead.id_estado));
-    this.formGroup.controls.monto_cursado.setValue(parseInt(lead.monto_cursado || 0));
+    this.formGroup.controls.id_estado.setValue(parseInt(lead.id_estado || 0));
+    this.formGroup.controls.monto.setValue(parseInt(lead.monto || 0));
     this.formGroup.controls.observaciones.setValue(lead.observaciones);
-    if (parseInt(lead.monto_cursado) > 0) {
-      this.isMonto = true;
-    }
-    this.estadoSubscription = this.formGroup.get('id_estado').valueChanges.subscribe(value=> {
-      if (parseInt(value) === 5 || parseInt(value) === 12) {
-        this.isMonto = true;
-      } else {
-        this.isMonto = false;
-      }
-    });
 
 }
 
@@ -148,9 +147,9 @@ public onSubmit() {
   let re2 = /\,/gi;
   let re3 = /\-/gi;
 
-  if (formData.monto_cursado){
+  if (formData.monto){
 
-    monto = formData.monto_cursado == undefined ? 0 : (isNaN(parseInt(String(formData.monto_cursado).replace(re, '').replace(re2, '').replace(re3, ''))) ? 1 : parseInt(String(formData.monto_cursado).replace(re, '').replace(re2, '').replace(re3, '')));
+    monto = formData.monto == undefined ? 0 : (isNaN(parseInt(String(formData.monto).replace(re, '').replace(re2, '').replace(re3, ''))) ? 1 : parseInt(String(formData.monto).replace(re, '').replace(re2, '').replace(re3, '')));
   }
 
 
@@ -170,7 +169,7 @@ public onSubmit() {
       comuna: formData.comuna || '',
       email_colaborador: this.user_cla.email.toLowerCase() || '',
       fecha_gestion: new Date(),
-      monto_cursado: monto || 0,
+      monto: monto || 0,
       id_region: formData.id_region
     };
     this.updateLead(data);
