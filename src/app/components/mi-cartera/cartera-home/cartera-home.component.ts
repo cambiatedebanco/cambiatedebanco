@@ -70,7 +70,7 @@ export class CarteraHomeComponent implements OnInit, OnDestroy {
   getCreditosByRutSubscription: Subscription;
   campanas: [];
   filtroFechaForm: FormGroup;
-  tabFilterLead = 1;
+  tabFilterLead = 0;
   startDate: any;
   endDate: any;
   tabFilter = null;
@@ -154,6 +154,7 @@ export class CarteraHomeComponent implements OnInit, OnDestroy {
   }
 
   getCreditosByRut(){
+    this.tabFilterLead = 0;
     this.getCreditosByRutSubscription = this.postgresqlService.getCreditosByRut(this.user_cla.rut, this.headers).subscribe((data: any) => {
       this.creditos = data[0];
       console.log('this.creditos ==> ',this.creditos);
@@ -272,7 +273,14 @@ export class CarteraHomeComponent implements OnInit, OnDestroy {
       }
 
        filterLead(tipoFiltro: any) {
+         console.log('tipoFiltro ==> ', tipoFiltro);
         this.navbar.getTop11LeadsColaborador();
+
+        if (tipoFiltro === 0) {
+          this.getLeadByBanco();
+          this.getCreditosByRut();
+        }
+
         if (tipoFiltro === 1) {
           this.getLeadsColaborador(1, 0);
           this.getResumenLeadsColaborador();

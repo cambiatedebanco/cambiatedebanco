@@ -70,293 +70,212 @@
                         </div>-->
                         <!-- Tab panes -->
                         <div class="tab-content">
-                            <div role="tabpanel2" class="tab-pane" [ngClass]="{'active':cookieTab === 'default'}" id="ihome">
 
-                                <!--<mat-card>
-                                    <div class="example-header">
-                                        <mat-form-field>
-                                            <input matInput #filter placeholder="Buscar" (keyup)="applyFilterBase($event.target.value)">
-                                        </mat-form-field>
-                                        <mat-form-field *ngIf="tabFilter === 3">
-                                            <mat-label>Estado</mat-label>
-                                            <mat-select (selectionChange)="applyFilterChangeBase($event.value)">
-                                                <mat-option *ngFor="let state of states" [value]="state.idestado">
-                                                    {{state.nombre_estado}}</mat-option>
-                                            </mat-select>
-                                        </mat-form-field>
-                                    </div>
-                                    <table mat-table #table [dataSource]="dataSource" style="height:200px;" class="mat-elevation-z8" width="100%" align="center" #sort="matSort" matSort>
-                                        <ng-container matColumnDef="fecha">
-                                            <th mat-header-cell *matHeaderCellDef mat-sort-header> FECHA </th>
-                                            <td mat-cell *matCellDef="let element">{{ element.created_time | date:'dd/MM/yy H:mm'}} </td>
-                                        </ng-container>
-                                        <ng-container matColumnDef="id">
-                                            <th mat-header-cell *matHeaderCellDef> ID </th>
-                                            <td mat-cell *matCellDef="let element">
-                                                {{ element.id }}
-                                            </td>
-                                        </ng-container>
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#home" (click)="onClickTabLead(0)" aria-controls="home" role="tab" data-toggle="tab" aria-expanded="true"><span class="visible-xs"><i class="ti-home"></i></span><span class="hidden-xs"> En Venta</span></a></li>
+                                <li role="presentation" class=""><a href="#profile" (click)="onClickTabLead(1)" aria-controls="profile" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-user"></i></span> <span class="hidden-xs"><span class="label label-success label-rounded">{{ resumen?.nuevos }}</span>&nbsp;Nuevos</span></a></li>
+                                <li role="presentation" class=""><a href="#messages" (click)="onClickTabLead(3)" aria-controls="messages" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-email"></i></span> <span class="hidden-xs"><span class="label label-warning label-rounded">{{ resumen?.pendientes }}</span>&nbsp; Pendientes</span></a></li>
+                                <li role="presentation" class=""><a href="#settings" (click)="onClickTabLead(4)" aria-controls="settings" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-settings"></i></span> <span class="hidden-xs"><span class="label label-info label-rounded">{{ resumen?.gestionados }}</span>&nbsp; Gestionados</span></a></li>
+                            </ul>
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" [ngClass]="(tabFilterLead === 0)?'tab-pane active':'tab-pane'">
+                                    <mat-card>
+                                        <div class="example-header">
+                                            <mat-form-field>
+                                                <input matInput #filter placeholder="Buscar" (keyup)="applyFilterBase($event.target.value)">
+                                            </mat-form-field>
+                                        </div>
+                                        <table mat-table #table [dataSource]="dataSource" style="height:200px;" class="mat-elevation-z8" width="100%" align="center" #sort="matSort" matSort>
+                                            <ng-container matColumnDef="fecha">
+                                                <th mat-header-cell *matHeaderCellDef mat-sort-header> FECHA </th>
+                                                <td mat-cell *matCellDef="let element">{{ element.created_time | date:'dd/MM/yy H:mm'}} </td>
+                                            </ng-container>
+                                            <ng-container matColumnDef="id">
+                                                <th mat-header-cell *matHeaderCellDef> ID </th>
+                                                <td mat-cell *matCellDef="let element">
+                                                    {{ element.id }}
+                                                </td>
+                                            </ng-container>
 
-                                        <ng-container matColumnDef="campana">
-                                            <th mat-header-cell *matHeaderCellDef> CAMPAÑA </th>
-                                            <td mat-cell *matCellDef="let element">{{ element.nombre_campana }} </td>
-                                        </ng-container>
+                                            <ng-container matColumnDef="campana">
+                                                <th mat-header-cell *matHeaderCellDef> CAMPAÑA </th>
+                                                <td mat-cell *matCellDef="let element">{{ element.nombre_campana }} </td>
+                                            </ng-container>
 
-                                        <ng-container matColumnDef="bco_origen">
-                                            <th mat-header-cell *matHeaderCellDef> BANCO ORIGEN </th>
-                                            <td mat-cell *matCellDef="let element">
-                                                <span><b>{{element.banco_origen}}</b></span>
-                                            </td>
-                                        </ng-container>
-                                        <ng-container matColumnDef="bco_destino">
-                                            <th mat-header-cell *matHeaderCellDef> BANCO DESTINO </th>
-                                            <td mat-cell *matCellDef="let element">
-                                                <span><b>{{element.nombre_banco}}</b></span>
-                                            </td>
-                                        </ng-container>
+                                            <ng-container matColumnDef="bco_origen">
+                                                <th mat-header-cell *matHeaderCellDef> BANCO ORIGEN </th>
+                                                <td mat-cell *matCellDef="let element">
+                                                    <span><b>{{element.banco_origen}}</b></span>
+                                                </td>
+                                            </ng-container>
+                                            <ng-container matColumnDef="bco_destino">
+                                                <th mat-header-cell *matHeaderCellDef> BANCO DESTINO </th>
+                                                <td mat-cell *matCellDef="let element">
+                                                    <span><b>{{element.nombre_banco}}</b></span>
+                                                </td>
+                                            </ng-container>
 
-                                        <ng-container matColumnDef="monto">
-                                            <th mat-header-cell *matHeaderCellDef> MONTO </th>
-                                            <td mat-cell *matCellDef="let element">
-                                                <span><b>${{element.monto | number}}</b></span>
-                                            </td>
-                                        </ng-container>
+                                            <ng-container matColumnDef="monto">
+                                                <th mat-header-cell *matHeaderCellDef> MONTO </th>
+                                                <td mat-cell *matCellDef="let element">
+                                                    <span><b>${{element.monto | number}}</b></span>
+                                                </td>
+                                            </ng-container>
 
-                                        <ng-container matColumnDef="tools">
-                                            <th mat-header-cell *matHeaderCellDef> TOOLS </th>
-                                            <td mat-cell *matCellDef="let element" align="center">
-                                                <button type="button" class="btn btn-primary btn-rounded waves-effect waves-light" (click)="onComprar(element.id)">
-                                          <span class="btn-label"><i
-                                                  class="fa fa-pencil"></i></span>Comprar</button>
-
-
-                                            </td>
-                                        </ng-container>
+                                            <ng-container matColumnDef="tools">
+                                                <th mat-header-cell *matHeaderCellDef> TOOLS </th>
+                                                <td mat-cell *matCellDef="let element" align="center">
+                                                    <button type="button" class="btn btn-primary btn-rounded waves-effect waves-light" (click)="onComprar(element.id)">
+                                                      <span class="btn-label"><i
+                                                              class="fa fa-pencil"></i></span>Comprar</button>
 
 
-                                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-                                    </table>
-
-                                    <mat-paginator #paginator="matPaginator" [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true">
-                                    </mat-paginator>
-                                </mat-card>-->
+                                                </td>
+                                            </ng-container>
 
 
-                            </div>
+                                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
+                                        </table>
 
-
-                            <div role="tabpanel" class="tab-pane" [ngClass]="{'active':cookieTab === 'bell'}" id="isettings">
-                                <ul class="nav nav-tabs" role="tablist">
-                                    <li role="presentation2" class="active"><a href="#enventa" (click)="getCreditosByRut()" aria-controls="venta" role="tab" data-toggle="tab" aria-expanded="true">&nbsp;<span>En Venta</span></a></li>
-                                    <li role="presentation2" class=""><a href="#nuevos" (click)="onClickTabLead(1)" aria-controls="home" role="tab" data-toggle="tab" aria-expanded="false"><span class="label label-success label-rounded">{{ resumen?.nuevos }}</span>&nbsp;<span>Nuevos</span></a></li>
-                                    <li role="presentation2" class=""><a href="#pendientes" (click)="onClickTabLead(3)" aria-controls="profile" role="tab" data-toggle="tab" aria-expanded="false"><span class="label label-warning label-rounded">{{ resumen?.pendientes }}</span>&nbsp;<span> Pendientes</span> </a></li>
-                                    <li role="presentation2" class=""><a href="#gestionados" (click)="onClickTabLead(4)" aria-controls="messages" role="tab" data-toggle="tab" aria-expanded="false"><span class="label label-info label-rounded">{{ resumen?.gestionados }}</span>&nbsp;<span> Gestionados</span></a></li>
-
-                                </ul>
-                                <div class="tab-content">
-                                    <div role="tabpanel2" class="tab-pane active" id="enventa">
-                                        <mat-card>
-                                            <div class="example-header">
-                                                <mat-form-field>
-                                                    <input matInput #filter placeholder="Buscar" (keyup)="applyFilterBase($event.target.value)">
-                                                </mat-form-field>
-                                                <mat-form-field *ngIf="tabFilter === 3">
-                                                    <mat-label>Estado</mat-label>
-                                                    <mat-select (selectionChange)="applyFilterChangeBase($event.value)">
-                                                        <mat-option *ngFor="let state of states" [value]="state.idestado">
-                                                            {{state.nombre_estado}}</mat-option>
-                                                    </mat-select>
-                                                </mat-form-field>
-                                            </div>
-                                            <table mat-table #table [dataSource]="dataSource" style="height:200px;" class="mat-elevation-z8" width="100%" align="center" #sort="matSort" matSort>
-                                                <ng-container matColumnDef="fecha">
-                                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> FECHA </th>
-                                                    <td mat-cell *matCellDef="let element">{{ element.created_time | date:'dd/MM/yy H:mm'}} </td>
-                                                </ng-container>
-                                                <ng-container matColumnDef="id">
-                                                    <th mat-header-cell *matHeaderCellDef> ID </th>
-                                                    <td mat-cell *matCellDef="let element">
-                                                        {{ element.id }}
-                                                    </td>
-                                                </ng-container>
-
-                                                <ng-container matColumnDef="campana">
-                                                    <th mat-header-cell *matHeaderCellDef> CAMPAÑA </th>
-                                                    <td mat-cell *matCellDef="let element">{{ element.nombre_campana }} </td>
-                                                </ng-container>
-
-                                                <ng-container matColumnDef="bco_origen">
-                                                    <th mat-header-cell *matHeaderCellDef> BANCO ORIGEN </th>
-                                                    <td mat-cell *matCellDef="let element">
-                                                        <span><b>{{element.banco_origen}}</b></span>
-                                                    </td>
-                                                </ng-container>
-                                                <ng-container matColumnDef="bco_destino">
-                                                    <th mat-header-cell *matHeaderCellDef> BANCO DESTINO </th>
-                                                    <td mat-cell *matCellDef="let element">
-                                                        <span><b>{{element.nombre_banco}}</b></span>
-                                                    </td>
-                                                </ng-container>
-
-                                                <ng-container matColumnDef="monto">
-                                                    <th mat-header-cell *matHeaderCellDef> MONTO </th>
-                                                    <td mat-cell *matCellDef="let element">
-                                                        <span><b>${{element.monto | number}}</b></span>
-                                                    </td>
-                                                </ng-container>
-
-                                                <ng-container matColumnDef="tools">
-                                                    <th mat-header-cell *matHeaderCellDef> TOOLS </th>
-                                                    <td mat-cell *matCellDef="let element" align="center">
-                                                        <button type="button" class="btn btn-primary btn-rounded waves-effect waves-light" (click)="onComprar(element.id)">
-                                                  <span class="btn-label"><i
-                                                          class="fa fa-pencil"></i></span>Comprar</button>
-
-
-                                                    </td>
-                                                </ng-container>
-
-
-                                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-                                            </table>
-
-                                            <mat-paginator #paginator="matPaginator" [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true">
-                                            </mat-paginator>
-                                        </mat-card>
-
-
-                                    </div>
-                                    <div role="tabpanel2" class="tab-pane" id="nuevos">
-                                        <mat-card class="example-container">
-                                            <div class="example-header col-sm-12 col-md-12">
-                                                <div class="row">
-                                                    <div class="col-sm-6 col-md-6">
-                                                        <mat-form-field>
-                                                            <input matInput #filter placeholder="Buscar" (keyup)="applyFilterLead($event.target.value)">
-                                                        </mat-form-field>
-                                                        <mat-form-field *ngIf="tabFilterLead === 4">
-                                                            <mat-label>Estado</mat-label>
-                                                            <mat-select (selectionChange)="applyFilterChangeLead($event.value)">
-                                                                <mat-option *ngFor="let state of states" [value]="state.idestado">
-                                                                    {{state.nombre_estado}}</mat-option>
-                                                            </mat-select>
-                                                        </mat-form-field>
-                                                    </div>
-                                                    <form [formGroup]="filtroFechaForm" (ngSubmit)="onSubmit()">
-                                                        <div class="col-sm-6 col-md-6">
-                                                            <ul class="list-inline">
-                                                                <li>
-                                                                    <div class="form-group">
-                                                                        <mat-form-field color="accent">
-                                                                            <mat-label>Fecha Inicio</mat-label>
-                                                                            <input matInput class="form-control" formControlName="startDate" [matDatepicker]="picker1" readonly>
-                                                                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                                                                            <mat-datepicker #picker1 color="primary" [disabled]="false">
-                                                                            </mat-datepicker>
-                                                                            <mat-error *ngIf="filtroFechaForm.controls['startDate'].errors?.required">
-                                                                                Fecha Inicio es Requerida</mat-error>
-                                                                        </mat-form-field>
-
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="form-group">
-                                                                        <mat-form-field color="accent">
-                                                                            <mat-label>Fecha Finalización</mat-label>
-                                                                            <input matInput class="form-control" formControlName="endDate" [matDatepicker]="picker2" readonly>
-                                                                            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                                                                            <mat-datepicker #picker2 color="primary" [disabled]="false">
-                                                                            </mat-datepicker>
-                                                                            <mat-error *ngIf="filtroFechaForm.controls['endDate'].errors?.required">
-                                                                                Fecha Finalización es Requerida</mat-error>
-                                                                        </mat-form-field>
-
-                                                                    </div>
-                                                                </li>
-                                                                <li><button class="btn btn-danger" type="submit">Aplicar</button></li>
-
-                                                            </ul>
-                                                            <code *ngIf="filtroFechaForm.hasError('notValid')">La fecha de finalización es anterior a la fecha de inicio</code>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                            <table mat-table #table2 [dataSource]="dataSourceLeads" style="height:200px;" class="mat-elevation-z8" width="100%" align="center" #sortLeads="matSort" matSort>
-                                                <ng-container matColumnDef="fecha">
-                                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> FECHA </th>
-                                                    <td mat-cell *matCellDef="let element">{{ element.created_time | date:'dd/MM/yy H:mm'}} </td>
-                                                </ng-container>
-                                                <ng-container matColumnDef="rut">
-                                                    <th mat-header-cell *matHeaderCellDef> RUT </th>
-                                                    <td mat-cell *matCellDef="let element">
-                                                        {{ element.rut }}
-                                                        <ng-container *ngIf="element.star==1"> <img src="../../../assets/images/star.png" width="32">
-                                                        </ng-container>
-                                                    </td>
-                                                </ng-container>
-                                                <ng-container matColumnDef="nombre">
-                                                    <th mat-header-cell *matHeaderCellDef> NOMBRE </th>
-                                                    <td mat-cell *matCellDef="let element">{{ element.nombre }} </td>
-                                                </ng-container>
-                                                <ng-container matColumnDef="campana">
-                                                    <th mat-header-cell *matHeaderCellDef> CAMPAÑA </th>
-                                                    <td mat-cell *matCellDef="let element">{{ element.nombre_campana }} </td>
-                                                </ng-container>
-                                                <ng-container matColumnDef="variable">
-                                                    <th mat-header-cell *matHeaderCellDef> VARIABLE </th>
-                                                    <td mat-cell *matCellDef="let element">
-                                                        <span><b>${{element.monto | number}}</b></span>
-                                                    </td>
-                                                </ng-container>
-                                                <ng-container matColumnDef="asignado">
-                                                    <th mat-header-cell *matHeaderCellDef> ASIGNADO A </th>
-                                                    <td mat-cell *matCellDef="let element"> {{ element.email_colaborador | split:'@' }}
-                                                        <ng-container *ngIf="user_cla.id_cargo==4 &&  element.tipo_campana!=4 && element.tipo_campana!=10"> -
-                                                            <select (change)="onChange($event.target.value)">
-                                                                <option selected>Seleccione Ejecutivo...</option>
-                                                                <option *ngFor="let ejecutivo of ejecutivos | filterArray:element.tipo_campana"
-                                                                    [value]="element.id+'-'+ejecutivo.rut+'-'+ejecutivo.email">
-                                                                    {{ejecutivo.email | split:'@' }}
-                                                                </option>
-                                                            </select>
-                                                        </ng-container>
-                                                    </td>
-                                                </ng-container>
-
-                                                <ng-container matColumnDef="modifica">
-                                                    <th mat-header-cell *matHeaderCellDef> ACCIONES </th>
-                                                    <td mat-cell *matCellDef="let element" align="center">
-                                                        <button *ngIf="user_cla.id_cargo!=4" type="button" class="btn btn-primary btn-rounded waves-effect waves-light" (click)="onLead(element.id)">
-                                                  <span class="btn-label"><i
-                                                          class="fa fa-pencil"></i></span>Gestionar</button>
-                                                        <button *ngIf="user_cla.id_cargo==4" type="button" class="btn btn-primary btn-rounded waves-effect waves-light" (click)="onLead(element.id)">
-                                                            <span class="btn-label"><i
-                                                                    class="fa fa-pencil"></i></span>Revisar</button>
-
-
-                                                    </td>
-                                                </ng-container>
-
-
-                                                <tr mat-header-row *matHeaderRowDef="displayedColumnsLeads"></tr>
-                                                <tr mat-row *matRowDef="let row; columns: displayedColumnsLeads;"></tr>
-
-                                            </table>
-
-                                            <mat-paginator #paginatorLeads="matPaginator" [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true">
-                                            </mat-paginator>
-                                        </mat-card>
-
-                                    </div>
+                                        <mat-paginator #paginator="matPaginator" [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true">
+                                        </mat-paginator>
+                                    </mat-card>
 
                                     <div class="clearfix"></div>
                                 </div>
+                                <div role="tabpanel" [ngClass]="(tabFilterLead !== 0)?'tab-pane active':'tab-pane'">
+                                    <mat-card class="example-container">
+                                        <div class="example-header col-sm-12 col-md-12">
+                                            <div class="row">
+                                                <div class="col-sm-6 col-md-6">
+                                                    <mat-form-field>
+                                                        <input matInput #filter placeholder="Buscar" (keyup)="applyFilterLead($event.target.value)">
+                                                    </mat-form-field>
+                                                    <mat-form-field *ngIf="tabFilterLead === 4">
+                                                        <mat-label>Estado</mat-label>
+                                                        <mat-select (selectionChange)="applyFilterChangeLead($event.value)">
+                                                            <mat-option *ngFor="let state of states" [value]="state.idestado">
+                                                                {{state.nombre_estado}}</mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                </div>
+                                                <form [formGroup]="filtroFechaForm" (ngSubmit)="onSubmit()">
+                                                    <div class="col-sm-6 col-md-6">
+                                                        <ul class="list-inline">
+                                                            <li>
+                                                                <div class="form-group">
+                                                                    <mat-form-field color="accent">
+                                                                        <mat-label>Fecha Inicio</mat-label>
+                                                                        <input matInput class="form-control" formControlName="startDate" [matDatepicker]="picker1" readonly>
+                                                                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                                                        <mat-datepicker #picker1 color="primary" [disabled]="false">
+                                                                        </mat-datepicker>
+                                                                        <mat-error *ngIf="filtroFechaForm.controls['startDate'].errors?.required">
+                                                                            Fecha Inicio es Requerida</mat-error>
+                                                                    </mat-form-field>
+
+                                                                </div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="form-group">
+                                                                    <mat-form-field color="accent">
+                                                                        <mat-label>Fecha Finalización</mat-label>
+                                                                        <input matInput class="form-control" formControlName="endDate" [matDatepicker]="picker2" readonly>
+                                                                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                                                        <mat-datepicker #picker2 color="primary" [disabled]="false">
+                                                                        </mat-datepicker>
+                                                                        <mat-error *ngIf="filtroFechaForm.controls['endDate'].errors?.required">
+                                                                            Fecha Finalización es Requerida</mat-error>
+                                                                    </mat-form-field>
+
+                                                                </div>
+                                                            </li>
+                                                            <li><button class="btn btn-danger" type="submit">Aplicar</button></li>
+
+                                                        </ul>
+                                                        <code *ngIf="filtroFechaForm.hasError('notValid')">La fecha de finalización es anterior a la fecha de inicio</code>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <table mat-table #table2 [dataSource]="dataSourceLeads" style="height:200px;" class="mat-elevation-z8" width="100%" align="center" #sortLeads="matSort" matSort>
+                                            <ng-container matColumnDef="fecha">
+                                                <th mat-header-cell *matHeaderCellDef mat-sort-header> FECHA </th>
+                                                <td mat-cell *matCellDef="let element">{{ element.created_time | date:'dd/MM/yy H:mm'}} </td>
+                                            </ng-container>
+                                            <ng-container matColumnDef="rut">
+                                                <th mat-header-cell *matHeaderCellDef> RUT </th>
+                                                <td mat-cell *matCellDef="let element">
+                                                    {{ element.rut }}
+                                                    <ng-container *ngIf="element.star==1"> <img src="../../../assets/images/star.png" width="32">
+                                                    </ng-container>
+                                                </td>
+                                            </ng-container>
+                                            <ng-container matColumnDef="nombre">
+                                                <th mat-header-cell *matHeaderCellDef> NOMBRE </th>
+                                                <td mat-cell *matCellDef="let element">{{ element.nombre }} </td>
+                                            </ng-container>
+                                            <ng-container matColumnDef="campana">
+                                                <th mat-header-cell *matHeaderCellDef> CAMPAÑA </th>
+                                                <td mat-cell *matCellDef="let element">{{ element.nombre_campana }} </td>
+                                            </ng-container>
+                                            <ng-container matColumnDef="variable">
+                                                <th mat-header-cell *matHeaderCellDef> VARIABLE </th>
+                                                <td mat-cell *matCellDef="let element">
+                                                    <span><b>${{element.monto | number}}</b></span>
+                                                </td>
+                                            </ng-container>
+                                            <ng-container matColumnDef="asignado">
+                                                <th mat-header-cell *matHeaderCellDef> ASIGNADO A </th>
+                                                <td mat-cell *matCellDef="let element"> {{ element.email_colaborador | split:'@' }}
+                                                    <ng-container *ngIf="user_cla.id_cargo==4 &&  element.tipo_campana!=4 && element.tipo_campana!=10"> -
+                                                        <select (change)="onChange($event.target.value)">
+                                                                    <option selected>Seleccione Ejecutivo...</option>
+                                                                    <option *ngFor="let ejecutivo of ejecutivos | filterArray:element.tipo_campana"
+                                                                        [value]="element.id+'-'+ejecutivo.rut+'-'+ejecutivo.email">
+                                                                        {{ejecutivo.email | split:'@' }}
+                                                                    </option>
+                                                                </select>
+                                                    </ng-container>
+                                                </td>
+                                            </ng-container>
+
+                                            <ng-container matColumnDef="modifica">
+                                                <th mat-header-cell *matHeaderCellDef> ACCIONES </th>
+                                                <td mat-cell *matCellDef="let element" align="center">
+                                                    <button *ngIf="user_cla.id_cargo!=4" type="button" class="btn btn-primary btn-rounded waves-effect waves-light" (click)="onLead(element.id)">
+                                                      <span class="btn-label"><i
+                                                              class="fa fa-pencil"></i></span>Gestionar</button>
+                                                    <button *ngIf="user_cla.id_cargo==4" type="button" class="btn btn-primary btn-rounded waves-effect waves-light" (click)="onLead(element.id)">
+                                                                <span class="btn-label"><i
+                                                                        class="fa fa-pencil"></i></span>Revisar</button>
+
+
+                                                </td>
+                                            </ng-container>
+
+
+                                            <tr mat-header-row *matHeaderRowDef="displayedColumnsLeads"></tr>
+                                            <tr mat-row *matRowDef="let row; columns: displayedColumnsLeads;"></tr>
+
+                                        </table>
+
+                                        <mat-paginator #paginatorLeads="matPaginator" [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true">
+                                        </mat-paginator>
+                                    </mat-card>
+                                    <div class="clearfix"></div>
+                                </div>
+
+
                             </div>
+
+
+
+
 
                         </div>
                 </div>
