@@ -210,15 +210,19 @@ export class CarteraHomeComponent implements OnInit, OnDestroy {
       });
     }else{
       Swal.fire({
-        title: 'Ups!',
-        text: 'Saldo insuficiente',
-        type: 'warning'
-      }).then(() => {
-      });
-    }
-    
+        title: 'Saldo Insuficiente',
+        type: 'warning',
+        html: 'Aumenta tus <b>créditos</b>!'  ,
+        focusConfirm: false,
+        confirmButtonText: '<i class="fa fa-shopping-cart fa-1x"></i>&nbsp; Comprar!',
+      }).then((result) => {
+        if(result.value){
+          this._route.navigate(['tarjeta'] , {skipLocationChange:true});
+        }
+      })
 
-    
+    }
+
   }
 
   getAllEjecutivosCampana(){
