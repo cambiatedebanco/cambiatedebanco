@@ -38,6 +38,18 @@
         border-radius: 20px !important;
         background-color: rgba(255, 255, 255, 0.32) !important;
     }
+     ::ng-deep .mat-checkbox-layout .mat-checkbox-label {
+        font-family: 'Montserrat' !important;
+        color: #707070 !important;
+        font-weight: 500 !important;
+        font-size: 20px !important;
+    }
+    .termino {
+        font-family: 'Montserrat' !important;
+        color: #707070 !important;
+        font-weight: 500 !important;
+        font-size: 10px !important;
+    }
      ::ng-deep .mat-step-header .mat-step-icon-selected {
         background-color: #FF0073 !important;
         border: 6px solid #ffffff !important;
@@ -291,6 +303,11 @@
     .mat-stepper-horizontal {
         border-radius: 20px !important;
         background-color: rgba(255, 255, 255, 0.32) !important;
+    }
+     ::ng-deep .mat-checkbox-layout .mat-checkbox-label {
+        color: #707070 !important;
+        font-weight: 500 !important;
+        font-size: 18px !important;
     }
      ::ng-deep .mat-step-header .mat-step-icon-selected {
         background-color: #FF0073 !important;

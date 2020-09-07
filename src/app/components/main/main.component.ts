@@ -16,6 +16,7 @@ import { RutValidator } from '../../rut.validator';
 })
 export class MainComponent implements OnInit {
   format= { add: 'Add', remove: 'Remove', all: 'All', none: 'None', direction: 'left-to-right', draggable: true, locale: undefined }
+  formErrors: any;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
@@ -89,13 +90,15 @@ export class MainComponent implements OnInit {
       chktarjeta:[false]
     });
 
+  
+
     this.secondFormGroup = this._formBuilder.group({
       sBancos: ['', Validators.required]
     });
 
     this.thirdFormGroup = this._formBuilder.group({
-      rut: ['', [Validators.required, RutValidator.validaRut]],
-      nombre: ['', Validators.required],
+      rut: ['', [Validators.required, RutValidator.validaRut,Validators.minLength(8)]],
+      nombre: ['', Validators.required,Validators.minLength(3)],
       telefono: ['',  [Validators.required, Validators.pattern('[0-9]{1,10}')]],
       email: ['', [Validators.email, Validators.required]]
     });

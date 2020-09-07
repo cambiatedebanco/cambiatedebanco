@@ -62,28 +62,28 @@
                                             </mat-form-field>
                                             <br>
                                             <mat-form-field class="example-full-width">
-                                                <mat-label>Ingrese el Monto de la deuda</mat-label>
+                                                <mat-label>Ingrese el monto total de la deuda(Hipotecario y/o crédito de consumo)</mat-label>
                                                 <input matInput type="text" matInputCommified formControlName="deuda" placeholder="" required>
                                             </mat-form-field>
 
                                             <h2 class="example-h2">Que productos desea portar?</h2>
                                             <div class="row">
-                                                <div class="col-lg-4">
+                                                <div class="col-4 m-r-5">
                                                     <mat-checkbox formControlName='chkhipoteca' value=1 class="example-margin">Hipoteca</mat-checkbox>
 
                                                 </div>
-                                                <div class="col-lg-4">
-                                                    <mat-checkbox formControlName='chkcredito' value=1 class="example-margin">Cuenta Corriente</mat-checkbox>
+                                                <div class="col-4 m-r-5">
+                                                    <mat-checkbox formControlName='chkcredito' value=1 class="example-margin">Crédito Consumo</mat-checkbox>
 
                                                 </div>
-                                                <div class="col-lg-4">
-                                                    <mat-checkbox formControlName='chktarjeta' value=1 class="example-margin">Tarjeta de Crédito</mat-checkbox>
+                                                <div class="col-4">
+                                                    <mat-checkbox formControlName='chktarjeta' value=1 class="example-margin">Otros</mat-checkbox>
 
                                                 </div>
                                             </div>
 
                                             <div class="example-button-row">
-                                                <h2 class="example-h2">Suba el certificado de deuda que le entrego su banco</h2>
+                                                <h2 class="example-h2">Suba el certificado de liquidación que le entrego su banco</h2>
                                                 <button mat-raised-button color="primary" (click)="archivo.click()">
                                                     Subir Certificado
                                                       <input #archivo formControlName="archivo" type="file" accept="application/pdf" (change)="cambioArchivo($event)" style="display:none;" />
@@ -150,11 +150,25 @@
                                             <h2 class="example-h2">Para poder entregarle toda la información necesitamos que complete sus datos personales: </h2>
                                             <mat-form-field class="example-full-width">
                                                 <mat-label>Rut</mat-label>
-                                                <input matInput formControlName="rut" placeholder="Ingrese Rut" required>
+                                                <input matInput formControlName="rut" placeholder="Ingrese Rut con guión y digito verificador" required>
+                                                <mat-error *ngIf="
+                                                thirdFormGroup.get('rut').hasError('validaRut')
+                                                &&!thirdFormGroup.get('rut').hasError('required')">
+                                                    Ingrese un RUT Válido (1111111-1)
+                                                </mat-error>
+                                                <mat-error *ngIf="thirdFormGroup.get('rut').hasError('required')">
+                                                    RUT es <strong>obligatorio</strong>
+                                                </mat-error>
+                                                <mat-error *ngIf="thirdFormGroup.get('rut').hasError('minlength')">
+                                                    RUT es <strong>obligatorio</strong>
+                                                </mat-error>
                                             </mat-form-field>
                                             <mat-form-field class="example-full-width">
                                                 <mat-label>Nombre</mat-label>
                                                 <input matInput formControlName="nombre" placeholder="Ingrese Nombre" required>
+                                                <mat-error *ngIf="thirdFormGroup.get('nombre').hasError('minlength')">
+                                                    Nombre es <strong>obligatorio</strong>
+                                                </mat-error>
                                             </mat-form-field>
                                             <mat-form-field class="example-full-width">
                                                 <mat-label>Telefono</mat-label>
@@ -162,8 +176,32 @@
                                             </mat-form-field>
                                             <mat-form-field class="example-full-width">
                                                 <mat-label>Email</mat-label>
-                                                <input matInput formControlName="email" placeholder="Ingrese Email" required>
+                                                <input matInput pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$" formControlName="email" placeholder="Ingrese Email" required>
+                                                <mat-error *ngIf="
+                                                thirdFormGroup.get('email').hasError('email')
+                                                &&!thirdFormGroup.get('email').hasError('required')">
+                                                    Ingrese un Email Válido
+                                                </mat-error>
+                                                <mat-error *ngIf="thirdFormGroup.get('email').hasError('required')">
+                                                    Email es <strong>obligatorio</strong>
+                                                </mat-error>
+
+
                                             </mat-form-field>
+                                            <div class="row">
+
+                                                <mat-checkbox formControlName='chkhipoteca' value=1 class="example-full-width">
+                                                    <div class="col-12 m-r-5">
+                                                        <span class="termino">
+                                                        Al continuar, acepto los Términos de uso de cambiatedebanco.cl y reconozco que leí la Política de privacidad. También acepto que cambiatedebanco.cl o sus representantes pueden ponerse en contacto conmigo
+                                                        por correo electrónico, teléfono o SMS (incluidos medios automatizados) a la dirección de correo electrónico o al número que yo indique, incluso, para fines de publicidad.</span>
+                                                    </div>
+                                                </mat-checkbox>
+
+
+
+
+                                            </div>
                                         </div>
                                         <div class="row align-items-end justify-content-between" style="width:100%;">
                                             <div class="col-6 ">
@@ -182,7 +220,7 @@
 
                                 <div class="col-12">
                                     <h2 class="example-h2"> ¡Gracias! </h2>
-                                    <h4>Hemos enviado toda la información a los bancos que haz elegido, pronto ellos se contactaran contigo. Recuerda estar atento a tu celular y/o tu correo electronico.
+                                    <h4>Hemos enviado toda la información a los bancos que haz elegido, pronto ellos se contactaran contigo. <br>Recuerda estar atento a tu celular y/o tu correo electronico.
                                     </h4>
                                 </div>
 
@@ -319,3 +357,23 @@
 
     </div>
 </footer>
+<!-- Modal -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
