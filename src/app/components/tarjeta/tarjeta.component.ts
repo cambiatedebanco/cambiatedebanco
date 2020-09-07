@@ -23,13 +23,7 @@ export class TarjetaComponent implements OnInit {
   headers = null;
   user=null;
   getLeadByBancoSubscription: Subscription;
-    items={
-        
-            name: 'Mi producto',
-            price: 1000,
-            unit: 1
-        }
-    
+  items: any;    
   
   constructor( private postgresqlService: PostgresService,
     private checkoutService: CheckoutService,
@@ -51,6 +45,12 @@ export class TarjetaComponent implements OnInit {
         if(resp){
           this.user = resp[0];
           console.log(this.user);
+          this.items = {
+            email: this.user.email.toLowerCase(),
+            rut: this.user.rut+'-'+this.user.dv,
+            rutint: this.user.rut,
+            monto: 5000
+          }
         }
       });
   /*  this.postgresqlService.getFlow(this.items).subscribe(res=>{
