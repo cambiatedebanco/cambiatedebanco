@@ -310,7 +310,11 @@ this.stepper.selected.completed = true;
    }
   
  this.postgresService.addCotizacion(payload).subscribe(res=>{
-  console.log(res);
+  
+  let data= res[0];
+  this.postgresService.sendEmail(data.nombre,data.id).subscribe( res=>{
+    console.log(res);
+  });
  } 
   );
 

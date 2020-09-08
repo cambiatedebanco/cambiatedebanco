@@ -15,7 +15,13 @@ export class PostgresService {
   constructor(private http: HttpClient) {
   }
 // Http Headers
-
+sendEmail(nombre: any,transaccion:any) {
+  
+  return this.http.get<any>('https://us-central1-graphite-maker-287716.cloudfunctions.net/email' + `?nombre=${nombre}&transaccion=${transaccion}`).pipe(
+    retry(1),
+    catchError(this.errorHandl)
+  );
+}
 
   // GET Empresa
   getEmpresa(id: any, headers): Observable<any> {
