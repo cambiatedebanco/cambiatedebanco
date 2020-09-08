@@ -1,14 +1,13 @@
 import { Component, Inject, OnInit ,ViewChild} from '@angular/core';
 import { DOCUMENT  } from '@angular/common';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import { DualListComponent } from 'angular-dual-listbox';
 import { MatStepper } from '@angular/material/stepper';
 import { AuthService } from '../../services/auth.service';
 import { getHeaders, getHeaderStts } from '../utility';
 import { PostgresService } from 'src/app/services/postgres/postgres.service';
 import { FirebaseStorageService } from 'src/app/services/firebase-storage.service';
 import { RutValidator } from '../../rut.validator';
-
+import { of } from 'rxjs';
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -98,9 +97,11 @@ export class MainComponent implements OnInit {
 
     this.thirdFormGroup = this._formBuilder.group({
       rut: ['', [Validators.required, RutValidator.validaRut,Validators.minLength(8)]],
-      nombre: ['', Validators.required,Validators.minLength(3)],
+      nombre: ['', [Validators.required,Validators.minLength(3)]],
       telefono: ['',  [Validators.required, Validators.pattern('[0-9]{1,10}')]],
-      email: ['', [Validators.email, Validators.required]]
+      email: ['', [Validators.email, Validators.required]],
+      chktermino: ['', [Validators.required]]
+      
     });
     
 
@@ -109,23 +110,6 @@ export class MainComponent implements OnInit {
   }
  
 
-  echoDestinationSupervisor(ejecutivosArray: any) {
-    
-    //this.deleteSupervisoresCampain(this.codigoCampaign, this.headers);
-    /*this.postgresService.deleteSupervisoresCampain(this.codigoCampaign, this.headers).subscribe((_ => {
-      let dataEjec: any;
-      ejecutivosArray.forEach((data, index) => {
-        dataEjec = {
-          idusuario: data.rut,
-          idcampana: this.codigoCampaign,
-          created_time: new Date()
-        };
-        this.addSupervisoresCampain(dataEjec, this.headers);
-      });
-    }));*/
-    
-
-  }
 
   private ejecutivosLabel(item: any) {
     return  item.nombre ;
@@ -312,7 +296,7 @@ this.stepper.selected.completed = true;
  this.postgresService.addCotizacion(payload).subscribe(res=>{
   
   let data= res[0];
-  this.postgresService.sendEmail(data.nombre,data.id).subscribe( res=>{
+  this.postgresService.sendEmail(data.nombre,data.id,data.email).subscribe( res=>{
     console.log(res);
   });
  } 

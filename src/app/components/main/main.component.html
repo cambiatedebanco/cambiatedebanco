@@ -66,23 +66,26 @@
                                                 <input matInput type="text" matInputCommified formControlName="deuda" placeholder="" required>
                                             </mat-form-field>
 
-                                            <h2 class="example-h2">Que productos desea portar?</h2>
+
                                             <div class="row">
-                                                <div class="col-4 m-r-5">
-                                                    <mat-checkbox formControlName='chkhipoteca' value=1 class="example-margin">Hipoteca</mat-checkbox>
-
+                                                <div class="col-12">
+                                                    <h2 class="example-h2 m-t-30">Que productos desea portar?</h2>
                                                 </div>
-                                                <div class="col-4 m-r-5">
-                                                    <mat-checkbox formControlName='chkcredito' value=1 class="example-margin">Crédito Consumo</mat-checkbox>
-
+                                                <div class="col-12 m-r-5">
+                                                    <mat-checkbox formControlName='chkhipoteca' value=1 class="example-margin">
+                                                        <font size="3">Hipoteca</font>
+                                                    </mat-checkbox>
+                                                    <mat-checkbox formControlName='chkcredito' value=1 class="example-margin">
+                                                        <font size="3">Consumo</font>
+                                                    </mat-checkbox>
+                                                    <mat-checkbox formControlName='chktarjeta' value=1 class="example-margin">
+                                                        <font size="3">Otros</font>
+                                                    </mat-checkbox>
                                                 </div>
-                                                <div class="col-4">
-                                                    <mat-checkbox formControlName='chktarjeta' value=1 class="example-margin">Otros</mat-checkbox>
 
-                                                </div>
                                             </div>
 
-                                            <div class="example-button-row">
+                                            <div class="example-button-row m-t-30">
                                                 <h2 class="example-h2">Suba el certificado de liquidación que le entrego su banco</h2>
                                                 <button mat-raised-button color="primary" (click)="archivo.click()">
                                                     Subir Certificado
@@ -101,7 +104,7 @@
 
                                             </div>
 
-                                            <div class="col-6">
+                                            <div class="col-6" style="text-align:right">
                                                 <button mat-raised-button matStepperNext color="accent">Siguiente</button>
                                             </div>
                                         </div>
@@ -130,11 +133,11 @@
                                         </div>
 
                                         <div class="row align-items-end justify-content-between" style="width:100%;">
-                                            <div class="col-6">
+                                            <div class="col-6" style="text-align:left">
                                                 <button mat-raised-button matStepperPrevious color="warn">Atras</button>
                                             </div>
 
-                                            <div class="col-6">
+                                            <div class="col-6" style="text-align:right">
                                                 <button mat-raised-button matStepperNext color="accent">Siguiente</button>
                                             </div>
                                         </div>
@@ -150,7 +153,7 @@
                                             <h2 class="example-h2">Para poder entregarle toda la información necesitamos que complete sus datos personales: </h2>
                                             <mat-form-field class="example-full-width">
                                                 <mat-label>Rut</mat-label>
-                                                <input matInput formControlName="rut" placeholder="Ingrese Rut con guión y digito verificador" required>
+                                                <input matInput formControlName="rut" placeholder="Ingrese Rut con guión y digito verificador">
                                                 <mat-error *ngIf="
                                                 thirdFormGroup.get('rut').hasError('validaRut')
                                                 &&!thirdFormGroup.get('rut').hasError('required')">
@@ -165,14 +168,17 @@
                                             </mat-form-field>
                                             <mat-form-field class="example-full-width">
                                                 <mat-label>Nombre</mat-label>
-                                                <input matInput formControlName="nombre" placeholder="Ingrese Nombre" required>
+                                                <input matInput formControlName="nombre" placeholder="Ingrese Nombre">
+                                                <mat-error *ngIf="thirdFormGroup.get('nombre').hasError('required')">
+                                                    Nombre es <strong>obligatorio</strong>
+                                                </mat-error>
                                                 <mat-error *ngIf="thirdFormGroup.get('nombre').hasError('minlength')">
                                                     Nombre es <strong>obligatorio</strong>
                                                 </mat-error>
                                             </mat-form-field>
                                             <mat-form-field class="example-full-width">
                                                 <mat-label>Telefono</mat-label>
-                                                <input matInput formControlName="telefono" placeholder="Ingrese Telefono" required>
+                                                <input matInput formControlName="telefono" placeholder="Ingrese Telefono">
                                             </mat-form-field>
                                             <mat-form-field class="example-full-width">
                                                 <mat-label>Email</mat-label>
@@ -188,27 +194,29 @@
 
 
                                             </mat-form-field>
-                                            <div class="row">
 
-                                                <mat-checkbox formControlName='chkhipoteca' value=1 class="example-full-width">
-                                                    <div class="col-12 m-r-5">
-                                                        <span class="termino">
-                                                        Al continuar, acepto los Términos de uso de cambiatedebanco.cl y reconozco que leí la Política de privacidad. También acepto que cambiatedebanco.cl o sus representantes pueden ponerse en contacto conmigo
-                                                        por correo electrónico, teléfono o SMS (incluidos medios automatizados) a la dirección de correo electrónico o al número que yo indique, incluso, para fines de publicidad.</span>
-                                                    </div>
-                                                </mat-checkbox>
+                                            <div class="row m-t-40">
+                                                <div class="col-12 ">
+                                                    <mat-checkbox formControlName='chktermino' value=1 class="chkTermino" required>
+                                                        <font size=1>Al continuar, acepto los Términos de uso de cambiatedebanco.cl y reconozco que leí la Política de privacidad. También acepto que cambiatedebanco.cl o sus representantes pueden ponerse en contacto
+                                                            conmigo por correo electrónico, teléfono o SMS (incluidos medios automatizados) a la dirección de correo electrónico o al número que yo indique, incluso, para fines de publicidad.
+                                                        </font>
+                                                    </mat-checkbox>
 
-
-
+                                                </div>
 
                                             </div>
+
+
                                         </div>
+
+
                                         <div class="row align-items-end justify-content-between" style="width:100%;">
-                                            <div class="col-6 ">
+                                            <div class="col-6 " style="text-align:left">
                                                 <button mat-raised-button matStepperPrevious color="warn">Atras</button>
                                             </div>
 
-                                            <div class="col-6">
+                                            <div class="col-6" style="text-align:right">
                                                 <button mat-raised-button matStepperNext color="accent">Siguiente</button>
                                             </div>
                                         </div>
@@ -220,7 +228,7 @@
 
                                 <div class="col-12">
                                     <h2 class="example-h2"> ¡Gracias! </h2>
-                                    <h4>Hemos enviado toda la información a los bancos que haz elegido, pronto ellos se contactaran contigo. <br>Recuerda estar atento a tu celular y/o tu correo electronico.
+                                    <h4>Hemos enviado toda la información a los bancos que haz elegido, pronto ellos se contactaran contigo. Recuerda estar atento a tu celular y/o tu correo electronico.
                                     </h4>
                                 </div>
 

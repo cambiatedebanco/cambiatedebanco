@@ -16,7 +16,11 @@
     }
     .example-full-width {
         width: 100% !important;
-        height: 60px !important;
+        height: 55px !important;
+    }
+    .termino {
+        width: 50px;
+        word-wrap: break-word;
     }
     .example-section {
         display: flex !important;
@@ -30,25 +34,31 @@
     .example-h2 {
         font-family: 'Montserrat' !important;
         color: #707070 !important;
-        font-weight: 600 !important;
+        font-weight: 550 !important;
         line-height: 30px !important;
-        font-size: 21px !important;
+        font-size: 18px !important;
     }
     .mat-stepper-horizontal {
         border-radius: 20px !important;
         background-color: rgba(255, 255, 255, 0.32) !important;
     }
-     ::ng-deep .mat-checkbox-layout .mat-checkbox-label {
-        font-family: 'Montserrat' !important;
-        color: #707070 !important;
-        font-weight: 500 !important;
-        font-size: 20px !important;
-    }
-    .termino {
+    .chkTermino {
         font-family: 'Montserrat' !important;
         color: #707070 !important;
         font-weight: 500 !important;
         font-size: 10px !important;
+        white-space: initial !important;
+    }
+     ::ng-deep .mat-checkbox-layout .mat-checkbox-label {
+        font-family: 'Montserrat' !important;
+        color: #707070 !important;
+        font-weight: 500 !important;
+        font-size: 22px !important;
+        white-space: initial !important;
+    }
+     ::ng-deep .mat-form-field-wrapper {
+        position: relative;
+        font-size: 17px;
     }
      ::ng-deep .mat-step-header .mat-step-icon-selected {
         background-color: #FF0073 !important;
@@ -75,10 +85,10 @@
         font-family: 'Montserrat' !important;
         color: #ffffff !important;
         font-weight: 500 !important;
-        font-size: 22px !important;
+        font-size: 18px !important;
         border-radius: 10px !important;
-        height: 66px !important;
-        width: 272px !important;
+        height: 50px !important;
+        width: 200px !important;
     }
      ::ng-deep .mat-fab.mat-accent,
     .mat-flat-button.mat-accent,
@@ -89,10 +99,10 @@
         font-family: 'Montserrat' !important;
         color: #ffffff !important;
         font-weight: 500 !important;
-        font-size: 22px !important;
+        font-size: 20px !important;
         border-radius: 10px !important;
-        height: 66px !important;
-        width: 172px !important;
+        height: 55px !important;
+        width: 150px !important;
     }
      ::ng-deep .mat-fab.mat-warn,
     .mat-flat-button.mat-warn,
@@ -104,10 +114,10 @@
         font-family: 'Montserrat' !important;
         color: #ffffff !important;
         font-weight: 500 !important;
-        font-size: 22px !important;
+        font-size: 20px !important;
         border-radius: 10px !important;
-        height: 66px !important;
-        width: 172px !important;
+        height: 55px !important;
+        width: 150px !important;
     }
      ::ng-deep .mat-step-header .mat-step-label.mat-step-label-active {
         color: #3E3E3E !important;
