@@ -198,15 +198,30 @@
 
                                             </mat-form-field>
 
-                                            <div class="row m-t-40">
-                                                <div class="col-12 ">
-                                                    <mat-checkbox formControlName='chktermino' value=1 class="chkTermino" required>
-                                                        <font size=1>Al continuar, acepto los Términos de uso de cambiatedebanco.cl y reconozco que leí la Política de privacidad. También acepto que cambiatedebanco.cl o sus representantes pueden ponerse en contacto
-                                                            conmigo por correo electrónico, teléfono o SMS (incluidos medios automatizados) a la dirección de correo electrónico o al número que yo indique, incluso, para fines de publicidad.
-                                                        </font>
-                                                    </mat-checkbox>
+                                            <div class="row m-t-20">
+
+                                                <div class="tablagen">
+                                                    <div class="fila">
+                                                        <div class="col-chk">
+                                                            <mat-checkbox formControlName='chktermino' value=1 class="chkTermino" required>
+                                                            </mat-checkbox>
+                                                        </div>
+                                                        <div class="col-ter">
+                                                            <font size=1>
+
+                                                                Al continuar, acepto los Términos de uso de cambiatedebanco.cl y reconozco que leí la Política de privacidad. También acepto que cambiatedebanco.cl o sus representantes pueden ponerse en contacto conmigo por correo electrónico, teléfono o SMS (incluidos
+                                                                medios automatizados) a la dirección de correo electrónico o al número que yo indique, incluso, para fines de publicidad.
+
+                                                            </font>
+                                                        </div>
+
+                                                    </div>
 
                                                 </div>
+
+
+
+
 
                                             </div>
 
@@ -262,7 +277,7 @@
 <main>
     <!--/.Navbar-->
     <div class="gridContainer">
-        <div class="row text-center">
+        <div class="row text-center" style="margin-top:100px;">
             <div class="col-12">
                 <h3>
                     Etapas de la <span class="h2-bold">Portabilidad</span>
@@ -271,7 +286,7 @@
 
         </div>
         <div data-type="row" class="row spaced-cols text-center">
-            <div class="col-xs-12 col-sm-4 col-padding"> <i class="fa icon shadow-large-black aligncenter color1 fa-list-alt reverse round large"></i>
+            <div class="col-xs-12 col-sm-4 col-padding">
                 <div data-type="column" class="">
                     <h2 class="example-h2">Solicitud</h2>
                     <img src="../../../assets/images/step_1.png">
@@ -279,7 +294,7 @@
                     </h4>
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-4 col-padding"> <i class="fa icon shadow-large-black aligncenter color1 fa-group reverse round large"></i>
+            <div class="col-xs-12 col-sm-4 col-padding">
                 <div data-type="column" class="">
                     <h2 class="example-h2">Sube Certificado</h2>
                     <img src="../../../assets/images/step_2.png">
@@ -287,7 +302,7 @@
                     </h4>
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-4 col-padding"> <i class="fa icon shadow-large-black aligncenter color1 fa-handshake-o reverse round large"></i>
+            <div class="col-xs-12 col-sm-4 col-padding">
                 <div data-type="column" class="">
                     <h2 class="example-h2">Mejor Oferta</h2>
                     <img src="../../../assets/images/step_3.png">
@@ -310,9 +325,8 @@
 
             <div class="row">
                 <div class="offset-md-6 col-lg-6">
-                    <h2>
-                        Ley de portabilidad <br><span class="h2-bold">financiera</span>
-                    </h2>
+                    <h3> Ley de portabilidad <br><span class="h2-bold">financiera</span>
+                    </h3>
                     <h4>
                         La ley sobre la portabilidad financiera busca facilitar a las personas que tienen cuentas de ahorro, cuentas vistas, chequeras electrónicas, líneas de crédito, tarjetas de crédito y débito, créditos hipotecarios, de consumo, automotrices, entre otros,
                         solicitar el cambio de institución financiera, siguiendo un modelo similar al utilizado en la portabilidad numérica de la telefonía móvil. <br><br>Con la portabilidad financiera, aumentará la competencia
@@ -321,10 +335,60 @@
                 </div>
             </div>
 
+            <a id="contacto"></a>
+
+            <div class="row">
+                <h3 style="margin-top:200px;margin-left:100px;">
+                    Contáctenos
+                </h3>
+            </div>
+            <div class="row">
+
+                <div style="width: 900px; margin-top:100px; padding:30px;background-color:rgba(255, 255, 255, 0.5);text-align:center; margin:0 auto;padding-top:10px; padding-bottom:50px;border-radius: 20px;">
+                    <div class="col-12">
+                        <form [formGroup]="contactoFormGroup">
+                            <h4>Si desea más información no dude en contactarnos. Puede rellenar el siguiente formulario:</h4><br>
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Ingrese Nombre</mat-label>
+                                <input matInput type="text" matInputCommified formControlName="nombre" placeholder="" required>
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Ingrese Telefono</mat-label>
+                                <input matInput type="text" matInputCommified formControlName="telefono" placeholder="" required>
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Ingrese Email</mat-label>
+                                <input matInput type="text" matInputCommified formControlName="email" placeholder="" required>
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width">
+                                <textarea matInput placeholder="Comentarios" formControlName="comentarios">
+                         </textarea>
+                            </mat-form-field>
+                            <br><br><br>
+                            <div class="col-12" style="text-align:right">
+                                <button mat-raised-button color="accent">Enviar</button>
+                            </div>
+
+
+                        </form>
+
+
+
+                    </div>
+                </div>
+
+
+
+            </div>
+
+
         </div>
     </div>
+
+
+
 </main>
-<a id="contacto"></a>
+
 <footer id="myFooter" class="pt-md-5">
     <div class="row">
         <div class="col-12 col-md">

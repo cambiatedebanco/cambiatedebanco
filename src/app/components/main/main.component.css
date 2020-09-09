@@ -2,6 +2,13 @@
     .title {
         padding-left: 144px;
     }
+    h3 {
+        font-family: 'Montserrat' !important;
+        color: #707070 !important;
+        font-size: 60px !important;
+        font-weight: 500 !important;
+        line-height: 70px !important;
+    }
     .width-bancos {
         width: 900px;
     }
@@ -42,12 +49,21 @@
         border-radius: 20px !important;
         background-color: rgba(255, 255, 255, 0.32) !important;
     }
-    .chkTermino {
-        font-family: 'Montserrat' !important;
-        color: #707070 !important;
-        font-weight: 500 !important;
-        font-size: 10px !important;
-        white-space: initial !important;
+    .tablagen {
+        display: table;
+    }
+    .fila {
+        display: table-row;
+    }
+    .col-chk {
+        display: table-cell;
+        padding: 0px;
+        width: 10%;
+    }
+    .col-ter {
+        display: table-cell;
+        padding: 12px;
+        width: 90%;
     }
      ::ng-deep .mat-checkbox-layout .mat-checkbox-label {
         font-family: 'Montserrat' !important;

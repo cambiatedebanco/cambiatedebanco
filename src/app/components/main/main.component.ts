@@ -19,6 +19,7 @@ export class MainComponent implements OnInit {
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
+  contactoFormGroup: FormGroup;
   isEditable = false;
   keepSorted = true;
   key: string;
@@ -103,7 +104,16 @@ export class MainComponent implements OnInit {
       chktermino: ['', [Validators.required]]
       
     });
+
+
+    this.contactoFormGroup= this._formBuilder.group({
+      nombre:['',[Validators.required]],
+      telefono:['',[Validators.required]],
+      email:['',[Validators.required]],
+      comentarios:['']
+    });
     
+
 
    
     
