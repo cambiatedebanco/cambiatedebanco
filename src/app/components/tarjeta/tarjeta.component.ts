@@ -23,8 +23,9 @@ export class TarjetaComponent implements OnInit {
   headers = null;
   user=null;
   getLeadByBancoSubscription: Subscription;
-  items: any;    
-  
+  items: any;
+  ofertas: any;    
+
   constructor( private postgresqlService: PostgresService,
     private checkoutService: CheckoutService,
     private apiMercadopagoService: ApiMercadopagoService,
@@ -45,12 +46,8 @@ export class TarjetaComponent implements OnInit {
         if(resp){
           this.user = resp[0];
           console.log(this.user);
-          this.items = {
-            email: this.user.email.toLowerCase(),
-            rut: this.user.rut+'-'+this.user.dv,
-            rutint: this.user.rut,
-            monto: 5000
-          }
+          this.getConfiguradorOferta();
+          
         }
       });
   /*  this.postgresqlService.getFlow(this.items).subscribe(res=>{
@@ -63,32 +60,14 @@ export class TarjetaComponent implements OnInit {
     });*/
   }
 
-  onBuy() {
-   /* this.checkoutService.goCheckOut(this.preference).then(result => {
-      // Read result of the Cloud Function.
-      this.init_point = result.data.result;
-      console.log(this.init_point);
-      //window.location.href = this.init_point;
-    }).catch(error => {
-      console.log(error);
-      return erryyyyor
-    });*/
-    this.postgresqlService.getFlow(this.items).subscribe(res=>{
-      this.init_point = res.redirect;
-        console.log(this.init_point);
-        window.open(this.init_point, '_blank');
-      });
-    /*this.apiMercadopagoService.getMP(this.items).subscribe(res=>{
-      this.init_point = res.url;
-        console.log(this.init_point);
-        window.open(this.init_point, '_blank');
-        //window.location.href = this.init_point;
-      });*/
+  getConfiguradorOferta(){
+  this.postgresqlService.getConfiguradorOferta(this.headers).subscribe(res=>{
+    this.ofertas = res;
+    console.log('this.oferta ==>', this.ofertas);
+    });
   }
 
-
-  
-  
+ 
 
   applyFilter(value: string) {
     let filterValue = value.trim();
