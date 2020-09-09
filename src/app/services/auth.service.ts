@@ -39,21 +39,16 @@ export class AuthService {
       gapi.client.init({
         apiKey: environment.firebase.apiKey,
         clientId: environment.gcp.clientId,
-        discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest',
-        `https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest`],
-        scope: 'https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/gmail.readonly https://www.googleapis.com/auth/gmail.send'
+        discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest'],
+        scope: 'https://www.googleapis.com/auth/userinfo.email'
 
       })
       gapi.client.load('calendar', 'v3', () => {
        // console.log('calendar ready');
       });
-      gapi.client.load('gmail', 'v1', () => {
-        //console.log("Loaded GMail API");
-    });
+     
     });
   }
-
-
   getestado() {
 
     this.angularFireAuth.authState.subscribe( userResponse => {
@@ -65,6 +60,7 @@ export class AuthService {
           resp => {
             if(resp.length > 0){
               localStorage.setItem('user_perfil', JSON.stringify(resp[0]));
+           
             }else{
                localStorage.setItem('user', null);
                this.router.navigate([`/login`]);
