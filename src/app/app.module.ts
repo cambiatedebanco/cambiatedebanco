@@ -186,6 +186,7 @@ import { PendingComponent } from './components/tarjeta/pending/pending.component
 import { ErrorComponent } from './components/tarjeta/error/error.component';
 import { MainComponent } from './components/main/main.component';
 import {NgxMaterialToolsModule} from 'ngx-material-tools';
+import { ConfiguradorOfertaComponent } from './components/tarjeta/configurador-oferta/configurador-oferta.component';
 
 
 registerLocaleData(localesEsCl, 'es-Cl');
@@ -331,7 +332,8 @@ export function provideConfig() {
     SuccessComponent,
     PendingComponent,
     ErrorComponent,
-    MainComponent
+    MainComponent,
+    ConfiguradorOfertaComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,30 @@
+<div [ngClass]="(oferta.es_popular === 1)?'pricing-box featured-plan':'pricing-box b-l'">
+    <div class="pricing-body">
+        <div class="pricing-header">
+            <h4 *ngIf="oferta.es_popular === 1" class="price-lable text-white bg-warning"> Popular</h4>
+            <h4 class="text-center">{{oferta.tipo}}</h4>
+            <h2 class="text-center"><span class="price-sign">$</span>{{oferta.costo_total}}</h2>
+            <p class="uppercase">por bolsa</p>
+        </div>
+        <div class="price-table-content">
+
+            <div class="price-row"><i class=""></i> <b>{{oferta.cantidad}}</b> Diamantes</div>
+            <div class="price-row"><i class="icon-diamond"></i> Valor unitario <b>${{oferta.valor_untario}}</b></div>
+            <div class="price-row">
+                <select (change)="onChange($event.target.value)">
+                    <option selected>Cantidad de Diamantes</option>
+                    <option *ngFor="let cant of cantidad"
+                        [value]="cant+'-'+oferta.costo_total">
+                        {{ cant }}
+                    </option>                                                
+                </select>
+            </div>
+            <div class="price-row">
+                <form action="/procesar-pago" method="POST">
+                    <button type="button" *ngIf="oferta.es_popular !== 1" class="btn btn-success waves-effect waves-light m-t-20" (click)="onBuy()" target="_blank">${{monto_compra | number}}</button>
+                    <button type="button" *ngIf="oferta.es_popular === 1" class="btn btn-lg btn-info waves-effect waves-light m-t-20" (click)="onBuy()" target="_blank">${{monto_compra | number}}</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

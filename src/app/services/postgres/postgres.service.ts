@@ -702,9 +702,16 @@ sendEmail(nombre: any,transaccion:any,email:any) {
         return this.http.put(this.BASE_URI+'/cambiate/creditos', data, headers).pipe(
           retry(1),catchError(this.errorHandl))}
 
-          updateAsignLeadsCb(data, headers: any):Observable<any>{
+      updateAsignLeadsCb(data, headers: any):Observable<any>{
             return this.http.put(this.BASE_URI+'/cambiate_leads/asigna', data, headers).pipe(
               retry(1),catchError(this.errorHandl))}
+      
+              
+
+              getConfiguradorOferta(headers): Observable<any>{
+                let complete_uri = `${this.BASE_URI}/cambiate/conf_oferta`;
+                return this.httpGet(complete_uri, headers);
+              }
 
   errorHandl(error: any) {
     let errorMessage = '';
