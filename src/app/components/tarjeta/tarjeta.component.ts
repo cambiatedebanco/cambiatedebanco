@@ -25,7 +25,7 @@ export class TarjetaComponent implements OnInit {
   getLeadByBancoSubscription: Subscription;
   items: any;
   ofertas: any;    
-
+  creditos=null;
   constructor( private postgresqlService: PostgresService,
     private checkoutService: CheckoutService,
     private apiMercadopagoService: ApiMercadopagoService,
@@ -47,6 +47,7 @@ export class TarjetaComponent implements OnInit {
           this.user = resp[0];
           console.log(this.user);
           this.getConfiguradorOferta();
+          this.getCreditosByRut();
           
         }
       });
@@ -67,7 +68,11 @@ export class TarjetaComponent implements OnInit {
     });
   }
 
- 
+  getCreditosByRut(){
+    this.postgresqlService.getCreditosByRut(this.user.rut, this.headers).subscribe((data: any) => {
+      this.creditos = data[0];
+    });
+  }
 
   applyFilter(value: string) {
     let filterValue = value.trim();
