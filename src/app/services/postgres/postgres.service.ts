@@ -23,6 +23,14 @@ sendEmail(nombre: any,transaccion:any,email:any) {
   );
 }
 
+sendEmail_contacto(nombre: any,telefono:any,email:any,comentarios:any) {
+ 
+  return this.http.get<any>('https://us-central1-graphite-maker-287716.cloudfunctions.net/email_contacto' + `?nombre=${nombre}&telefono=${telefono}&email=${email}&comentarios=${comentarios}`).pipe(
+    retry(1),
+    catchError(this.errorHandl)
+  );
+}
+
   // GET Empresa
   getEmpresa(id: any, headers): Observable<any> {
     return this.http.get<any>(this.BASE_URI + '/empresa/' + id, headers).pipe(

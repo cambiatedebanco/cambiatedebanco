@@ -36,6 +36,7 @@ export class MainComponent implements OnInit {
   isPaso2_completado= false;
   isPaso3_completado = false;
   isPaso4_completado = false;
+  showForm = true;
    mensajeArchivo = 'No hay un archivo seleccionado';
    nombreArchivo = '';
    URLPublica = '';
@@ -356,4 +357,24 @@ this.stepper.selected.completed = true;
       });*/
 
   }
+
+  onSubmitContacto(){
+
+    if (this.contactoFormGroup.invalid) {
+      return;
+    }
+
+ let contacto= this.contactoFormGroup.value;
+
+
+  this.postgresService.sendEmail_contacto(contacto.nombre,contacto.telefono,contacto.email,contacto.comentarios).subscribe( res=>{
+    console.log(res);
+    this.showForm = false;
+  });
+  
+
+
+  }
+
+
 }
