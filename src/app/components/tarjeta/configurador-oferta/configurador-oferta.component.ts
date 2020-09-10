@@ -80,7 +80,7 @@ export class ConfiguradorOfertaComponent implements OnInit {
       cantidad_monedas: this.cantidadMonedas
     }
 
-    console.log(this.items);
+  
     this.postgresqlService.getFlow(this.items).subscribe(res=>{
        this.init_point = res.redirect;
        console.log(this.init_point);

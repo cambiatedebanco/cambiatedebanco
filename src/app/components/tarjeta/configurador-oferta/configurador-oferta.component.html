@@ -1,18 +1,33 @@
-<div [ngClass]="(oferta.es_popular === 1)?'pricing-box featured-plan':'pricing-box b-l'">
+<div [ngClass]="(oferta.es_popular === 1)?'pricing-box featured-plan':'pricing-box'">
     <div class="pricing-body">
-        <div class="pricing-header">
+        <div *ngIf="oferta.cantidad==150" class="pricing-header" style="background: url(../../../../assets/images/banner_pack_1.png) no-repeat !important;height:276px;">
+
             <h4 *ngIf="oferta.es_popular === 1" class="price-lable text-white bg-warning"> Popular</h4>
-            <h4 class="text-center">{{oferta.tipo}}</h4>
-            <h2 class="text-center"><span class="price-sign">$</span>{{oferta.costo_total}}</h2>
-            <p class="uppercase">por bolsa</p>
+            <h4 class="text-right" style="margin-right:100px;">{{oferta.tipo}}</h4>
+            <h2 class="text-right" style="margin-right:100px;">{{oferta.cantidad}} </h2>
+            <p class="uppercase text-right" style="margin-right:100px;">monedas</p>
+        </div>
+        <div *ngIf="oferta.cantidad==250" class="pricing-header" style="background: url(../../../../assets/images/banner_pack_2.png) no-repeat !important;height:276px;">
+            <h4 *ngIf="oferta.es_popular === 1" class="price-lable text-white bg-warning"> Popular</h4>
+            <h4 class="text-right" style="margin-right:100px;">{{oferta.tipo}}</h4>
+            <h2 class="text-right" style="margin-right:100px;">{{oferta.cantidad}} </h2>
+            <p class="uppercase text-right" style="margin-right:100px;">monedas</p>
+        </div>
+        <div *ngIf="oferta.cantidad==400" class="pricing-header" style="background: url(../../../../assets/images/banner_pack_3.png) no-repeat !important;height:276px;">
+            <h4 *ngIf="oferta.es_popular === 1" class="price-lable text-white bg-warning"> Popular</h4>
+            <h4 class="text-right" style="margin-right:100px;">{{oferta.tipo}}</h4>
+            <h2 class="text-right" style="margin-right:100px;">{{oferta.cantidad}} </h2>
+            <p class="uppercase text-right" style="margin-right:100px;">monedas</p>
         </div>
         <div class="price-table-content">
 
-            <div class="price-row"><i class=""></i> <b>{{oferta.cantidad}}</b> Diamantes</div>
-            <div class="price-row"><i class="icon-diamond"></i> Valor unitario <b>${{oferta.valor_untario}}</b></div>
+            <div class="price-row">
+                <h2 class="text-center"><span class="price-sign">$</span>{{oferta.costo_total}}</h2>
+            </div>
+            <div class="price-row"><img src="../../../../assets/images/coin.png" width=16> Valor unitario <b>${{oferta.valor_untario}}</b></div>
             <div class="price-row">
                 <select (change)="onChange($event.target.value)">
-                    <option selected>Cantidad de Diamantes</option>
+                    <option selected>Cantidad de Bolsas</option>
                     <option *ngFor="let cant of cantidad"
                         [value]="cant+'-'+oferta.costo_total+'-'+oferta.cantidad">
                         {{ cant }}
