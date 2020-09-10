@@ -14,7 +14,7 @@
                 <select (change)="onChange($event.target.value)">
                     <option selected>Cantidad de Diamantes</option>
                     <option *ngFor="let cant of cantidad"
-                        [value]="cant+'-'+oferta.costo_total">
+                        [value]="cant+'-'+oferta.costo_total+'-'+oferta.cantidad">
                         {{ cant }}
                     </option>                                                
                 </select>

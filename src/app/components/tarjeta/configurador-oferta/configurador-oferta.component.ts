@@ -42,7 +42,8 @@ export class ConfiguradorOfertaComponent implements OnInit {
   indice=null;
   init_point: any;
   items: any;
-  cantidadLingotes=0;
+  cantidadBolsa = 0;
+  cantidadMonedas = 0;
   getCreditosByRutSubscription: Subscription;
   headers=null;
 
@@ -52,8 +53,9 @@ export class ConfiguradorOfertaComponent implements OnInit {
 
   onChange(e){
     const params = e.split('-');
-    this.cantidadLingotes = parseInt(params[0]);
-    this.monto_compra = this.cantidadLingotes * parseInt(params[1]);
+    this.cantidadBolsa = parseInt(params[0]);
+    this.cantidadMonedas = parseInt(params[2]) * this.cantidadBolsa;
+    this.monto_compra = this.cantidadBolsa * parseInt(params[1]);
     console.log(this.monto_compra);
   }
 
@@ -74,10 +76,8 @@ export class ConfiguradorOfertaComponent implements OnInit {
     this.items = {
       email: this._user.email.toLowerCase(),
       rut: this._user.rut + '-' + this._user.dv,
-      rutint: this._user.rut,
       monto: this.monto_compra,
-      cantidad: this.cantidadLingotes,
-      credito_total: this._creditos.credito_total
+      cantidad_monedas: this.cantidadMonedas
     }
 
     console.log(this.items);
