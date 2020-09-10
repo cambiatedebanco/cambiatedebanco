@@ -1,5 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { PostgresService } from 'src/app/services/postgres/postgres.service';
+import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/services/auth.service';
+import { getHeaderStts } from '../../utility';
 
 @Component({
   selector: 'app-configurador-oferta',
@@ -17,18 +20,32 @@ export class ConfiguradorOfertaComponent implements OnInit {
 
   @Input() set user(user) {
     this._user= user;
+
   }
   get user() {
     return this._user;
   }
   _user: any;
-  constructor(private postgresqlService: PostgresService) { }
+
+    @Input() set creditos(creditos) {
+    this._creditos= creditos;
+
+  }
+  get creditos() {
+    return this.creditos;
+  }
+  _creditos: any;
+  constructor(private postgresqlService: PostgresService,
+    private authService: AuthService) { }
   cantidad = []; 
   monto_compra=0;
   indice=null;
   init_point: any;
   items: any;
   cantidadLingotes=0;
+  getCreditosByRutSubscription: Subscription;
+  headers=null;
+
   ngOnInit() {
     this.cantidad = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
   }
@@ -39,6 +56,7 @@ export class ConfiguradorOfertaComponent implements OnInit {
     this.monto_compra = this.cantidadLingotes * parseInt(params[1]);
     console.log(this.monto_compra);
   }
+
 
   onBuy() {
     if(this.monto_compra === 0){
@@ -58,9 +76,11 @@ export class ConfiguradorOfertaComponent implements OnInit {
       rut: this._user.rut + '-' + this._user.dv,
       rutint: this._user.rut,
       monto: this.monto_compra,
-      cantidad: this.cantidad
+      cantidad: this.cantidadLingotes,
+      credito_total: this._creditos.credito_total
     }
 
+    console.log(this.items);
     this.postgresqlService.getFlow(this.items).subscribe(res=>{
        this.init_point = res.redirect;
        console.log(this.init_point);
