@@ -17,7 +17,10 @@
                         <a class="nav-link" href="#">HOME <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#portabilidad">LEY PORTABILIDAD</a>
+                        <a class="nav-link" href="#etapas">ETAPAS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#portabilidad">LEY</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#contacto">Contactenos</a>
@@ -273,7 +276,7 @@
     </div>
 
 </header>
-<a id="portabilidad"></a>
+<a id="etapas"></a>
 <main>
     <!--/.Navbar-->
     <div class="gridContainer">
@@ -285,8 +288,8 @@
             </div>
 
         </div>
-        <div data-type="row" class="row spaced-cols text-center">
-            <div class="col-xs-12 col-sm-4 col-padding">
+        <div data-type="row" class="row spaced-cols text-center p-30">
+            <div class="col-xs-12 col-sm-4 p-r-30 ">
                 <div data-type="column" class="">
                     <h2 class="example-h2">Solicitud</h2>
                     <img src="../../../assets/images/step_1.png">
@@ -294,7 +297,7 @@
                     </h4>
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-4 col-padding">
+            <div class="col-xs-12 col-sm-4 p-r-30">
                 <div data-type="column" class="">
                     <h2 class="example-h2">Sube Certificado</h2>
                     <img src="../../../assets/images/step_2.png">
@@ -302,11 +305,11 @@
                     </h4>
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-4 col-padding">
+            <div class="col-xs-12 col-sm-4 p-r-30">
                 <div data-type="column" class="">
                     <h2 class="example-h2">Mejor Oferta</h2>
                     <img src="../../../assets/images/step_3.png">
-                    <h4>Los bancos que elegiste pata cotizar te contactaran para entregarte una mejor oferta de tu crédito.
+                    <h4>Los bancos que elegiste para cotizar te contactaran para entregarte una mejor oferta de tu crédito.
                     </h4>
                 </div>
             </div>
@@ -320,10 +323,12 @@
         </div>
 
     </div>
+    <a id="portabilidad"></a>
+
     <div id="contenido" class="view">
         <div class="full-bg-img">
 
-            <div class="row">
+            <div class="row" style="margin-top:100px;">
                 <div class="offset-md-6 col-lg-6">
                     <h3> Ley de portabilidad <br><span class="h2-bold">financiera</span>
                     </h3>
@@ -345,20 +350,20 @@
             <div class="row">
 
                 <div style="width: 900px; margin-top:100px; padding:30px;background-color:rgba(255, 255, 255, 0.5);text-align:center; margin:0 auto;padding-top:10px; padding-bottom:50px;border-radius: 20px;">
-                    <div class="col-12">
-                        <form [formGroup]="contactoFormGroup">
+                    <div class="col-12" *ngIf="showForm">
+                        <form [formGroup]="contactoFormGroup" (ngSubmit)="onSubmitContacto()">
                             <h4>Si desea más información no dude en contactarnos. Puede rellenar el siguiente formulario:</h4><br>
                             <mat-form-field class="example-full-width">
                                 <mat-label>Ingrese Nombre</mat-label>
-                                <input matInput type="text" matInputCommified formControlName="nombre" placeholder="" required>
+                                <input matInput type="text" formControlName="nombre" placeholder="" required>
                             </mat-form-field>
                             <mat-form-field class="example-full-width">
                                 <mat-label>Ingrese Telefono</mat-label>
-                                <input matInput type="text" matInputCommified formControlName="telefono" placeholder="" required>
+                                <input matInput type="text" formControlName="telefono" placeholder="" required>
                             </mat-form-field>
                             <mat-form-field class="example-full-width">
                                 <mat-label>Ingrese Email</mat-label>
-                                <input matInput type="text" matInputCommified formControlName="email" placeholder="" required>
+                                <input matInput type="text" formControlName="email" placeholder="" required>
                             </mat-form-field>
                             <mat-form-field class="example-full-width">
                                 <textarea matInput placeholder="Comentarios" formControlName="comentarios">
@@ -375,6 +380,19 @@
 
 
                     </div>
+
+                    <div class="col-12" *ngIf="!showForm">
+                        <h4><br><br><br> Procesaremos la consulta, en breve nos contactaremos con usted. <br><br>
+                            <img src="../../../assets/images/note.png" width="200">
+                            <br><b>¡Gracias!</b>
+
+                            <br><br> el equipo cambiatedebanco.cl
+                        </h4>
+
+
+
+                    </div>
+
                 </div>
 
 

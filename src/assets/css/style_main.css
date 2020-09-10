@@ -35,6 +35,9 @@ header,
     .navbar .nav-link {
         color: #707070 !important;
     }
+    .navbar .nav-item {
+        margin-right: 100px !important;
+    }
     .navbar .nav-link:hover,
     .navbar .nav-link:focus {
         color: #FF0073 !important;
@@ -66,16 +69,23 @@ header,
     h2 {
         font-family: 'Montserrat' !important;
         color: #707070 !important;
-        font-size: 83px !important;
+        font-size: 73px !important;
         font-weight: 300 !important;
+        line-height: 70px !important;
+    }
+    h3 {
+        font-family: 'Montserrat' !important;
+        color: #707070 !important;
+        font-size: 50px !important;
+        font-weight: 500 !important;
         line-height: 70px !important;
     }
     h4 {
         font-family: 'Montserrat' !important;
         color: #707070 !important;
         font-weight: 400 !important;
-        font-size: 23px !important;
-        line-height: 40px !important;
+        font-size: 20px !important;
+        line-height: 30px !important;
     }
     .h2-bold {
         font-family: 'Montserrat' !important;
@@ -113,6 +123,9 @@ header,
     .navbar .nav-link {
         color: #707070 !important;
     }
+    .navbar .nav-item {
+        margin-right: 50px !important;
+    }
     .navbar .nav-link:hover,
     .navbar .nav-link:focus {
         color: #FF0073 !important;
@@ -148,12 +161,19 @@ header,
         font-weight: 300 !important;
         line-height: 70px !important;
     }
+    h3 {
+        font-family: 'Montserrat' !important;
+        color: #707070 !important;
+        font-size: 40px !important;
+        font-weight: 500 !important;
+        line-height: 70px !important;
+    }
     h4 {
         font-family: 'Montserrat' !important;
         color: #707070 !important;
         font-weight: 400 !important;
         font-size: 22px !important;
-        line-height: 40px !important;
+        line-height: 30px !important;
     }
     .h2-bold {
         font-family: 'Montserrat' !important;
@@ -191,6 +211,9 @@ header,
     .navbar .nav-link {
         color: #707070 !important;
     }
+    .navbar .nav-item {
+        margin-right: 0px !important;
+    }
     .navbar .nav-link:hover,
     .navbar .nav-link:focus {
         color: #FF0073 !important;
@@ -224,6 +247,13 @@ header,
         color: #707070 !important;
         font-size: 40px !important;
         font-weight: 300 !important;
+        line-height: 70px !important;
+    }
+    h3 {
+        font-family: 'Montserrat' !important;
+        color: #707070 !important;
+        font-size: 30px !important;
+        font-weight: 500 !important;
         line-height: 70px !important;
     }
     h4 {
