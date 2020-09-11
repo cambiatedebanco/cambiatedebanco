@@ -33,7 +33,7 @@ export class CarteraHomeComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['fecha', 'id', 'campana', 'bco_origen','bco_destino', 'monto', 'tools'];
 
   dataSourceLeads: MatTableDataSource<any> = new MatTableDataSource();
-  displayedColumnsLeads: string[] = ['fecha', 'rut', 'nombre', 'campana', 'variable', 'asignado', 'modifica'];
+  displayedColumnsLeads: string[] = ['id', 'fecha', 'rut', 'nombre', 'campana', 'variable', 'asignado', 'modifica'];
   chart: Chart;
   chart2: Chart;
   user = null;
@@ -77,6 +77,7 @@ export class CarteraHomeComponent implements OnInit, OnDestroy {
   resumen: any;
   creditos = null;
   downloadURL = null;
+  tramoPrecio=null;
   public cookieTab: string;
   constructor(   private route: ActivatedRoute,private _route: Router,
                  private authService: AuthService,
@@ -148,6 +149,7 @@ export class CarteraHomeComponent implements OnInit, OnDestroy {
       this.getResumenLeadsColaborador();
       this.getCreditosByRut();
       this.getLeadByBanco();
+      this.getTramoPrecio();
       this.navbar.getTop11LeadsColaborador();
       
 
@@ -157,7 +159,7 @@ export class CarteraHomeComponent implements OnInit, OnDestroy {
     this.tabFilterLead = 0;
     this.getCreditosByRutSubscription = this.postgresqlService.getCreditosByRut(this.user_cla.rut, this.headers).subscribe((data: any) => {
       this.creditos = data[0];
-      console.log('this.creditos ==> ',this.creditos);
+      
     });
   }
 
@@ -168,12 +170,21 @@ export class CarteraHomeComponent implements OnInit, OnDestroy {
     this.dataSource.data = data;
   });
 }
-  onComprar(id){
+
+getTramoPrecio(){
+  this.getLeadByBancoSubscription = this.postgresqlService.getTramoPrecio(this.headers).subscribe((data: any) => {
+    this.tramoPrecio = data;
+    console.log('this.tramoPrecio ==> ', this.tramoPrecio);
+  });
+}
+
+  onComprar(element){
+    const id = element.id;
     this.getCreditosByRut();
-    if(parseInt(this.creditos.credito_saldo) > 0){
+    if(parseInt(this.creditos.credito_saldo) >= parseInt(element.precio)){
       Swal.fire({
         title: 'Comprar',
-        text: `Tiene un saldo de ${this.creditos.credito_saldo} créditos`,
+        text: `Tiene un saldo de ${this.creditos.credito_saldo} monedas`,
         type: 'info',
         showCancelButton: true,
         confirmButtonText: 'Si, Comprar!',
@@ -181,7 +192,7 @@ export class CarteraHomeComponent implements OnInit, OnDestroy {
       }).then((result) => {
         if (result.value) {
           let dataSaldo ={
-            utilizado: parseInt(this.creditos.credito_utilizado) + 1,
+            utilizado: parseInt(this.creditos.credito_utilizado) + parseInt(element.precio),
             rut: this.user_cla.rut
           }
 
@@ -212,7 +223,7 @@ export class CarteraHomeComponent implements OnInit, OnDestroy {
       Swal.fire({
         title: 'Saldo Insuficiente',
         type: 'warning',
-        html: 'Aumenta tus <b>créditos</b>!'  ,
+        html: 'Aumenta tus <b>monedas</b>!'  ,
         focusConfirm: false,
         confirmButtonText: '<i class="fa fa-shopping-cart fa-1x"></i>&nbsp; Comprar!',
       }).then((result) => {
@@ -224,6 +235,7 @@ export class CarteraHomeComponent implements OnInit, OnDestroy {
     }
 
   }
+
 
   getAllEjecutivosCampana(){
     this.getAllEjecutivosCampanaSubscription = this.postgresqlService.getAllEjecutivosCampana(this.headers).subscribe((data: any) => {

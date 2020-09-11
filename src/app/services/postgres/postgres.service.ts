@@ -721,6 +721,13 @@ sendEmail_contacto(nombre: any,telefono:any,email:any,comentarios:any) {
                 return this.httpGet(complete_uri, headers);
               }
 
+              getTramoPrecio(headers): Observable<any>{
+                let complete_uri = `${this.BASE_URI}/cambiate/tramo_precio`;
+                return this.httpGet(complete_uri, headers);
+              }
+
+              
+
   errorHandl(error: any) {
     let errorMessage = '';
     if(error.error instanceof ErrorEvent) {

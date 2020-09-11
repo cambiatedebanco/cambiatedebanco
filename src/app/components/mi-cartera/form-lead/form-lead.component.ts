@@ -105,8 +105,6 @@ export class FormLeadComponent implements OnInit, OnDestroy {
     this.formGroup.controls.created_time.setValue(datePipe.transform(lead.created_time.toString(), 'short'));
     this.formGroup.controls.rut.setValue(lead.rut);
     this.formGroup.controls.nombre.setValue(lead.nombre);
-    this.formGroup.controls.comuna.setValue(lead.comuna);
-    this.formGroup.controls.id_region.setValue(parseInt(lead.id_region || 0));
     this.formGroup.controls.phone_number.setValue(lead.phone_number);
     this.formGroup.controls.email.setValue(lead.email);
     this.formGroup.controls.id_estado.setValue(parseInt(lead.id_estado || 0));
@@ -166,11 +164,9 @@ public onSubmit() {
       nuevo: 0,
       gestionado: (formData.id_estado === '1' ? 0 : 1),
       rut_colaborador: parseInt(this.user_cla.rut) || '',
-      comuna: formData.comuna || '',
       email_colaborador: this.user_cla.email.toLowerCase() || '',
       fecha_gestion: new Date(),
-      monto: monto || 0,
-      id_region: formData.id_region
+      monto: monto || 0
     };
     this.updateLead(data);
 

@@ -45,21 +45,6 @@
                             <input type="text" class="form-control" id="txtnombre" formControlName="nombre">
                         </div>
 
-                        <div class="form-group col-md-6">
-                            <label for="txtphone">Comuna</label>
-                            <input type="text" class="form-control" id="txtcomuna" formControlName="comuna" placeholder="Ingrese Comuna">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="inputState">Región</label>
-                            <select id="inputState" name="id_region" class="form-control" formControlName="id_region">
-                                      <option value='0' selected>Seleccione Región...</option>
-                                      <option *ngFor="let region of regiones" value="{{region.id_region}}"  [attr.selected]="lead?.id_region==region.id_region ? true : null">
-
-                          {{region.nombre_region?.toUpperCase()}}
-                        </option>
-                                    </select>
-
-                        </div>
                         <div class="form-group col-md-12">
                             <label for="txtphone">Teléfono</label>
                             <input type="text" class="form-control" id="txtphone" formControlName="phone_number" placeholder="Ingrese Teléfono">
