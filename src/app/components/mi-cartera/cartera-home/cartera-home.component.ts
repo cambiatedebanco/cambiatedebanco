@@ -1,8 +1,5 @@
 import {Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Router} from '@angular/router';
-import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from '@angular/fire/storage';
-import { Chart } from 'angular-highcharts';
-import { Options } from 'highcharts';
+import { Router} from '@angular/router';
 import { Subscription } from 'rxjs';
 import { getHeaderStts } from '../../utility';
 import { PostgresService } from 'src/app/services/postgres/postgres.service';
@@ -11,7 +8,6 @@ import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { NavbarComponent } from '../../../components/navbar/navbar.component';
-import { FirebaseStorageService } from 'src/app/services/firebase-storage.service';
 
 @Component({
   selector: 'app-cartera-home',
@@ -34,12 +30,8 @@ export class CarteraHomeComponent implements OnInit, OnDestroy {
 
   dataSourceLeads: MatTableDataSource<any> = new MatTableDataSource();
   displayedColumnsLeads: string[] = ['id', 'fecha', 'rut', 'nombre', 'campana', 'variable', 'asignado', 'modifica'];
-  chart: Chart;
-  chart2: Chart;
   user = null;
   headers = null;
-  options: Options;
-  options2: Options;
   navigationSubscription: Subscription;
   getEstadosLeadsSubscription: Subscription;
   getResumenLeadsColaboradorSubscription: Subscription;
@@ -47,27 +39,24 @@ export class CarteraHomeComponent implements OnInit, OnDestroy {
   getMicarteraCreditosSubscription2: Subscription;
   getMicarteraCreditosTotalSubscription: Subscription;
   getLeads_totalSubscription: Subscription;
-  getDiasRestantesSubscription: Subscription;
   getCampanasByColaboradorSubscription: Subscription;
   getLeadsColaboradorSubscription: Subscription;
   getMicarteraCreditosPendientesSubscription: Subscription;
   getMicarteraCreditosGestionadoSubacription: Subscription;
   getMicarteraEjecutivosSubscription: Subscription;
   getVistaUsuarioCantidadSubscription: Subscription;
-  dataUsers = [];
-  diasRestantes = [];
-  dataUsersLeads = [];
-  ejecutivos = [];
-  ejecutivosc = [];
-  hoy : any;
-  user_cla : any;
-  userPerfil: any;
-  states = [];
-  cleanData = [];
-  cleanDataLead = [];
-  getAllEjecutivosCampanaSubscription: Subscription;
   getLeadByBancoSubscription: Subscription;
   getCreditosByRutSubscription: Subscription;
+  subsUpdCred: Subscription;
+  subsAsignLeadCb: Subscription;
+  subsUsMail: Subscription;
+  subsUpdLeadsPend: Subscription;
+  dataUsers = [];
+  dataUsersLeads = [];
+  user_cla : any;
+  states = [];
+  cleanData = [];
+  cleanDataLead = [];  
   campanas: [];
   filtroFechaForm: FormGroup;
   tabFilterLead = 0;
@@ -76,21 +65,13 @@ export class CarteraHomeComponent implements OnInit, OnDestroy {
   tabFilter = null;
   resumen: any;
   creditos = null;
-  downloadURL = null;
-  tramoPrecio=null;
+  hoy:any;
   public cookieTab: string;
-  constructor(   private route: ActivatedRoute,private _route: Router,
+  constructor(   private _route: Router,
                  private authService: AuthService,
                  private postgresqlService: PostgresService,
                  private formBuilder: FormBuilder) {
 
-
-    /*this.navigationSubscription = this._route.events.subscribe((e: any) => {
-      // If it is a NavigationEnd event re-initalise the component
-      if (e instanceof NavigationEnd) {
-        //this.initialiseInvites();
-      }
-    });*/
   }
   ngOnInit() {
     const date = new Date();
@@ -108,7 +89,7 @@ export class CarteraHomeComponent implements OnInit, OnDestroy {
 
     this.user =this.authService.isUserLoggedIn();
 
-    this.postgresqlService.getUsuarioPorMail(this.user.email , getHeaderStts(this.user)).subscribe(
+    this.subsUsMail = this.postgresqlService.getUsuarioPorMail(this.user.email , getHeaderStts(this.user)).subscribe(
       resp => {
         if(resp){
           this.user_cla=resp[0];          
@@ -129,27 +110,18 @@ export class CarteraHomeComponent implements OnInit, OnDestroy {
          this.dataUsers = data;  
          this.getLeads_totalSubscription = this.postgresqlService.getLeads_total(user_cla.rut , user_cla.id_cargo, this.headers).subscribe((data: any) => {
           this.dataUsersLeads = data;
-          this.init();
        });      
 
       });
 
-       if (user_cla.id_cargo==1 || user_cla.id_cargo ==2){
-        this.getMicarteraEjecutivosSubscription = this.postgresqlService.getMicarteraEjecutivos(user_cla.rut , user_cla.id_cargo, this.headers).subscribe((data: any) => {
-      this.ejecutivosc = data;
-
-   });
-  }
       this.prepareLocalStorage();
       this.initDate();
       this.getEstadosLeads(this.headers);
       this.getCampanasByColaborador(user_cla.rut, this.headers);
       this.getLeadsColaborador(1, 0);
-      this.getAllEjecutivosCampana();
       this.getResumenLeadsColaborador();
       this.getCreditosByRut();
       this.getLeadByBanco();
-      this.getTramoPrecio();
       this.navbar.getTop11LeadsColaborador();
       
 
@@ -168,13 +140,6 @@ export class CarteraHomeComponent implements OnInit, OnDestroy {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
     this.dataSource.data = data;
-  });
-}
-
-getTramoPrecio(){
-  this.getLeadByBancoSubscription = this.postgresqlService.getTramoPrecio(this.headers).subscribe((data: any) => {
-    this.tramoPrecio = data;
-    console.log('this.tramoPrecio ==> ', this.tramoPrecio);
   });
 }
 
@@ -202,8 +167,8 @@ getTramoPrecio(){
             id: id
           }
 
-          this.postgresqlService.updateCreditos(dataSaldo, this.headers).subscribe((_ => {
-            this.postgresqlService.updateAsignLeadsCb(dataAsign, this.headers).subscribe((_ => {
+          this.subsUpdCred = this.postgresqlService.updateCreditos(dataSaldo, this.headers).subscribe((_ => {
+            this.subsAsignLeadCb = this.postgresqlService.updateAsignLeadsCb(dataAsign, this.headers).subscribe((_ => {
               this.getCreditosByRut();
               this.getLeadByBanco();
               this.getResumenLeadsColaborador();
@@ -237,12 +202,6 @@ getTramoPrecio(){
   }
 
 
-  getAllEjecutivosCampana(){
-    this.getAllEjecutivosCampanaSubscription = this.postgresqlService.getAllEjecutivosCampana(this.headers).subscribe((data: any) => {
-      this.ejecutivos = data;
-    });
-  }
-
   getCampanasByColaborador(rut, headers){
     this.getCampanasByColaboradorSubscription = this.postgresqlService.getCampanasByColaborador(rut, headers).subscribe((data: any) => {
       this.campanas = data;
@@ -271,25 +230,16 @@ getTramoPrecio(){
           rut_persona: id
         };
 
-        if(Number(this.user_cla.id_cargo) !== 1 && 
-        Number(this.user_cla.id_cargo) !== 2 && 
-        Number(this.user_cla.id_cargo) !== 4){
-          this.updateBaseLeadsPendientes(dataUpdate);
-        }
-
         this._route.navigate(['mi-ficha', id] , {skipLocationChange: true});
 
        }
 
       onClickTabLead(tipoFiltro: any){
         this.tabFilterLead = tipoFiltro;
-        console.log(tipoFiltro);
-        //this.initDate();
         this.filterLead(this.tabFilterLead);
       }
 
        filterLead(tipoFiltro: any) {
-         console.log('tipoFiltro ==> ', tipoFiltro);
         this.navbar.getTop11LeadsColaborador();
 
         if (tipoFiltro === 0) {
@@ -320,7 +270,6 @@ getTramoPrecio(){
           fechaFin: this.endDate,
           idcargo: parseInt(this.user_cla.id_cargo)
         }
-        console.log(data);
         this.getLeadsColaboradorSubscription = this.postgresqlService.getLeadsColaborador(data,this.headers).subscribe((data: any) => {
           this.dataSourceLeads.sort = this.sortLeads;
           this.dataSourceLeads.paginator = this.paginatorLeads;
@@ -359,7 +308,7 @@ getTramoPrecio(){
       }
 
       updateBaseLeadsPendientes(data){
-        this.postgresqlService.updateBaseLeadsPendientes(data, this.headers).subscribe(res=> res ,
+        this.subsUpdLeadsPend = this.postgresqlService.updateBaseLeadsPendientes(data, this.headers).subscribe(res=> res ,
         err => {
           console.error(err)
         },
@@ -440,23 +389,7 @@ getTramoPrecio(){
         this._route.navigate(['form-lead', id] , {skipLocationChange: true});
        }
 
-       onChange(event){
-        let dato = event.split('-');
-        let data = {
-          id: Number(dato[0]),
-          rut: Number(dato[1]),
-          email: dato[2]
-        };
-        this.updateEjecutivoLead(data);
-        Swal.fire({
-          title: 'OK',
-          text: 'Reasignado Correctamente',
-          type: 'success'
-        }).then(function() {
-  
-      });
-       }
-
+       
        updateEjecutivoLead(data){
         this.postgresqlService.updateEjecutivoLead(data, this.headers).subscribe(res=> res ,
         err => {
@@ -523,117 +456,7 @@ getTramoPrecio(){
       }
     }
 
-      init() {
-        let cumplimiento=Math.round((((this.dataUsers[0].n_gestion + this.dataUsersLeads[0].n_gestion) / (this.dataUsersLeads[0].n_total + this.dataUsers[0].n_total))*100));
-        let restante= 100 - cumplimiento;
-        this.hoy= Date();
-        this.options2={
-          chart: {
-              type: 'bar'
-          },
-          title: {
-              text: ''
-          },
-          xAxis: {
-              categories: ['Credito', 'Seguro', 'Ahorro', 'Mora','Leads']
-          },
-          credits: {
-            enabled: false,
-           },
-          yAxis: {
-              min: 0,
-              title: {
-                  text: 'Total Gestion'
-              }
-          },
-          tooltip: {
-              pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
-              shared: true
-          },
-          plotOptions: {
-              bar: {
-                  stacking: 'percent',
-                  pointWidth: 15,
-          minPointLength: 50,
-          dataLabels: {
-            enabled: true
-          }
-              }
-          },
-          series: [{
-            type:'bar',
-              name: 'No Gestionados',
-              color: '#f9be00',
-              data: [56,47,21,20,5]
-          }, {
-            type:'bar',
-              name: 'Gestionados',
-              color: '#1e88e5',
-              data: [28,16,5,15,15]
-          }]
-      };
-    
-        this.options = {
-              chart: {
-                  type: 'pie',
-                  margin: [0, 0, 0, 0],
-                  spacingTop: 0,
-                  spacingBottom: 0,
-                  spacingLeft: 0,
-                  spacingRight: 0
-              },
-               plotOptions: {
-                pie: {
-                  size:'100%',
-                  shadow: false,
-                  borderColor: null
-                }
-              },
-              title: {
-                text: cumplimiento +'%',
-                align: 'center',
-                verticalAlign: 'middle',
-                  style: {
-                      fontSize: '14px',
-                      fontWeight: 'bold'
-                  }
-    
-            },
-              credits: {
-                enabled: false,
-               },
-              series: [{
-                type:'pie',
-                name: 'meta',
-                data: [{
-                   y: cumplimiento ,
-                  name: 'cumplimiento',
-                  color: "#1e88e5"
-                }, {
-                   y: restante,
-                  name:'',
-                  color: "#f9be00"
-                }],
-                size: '100%',
-                innerSize: '70%',
-                dataLabels: {
-                  enabled: false
-                },
-                marker: {
-                  symbol: 'square',
-                  radius: 12
-                }
-              }]
-            };
-        const chart = new Chart(this.options);
-    
-        this.chart = chart;
-    
-        const chart2 = new Chart(this.options2);
-    
-        this.chart2 = chart2;
-    
-          }
+      
 
       ngOnDestroy(): void {
 
@@ -647,10 +470,6 @@ getTramoPrecio(){
           this.getLeads_totalSubscription.unsubscribe();
         }
         
-        if (this.getDiasRestantesSubscription ) {
-          this.getDiasRestantesSubscription.unsubscribe();
-        }
-        
         if (this.getCampanasByColaboradorSubscription) {
           this.getCampanasByColaboradorSubscription.unsubscribe();
         }
@@ -661,10 +480,6 @@ getTramoPrecio(){
 
         if (this.getEstadosLeadsSubscription) {
           this.getEstadosLeadsSubscription.unsubscribe();
-        }
-        
-        if (this.getAllEjecutivosCampanaSubscription) {
-          this.getAllEjecutivosCampanaSubscription.unsubscribe();
         }
 
         if (this.getLeadsColaboradorSubscription) {
@@ -690,7 +505,29 @@ getTramoPrecio(){
         if (this.getVistaUsuarioCantidadSubscription) {
           this.getVistaUsuarioCantidadSubscription.unsubscribe();
         }
+
+        if (this.subsUsMail) {
+          this.subsUsMail.unsubscribe();
+        }
+
+        if (this.getLeadByBancoSubscription) {
+          this.getLeadByBancoSubscription.unsubscribe();
+        }
+
+        if (this.getCreditosByRutSubscription) {
+          this.getCreditosByRutSubscription.unsubscribe();
+        }
         
+        if (this.subsUpdCred) {
+          this.subsUpdCred.unsubscribe();
+        }
+
+        if (this.subsAsignLeadCb) {
+          this.subsAsignLeadCb.unsubscribe();
+        }
+        if (this.subsUpdLeadsPend) {
+          this.subsUpdLeadsPend.unsubscribe();
+        }
       }
 
      

@@ -1,15 +1,13 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { PostgresService } from 'src/app/services/postgres/postgres.service';
 import { Subscription } from 'rxjs';
-import { AuthService } from 'src/app/services/auth.service';
-import { getHeaderStts } from '../../utility';
 
 @Component({
   selector: 'app-configurador-oferta',
   templateUrl: './configurador-oferta.component.html',
   styleUrls: ['./configurador-oferta.component.css']
 })
-export class ConfiguradorOfertaComponent implements OnInit {
+export class ConfiguradorOfertaComponent implements OnInit, OnDestroy {
   @Input() set oferta(oferta) {
     this._oferta= oferta;
   }
@@ -35,16 +33,14 @@ export class ConfiguradorOfertaComponent implements OnInit {
     return this.creditos;
   }
   _creditos: any;
-  constructor(private postgresqlService: PostgresService,
-    private authService: AuthService) { }
+  constructor(private postgresqlService: PostgresService) { }
   cantidad = []; 
   monto_compra=0;
-  indice=null;
   init_point: any;
   items: any;
   cantidadBolsa = 0;
   cantidadMonedas = 0;
-  getCreditosByRutSubscription: Subscription;
+  subsFlow: Subscription;
   headers=null;
 
   ngOnInit() {
@@ -64,15 +60,7 @@ export class ConfiguradorOfertaComponent implements OnInit {
     if(this.monto_compra === 0){
       return;
     }
-    /* this.checkoutService.goCheckOut(this.preference).then(result => {
-       // Read result of the Cloud Function.
-       this.init_point = result.data.result;
-       console.log(this.init_point);
-       //window.location.href = this.init_point;
-     }).catch(error => {
-       console.log(error);
-       return erryyyyor
-     });*/
+
     this.items = {
       email: this._user.email.toLowerCase(),
       rut: this._user.rut + '-' + this._user.dv,
@@ -81,12 +69,17 @@ export class ConfiguradorOfertaComponent implements OnInit {
     }
 
   
-    this.postgresqlService.getFlow(this.items).subscribe(res=>{
+    this.subsFlow = this.postgresqlService.getFlow(this.items).subscribe(res=>{
        this.init_point = res.redirect;
        console.log(this.init_point);
        window.open(this.init_point, '_blank');
        });
 
    }
+   ngOnDestroy(): void {
 
+    if (this.subsFlow ) {
+      this.subsFlow.unsubscribe();
+    }
+   }
 }

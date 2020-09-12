@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { getHeaderStts } from '../../utility';
 import { PostgresService } from 'src/app/services/postgres/postgres.service';
 import { AuthService } from 'src/app/services/auth.service';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
 import { NavbarComponent } from '../../../components/navbar/navbar.component';
@@ -25,18 +25,17 @@ export class FormLeadComponent implements OnInit, OnDestroy {
   user_cla = null;
   getLeadByIdSubscription: Subscription;
   getEstadosLeadsSubscription: Subscription;
-  getRegionesSubscription: Subscription;
+  subsUsuMail: Subscription;
+  subsUpdLead: Subscription;
+  subsUpdPendLead: Subscription;
   lead = null;
   estados: any;
-  regiones: any;
-  isMonto: boolean;
   selectedEstado = null;
   estadoSubscription: Subscription;
   file = null;
   constructor(private formBuilder: FormBuilder,
     private authService: AuthService,
                  private postgresqlService: PostgresService,
-                 private _route: Router,
                  private route: ActivatedRoute,
                  private firebaseStorage: FirebaseStorageService) { }
 
@@ -61,13 +60,12 @@ export class FormLeadComponent implements OnInit, OnDestroy {
 
 
     this.user =this.authService.isUserLoggedIn();
-    //this.user.email
-    this.postgresqlService.getUsuarioPorMail(this.user.email, getHeaderStts(this.user)).subscribe(
+
+    this.subsUsuMail = this.postgresqlService.getUsuarioPorMail(this.user.email, getHeaderStts(this.user)).subscribe(
       resp => {
         if(resp){
           this.user_cla = resp[0];
           this.getEstadosLeads(this.headers);
-          this.getRegiones(this.headers);
           this.getLeadById(id, this.headers);
           if(Number(this.user_cla.id_cargo) !== 4){
             this.updatePendienteLead({fecha_gestion: new Date(), id: parseInt(id)});
@@ -91,7 +89,7 @@ export class FormLeadComponent implements OnInit, OnDestroy {
   }
 
   updatePendienteLead(data){
-    this.postgresqlService.updatePendienteLead(data, this.headers).subscribe(res=> res ,
+    this.subsUpdPendLead = this.postgresqlService.updatePendienteLead(data, this.headers).subscribe(res=> res ,
     err => {
       console.error(err)
     },
@@ -120,25 +118,12 @@ getEstadosLeads(headers: any) {
 
 }
 
-getRegiones(headers: any) {
-  this.getRegionesSubscription = this.postgresqlService.getRegiones(headers).subscribe((regiones: any) => {
-    this.regiones = regiones;
-  });
-
-}
 
 public onSubmit() {
   const formData = this.formGroup.value;
   if (parseInt(formData.id_estado) === 0) {
     return;
   }
-  /*Swal.fire({
-    title: 'Espera',
-    text: 'Actualizando Información',
-    type: 'info',
-    allowOutsideClick: false
-    });
-  Swal.showLoading();*/
 
   let monto = 0;
   let re = /\./gi;
@@ -185,7 +170,7 @@ public onSubmit() {
 }
 
 updateLead(data){
-  this.postgresqlService.updateLead(data, this.headers).subscribe(res=> res ,
+  this.subsUpdLead = this.postgresqlService.updateLead(data, this.headers).subscribe(res=> res ,
   err => {
     console.error(err)
   },
@@ -204,12 +189,7 @@ onIdEmmiter(id){
 }
 
 ngOnDestroy(): void {
-  if (this.getEstadosLeadsSubscription ) {
-      this.getEstadosLeadsSubscription.unsubscribe();
-  }
-  if (this.getRegionesSubscription ) {
-    this.getRegionesSubscription.unsubscribe();
-  }
+
   if (this.getEstadosLeadsSubscription ) {
     this.getEstadosLeadsSubscription.unsubscribe();
   }
@@ -221,7 +201,18 @@ ngOnDestroy(): void {
   if (this.getLeadByIdSubscription) {
     this.getLeadByIdSubscription.unsubscribe();
   }
+  if (this.subsUsuMail) {
+    this.subsUsuMail.unsubscribe();
+  }
 
+  if (this.subsUpdLead) {
+    this.subsUpdLead.unsubscribe();
+  }
+
+  if (this.subsUpdPendLead) {
+    this.subsUpdPendLead.unsubscribe();
+  }
+  
 }
 
 }

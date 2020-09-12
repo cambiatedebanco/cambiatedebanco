@@ -1,10 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { CheckoutService } from '../../services/checkout.service';
-import { ApiMercadopagoService } from '../../services/api-mercadopago.service';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { PostgresService } from 'src/app/services/postgres/postgres.service';
 import { MatTableDataSource, MatSort, MatPaginator} from '@angular/material';
 import { Subscription } from 'rxjs';
-import { get } from 'scriptjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { getHeaderStts } from '../utility';
 
@@ -13,7 +10,7 @@ import { getHeaderStts } from '../utility';
   templateUrl: './tarjeta.component.html',
   styleUrls: ['./tarjeta.component.css']
 })
-export class TarjetaComponent implements OnInit {
+export class TarjetaComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['fecha', 'id', 'campana', 'bco_origen','bco_destino', 'tools'];
   dataSource: MatTableDataSource<any> = new MatTableDataSource();
   @ViewChild(MatSort, {static: false}) sort: MatSort;
@@ -23,16 +20,17 @@ export class TarjetaComponent implements OnInit {
   headers = null;
   user=null;
   getLeadByBancoSubscription: Subscription;
+  subsUsuMail: Subscription;
+  subsConfOfer: Subscription;
+  subsCredRut: Subscription;
   items: any;
-  ofertas: any;    
+  ofertas: any;
   creditos=null;
   constructor( private postgresqlService: PostgresService,
-    private checkoutService: CheckoutService,
-    private apiMercadopagoService: ApiMercadopagoService,
     private authService: AuthService) { 
 
     }
-
+    
   ngOnInit(): void {
     
     this.authService.getestado();
@@ -40,36 +38,25 @@ export class TarjetaComponent implements OnInit {
 
 
     this.user =this.authService.isUserLoggedIn();
-    //this.user.email  julio.arellano@cajalosandes.cl
-    this.postgresqlService.getUsuarioPorMail(this.user.email, getHeaderStts(this.user)).subscribe(
+    this.subsUsuMail = this.postgresqlService.getUsuarioPorMail(this.user.email, getHeaderStts(this.user)).subscribe(
       resp => {
         if(resp){
           this.user = resp[0];
-          console.log(this.user);
           this.getConfiguradorOferta();
           this.getCreditosByRut();
-          
         }
       });
-  /*  this.postgresqlService.getFlow(this.items).subscribe(res=>{
-      
-        console.log(res);
-      });*/
 
-  /* get("https://www.mercadopago.cl/integrations/v1/web-payment-checkout.js", () => {
-      //library has been loaded...
-    });*/
   }
 
   getConfiguradorOferta(){
-  this.postgresqlService.getConfiguradorOferta(this.headers).subscribe(res=>{
+  this.subsConfOfer = this.postgresqlService.getConfiguradorOferta(this.headers).subscribe(res=>{
     this.ofertas = res;
-    console.log('this.oferta ==>', this.ofertas);
     });
   }
 
   getCreditosByRut(){
-    this.postgresqlService.getCreditosByRut(this.user.rut, this.headers).subscribe((data: any) => {
+    this.subsCredRut = this.postgresqlService.getCreditosByRut(this.user.rut, this.headers).subscribe((data: any) => {
       this.creditos = data[0];
     });
   }
@@ -80,6 +67,21 @@ export class TarjetaComponent implements OnInit {
     this.dataSource.filter = filterValue;
     }
 
+    ngOnDestroy(): void {
+
+      if (this.subsUsuMail ) {
+        this.subsUsuMail.unsubscribe();
+      }
+
+      if (this.subsConfOfer ) {
+        this.subsConfOfer.unsubscribe();
+      }
+      
+      if (this.subsCredRut ) {
+        this.subsCredRut.unsubscribe();
+      }
+      
+    }
 }
 
 
