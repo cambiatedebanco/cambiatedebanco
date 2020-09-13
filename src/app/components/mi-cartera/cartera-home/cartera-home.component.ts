@@ -152,7 +152,7 @@ export class CarteraHomeComponent implements OnInit, OnDestroy {
         text: `Tiene un saldo de ${this.creditos.credito_saldo} monedas`,
         type: 'info',
         showCancelButton: true,
-        confirmButtonText: 'Si, Comprar!',
+        confirmButtonText: 'Sí, Comprar!',
         cancelButtonText: 'No, Cancelar'
       }).then((result) => {
         if (result.value) {
@@ -186,7 +186,7 @@ export class CarteraHomeComponent implements OnInit, OnDestroy {
       });
     }else{
       Swal.fire({
-        title: 'Saldo Insuficiente',
+        title: `Saldo Insuficiente: ${this.creditos.credito_saldo} monedas`,
         type: 'warning',
         html: 'Aumenta tus <b>monedas</b>!'  ,
         focusConfirm: false,

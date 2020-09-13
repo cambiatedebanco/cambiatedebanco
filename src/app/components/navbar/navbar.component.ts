@@ -170,12 +170,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
         this.user = undefined;
         this.loggedIn = false;
         localStorage.removeItem('user');
-        if (this.user_cla.id_cargo === "5") {
-          localStorage.removeItem('user_perfil');
-          localStorage.removeItem('cookieTab');
-          this._route.navigate([`/login-externo`])
-          return;
-        }
         localStorage.removeItem('user_perfil');
         localStorage.removeItem('cookieTab');
         this._route.navigate([`/login`]);

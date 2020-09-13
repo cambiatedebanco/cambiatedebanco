@@ -39,20 +39,13 @@ export class LoginComponent {
     this.numero = Math.floor(Math.random() * 4) + 1
 
   }
-  ngOnInit() {
-    this.user = this.authService.isUserLoggedIn();
-    this.loggedIn = (this.user != null);
-    if (this.user != null) {
-      let userProfile = JSON.parse(localStorage.getItem("user_perfil"))
-      if (parseInt(userProfile.id_cargo) === 5) {
-        this.router.navigate(['home-tam'], { skipLocationChange: false });
-      }
-      this.router.navigate([`/home2`]);
-    }
+
+  ngOnInit() {   
 
   }
+
   // Comman Method to Show Message and Hide after 2 seconds
-  showMessage(type, msg) {
+  showMessage(type, msg) { 
     this.responseMessageType = type;
     this.responseMessage = msg;
     setTimeout(() => {
@@ -69,16 +62,16 @@ export class LoginComponent {
   // Check localStorage is having User Data
   isUserLoggedIn() {
     this.user = this.authService.isUserLoggedIn();
+
     if (this.user === null) {
       this.onWrongLogin();
       return;
     }
     this.postgresService.getUsuarioPorMail(this.user.email, getHeaderStts(this.user)).subscribe(
       resp => {
-        if (resp) {
-          this.showMessage("success", this.successMessage);
+        if(resp.length > 0){
 
-              this.router.navigate([`/mi-cartera-home`]);
+          this.router.navigate([`/mi-cartera-home`]);
 
         } else {
           this.onWrongLogin();
@@ -86,24 +79,6 @@ export class LoginComponent {
         }
       }
     )
-
-    /*let time = new Date();
-
-    let mes='0'+ (time.getMonth()+1).toString();
-    let dia='0'+ (time.getDate()).toString();
-
-    this.data={
-      "rut_colaborador":parseInt(this.userPerfil.RUT),
-      "email":this.userPerfil.EMAIL.toLowerCase(),
-      "timestamp":parseInt(time.getTime().toString().substr(0,10)),
-      "periodo": parseInt(time.getFullYear()+ mes.substring(mes.length, mes.length - 2)),
-      "fecha":parseInt(time.getFullYear()+ mes.substring(mes.length, mes.length - 2)  + dia.substring(dia.length, dia.length - 2)) ,
-      "query":"login",
-      "modulo":"LoginComponent"
-
-    };
-   this._firestore.createLog('cla_scanner_log',this.data);
-*/
 
 
 
@@ -174,9 +149,7 @@ export class LoginComponent {
   googleLogin() {
     this.authService.loginWithGoogle()
       .then(res => {
-        this.showMessage("success", this.successMessage);
         this.isUserLoggedIn();
-
       }, err => {
         this.showMessage("danger", this.dangerMessage);
       });

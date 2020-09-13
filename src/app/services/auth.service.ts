@@ -50,7 +50,7 @@ export class AuthService {
     });
   }
   getestado() {
-
+console.log('En getestado()');
     this.angularFireAuth.authState.subscribe( userResponse => {
       if (userResponse && userResponse.isAnonymous == false) {
         let userStr = JSON.stringify(userResponse);
@@ -77,8 +77,10 @@ export class AuthService {
   }
 
   async login(email: string, password: string) {
+    console.log('login(email: string, password: string) ');
     return await  this.angularFireAuth.auth.signInWithEmailAndPassword(email, password).then(
       response => {
+        console.log('response ==> ', response.user);
         if(response){
           localStorage.setItem('user', JSON.stringify(response.user))
           return true;
@@ -137,21 +139,22 @@ export class AuthService {
     return this._token;
   }
 
+  setLocalStorageUser(){
+    
+  }
+
   async  loginWithGoogle() {
     const googleAuth = gapi.auth2.getAuthInstance();
     const googleUser = await googleAuth.signIn();
     const token = googleUser.getAuthResponse().id_token;
     const credential = auth.GoogleAuthProvider.credential(token);
-    await this.angularFireAuth.auth.signInWithCredential(credential).then(function (result) {
-
+    return await this.angularFireAuth.auth.signInWithCredential(credential).then(function (result) {
+      localStorage.setItem('user', JSON.stringify(result.user))
     }).catch(function (error) {
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      var email = error.email;
-      var credential = error.credential;
-      console.error(error.code);
-      console.error(error.message);
+      console.log(error.code);
+      console.log(error.message);
     })
+
     //    provider.addScope();
 
 
