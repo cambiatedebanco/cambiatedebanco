@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { methods } from 'underscore';
 
 @Component({
   selector: 'app-success',
@@ -11,9 +12,9 @@ export class SuccessComponent implements OnInit {
   constructor(  private route: ActivatedRoute,
     private _route: Router) { }
 
-  ngOnInit() {
-    this.showVariable=this.route.snapshot.data.postData;
-   console.log(this.showVariable);
+  ngOnInit( ) {
+    console.log(this.route.snapshot.queryParamMap.getAll("token"));
+    
   }
 
 }
