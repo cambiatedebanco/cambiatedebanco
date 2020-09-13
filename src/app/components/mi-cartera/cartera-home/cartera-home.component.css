@@ -20,11 +20,11 @@ table {
     font-size: 14px;
 }
 
-.mat-column-rut_persona_b {
+.mat-column-fecha_a {
     word-wrap: break-word !important;
     white-space: unset !important;
-    flex: 0 0 10% !important;
-    width: 10% !important;
+    flex: 0 0 15% !important;
+    width: 15% !important;
     overflow-wrap: break-word;
     word-wrap: break-word;
     word-break: break-word;
@@ -34,7 +34,21 @@ table {
     hyphens: auto;
 }
 
-.mat-column-nombres_b {
+.mat-column-id_a {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 15% !important;
+    width: 15% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+}
+
+.mat-column-campana_a {
     word-wrap: break-word !important;
     white-space: unset !important;
     flex: 0 0 20% !important;
@@ -48,28 +62,11 @@ table {
     hyphens: auto;
 }
 
-.mat-column-monto_b {
+.mat-column-bco_origen_a {
     word-wrap: break-word !important;
     white-space: unset !important;
-    flex: 0 0 15% !important;
-    width: 15% !important;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-    word-break: break-word;
-    -ms-hyphens: auto;
-    -moz-hyphens: auto;
-    -webkit-hyphens: auto;
-    hyphens: auto;
-    padding-right: 50px;
-    text-align: right;
-    justify-content: center;
-}
-
-.mat-column-campana_b {
-    word-wrap: break-word !important;
-    white-space: unset !important;
-    flex: 0 0 15% !important;
-    width: 15% !important;
+    flex: 0 0 20% !important;
+    width: 20% !important;
     overflow-wrap: break-word;
     word-wrap: break-word;
     word-break: break-word;
@@ -79,7 +76,7 @@ table {
     hyphens: auto;
 }
 
-.mat-column-probabilidad_b {
+.mat-column-monto_a {
     word-wrap: break-word !important;
     white-space: unset !important;
     flex: 0 0 15% !important;
@@ -95,7 +92,7 @@ table {
     justify-content: center;
 }
 
-.mat-column-variable_b {
+.mat-column-tools_a {
     word-wrap: break-word !important;
     white-space: unset !important;
     flex: 0 0 15% !important;
@@ -109,20 +106,6 @@ table {
     hyphens: auto;
     text-align: center;
     justify-content: center;
-}
-
-.mat-column-modifica_b {
-    word-wrap: break-word !important;
-    white-space: unset !important;
-    flex: 0 0 15% !important;
-    width: 15% !important;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-    word-break: break-word;
-    -ms-hyphens: auto;
-    -moz-hyphens: auto;
-    -webkit-hyphens: auto;
-    hyphens: auto;
 }
 
 mat-form-field {
@@ -188,8 +171,8 @@ mat-form-field {
 .mat-column-campana {
     word-wrap: break-word !important;
     white-space: unset !important;
-    flex: 0 0 20% !important;
-    width: 20% !important;
+    flex: 0 0 15% !important;
+    width: 15% !important;
     overflow-wrap: break-word;
     word-wrap: break-word;
     word-break: break-word;
@@ -216,8 +199,8 @@ mat-form-field {
 .mat-column-asignado {
     word-wrap: break-word !important;
     white-space: unset !important;
-    flex: 0 0 15% !important;
-    width: 15% !important;
+    flex: 0 0 20% !important;
+    width: 20% !important;
     overflow-wrap: break-word;
     word-wrap: break-word;
     word-break: break-word;
