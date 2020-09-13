@@ -171,8 +171,10 @@ export class CarteraHomeComponent implements OnInit, OnDestroy {
             this.subsAsignLeadCb = this.postgresqlService.updateAsignLeadsCb(dataAsign, this.headers).subscribe((_ => {
               this.getCreditosByRut();
               this.getLeadByBanco();
+              this.navbar.getTop11LeadsColaborador();
               this.getResumenLeadsColaborador();
               this.getLeadsColaborador(1, 0);
+          
               Swal.fire(
                 'Comprado!',
                 'Compra exitosa lead asignado.',
@@ -245,6 +247,8 @@ export class CarteraHomeComponent implements OnInit, OnDestroy {
         if (tipoFiltro === 0) {
           this.getLeadByBanco();
           this.getCreditosByRut();
+          this.getResumenLeadsColaborador();
+          this.navbar.getTop11LeadsColaborador();
         }
 
         if (tipoFiltro === 1) {
