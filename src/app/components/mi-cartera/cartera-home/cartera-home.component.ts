@@ -26,7 +26,7 @@ export class CarteraHomeComponent implements OnInit, OnDestroy {
   @ViewChild(NavbarComponent, {static: false}) navbar:NavbarComponent;
 
   dataSource: MatTableDataSource<any> = new MatTableDataSource();
-  displayedColumns: string[] = ['fecha', 'id', 'campana', 'bco_origen','bco_destino', 'monto', 'tools'];
+  displayedColumns: string[] = ['fecha', 'id', 'campana', 'bco_origen', 'monto', 'tools'];
 
   dataSourceLeads: MatTableDataSource<any> = new MatTableDataSource();
   displayedColumnsLeads: string[] = ['id', 'fecha', 'rut', 'nombre', 'campana', 'variable', 'asignado', 'modifica'];

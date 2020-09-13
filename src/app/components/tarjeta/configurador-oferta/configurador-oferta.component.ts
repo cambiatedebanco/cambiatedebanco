@@ -42,6 +42,7 @@ export class ConfiguradorOfertaComponent implements OnInit, OnDestroy {
   cantidadMonedas = 0;
   subsFlow: Subscription;
   headers=null;
+  userPerfil=null;
 
   ngOnInit() {
     this.cantidad = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
@@ -52,6 +53,7 @@ export class ConfiguradorOfertaComponent implements OnInit, OnDestroy {
     this.cantidadBolsa = parseInt(params[0]);
     this.cantidadMonedas = parseInt(params[2]) * this.cantidadBolsa;
     this.monto_compra = this.cantidadBolsa * parseInt(params[1]);
+    this.userPerfil = JSON.parse(localStorage.getItem('user_perfil'));
     console.log(this.monto_compra);
   }
 
@@ -63,7 +65,7 @@ export class ConfiguradorOfertaComponent implements OnInit, OnDestroy {
 
     this.items = {
       email: this._user.email.toLowerCase(),
-      rut: this._user.rut + '-' + this._user.dv,
+      rut: this.userPerfil.rut + '-' + this.userPerfil.dv,
       monto: this.monto_compra,
       cantidad_monedas: this.cantidadMonedas
     }
