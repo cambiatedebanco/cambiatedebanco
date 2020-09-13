@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import {Component, OnInit, ViewChild, OnDestroy, ElementRef } from '@angular/core';
 import { Router} from '@angular/router';
 import { Subscription } from 'rxjs';
 import { getHeaderStts } from '../../utility';
@@ -15,7 +15,7 @@ import { NavbarComponent } from '../../../components/navbar/navbar.component';
   styleUrls: ['./cartera-home.component.css']
 })
 export class CarteraHomeComponent implements OnInit, OnDestroy {
-
+  @ViewChild('alerttopright', {static: false}) alerttopright: ElementRef;
   @ViewChild('paginator', {static: true}) paginator: MatPaginator;
   @ViewChild('sort', {static: true}) sort: MatSort;
 
@@ -126,6 +126,10 @@ export class CarteraHomeComponent implements OnInit, OnDestroy {
       
 
   }
+  close(){
+    this.alerttopright.nativeElement.style.display = 'none';
+  }
+  
 
   getCreditosByRut(){
     this.tabFilterLead = 0;

@@ -226,3 +226,8 @@ mat-form-field {
     -webkit-hyphens: auto;
     hyphens: auto;
 }
+
+.myadmin-alert-top-right,
+.myadmin-alert-fullscreen {
+    z-index: 500;
+}
