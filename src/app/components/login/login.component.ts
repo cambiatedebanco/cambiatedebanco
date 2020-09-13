@@ -1,15 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { getHeaderStts } from '../utility';
 import { PostgresService } from 'src/app/services/postgres/postgres.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'login-app',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnDestroy {
   title = 'firebaseLogin';
 
   selectedVal: string;
@@ -24,6 +25,7 @@ export class LoginComponent {
   loggedIn: boolean;
   numero;
   data: any;
+  subsUserMail: Subscription;
 
   dangerMessage = "No es posible ingresar, intente nuevamente.";
   successMessage = "Bienvenido a CEOcrm, ingreso exitoso!.";
@@ -67,10 +69,10 @@ export class LoginComponent {
       this.onWrongLogin();
       return;
     }
-    this.postgresService.getUsuarioPorMail(this.user.email, getHeaderStts(this.user)).subscribe(
+    this.subsUserMail = this.postgresService.getUsuarioPorMail(this.user.email, getHeaderStts(this.user)).subscribe(
       resp => {
         if(resp.length > 0){
-
+          localStorage.setItem('user_perfil', JSON.stringify(resp[0]));
           this.router.navigate([`/mi-cartera-home`]);
 
         } else {
@@ -157,5 +159,12 @@ export class LoginComponent {
   onWrongLogin() {
     this.router.navigate([`/login`]);
     this.showMessage("danger", this.dangerMessage);
+  }
+
+  ngOnDestroy(): void {
+
+    if (this.subsUserMail ) {
+        this.subsUserMail.unsubscribe();
+    }
   }
 }

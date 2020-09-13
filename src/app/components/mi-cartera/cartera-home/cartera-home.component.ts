@@ -222,23 +222,6 @@ export class CarteraHomeComponent implements OnInit, OnDestroy {
     this.startDate = this.getFechaInteger(date);
     this.endDate = this.getFechaInteger(new Date());
   }
-       onFichaAfiliado(id){
-        const time = new Date();
-        const mes = '0' + (time.getMonth() + 1).toString();
-        const dia = '0' + (time.getDate()).toString();
-        const periodo = parseInt(time.getFullYear() + '' + mes.substring(mes.length, mes.length - 2));
-        const fecha = parseInt(time.getFullYear() + '' + mes.substring(mes.length, mes.length - 2)  +''+ dia.substring(dia.length, dia.length - 2));
-
-        const dataUpdate = {
-          fecha_date_gestion: time,
-          periodo_gestion: periodo,
-          fecha_gestion: fecha,
-          rut_persona: id
-        };
-
-        this._route.navigate(['mi-ficha', id] , {skipLocationChange: true});
-
-       }
 
       onClickTabLead(tipoFiltro: any){
         this.tabFilterLead = tipoFiltro;
@@ -315,16 +298,6 @@ export class CarteraHomeComponent implements OnInit, OnDestroy {
       }
       }
 
-      updateBaseLeadsPendientes(data){
-        this.subsUpdLeadsPend = this.postgresqlService.updateBaseLeadsPendientes(data, this.headers).subscribe(res=> res ,
-        err => {
-          console.error(err)
-        },
-        ()=> {
-        }
-      )
-      }
-
 
       getEstadosLeads(headers: any) {
         this.getEstadosLeadsSubscription = this.postgresqlService.getEstadosLeads(headers).subscribe((estados: any) => {
@@ -396,18 +369,6 @@ export class CarteraHomeComponent implements OnInit, OnDestroy {
        onLead(id: any) {
         this._route.navigate(['form-lead', id] , {skipLocationChange: true});
        }
-
-       
-       updateEjecutivoLead(data){
-        this.postgresqlService.updateEjecutivoLead(data, this.headers).subscribe(res=> res ,
-        err => {
-          console.error(err)
-        },
-        ()=> {
-          this.filterLead(this.tabFilterLead);
-        }
-      )
-      }
 
       getResumenLeadsColaborador(){
         const data = {

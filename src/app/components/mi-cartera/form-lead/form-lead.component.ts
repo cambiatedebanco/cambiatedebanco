@@ -55,24 +55,16 @@ export class FormLeadComponent implements OnInit, OnDestroy {
       monto: new FormControl({value: 0}),
       observaciones: new FormControl({value: ''})
     });
-    this.authService.getestado();
-    this.headers = getHeaderStts(this.authService.isUserLoggedIn())
+    this.user_cla = JSON.parse(localStorage.getItem('user_perfil'));
+    this.user = this.authService.isUserLoggedIn();
+    this.headers = getHeaderStts(this.user);
+    this.getEstadosLeads(this.headers);
+    this.getLeadById(id, this.headers);
+    if(Number(this.user_cla.id_cargo) !== 4){
+      this.updatePendienteLead({fecha_gestion: new Date(), id: parseInt(id)});
+    }
+    this.navbar.getTop11LeadsColaborador();
 
-
-    this.user =this.authService.isUserLoggedIn();
-
-    this.subsUsuMail = this.postgresqlService.getUsuarioPorMail(this.user.email, getHeaderStts(this.user)).subscribe(
-      resp => {
-        if(resp){
-          this.user_cla = resp[0];
-          this.getEstadosLeads(this.headers);
-          this.getLeadById(id, this.headers);
-          if(Number(this.user_cla.id_cargo) !== 4){
-            this.updatePendienteLead({fecha_gestion: new Date(), id: parseInt(id)});
-          }
-          this.navbar.getTop11LeadsColaborador();
-        }
-      });
   }
 
   private getLeadById(id: string, headers) {

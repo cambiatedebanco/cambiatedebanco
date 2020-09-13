@@ -1,11 +1,12 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import Swal from 'sweetalert2';
+import { Subscription } from 'rxjs';
 import { FirestoreService } from 'src/app/services/firestore/firestore.service';
 import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 import {ExportService} from '../../services/export-file/export.service';
 import { tap } from 'rxjs/operators';
-import { getHeaders } from '../utility';
+import { getHeaders, getHeaderStts } from '../utility';
 import { PostgresService } from 'src/app/services/postgres/postgres.service';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -16,10 +17,13 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class AdminRolesComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['rut', 'nombre', 'email', 'modifica', 'elimina'];
-  navigationSubscription;
-  getUsuariosAllSubscribe;
+  navigationSubscription: Subscription;
+  getUsuariosAllSubscribe: Subscription;
+  subsDelUsuRut: Subscription;
   headers = null;
   dataUsers: any;
+  user_cla = null;
+  user = null;
   dataSource: MatTableDataSource<any> = new MatTableDataSource();
   @ViewChild(MatSort, {static: false}) sort: MatSort;
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
@@ -42,14 +46,10 @@ export class AdminRolesComponent implements OnInit, OnDestroy {
     }
 
   initialiseInvites() {
-    this.authService.isUserLoggedInAuth().pipe(
-      tap((user) => { if (user) { 
-      this.headers = getHeaders(user)
-      this.getUsuariosCla(getHeaders(this.headers))
-       } })
-    ).subscribe(
-      _ => {}
-    )
+    this.user_cla = JSON.parse(localStorage.getItem('user_perfil'));
+    this.user = this.authService.isUserLoggedIn();
+    this.headers = getHeaderStts(this.user);
+    this.getUsuariosCla(this.headers);
   }
 
   ngAfterViewInit() {
@@ -105,7 +105,7 @@ export class AdminRolesComponent implements OnInit, OnDestroy {
       if (result.value) {
         //TO DO DELETE CAMPAIN
       //  this.firestoreservice.deleteCampaignsEjec(id);
-        this.postgresService.deleteUsuarioPorRut(id, this.headers).subscribe((_ => {
+        this.subsDelUsuRut = this.postgresService.deleteUsuarioPorRut(id, this.headers).subscribe((_ => {
           this.deleteRowInDataSourceByRut(id);
         }))
         Swal.fire(
@@ -149,6 +149,10 @@ export class AdminRolesComponent implements OnInit, OnDestroy {
     if (this.getUsuariosAllSubscribe) {
       this.getUsuariosAllSubscribe.unsubscribe();
      }
+     if (this.subsDelUsuRut) {
+      this.subsDelUsuRut.unsubscribe();
+     }
+     
   }
 
 }

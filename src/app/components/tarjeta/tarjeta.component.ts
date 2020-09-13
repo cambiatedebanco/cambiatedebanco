@@ -19,6 +19,7 @@ export class TarjetaComponent implements OnInit, OnDestroy {
   init_point: any;
   headers = null;
   user=null;
+  user_cla = null;
   getLeadByBancoSubscription: Subscription;
   subsUsuMail: Subscription;
   subsConfOfer: Subscription;
@@ -32,21 +33,11 @@ export class TarjetaComponent implements OnInit, OnDestroy {
     }
     
   ngOnInit(): void {
-    
-    this.authService.getestado();
-    this.headers = getHeaderStts(this.authService.isUserLoggedIn())
-
-
-    this.user =this.authService.isUserLoggedIn();
-    this.subsUsuMail = this.postgresqlService.getUsuarioPorMail(this.user.email, getHeaderStts(this.user)).subscribe(
-      resp => {
-        if(resp){
-          this.user = resp[0];
-          this.getConfiguradorOferta();
-          this.getCreditosByRut();
-        }
-      });
-
+    this.user_cla = JSON.parse(localStorage.getItem('user_perfil'));
+    this.user = this.authService.isUserLoggedIn();
+    this.headers = getHeaderStts(this.user);
+    this.getConfiguradorOferta();
+    this.getCreditosByRut();
   }
 
   getConfiguradorOferta(){
@@ -56,7 +47,7 @@ export class TarjetaComponent implements OnInit, OnDestroy {
   }
 
   getCreditosByRut(){
-    this.subsCredRut = this.postgresqlService.getCreditosByRut(this.user.rut, this.headers).subscribe((data: any) => {
+    this.subsCredRut = this.postgresqlService.getCreditosByRut(this.user_cla.rut, this.headers).subscribe((data: any) => {
       this.creditos = data[0];
     });
   }

@@ -8,7 +8,7 @@ import { Subject, combineLatest, Subscription } from 'rxjs';
 import { RutValidator } from '../../rut.validator';
 import { PostgresService } from 'src/app/services/postgres/postgres.service';
 import { tap } from 'rxjs/operators';
-import { getHeaders } from '../utility';
+import { getHeaders, getHeaderStts } from '../utility';
 
 @Component({
   selector: 'app-crear-usuario',
@@ -20,12 +20,6 @@ export class CrearUsuarioComponent implements OnInit, OnDestroy {
   agregarForm;
   submitted = false;
   Ischecked: boolean;
-  allemps: any;
-  startAt = new Subject();
-  endAt = new Subject();
-  startobs = this.startAt.asObservable();
-  endobs = this.endAt.asObservable();
-  emps: any;
   nivelAcceso: any;
   selected: any;
   navigationSubscription;
@@ -38,10 +32,13 @@ export class CrearUsuarioComponent implements OnInit, OnDestroy {
   rutEjec: any;
   headers = null;
   subscriptionPostgres: Subscription;
+  subsBanco: Subscription;
+  subsUserMail: Subscription;
+  subsAddUser: Subscription;
+  subsRoles: Subscription;
   rolesDisponibles
-  DEFAULTDOMAIN: String = '@CAJALOSANDES.CL'
-  EXTERNALDOMAIN: String = ''
   bancos: any = [];
+  user_cla = null;
   constructor(
     private formBuilder: FormBuilder,
     public firestoreservice: FirestoreService,
@@ -91,41 +88,23 @@ export class CrearUsuarioComponent implements OnInit, OnDestroy {
   }
 
   initializeHeader() {
-    this.authService.isUserLoggedInAuth().pipe(
-      tap((user) => {
-        if (user) {
-          this.user = user;
-          this.headers = getHeaders(user)
-
-          this.postgresService.getUsuarioPorMail(this.user.email.toUpperCase(), this.headers).subscribe(resp => {
-            if (resp) {
-              this.rutEjec = resp[0].rut
-            }
-          })
-
-        }
-      })
-    ).subscribe(
-      _ => {
-        this.getRolesDisponibles()
-        this.getBancos()
-      }
-    ), error => {
-      console.error(error)
-    }
+    this.user_cla = JSON.parse(localStorage.getItem('user_perfil'));
+    this.user = this.authService.isUserLoggedIn();
+    this.headers = getHeaderStts(this.user);
+    this.rutEjec = this.user_cla.rut;
+    this.getRolesDisponibles();
+    this.getBancos();
   }
 
   getBancos(){
-    this.postgresService.getBancos().subscribe(resp=>{
+    this.subsBanco = this.postgresService.getBancos().subscribe(resp=>{
       this.bancos=resp;
-      console.log(this.bancos);
     })
   }
   
 
   public onSubmit() {
     this.submitted = true;
-    console.log(this.agregarForm.value)
 
 if(this.agregarForm.invalid){
 return;
@@ -163,7 +142,7 @@ return;
 
 
   addUserPostgres(data) {
-    this.postgresService.addUser(data, this.headers).subscribe(_ => {
+    this.subsAddUser = this.postgresService.addUser(data, this.headers).subscribe(_ => {
       Swal.fire({
         title: 'OK',
         text: 'Usuario ha sido Ingresado',
@@ -190,16 +169,6 @@ return;
     let q = $event.source.value;
   }
 
-  search($event) {
-    let q = $event.target.value;
-
-    if (q !== '') {
-      this.startAt.next(q.toUpperCase());
-      this.endAt.next(q.toUpperCase() + '\uf8ff');
-    } else {
-      this.emps = this.allemps;
-    }
-  }
 
   onSubmitRut() {
     this.userExist = false;
@@ -228,7 +197,7 @@ return;
   }
 
   getRolesDisponibles() {
-    this.postgresService.getRoles(this.headers).subscribe(result => {
+    this.subsRoles = this.postgresService.getRoles(this.headers).subscribe(result => {
       this.rolesDisponibles = result
     })
   }
@@ -252,5 +221,19 @@ return;
     if (this.subscriptionPostgres) {
       this.subscriptionPostgres.unsubscribe();
     }
+    if (this.subsBanco) {
+      this.subsBanco.unsubscribe();
+    }
+    if (this.subsUserMail) {
+      this.subsUserMail.unsubscribe();
+    }
+    if (this.subsAddUser) {
+      this.subsAddUser.unsubscribe();
+    }
+
+    if (this.subsRoles) {
+      this.subsRoles.unsubscribe();
+    }
+
   }
 }
