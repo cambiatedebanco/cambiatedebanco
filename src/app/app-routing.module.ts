@@ -100,7 +100,7 @@ const routes: Routes = [
   { path: 'update-campana', component: UpdateCampanaComponent, canActivate: [AuthGuard] },
   { path: 'home-tam', component: HomeTamComponent, canActivate: [AuthGuard] },
   { path: 'tarjeta', component: TarjetaComponent, canActivate: [AuthGuard] },
-  { path: 'success', component: SuccessComponent, canActivate: [AuthGuard] },
+  { path: 'success', component: SuccessComponent },
   { path: 'pending', component: PendingComponent, canActivate: [AuthGuard] },
   { path: 'error', component: ErrorComponent, canActivate: [AuthGuard] },
   { path: 'gestion-tam/:id', component: GestionTam, canActivate: [AuthGuard] },
