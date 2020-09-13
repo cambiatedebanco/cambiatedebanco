@@ -78,9 +78,8 @@ export class CrearUsuarioComponent implements OnInit, OnDestroy {
 
 
     this.nivelAcceso = [
-      { acceso: 1, name: 'Afiliado y Empresa' },
-      { acceso: 2, name: 'Empresa' },
-      { acceso: 3, name: 'Afiliado' },
+      { acceso: 1, name: 'Mi Cartera' },
+      { acceso: 99, name: 'Administración' }
     ];
   }
 
