@@ -2,7 +2,7 @@
 <!-- Topbar header - style you can find in pages.scss -->
 <!-- ============================================================== -->
 <nav class="navbar navbar-default navbar-static-top m-b-0">
-    <div class="navbar-header" *ngIf="user_cla">
+    <div class="navbar-header">
         <div class="top-left-part">
             <!-- Logo -->
             <a class="logo" routerLink="{{defaultHome}}">
@@ -16,7 +16,7 @@
                     <!--This is light logo text-->
                 </span> </a>
         </div>
-        <ul class="nav navbar-top-links navbar-left" *ngIf="user_cla.id_cargo != 5">
+        <ul class="nav navbar-top-links navbar-left">
             <li><a href="javascript:void(0)" class="open-close waves-effect waves-light visible-xs"><i
                         class="ti-close ti-menu"></i></a></li>
             <li class="dropdown">
@@ -63,9 +63,9 @@
         <!-- /Logo -->
         <!-- Search input and Toggle icon -->
 
-        <ul class="nav navbar-top-links navbar-right pull-right" *ngIf="user_cla">
+        <ul class="nav navbar-top-links navbar-right pull-right">
 
-            <li class="dropdown hidden-xs" *ngIf="loggedIn">
+            <li class="dropdown hidden-xs">
                 <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#">
                     <img *ngIf="user.photoURL" src="{{user.photoURL}}" alt="user-img" width="36" class="img-circle">
                     <img *ngIf="!user.photoURL" src="./assets/images/boss.png" alt="user-img" width="36" height="36" class="img-circle">

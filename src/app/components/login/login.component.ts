@@ -1,15 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { getHeaderStts } from '../utility';
 import { PostgresService } from 'src/app/services/postgres/postgres.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'login-app',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnDestroy {
   title = 'firebaseLogin';
 
   selectedVal: string;
@@ -24,6 +25,7 @@ export class LoginComponent {
   loggedIn: boolean;
   numero;
   data: any;
+  subsUserMail: Subscription;
 
   dangerMessage = "No es posible ingresar, intente nuevamente.";
   successMessage = "Bienvenido a CEOcrm, ingreso exitoso!.";
@@ -39,20 +41,13 @@ export class LoginComponent {
     this.numero = Math.floor(Math.random() * 4) + 1
 
   }
-  ngOnInit() {
-    this.user = this.authService.isUserLoggedIn();
-    this.loggedIn = (this.user != null);
-    if (this.user != null) {
-      let userProfile = JSON.parse(localStorage.getItem("user_perfil"))
-      if (parseInt(userProfile.id_cargo) === 5) {
-        this.router.navigate(['home-tam'], { skipLocationChange: false });
-      }
-      this.router.navigate([`/home2`]);
-    }
+
+  ngOnInit() {   
 
   }
+
   // Comman Method to Show Message and Hide after 2 seconds
-  showMessage(type, msg) {
+  showMessage(type, msg) { 
     this.responseMessageType = type;
     this.responseMessage = msg;
     setTimeout(() => {
@@ -69,16 +64,16 @@ export class LoginComponent {
   // Check localStorage is having User Data
   isUserLoggedIn() {
     this.user = this.authService.isUserLoggedIn();
+
     if (this.user === null) {
       this.onWrongLogin();
       return;
     }
-    this.postgresService.getUsuarioPorMail(this.user.email, getHeaderStts(this.user)).subscribe(
+    this.subsUserMail = this.postgresService.getUsuarioPorMail(this.user.email, getHeaderStts(this.user)).subscribe(
       resp => {
-        if (resp) {
-          this.showMessage("success", this.successMessage);
-
-              this.router.navigate([`/mi-cartera-home`]);
+        if(resp.length > 0){
+          localStorage.setItem('user_perfil', JSON.stringify(resp[0]));
+          this.router.navigate([`/mi-cartera-home`]);
 
         } else {
           this.onWrongLogin();
@@ -86,24 +81,6 @@ export class LoginComponent {
         }
       }
     )
-
-    /*let time = new Date();
-
-    let mes='0'+ (time.getMonth()+1).toString();
-    let dia='0'+ (time.getDate()).toString();
-
-    this.data={
-      "rut_colaborador":parseInt(this.userPerfil.RUT),
-      "email":this.userPerfil.EMAIL.toLowerCase(),
-      "timestamp":parseInt(time.getTime().toString().substr(0,10)),
-      "periodo": parseInt(time.getFullYear()+ mes.substring(mes.length, mes.length - 2)),
-      "fecha":parseInt(time.getFullYear()+ mes.substring(mes.length, mes.length - 2)  + dia.substring(dia.length, dia.length - 2)) ,
-      "query":"login",
-      "modulo":"LoginComponent"
-
-    };
-   this._firestore.createLog('cla_scanner_log',this.data);
-*/
 
 
 
@@ -174,9 +151,7 @@ export class LoginComponent {
   googleLogin() {
     this.authService.loginWithGoogle()
       .then(res => {
-        this.showMessage("success", this.successMessage);
         this.isUserLoggedIn();
-
       }, err => {
         this.showMessage("danger", this.dangerMessage);
       });
@@ -184,5 +159,12 @@ export class LoginComponent {
   onWrongLogin() {
     this.router.navigate([`/login`]);
     this.showMessage("danger", this.dangerMessage);
+  }
+
+  ngOnDestroy(): void {
+
+    if (this.subsUserMail ) {
+        this.subsUserMail.unsubscribe();
+    }
   }
 }

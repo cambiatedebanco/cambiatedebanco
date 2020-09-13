@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 import { FirestoreService } from 'src/app/services/firestore/firestore.service';
 import { Subject, combineLatest, Subscription } from 'rxjs';
 import { PostgresService } from 'src/app/services/postgres/postgres.service';
-import { getHeaders } from '../utility';
+import { getHeaders, getHeaderStts } from '../utility';
 import { tap } from 'rxjs/operators';
 
 
@@ -20,28 +20,27 @@ export class ModificarUsuarioComponent implements OnInit, OnDestroy {
   submitted = false;
   usuario: any = [{ apellido_paterno: ' ' }];
   Ischecked: boolean;
-  allemps: any;
-  startAt = new Subject();
-  endAt = new Subject();
-  startobs = this.startAt.asObservable();
-  endobs = this.endAt.asObservable();
-  emps: any;
   nivelAcceso: any;
   selected: any;
   selectedBanco: any;
-  navigationSubscription;
+  navigationSubscription: Subscription;;
   user: any;
-  campaignsEjecutivo: any = [];
   control: any = [];
   checked: boolean;
   rutEjec: any;
   rutUsuario: any;
   subscriptionGetUserCla: Subscription;
+  susbsRoles: Subscription;
+  subsUpdUser: Subscription;
+  subsUserMail: Subscription;
+  subsBancos: Subscription;
+  subsGetUserMail: Subscription;
   headers = null;
   currentUser = null
   isFormReady:boolean = false;
   toUpdateId = null;
   bancos: any = [];
+  user_cla = null;
   constructor(
     private formBuilder: FormBuilder,
     public firestoreservice: FirestoreService,
@@ -56,37 +55,26 @@ export class ModificarUsuarioComponent implements OnInit, OnDestroy {
 
   initialiseInvites() {
     this.toUpdateId = this.route.snapshot.paramMap.get('id');
-    this.authService.isUserLoggedInAuth().pipe(
-        tap((user) => { if (user) { 
-          this.currentUser = user;
-        this.headers = getHeaders(this.currentUser)
-        this.postgresService.getUsuarioPorMail(user.email, this.headers).subscribe(data=> {
-          if(data.length> 0){
-            this.rutUsuario = data[0].rut
-          }
-        })
-         } })
-      ).subscribe(
-        _ => {
 
-         this.getUsuarioPostgres(this.toUpdateId);
-         this.getRolesDisponibles();
-         this.getBancos()
-        }
-      )
+    this.user_cla = JSON.parse(localStorage.getItem('user_perfil'));
+    this.user = this.authService.isUserLoggedIn();
+    this.headers = getHeaderStts(this.user);
+    this.rutUsuario = this.user_cla.rut;
+    this.getUsuarioPostgres(this.toUpdateId);
+    this.getRolesDisponibles();
+    this.getBancos();
 
-    this.nivelAcceso = [
-      { acceso: 1, name: 'Afiliado y Empresa' },
-      { acceso: 2, name: 'Empresa' },
-      { acceso: 3, name: 'Afiliado' },
-    ];
+      this.nivelAcceso = [
+        { acceso: 1, name: 'Mi Cartera' },
+        { acceso: 99, name: 'Administración' }
+      ];
 
   }
+
   rolesDisponibles = []
   getRolesDisponibles(){
-    this.postgresService.getRoles(this.headers).subscribe(result=>{
-      console.log(result);
-      this.rolesDisponibles = result
+    this.susbsRoles = this.postgresService.getRoles(this.headers).subscribe(result=>{
+      this.rolesDisponibles = result;
     })
   }
 
@@ -120,12 +108,12 @@ export class ModificarUsuarioComponent implements OnInit, OnDestroy {
 
   }
   getBancos(){
-    this.postgresService.getBancos().subscribe(resp=>{
+    this.subsBancos = this.postgresService.getBancos().subscribe(resp=>{
       this.bancos=resp;
     })
   }
   getUsuarioPostgres(id: any) {
-    this.postgresService.getUsuarioPorRut(id, this.headers).subscribe(res => {
+    this.subsGetUserMail = this.postgresService.getUsuarioPorRut(id, this.headers).subscribe(res => {
       if (res.length > 0) {
         this.updateControls(res[0]);
 
@@ -142,7 +130,7 @@ export class ModificarUsuarioComponent implements OnInit, OnDestroy {
 
   }
   updateUsuarioPostgres(data: any) {
-    this.postgresService.updateUsuario(data, this.headers).subscribe(_ => {
+    this.subsUpdUser = this.postgresService.updateUsuario(data, this.headers).subscribe(_ => {
       Swal.fire({
         title: 'OK',
         text: 'Usuario ha sido actualizado',
@@ -163,9 +151,7 @@ export class ModificarUsuarioComponent implements OnInit, OnDestroy {
   }
 
   updateControls(data) {
-    console.log(data)
     let cargo = data.id_cargo ? parseInt(data.id_cargo) : ''
-    console.log(cargo);
     this.modificarForm = this.formBuilder.group(
       {
         rut: new FormControl({value: data.rut, disabled: true},),
@@ -198,16 +184,6 @@ export class ModificarUsuarioComponent implements OnInit, OnDestroy {
     const q = $event.source.value;
   }
 
-  search($event) {
-    const q = $event.target.value;
-
-    if (q !== '') {
-      this.startAt.next(q.toUpperCase());
-      this.endAt.next(q.toUpperCase() + '\uf8ff');
-    } else {
-      this.emps = this.allemps;
-    }
-  }
 
   ngOnInit() {
     this.initialiseInvites();
@@ -220,6 +196,22 @@ export class ModificarUsuarioComponent implements OnInit, OnDestroy {
     if (this.navigationSubscription) {
       this.navigationSubscription.unsubscribe();
     }
+    if (this.susbsRoles) {
+      this.susbsRoles.unsubscribe();
+    }
+    if (this.subsUpdUser) {
+      this.subsUpdUser.unsubscribe();
+    }
+    if (this.subsUserMail) {
+      this.subsUserMail.unsubscribe();
+    }
+    if (this.subsBancos) {
+      this.subsBancos.unsubscribe();
+    }
+    if (this.subsGetUserMail) {
+      this.subsGetUserMail.unsubscribe();
+    }
+    
   }
 
 }
