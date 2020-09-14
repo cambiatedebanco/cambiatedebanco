@@ -141,7 +141,7 @@ export class MainComponent implements OnInit {
       //let referencia = this.firebaseStorage.referenciaCloudStorage(this.nombreArchivo);
     //let tarea = this.firebaseStorage.tareaCloudStorage(this.nombreArchivo, archivo);
 //    this.firebaseStorage.tareaCloudStorage(this.nombreArchivo, archivo);
-this.isPaso1_completado = true;
+
 let form1= this.firstFormGroup.value;
 this.postgresService.getBancos(form1.bancos).subscribe(resp=>{
   this.bancos2=resp;
@@ -149,8 +149,8 @@ this.postgresService.getBancos(form1.bancos).subscribe(resp=>{
 });
 
 
-this.stepper.selected.completed = true;
-    stepper.next();
+
+
     /*if (this.creditFormGroup.invalid) {
       this.isCreditFormCompleted = false;
       this.isDetailCompleted = false;
@@ -215,10 +215,7 @@ this.stepper.selected.completed = true;
       return;
     }
     
-    this.isPaso2_completado = true;
-    this.stepper.selected.completed = true;
-
-    stepper.next();
+  
     /*if (this.creditFormGroup.invalid) {
       this.isCreditFormCompleted = false;
       this.isDetailCompleted = false;
@@ -314,7 +311,8 @@ this.stepper.selected.completed = true;
   );
 
   this.editable=false;
-    stepper.next();
+
+
     /*if (this.creditFormGroup.invalid) {
       this.isCreditFormCompleted = false;
       this.isDetailCompleted = false;

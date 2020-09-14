@@ -51,7 +51,7 @@
 
                     <div class="col-lg-12 col-md-12">
                         <mat-horizontal-stepper linear #stepper>
-                            <mat-step [completed]="isPaso1_completado" [editable]="editable" label="1">
+                            <mat-step [stepControl]="firstFormGroup" label="1">
                                 <form [formGroup]="firstFormGroup" (ngSubmit)="onSubmitPaso1(stepper)">
                                     <div class="row px-5" style="height: 550px;">
                                         <div class="row align-items-start">
@@ -115,7 +115,7 @@
                                 </form>
 
                             </mat-step>
-                            <mat-step [completed]="isPaso2_completado" [editable]="editable" label="Elige Bancos">
+                            <mat-step [stepControl]="secondFormGroup" label="Elige Bancos">
 
                                 <form [formGroup]="secondFormGroup" (ngSubmit)="onSubmitPaso2(stepper)">
                                     <div class="row px-5" style="height: 550px;">
@@ -148,7 +148,7 @@
                                 </form>
 
                             </mat-step>
-                            <mat-step [completed]="isPaso3_completado" [editable]="editable" label="Datos contacto">
+                            <mat-step [stepControl]="thirdFormGroup" label="Datos contacto">
 
                                 <form [formGroup]="thirdFormGroup" (ngSubmit)="onSubmitPaso3(stepper)">
                                     <div class="row px-5" style="height: 550px;">

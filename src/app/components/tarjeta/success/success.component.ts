@@ -11,7 +11,7 @@ import { getHeaderStts } from '../../utility';
   templateUrl: './success.component.html',
   styleUrls: ['./success.component.css']
 })
-export class SuccessComponent implements OnInit {
+export class SuccessComponent implements OnInit, OnDestroy {
   showVariable: any;
   headers = null;
   navigationSubscription: Subscription;
@@ -19,6 +19,7 @@ export class SuccessComponent implements OnInit {
   user_cla:any;
   resultado:any;
   subsUsMail: Subscription;
+  hoy:any;
   constructor(  private route: ActivatedRoute,
     private _route: Router,
     private _postgresqlService:PostgresService,
@@ -26,7 +27,8 @@ export class SuccessComponent implements OnInit {
     ) { }
 
   ngOnInit( ) {
-
+    const date = new Date();
+    date.setDate(date.getDate() - 5);
     this.authService.getestado();
     this.headers = getHeaderStts(this.authService.isUserLoggedIn())
 
@@ -56,6 +58,18 @@ export class SuccessComponent implements OnInit {
     }
       );
 
+  }
+
+  ngOnDestroy(): void {
+
+
+  
+
+    if (this.subsUsMail) {
+      this.subsUsMail.unsubscribe();
+    }
+
+  
   }
 
 
