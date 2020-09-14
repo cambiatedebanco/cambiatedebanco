@@ -16,7 +16,42 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <div class="white-box">
+                <div class="white-box" *ngIf="resultado">
+                    <table width="80%">
+                        <tr>
+                            <td>Fecha Pago:</td>
+                            <td>{{ resultado.payment_date}}</td>
+                        </tr>
+
+                        <tr>
+                            <td>Transaccion:</td>
+                            <td>{{ resultado.flow_order}}</td>
+                        </tr>
+
+
+                        <tr>
+                            <td>Rut:</td>
+                            <td>{{ resultado.rut}}</td>
+                        </tr>
+                        <tr>
+                            <td>Email:</td>
+                            <td>{{ resultado.payer}}</td>
+                        </tr>
+                        <tr>
+                            <td>Tipo:</td>
+                            <td>{{ resultado.subject}}</td>
+                        </tr>
+                        <tr>
+                            <td>Monto:</td>
+                            <td>${{ resultado.payment_amount}}</td>
+                        </tr>
+                        <tr>
+                            <td>Estado:</td>
+                            <td>
+                                <span *ngIf="resultado.status==2"><b> Pago realizado con éxito</b></span>
+                                <span *ngIf="resultado.status==3"><b> Pago rechazado</b></span>
+                        </tr>
+                    </table>
 
                 </div>
             </div>

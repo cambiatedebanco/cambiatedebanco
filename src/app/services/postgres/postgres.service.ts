@@ -412,6 +412,8 @@ sendEmail_contacto(nombre: any,telefono:any,email:any,comentarios:any) {
         retry(1),catchError(this.errorHandl))
     }
 
+
+
     deleteColaboradoresCampain(idcampana:number, idsucursal:number, headers:any): Observable<any>{
       return this.http.delete(this.BASE_URI+`/cla_colaboradores_campain?idcampana=${idcampana}&idsucursal=${idsucursal}`, headers).pipe(
         retry(1),catchError(this.errorHandl))
@@ -490,6 +492,8 @@ sendEmail_contacto(nombre: any,telefono:any,email:any,comentarios:any) {
       return this.http.post(this.BASE_URI+'/cla_leads_usuarios', data, headers).pipe(
         retry(1),catchError(this.errorHandl))
     }
+
+   
 
     updateAsignLeads(data, headers: any):Observable<any>{
       return this.http.put(this.BASE_URI+'/cla_leads_usuarios', data, headers).pipe(
@@ -725,7 +729,10 @@ sendEmail_contacto(nombre: any,telefono:any,email:any,comentarios:any) {
                 let complete_uri = `${this.BASE_URI}/cambiate/tramo_precio`;
                 return this.httpGet(complete_uri, headers);
               }
-
+      getStatusSuccess(data):Observable<any>{
+                return this.http.post(this.BASE_URI+'/cambiate/success', data).pipe(
+                  retry(1),catchError(this.errorHandl))
+              }
               
 
   errorHandl(error: any) {

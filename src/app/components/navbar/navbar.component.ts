@@ -115,7 +115,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
         localStorage.removeItem('user');
         localStorage.removeItem('user_perfil');
         localStorage.removeItem('cookieTab');
-        this._route.navigate([`/login`]);
+        this._route.navigate([`/`]);
       }, err => {
         this.showMessage("danger", err.message);
       });
