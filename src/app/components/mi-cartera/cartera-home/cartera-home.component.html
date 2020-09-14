@@ -2,7 +2,7 @@
 <app-left-bar></app-left-bar>
 <app-idle></app-idle>
 <div #alerttopright class="myadmin-alert myadmin-alert-img alert-warning myadmin-alert-top-right" style="display: block;"> <img src="../../../../assets/images/coin.png" class="img" alt="img"><a href="javascript:void(0)" (click)="close()" class="closed">×</a>
-    <h4>Tienes un saldo de</h4> <b>{{creditos?.credito_saldo}}</b> monedas.</div>
+    <h4>Tienes un saldo de</h4> <b>{{creditos?.credito_saldo | number}}</b> monedas.</div>
 <div id="page-wrapper">
     <div class="container-fluid">
         <div class="row bg-title">
@@ -23,14 +23,14 @@
             <div class="col-lg-12 col-sm-6 col-xs-12">
                 <div class="white-box">
                     <h4>CLIENTES A GESTIONAR</h4>
-                    <p class="text-muted m-b-40">Lista de Clientes para gestionar este mes de <b>{{ hoy | date :'LLLL' | titlecase }}</b> estan ordenados por fecha de recepción de la solicitud de portabilidad.
+                    <p class="text-muted m-b-40">Lista de Clientes para gestionar están ordenados por fecha de recepción de la solicitud de portabilidad.
                         <!-- Nav tabs -->
-                        <ul class="nav nav-tabs" role="tablist">
+                        <!--<ul class="nav nav-tabs" role="tablist">
                             <li role="presentation" #bellLi [ngClass]="{'active':cookieTab === 'bell'}" (click)="updateCookieTab('bell')">
                                 <a href="#isettings" aria-controls="settings" role="tab" data-toggle="tab" aria-expanded="false"><span><i class="fa fa-bell" style="color:#606060;"></i></span></a>
                             </li>
 
-                        </ul>
+                        </ul>-->
                         <!--<div class="container" *ngIf="downloadURL | async; let url">
                             <img [src]="url" alt="Image from AngularFireStorage">
                         </div>-->
@@ -54,38 +54,38 @@
                                             </mat-form-field>
                                         </div>
                                         <table mat-table #table [dataSource]="dataSource" style="height:200px;" class="mat-elevation-z8" width="100%" align="center" #sort="matSort" matSort>
-                                            <ng-container matColumnDef="fecha">
+                                            <ng-container matColumnDef="fecha_a">
                                                 <th mat-header-cell *matHeaderCellDef> FECHA </th>
                                                 <td mat-cell *matCellDef="let element">{{ element.created_time | date:'dd/MM/yy H:mm'}} </td>
                                             </ng-container>
-                                            <ng-container matColumnDef="id">
+                                            <ng-container matColumnDef="id_a">
                                                 <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
                                                 <td mat-cell *matCellDef="let element">
                                                     {{ element.id }}
                                                 </td>
                                             </ng-container>
 
-                                            <ng-container matColumnDef="campana">
+                                            <ng-container matColumnDef="campana_a">
                                                 <th mat-header-cell *matHeaderCellDef> CAMPAÑA </th>
                                                 <td mat-cell *matCellDef="let element">{{ element.nombre_campana }} </td>
                                             </ng-container>
 
-                                            <ng-container matColumnDef="bco_origen">
+                                            <ng-container matColumnDef="bco_origen_a">
                                                 <th mat-header-cell *matHeaderCellDef> BANCO ORIGEN </th>
                                                 <td mat-cell *matCellDef="let element">
                                                     <span><b>{{element.banco_origen}}</b></span>
                                                 </td>
                                             </ng-container>
 
-                                            <ng-container matColumnDef="monto">
+                                            <ng-container matColumnDef="monto_a">
                                                 <th mat-header-cell *matHeaderCellDef> MONTO </th>
                                                 <td mat-cell *matCellDef="let element">
                                                     <span><b>${{element.monto | number}}</b></span>
                                                 </td>
                                             </ng-container>
 
-                                            <ng-container matColumnDef="tools">
-                                                <th mat-header-cell *matHeaderCellDef> TOOLS </th>
+                                            <ng-container matColumnDef="tools_a">
+                                                <th mat-header-cell *matHeaderCellDef> ACCIONES </th>
                                                 <td mat-cell *matCellDef="let element" align="center">
                                                     <button type="button" class="btn btn-primary btn-rounded waves-effect waves-light" (click)="onComprar(element)">
                                                       <span class="btn-label"><img src="../../../../assets/images/coin.png" width=16></span>{{element.precio | number}}</button>
