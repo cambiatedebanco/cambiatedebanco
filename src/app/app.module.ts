@@ -136,10 +136,7 @@ import { TicketChatTalkComponent } from './components/atencion-virtual/ticket-ch
 import { RegionConfirmedComponent } from './components/region-confirmed/region-confirmed.component';
 import { ValoresTotalCovidComponent } from './components/valores-total-covid/valores-total-covid.component';
 import { Home2Component } from './components/home2/home2.component';
-import { EncuestaDiferidosComponent } from './components/encuestas/encuesta-diferidos/encuesta-diferidos.component';
 import { CampaignHomeComponent } from './components/admin-campaign/campaign-home/campaign-home.component';
-import { DesuscribirComponent } from './components/encuestas/desuscribir/desuscribir.component';
-import { EncuestaEmpresasComponent } from './components/encuestas/encuesta-empresas/encuesta-empresas.component';
 //
 import { AdminSimulacionWebComponent } from './components/admin-simulacion-web/admin-simulacion-web.component';
 import { CrudCampanaComponent } from './components/gestion-campana/crud-campana/crud-campana.component';
@@ -284,11 +281,8 @@ export function provideConfig() {
     RegionConfirmedComponent,
     ValoresTotalCovidComponent,
     Home2Component,
-    EncuestaDiferidosComponent,
     CampaignHomeComponent,
-    DesuscribirComponent,
-    EncuestaEmpresasComponent,
-    MiFichaComponent,
+     MiFichaComponent,
     MiFichaEncuestaComponent,
     MiFichaTimelineComponent,
     MiFichaMktgComponent,

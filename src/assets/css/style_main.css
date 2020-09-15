@@ -11,7 +11,7 @@ header,
     height: 1200px;
 }
 
-@media only screen and (max-width: 1920px) {
+@media only screen and (min-width: 1200px) {
     .top-stepper {
         margin-top: 214px;
     }
@@ -25,18 +25,19 @@ header,
     #contenido {
         height: 1700px;
         background: url(../../../assets/images/contenido.png) no-repeat;
+        background-position: -200px 0px;
     }
     .navbar {
         transition: all 0.4s !important;
     }
     .navbar-nav {
-        margin-left: 400px !important;
+        margin-left: 100px !important;
     }
     .navbar .nav-link {
         color: #707070 !important;
     }
     .navbar .nav-item {
-        margin-right: 100px !important;
+        margin-right: 50px !important;
     }
     .navbar .nav-link:hover,
     .navbar .nav-link:focus {
@@ -47,8 +48,8 @@ header,
     .navbar .navbar-brand {
         color: #707070 !important;
         font-weight: 700 !important;
-        font-size: 29px !important;
-        margin-left: -240px !important;
+        font-size: 25px !important;
+        margin-left: 0px !important;
     }
     /* Change navbar styling on scroll */
     .navbar.active {
@@ -69,7 +70,7 @@ header,
     h2 {
         font-family: 'Montserrat' !important;
         color: #707070 !important;
-        font-size: 73px !important;
+        font-size: 53px !important;
         font-weight: 300 !important;
         line-height: 70px !important;
     }
@@ -98,7 +99,7 @@ header,
     }
 }
 
-@media only screen and (max-width: 1366px) {
+@media only screen and (min-width: 992px) {
     .top-stepper {
         margin-top: 214px;
     }
@@ -111,14 +112,14 @@ header,
     }
     #contenido {
         height: 1700px;
-        background-position: -150px 0px !important;
         background: url(../../../assets/images/contenido.png) no-repeat;
+        background-position: -200px 0px;
     }
     .navbar {
         transition: all 0.4s !important;
     }
     .navbar-nav {
-        margin-left: 200px !important;
+        margin-left: 100px !important;
     }
     .navbar .nav-link {
         color: #707070 !important;
@@ -135,8 +136,8 @@ header,
     .navbar .navbar-brand {
         color: #707070 !important;
         font-weight: 700 !important;
-        font-size: 29px !important;
-        margin-left: -40px !important;
+        font-size: 25px !important;
+        margin-left: 0px !important;
     }
     /* Change navbar styling on scroll */
     .navbar.active {
@@ -157,14 +158,14 @@ header,
     h2 {
         font-family: 'Montserrat' !important;
         color: #707070 !important;
-        font-size: 60px !important;
+        font-size: 53px !important;
         font-weight: 300 !important;
         line-height: 70px !important;
     }
     h3 {
         font-family: 'Montserrat' !important;
         color: #707070 !important;
-        font-size: 40px !important;
+        font-size: 50px !important;
         font-weight: 500 !important;
         line-height: 70px !important;
     }
@@ -172,96 +173,8 @@ header,
         font-family: 'Montserrat' !important;
         color: #707070 !important;
         font-weight: 400 !important;
-        font-size: 22px !important;
+        font-size: 20px !important;
         line-height: 30px !important;
-    }
-    .h2-bold {
-        font-family: 'Montserrat' !important;
-        color: #707070 !important;
-        font-weight: 700 !important;
-        line-height: 70px !important;
-    }
-    #myFooter {
-        background-color: #3E3E3E !important;
-    }
-}
-
-@media only screen and (max-width: 1024px) {
-    .top-stepper {
-        margin-top: 214px;
-    }
-    .top-head {
-        margin-top: 214px;
-    }
-    #intro {
-        background: url(../../../assets/images/back_main.png) no-repeat;
-        background-position: 215px -1460px;
-    }
-    #contenido {
-        height: 1700px;
-        background-position: -200px 0px !important;
-        background: url(../../../assets/images/contenido.png) no-repeat;
-    }
-    .navbar {
-        transition: all 0.4s !important;
-    }
-    .navbar-nav {
-        margin-left: 200px !important;
-    }
-    .navbar .nav-link {
-        color: #707070 !important;
-    }
-    .navbar .nav-item {
-        margin-right: 0px !important;
-    }
-    .navbar .nav-link:hover,
-    .navbar .nav-link:focus {
-        color: #FF0073 !important;
-        text-decoration: none !important;
-        border-bottom: 3px solid #FF0073 !important;
-    }
-    .navbar .navbar-brand {
-        color: #707070 !important;
-        font-weight: 700 !important;
-        font-size: 29px !important;
-        margin-left: -40px !important;
-    }
-    /* Change navbar styling on scroll */
-    .navbar.active {
-        background: #ffffff !important;
-        box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.1) !important;
-    }
-    .navbar.active .nav-link {
-        color: #707070 !important;
-    }
-    .navbar.active .nav-link:hover,
-    .navbar.active .nav-link:focus {
-        color: #FF0073 !important;
-        text-decoration: none !important;
-    }
-    .navbar.active .navbar-brand {
-        color: #707070 !important;
-    }
-    h2 {
-        font-family: 'Montserrat' !important;
-        color: #707070 !important;
-        font-size: 40px !important;
-        font-weight: 300 !important;
-        line-height: 70px !important;
-    }
-    h3 {
-        font-family: 'Montserrat' !important;
-        color: #707070 !important;
-        font-size: 30px !important;
-        font-weight: 500 !important;
-        line-height: 70px !important;
-    }
-    h4 {
-        font-family: 'Montserrat' !important;
-        color: #707070 !important;
-        font-weight: 400 !important;
-        font-size: 16px !important;
-        line-height: 40px !important;
     }
     .h2-bold {
         font-family: 'Montserrat' !important;
@@ -303,5 +216,94 @@ header,
     }
     .px-5 {
         padding-left: 0rem!important
+    }
+}
+
+@media only screen and (max-width: 575px) {
+    .top-stepper {
+        margin-top: 64px;
+    }
+    .top-head {
+        margin-top: 100px;
+    }
+    #intro {
+        background: url(../../../assets/images/back_main.png) no-repeat;
+        background-position: -300px -1060px;
+    }
+    #contenido {
+        height: 1700px;
+        background: url(../../../assets/images/contenido.png) no-repeat;
+        background-position: -700px 0px;
+    }
+    .navbar {
+        transition: all 0.4s !important;
+    }
+    .navbar-nav {
+        margin-left: 100px !important;
+    }
+    .navbar .nav-link {
+        color: #707070 !important;
+    }
+    .navbar .nav-item {
+        margin-right: 50px !important;
+    }
+    .navbar .nav-link:hover,
+    .navbar .nav-link:focus {
+        color: #FF0073 !important;
+        text-decoration: none !important;
+        border-bottom: 3px solid #FF0073 !important;
+    }
+    .navbar-brand {
+        color: #707070 !important;
+        font-weight: 700 !important;
+        font-size: 25px !important;
+        margin-left: 0px !important;
+        margin-right: 100px !important;
+    }
+    /* Change navbar styling on scroll */
+    .navbar.active {
+        background: #ffffff !important;
+        box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.1) !important;
+    }
+    .navbar.active .nav-link {
+        color: #707070 !important;
+    }
+    .navbar.active .nav-link:hover,
+    .navbar.active .nav-link:focus {
+        color: #FF0073 !important;
+        text-decoration: none !important;
+    }
+    .navbar.active .navbar-brand {
+        color: #707070 !important;
+    }
+    h2 {
+        font-family: 'Montserrat' !important;
+        color: #707070 !important;
+        font-size: 30px !important;
+        font-weight: 300 !important;
+        line-height: 70px !important;
+    }
+    h3 {
+        font-family: 'Montserrat' !important;
+        color: #707070 !important;
+        font-size: 22px !important;
+        font-weight: 500 !important;
+        line-height: 70px !important;
+    }
+    h4 {
+        font-family: 'Montserrat' !important;
+        color: #707070 !important;
+        font-weight: 400 !important;
+        font-size: 18px !important;
+        line-height: 30px !important;
+    }
+    .h2-bold {
+        font-family: 'Montserrat' !important;
+        color: #707070 !important;
+        font-weight: 700 !important;
+        line-height: 70px !important;
+    }
+    #myFooter {
+        background-color: #3E3E3E !important;
     }
 }

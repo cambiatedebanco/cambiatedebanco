@@ -40,7 +40,7 @@
                 <div class="col-lg-5 top-head">
                     <div class="title">
                         <h2>
-                            Cámbiate de <br><span class="h2-bold">banco ahora</span>
+                            Cámbiate de <br class="hidden-xs"><span class="h2-bold">banco ahora</span>
                         </h2>
                         <h4>
                             En solo tres simples pasos podrás pagar menos, ingresa tu deuda, elije en que bancos quieres cotizar y proporciona tus datos para que te contacten.
@@ -89,7 +89,7 @@
                                             </div>
 
                                             <div class="example-button-row m-t-30">
-                                                <h2 class="example-h2">Suba el certificado de liquidación que le entrego su banco</h2>
+                                                <h2 class="example-h2 hidden-xs">Suba el certificado de liquidación que le entrego su banco</h2>
                                                 <button mat-raised-button color="primary" (click)="archivo.click()">
                                                     Subir Certificado
                                                       <input #archivo formControlName="archivo" type="file" accept="application/pdf" (change)="cambioArchivo($event)" style="display:none;" />
@@ -108,15 +108,19 @@
                                             </div>
 
                                             <div class="col-6" style="text-align:right">
-                                                <button mat-raised-button matStepperNext color="accent">Siguiente</button>
+                                                <button mat-raised-button matStepperNext color="accent">
+                                                 <div class="hidden-xs">Siguiente</div> 
+                                                 <div class="hidden-sm hidden-md hidden-lg">Sig.</div>
+                                                </button>
                                             </div>
+
                                         </div>
                                     </div>
                                 </form>
 
                             </mat-step>
-                            <mat-step [stepControl]="secondFormGroup" label="Elige Bancos">
-
+                            <mat-step [stepControl]="secondFormGroup">
+                                <ng-template matStepLabel>Elige Bancos</ng-template>
                                 <form [formGroup]="secondFormGroup" (ngSubmit)="onSubmitPaso2(stepper)">
                                     <div class="row px-5" style="height: 550px;">
                                         <div class="row align-items-start">
@@ -137,21 +141,27 @@
 
                                         <div class="row align-items-end justify-content-between" style="width:100%;">
                                             <div class="col-6" style="text-align:left">
-                                                <button mat-raised-button matStepperPrevious color="warn">Atras</button>
+                                                <button mat-raised-button matStepperPrevious color="warn">
+                                                    <div class="hidden-xs">Atrás</div> 
+                                                 <div class="hidden-sm hidden-md hidden-lg">Atr.</div>
+                                                </button>
                                             </div>
 
                                             <div class="col-6" style="text-align:right">
-                                                <button mat-raised-button matStepperNext color="accent">Siguiente</button>
+                                                <button mat-raised-button matStepperNext color="accent">
+                                                    <div class="hidden-xs">Siguiente</div> 
+                                                 <div class="hidden-sm hidden-md hidden-lg">Sig.</div>
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
                                 </form>
 
                             </mat-step>
-                            <mat-step [stepControl]="thirdFormGroup" label="Datos contacto">
-
+                            <mat-step [stepControl]="thirdFormGroup">
+                                <ng-template matStepLabel>Datos contacto</ng-template>
                                 <form [formGroup]="thirdFormGroup" (ngSubmit)="onSubmitPaso3(stepper)">
-                                    <div class="row px-5" style="height: 550px;">
+                                    <div class="row  px-5" style="height: 550px;">
                                         <div class="row align-items-start">
                                             <h2 class="example-h2">Para poder entregarle toda la información necesitamos que complete sus datos personales: </h2>
                                             <mat-form-field class="example-full-width">
@@ -203,24 +213,16 @@
 
                                             <div class="row m-t-20">
 
-                                                <div class="tablagen">
-                                                    <div class="fila">
-                                                        <div class="col-chk">
-                                                            <mat-checkbox formControlName='chktermino' value=1 class="chkTermino" required>
-                                                            </mat-checkbox>
-                                                        </div>
-                                                        <div class="col-ter">
-                                                            <font size=1>
+                                                <mat-checkbox formControlName='chktermino' value=1 class="chkTermino" required>
+                                                    <span class="terminos">
 
-                                                                Al continuar, acepto los Términos de uso de cambiatedebanco.cl y reconozco que leí la Política de privacidad. También acepto que cambiatedebanco.cl o sus representantes pueden ponerse en contacto conmigo por correo electrónico, teléfono o SMS (incluidos
-                                                                medios automatizados) a la dirección de correo electrónico o al número que yo indique, incluso, para fines de publicidad.
 
-                                                            </font>
-                                                        </div>
+                                                        Al continuar, acepto los <a href="#modalTerminos" data-toggle="modal" data-target="#modalTerminos"><strong>Terminos y Condiciones de Uso</strong></a> de cambiatedebanco.cl.
+    
+                                                    </span>
+                                                </mat-checkbox>
 
-                                                    </div>
 
-                                                </div>
 
 
 
@@ -234,11 +236,13 @@
 
                                         <div class="row align-items-end justify-content-between" style="width:100%;">
                                             <div class="col-6 " style="text-align:left">
-                                                <button mat-raised-button matStepperPrevious color="warn">Atras</button>
+                                                <button mat-raised-button matStepperPrevious color="warn"><div class="hidden-xs">Atrás</div> 
+                                                    <div class="hidden-sm hidden-md hidden-lg">Atr.</div></button>
                                             </div>
 
                                             <div class="col-6" style="text-align:right">
-                                                <button mat-raised-button matStepperNext color="accent">Siguiente</button>
+                                                <button mat-raised-button matStepperNext color="accent"><div class="hidden-xs">Siguiente</div> 
+                                                    <div class="hidden-sm hidden-md hidden-lg">Sig.</div></button>
                                             </div>
                                         </div>
                                     </div>
@@ -292,7 +296,7 @@
             <div class="col-xs-12 col-sm-4 p-r-30 ">
                 <div data-type="column" class="">
                     <h2 class="example-h2">Solicitud</h2>
-                    <img src="../../../assets/images/step_1.png">
+                    <img src="../../../assets/images/step_1.png" class="width-bancos">
                     <h4>Dirígete a tu banco y solicita el certificado de liquidación, con toda la información de todos tus productos financieros vigentes.
                     </h4>
                 </div>
@@ -300,7 +304,7 @@
             <div class="col-xs-12 col-sm-4 p-r-30">
                 <div data-type="column" class="">
                     <h2 class="example-h2">Sube Certificado</h2>
-                    <img src="../../../assets/images/step_2.png">
+                    <img src="../../../assets/images/step_2.png" class="width-bancos">
                     <h4>Sube el certificado de liquidación a nuestra plataforma, más los productos que deseas portar, para que los ejecutivos de los distintos bancos te puedan evaluar
                     </h4>
                 </div>
@@ -308,7 +312,7 @@
             <div class="col-xs-12 col-sm-4 p-r-30">
                 <div data-type="column" class="">
                     <h2 class="example-h2">Mejor Oferta</h2>
-                    <img src="../../../assets/images/step_3.png">
+                    <img src="../../../assets/images/step_3.png" class="width-bancos">
                     <h4>Los bancos que elegiste para cotizar te contactarán para entregarte una mejor oferta de tu crédito.
                     </h4>
                 </div>
@@ -328,9 +332,9 @@
     <div id="contenido" class="view">
         <div class="full-bg-img">
 
-            <div class="row" style="margin-top:100px;">
+            <div class="row margin-portabilidad p-l-30 p-r-30">
                 <div class="offset-md-6 col-lg-6">
-                    <h3> Ley de portabilidad <br><span class="h2-bold">financiera</span>
+                    <h3> Ley de portabilidad <br class="hidden-xs"><span class="h2-bold">financiera</span>
                     </h3>
                     <h4>
                         La ley sobre la portabilidad financiera busca facilitar a las personas que tienen cuentas de ahorro, cuentas vistas, chequeras electrónicas, líneas de crédito, tarjetas de crédito y débito, créditos hipotecarios, de consumo, automotrices, entre otros,
@@ -451,22 +455,49 @@
     </div>
 </footer>
 <!-- Modal -->
-<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+
+
+<div class="modal" tabindex="-1" role="dialog" id="modalTerminos" aria-labelledby="modalTerminos" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document ">
+        <div class="modal-content ">
+            <div class="modal-header ">
+                <span class="modal-title ">Terminos y Condiciones de Uso.</span>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+                    <span aria-hidden="true">&times;</span>
+                  </button>
             </div>
-            <div class="modal-body">
-                ...
+            <div class="modal-body ">
+                <h4>
+                    <b>Términos y Condiciones de Uso</b><br> El presente documento establece los «Términos y Condiciones de Uso» bajo los cuales puede utilizar este sitio (cambiatedebanco.cl o cualquiera de sus subdominios). Por favor lea cuidadosamente
+                    estos términos y condiciones de uso antes de comenzar a usar el sitio. Si no acepta los términos y condiciones establecidos aquí, no utilice este sitio ni sus servicios.
+                    <br><b>El Usuario</b><br> Se entiende por usuario a aquella persona natural o jurídica que hace uso del sitio cambiatedebanco.cl con la finalidad de acceder a la prestación de los servicios brindados gratuitamente por la empresa.
+                    <br><b>Los Servicios</b><br> La empresa, a través del sitio, provee al usuario, un servicio gratuito de buscar la entidad financiera que pueda dar la mejor opción crediticia.
+                    <br><b>Propiedad Intelectual</b><br> El contenido de este sitio está protegido bajo las leyes de derechos de autor. El usuario no debe vender ni modificar el contenido de este sitio, ni reproducir, ni mostrar, ni distribuir para ningún
+                    propósito comercial.
+                    <br><b>Política de Privacidad</b><br> El usuario responderá, en cualquier caso, de la veracidad y autenticidad de los datos ingresados en el sitio. CambiatedeBanco SPA no se responsabilizan por la veracidad de los datos provistos por
+                    el usuario. El usuario podrá siempre solicitar a CambiatedeBanco SPA la actualización, modificación, rectificación y/o cancelación de sus datos personales y el ejercicio de los derechos que contempla la Ley Nº19.628. El usuario entiende
+                    y acepta que la empresa puede divulgar datos obtenidos de la solicitud de registro y/o de formularios, a empresas del rubro hipotecario, con el objeto que el usuario pueda ser contactado para recibir información relacionada con productos
+                    financieros. La empresa no divulgará a ningún tercero ajeno al mercado finaciero, su nombre, domicilio, o dirección de correo electrónico ni número telefónico sin su previo consentimiento.
+                    <br><b>Almacenamiento de Datos</b><br> El usuario acepta y entiende que CambiatedeBanco SPA puede recopilar datos, a través de mecanismos automatizados, relacionados al momento en que éste visita el sitio. Esta información puede ser
+                    la dirección IP del dispositivo usado, la información sobre el sistema y navegador usado, las páginas del sitio visitadas, además de la fecha de su visita.
+                    <br><b>Política de Seguridad</b><br> La conexión y transmisión de información con el sitio se encuentra encriptada por SSL, siguiendo los estándares internacionales y ofreciendo un alto grado de seguridad de la información.
+                    <br><b>Vínculos</b><br> El sitio contiene vínculos a sitios de terceras partes. Estos vínculos se proporcionan tan sólo como un atajo para que el usuario valide y confirme la información entregada con ciertas instituciones financieras.
+                    Una vez que el usuario se encuentra en los sitios de las instituciones financieras, con el objeto de validar y/o simular cotizaciones, es responsabilidad de éste ingresar datos verídicos y coherentes.
+                    <br><b>Terminación</b><br> La empresa se reserva el derecho, a su entera discreción, a dar terminación inmediata al registro de un usuario, inhabilitando el acceso a este sitio de Internet, debido a cualquier incumplimiento del usuario
+                    a estos términos y condiciones, o si la empresa es incapaz de verificar cualquier información que el usuario haya presentado en el sitio.
+                    <br><b>Garantías</b><br> El usuario declara que utilizará el sitio por su cuenta y riesgo, el cual es puesto a su disposición en el estado en que se encuentra con todos sus defectos y sin garantía de ningún tipo. Bajo ninguna circunstancia
+                    CambiatedeBanco SPA será responsable ante el usuario, o alguna otra persona, por daños directos, indirectos, especiales, incidentales o consecuenciales, daño emergente, lucro cesante o daño moral de cualquier tipo, incluido pero no
+                    limitado a daños por pérdida de beneficios comerciales, interrupción de las actividades comerciales, pérdida de información, fallas o mal funcionamiento de los computadores, así como por cualquier otra clase de daños o pérdidas comerciales.
+                    <br><b>Cambios a los Términos de Condiciones</b><br> CambiatedeBanco SPA se reserva el derecho a modificar los presentes Términos de Condiciones de Uso. En caso de ocurrir un cambio, se informará a los usuarios mediante correo electrónico
+                    para su conocimiento.
+                    <br><b>Aceptación</b><br> Al aceptar los Términos y Condiciones de Uso, el usuario declara haber sido informado de manera clara y comprensible de los mismos.
+                </h4>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
             </div>
+
         </div>
     </div>
 </div>

@@ -1,12 +1,16 @@
-@media only screen and (max-width: 1920px) {
+@media only screen and (min-width: 1200px) {
+    .margin-portabilidad {
+        margin-top: 100px;
+    }
     .title {
-        padding-left: 144px;
+        padding-left: 100px;
     }
     .width-bancos {
-        width: 900px;
+        max-width: 100%;
+        max-height: 100%;
     }
     .padding-stepper {
-        padding-right: 142px;
+        padding-right: 20px;
     }
     .mat-stepper-horizontal {
         margin-top: 8px !important;
@@ -94,10 +98,10 @@
         font-family: 'Montserrat' !important;
         color: #ffffff !important;
         font-weight: 500 !important;
-        font-size: 18px !important;
+        font-size: 15px !important;
         border-radius: 10px !important;
         height: 50px !important;
-        width: 200px !important;
+        width: 150px !important;
     }
      ::ng-deep .mat-fab.mat-accent,
     .mat-flat-button.mat-accent,
@@ -108,9 +112,9 @@
         font-family: 'Montserrat' !important;
         color: #ffffff !important;
         font-weight: 500 !important;
-        font-size: 20px !important;
+        font-size: 18px !important;
         border-radius: 10px !important;
-        height: 55px !important;
+        height: 50px !important;
         width: 150px !important;
     }
      ::ng-deep .mat-fab.mat-warn,
@@ -170,12 +174,16 @@
     }
 }
 
-@media only screen and (max-width: 1366px) {
+@media(min-width:992px) {
+    .margin-portabilidad {
+        margin-top: 100px;
+    }
     .title {
-        padding-left: 144px;
+        padding-left: 100px;
     }
     .width-bancos {
-        width: 700px;
+        max-width: 100%;
+        max-height: 100%;
     }
     .padding-stepper {
         padding-right: 20px;
@@ -188,7 +196,11 @@
     }
     .example-full-width {
         width: 100% !important;
-        height: 60px !important;
+        height: 55px !important;
+    }
+    .termino {
+        width: 50px;
+        word-wrap: break-word;
     }
     .example-section {
         display: flex !important;
@@ -202,132 +214,41 @@
     .example-h2 {
         font-family: 'Montserrat' !important;
         color: #707070 !important;
-        font-weight: 600 !important;
+        font-weight: 550 !important;
         line-height: 30px !important;
-        font-size: 21px !important;
-    }
-    .mat-stepper-horizontal {
-        border-radius: 20px !important;
-        background-color: rgba(255, 255, 255, 0.32) !important;
-    }
-     ::ng-deep .mat-step-header .mat-step-icon-selected {
-        background-color: #FF0073 !important;
-        border: 6px solid #ffffff !important;
-        border-radius: 50% !important;
-        height: 50px !important;
-        width: 50px !important;
-    }
-     ::ng-deep .mat-step-header {
-        margin-top: -100px !important;
-    }
-     ::ng-deep .mat-stepper-horizontal-line {
-        margin-top: -100px !important;
-        border-top-width: 6px !important;
-    }
-     ::ng-deep .mat-checkbox-checked .mat-checkbox-background {
-        background-color: #FF0073 !important;
-    }
-     ::ng-deep .mat-fab.mat-primary,
-    .mat-flat-button.mat-primary,
-    .mat-mini-fab.mat-primary,
-    .mat-raised-button.mat-primary {
-        background-color: #57C7E4 !important;
-        font-family: 'Montserrat' !important;
-        color: #ffffff !important;
-        font-weight: 500 !important;
-        font-size: 22px !important;
-        border-radius: 10px !important;
-        height: 66px !important;
-        width: 272px !important;
-    }
-     ::ng-deep .mat-fab.mat-accent,
-    .mat-flat-button.mat-accent,
-    .mat-mini-fab.mat-accent,
-    .mat-raised-button.mat-accent {
-        display: inline-block !important;
-        background-color: #FF0073 !important;
-        font-family: 'Montserrat' !important;
-        color: #ffffff !important;
-        font-weight: 500 !important;
-        font-size: 22px !important;
-        border-radius: 10px !important;
-        height: 66px !important;
-        width: 172px !important;
-    }
-     ::ng-deep .mat-fab.mat-warn,
-    .mat-flat-button.mat-warn,
-    .mat-mini-fab.mat-warn,
-    .mat-raised-button.mat-warn {
-        display: inline-block !important;
-        background-color: #FF0073 !important;
-        margin-left: 0px !important;
-        font-family: 'Montserrat' !important;
-        color: #ffffff !important;
-        font-weight: 500 !important;
-        font-size: 22px !important;
-        border-radius: 10px !important;
-        height: 66px !important;
-        width: 172px !important;
-    }
-     ::ng-deep .mat-step-header .mat-step-label.mat-step-label-active {
-        color: #3E3E3E !important;
-        font-family: 'Montserrat' !important;
-        font-weight: 600 !important;
-        font-size: 23px !important;
-    }
-    .example-box:last-child {
-        border: none !important;
-    }
-    .example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
-        transition: transform 250ms cubic-bezier(0, 0, 0.2, 1) !important;
-    }
-}
-
-@media only screen and (max-width: 1024px) {
-    .title {
-        padding-left: 20px;
-    }
-    .width-bancos {
-        width: 700px;
-    }
-    .padding-stepper {
-        padding-right: 20px;
-    }
-    .mat-stepper-horizontal {
-        margin-top: 8px !important;
-    }
-    .mat-form-field {
-        margin-top: 16px !important;
-    }
-    .example-full-width {
-        width: 100% !important;
-        height: 60px !important;
-    }
-    .example-section {
-        display: flex !important;
-        align-content: center !important;
-        align-items: center !important;
-        height: 60px !important;
-    }
-    .example-margin {
-        margin: 0 10px !important;
-    }
-    .example-h2 {
-        font-family: 'Montserrat' !important;
-        color: #707070 !important;
-        font-weight: 600 !important;
-        line-height: 30px !important;
-        font-size: 21px !important;
-    }
-    .mat-stepper-horizontal {
-        border-radius: 20px !important;
-        background-color: rgba(255, 255, 255, 0.32) !important;
-    }
-     ::ng-deep .mat-checkbox-layout .mat-checkbox-label {
-        color: #707070 !important;
-        font-weight: 500 !important;
         font-size: 18px !important;
     }
+    .mat-stepper-horizontal {
+        border-radius: 20px !important;
+        background-color: rgba(255, 255, 255, 0.32) !important;
+    }
+    .tablagen {
+        display: table;
+    }
+    .fila {
+        display: table-row;
+    }
+    .col-chk {
+        display: table-cell;
+        padding: 0px;
+        width: 10%;
+    }
+    .col-ter {
+        display: table-cell;
+        padding: 12px;
+        width: 90%;
+    }
+     ::ng-deep .mat-checkbox-layout .mat-checkbox-label {
+        font-family: 'Montserrat' !important;
+        color: #707070 !important;
+        font-weight: 500 !important;
+        font-size: 22px !important;
+        white-space: initial !important;
+    }
+     ::ng-deep .mat-form-field-wrapper {
+        position: relative;
+        font-size: 17px;
+    }
      ::ng-deep .mat-step-header .mat-step-icon-selected {
         background-color: #FF0073 !important;
         border: 6px solid #ffffff !important;
@@ -353,10 +274,10 @@
         font-family: 'Montserrat' !important;
         color: #ffffff !important;
         font-weight: 500 !important;
-        font-size: 22px !important;
+        font-size: 15px !important;
         border-radius: 10px !important;
-        height: 66px !important;
-        width: 272px !important;
+        height: 50px !important;
+        width: 150px !important;
     }
      ::ng-deep .mat-fab.mat-accent,
     .mat-flat-button.mat-accent,
@@ -367,10 +288,10 @@
         font-family: 'Montserrat' !important;
         color: #ffffff !important;
         font-weight: 500 !important;
-        font-size: 22px !important;
+        font-size: 18px !important;
         border-radius: 10px !important;
-        height: 66px !important;
-        width: 172px !important;
+        height: 50px !important;
+        width: 150px !important;
     }
      ::ng-deep .mat-fab.mat-warn,
     .mat-flat-button.mat-warn,
@@ -382,10 +303,10 @@
         font-family: 'Montserrat' !important;
         color: #ffffff !important;
         font-weight: 500 !important;
-        font-size: 22px !important;
+        font-size: 20px !important;
         border-radius: 10px !important;
-        height: 66px !important;
-        width: 172px !important;
+        height: 55px !important;
+        width: 150px !important;
     }
      ::ng-deep .mat-step-header .mat-step-label.mat-step-label-active {
         color: #3E3E3E !important;
@@ -393,154 +314,33 @@
         font-weight: 600 !important;
         font-size: 23px !important;
     }
-    .example-box:last-child {
-        border: none !important;
+    .example-container {
+        width: 400px !important;
+        max-width: 100% !important;
+        margin: 0 25px 25px 0 !important;
+        display: inline-block !important;
+        vertical-align: top !important;
     }
-    .example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
-        transition: transform 250ms cubic-bezier(0, 0, 0.2, 1) !important;
+    .example-list {
+        border: solid 1px #ccc !important;
+        min-height: 60px !important;
+        background: white !important;
+        border-radius: 4px !important;
+        overflow: hidden !important;
+        display: block !important;
     }
-}
-
-@media (max-width: 767px) {
-    .hidden-xs {
-        display: none !important;
-    }
-    .navbar .navbar-brand {
-        margin-left: 10px !important;
-    }
-    .title {
-        padding-left: 20px;
-    }
-    .width-bancos {
-        width: 350px;
-    }
-    .padding-stepper {
-        padding-right: 0px;
-    }
-    .mat-stepper-horizontal {
-        margin-top: 8px !important;
-    }
-    .mat-form-field {
-        margin-top: 16px !important;
-    }
-    .example-full-width {
-        width: 100% !important;
-        height: 60px !important;
-    }
-    .example-section {
+    .example-box {
+        padding: 20px 10px !important;
+        border-bottom: solid 1px #ccc !important;
+        color: rgba(0, 0, 0, 0.87) !important;
         display: flex !important;
-        align-content: center !important;
+        flex-direction: row !important;
         align-items: center !important;
-        height: 60px !important;
-    }
-    .example-margin {
-        margin: 0 10px !important;
-    }
-    .example-h2 {
-        font-family: 'Montserrat' !important;
-        color: #707070 !important;
-        font-weight: 600 !important;
-        line-height: 30px !important;
+        justify-content: space-between !important;
+        box-sizing: border- !important;
+        cursor: move !important;
+        background: white !important;
         font-size: 14px !important;
-    }
-    .mat-stepper-horizontal {
-        border-radius: 20px !important;
-        background-color: rgba(255, 255, 255, 0.32) !important;
-    }
-    .mat-horizontal-content-container {
-        overflow: hidden;
-        padding: 0 0px 0px 0px;
-    }
-     ::ng-deep .mat-step-header .mat-step-icon-selected {
-        background-color: #FF0073 !important;
-        border: 6px solid #ffffff !important;
-        border-radius: 50% !important;
-        height: 40px !important;
-        width: 40px !important;
-    }
-     ::ng-deep .mat-step-header {
-        margin-top: -100px !important;
-    }
-     ::ng-deep .mat-stepper-horizontal-line {
-        margin-top: -100px !important;
-        border-top-width: 6px !important;
-        border-top-width: 1px;
-        border-top-style: solid;
-        flex: auto;
-        height: 0;
-        margin: 0 -16px;
-        min-width: 60px !important;
-    }
-     ::ng-deep .mat-horizontal-stepper-header {
-        display: flex;
-        height: 72px;
-        overflow: hidden;
-        align-items: center;
-        padding: 0 0px;
-    }
-     ::ng-deep .mat-form-field {
-        font-size: inherit;
-        font-weight: 400;
-        line-height: 1.125;
-        font-size: 14px !important;
-        font-family: 'Montserrat' !important;
-    }
-     ::ng-deep .mat-checkbox-checked .mat-checkbox-background {
-        background-color: #FF0073 !important;
-    }
-     ::ng-deep .mat-fab.mat-primary,
-    .mat-flat-button.mat-primary,
-    .mat-mini-fab.mat-primary,
-    .mat-raised-button.mat-primary {
-        background-color: #57C7E4 !important;
-        font-family: 'Montserrat' !important;
-        color: #ffffff !important;
-        font-weight: 500 !important;
-        font-size: 16px !important;
-        border-radius: 5px !important;
-        height: 50px !important;
-        width: 200px !important;
-    }
-     ::ng-deep .mat-fab.mat-accent,
-    .mat-flat-button.mat-accent,
-    .mat-mini-fab.mat-accent,
-    .mat-raised-button.mat-accent {
-        display: inline-block !important;
-        background-color: #FF0073 !important;
-        font-family: 'Montserrat' !important;
-        color: #ffffff !important;
-        font-weight: 500 !important;
-        font-size: 16px !important;
-        border-radius: 5px !important;
-        height: 50px !important;
-        width: 120px !important;
-        margin-right: -90px !important;
-    }
-     ::ng-deep .mat-fab.mat-warn,
-    .mat-flat-button.mat-warn,
-    .mat-mini-fab.mat-warn,
-    .mat-raised-button.mat-warn {
-        display: inline-block !important;
-        background-color: #FF0073 !important;
-        margin-left: 0px !important;
-        font-family: 'Montserrat' !important;
-        color: #ffffff !important;
-        font-weight: 500 !important;
-        font-size: 16px !important;
-        border-radius: 5px !important;
-        height: 50px !important;
-        width: 120px !important;
-        margin-left: -60px !important;
-    }
-     ::ng-deep .mat-step-header .mat-step-label.mat-step-label-active {
-        color: #3E3E3E !important;
-        font-family: 'Montserrat' !important;
-        font-weight: 500 !important;
-        font-size: 16px !important;
-        visibility: hidden;
-    }
-     ::ng-deep .mat-step-header .mat-step-text-label {
-        visibility: hidden;
     }
     .example-box:last-child {
         border: none !important;
@@ -550,18 +350,16 @@
     }
 }
 
-@media (min-width: 768px) and (max-width: 991px) {
-    .hidden-sm {
-        display: none !important;
-    }
-    .navbar .navbar-brand {
-        margin-left: 40px !important;
-    }
+@media(max-width:575px) {
     .title {
-        padding-left: 20px;
+        padding-left: 50px;
+    }
+    .margin-portabilidad {
+        margin-top: 0px;
     }
     .width-bancos {
-        width: 700px;
+        max-width: 100%;
+        max-height: 100%;
     }
     .padding-stepper {
         padding-right: 20px;
@@ -574,7 +372,11 @@
     }
     .example-full-width {
         width: 100% !important;
-        height: 60px !important;
+        height: 55px !important;
+    }
+    .termino {
+        width: 50px;
+        word-wrap: break-word;
     }
     .example-section {
         display: flex !important;
@@ -588,13 +390,53 @@
     .example-h2 {
         font-family: 'Montserrat' !important;
         color: #707070 !important;
-        font-weight: 600 !important;
+        font-weight: 500 !important;
         line-height: 30px !important;
-        font-size: 21px !important;
+        font-size: 12px !important;
+    }
+    .terminos {
+        font-family: 'Montserrat' !important;
+        color: #707070 !important;
+        font-weight: 500 !important;
+        line-height: 15px !important;
+        font-size: 12px !important;
     }
     .mat-stepper-horizontal {
         border-radius: 20px !important;
         background-color: rgba(255, 255, 255, 0.32) !important;
+    }
+    .tablagen {
+        display: table;
+    }
+    .fila {
+        display: table-row;
+    }
+    .col-chk {
+        display: table-cell;
+        padding: 0px;
+        width: 10%;
+    }
+    .col-ter {
+        display: table-cell;
+        padding: 12px;
+        width: 90%;
+    }
+     ::ng-deep .mat-checkbox-layout .mat-checkbox-label {
+        font-family: 'Montserrat' !important;
+        color: #707070 !important;
+        font-weight: 500 !important;
+        font-size: 22px !important;
+        white-space: initial !important;
+    }
+     ::ng-deep .mat-step-header .mat-step-label.mat-step-label-active {
+        display: none;
+    }
+     ::ng-deep .mat-step-header .mat-step-label {
+        display: none;
+    }
+     ::ng-deep .mat-form-field-wrapper {
+        position: relative;
+        font-size: 17px;
     }
      ::ng-deep .mat-step-header .mat-step-icon-selected {
         background-color: #FF0073 !important;
@@ -621,10 +463,10 @@
         font-family: 'Montserrat' !important;
         color: #ffffff !important;
         font-weight: 500 !important;
-        font-size: 22px !important;
+        font-size: 12px !important;
         border-radius: 10px !important;
-        height: 66px !important;
-        width: 272px !important;
+        height: 40px !important;
+        width: 150px !important;
     }
      ::ng-deep .mat-fab.mat-accent,
     .mat-flat-button.mat-accent,
@@ -635,10 +477,10 @@
         font-family: 'Montserrat' !important;
         color: #ffffff !important;
         font-weight: 500 !important;
-        font-size: 22px !important;
+        font-size: 14px !important;
         border-radius: 10px !important;
-        height: 66px !important;
-        width: 172px !important;
+        height: 50px !important;
+        width: 60px !important;
     }
      ::ng-deep .mat-fab.mat-warn,
     .mat-flat-button.mat-warn,
@@ -650,16 +492,44 @@
         font-family: 'Montserrat' !important;
         color: #ffffff !important;
         font-weight: 500 !important;
-        font-size: 22px !important;
+        font-size: 14px !important;
         border-radius: 10px !important;
-        height: 66px !important;
-        width: 172px !important;
+        height: 50px !important;
+        width: 60px !important;
     }
      ::ng-deep .mat-step-header .mat-step-label.mat-step-label-active {
         color: #3E3E3E !important;
         font-family: 'Montserrat' !important;
         font-weight: 600 !important;
         font-size: 23px !important;
+    }
+    .example-container {
+        width: 400px !important;
+        max-width: 100% !important;
+        margin: 0 25px 25px 0 !important;
+        display: inline-block !important;
+        vertical-align: top !important;
+    }
+    .example-list {
+        border: solid 1px #ccc !important;
+        min-height: 60px !important;
+        background: white !important;
+        border-radius: 4px !important;
+        overflow: hidden !important;
+        display: block !important;
+    }
+    .example-box {
+        padding: 20px 10px !important;
+        border-bottom: solid 1px #ccc !important;
+        color: rgba(0, 0, 0, 0.87) !important;
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        box-sizing: border- !important;
+        cursor: move !important;
+        background: white !important;
+        font-size: 14px !important;
     }
     .example-box:last-child {
         border: none !important;

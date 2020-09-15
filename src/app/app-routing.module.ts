@@ -24,11 +24,9 @@ import { ModificarUsuarioComponent } from './components/modificar-usuario/modifi
 import { TicketHomeComponent } from './components/atencion-virtual/ticket-home/ticket-home.component';
 import { TicketChatHomeComponent } from './components/atencion-virtual/ticket-chat-home/ticket-chat-home.component';
 import { Home2Component } from './components/home2/home2.component';
-import { EncuestaDiferidosComponent } from './components/encuestas/encuesta-diferidos/encuesta-diferidos.component';
-import { EncuestaEmpresasComponent } from './components/encuestas/encuesta-empresas/encuesta-empresas.component';
+
 
 import { CampaignHomeComponent } from './components/admin-campaign/campaign-home/campaign-home.component';
-import { DesuscribirComponent } from './components/encuestas/desuscribir/desuscribir.component';
 import { MiFichaComponent } from './components/mi-cartera/mi-ficha/mi-ficha.component';
 import { CarteraHomeComponent } from './components/mi-cartera/cartera-home/cartera-home.component';
 import { CarteraGestionComponent } from './components/mi-cartera/cartera-gestion/cartera-gestion.component';
@@ -63,9 +61,6 @@ import { MainComponent } from './components/main/main.component';
 const routes: Routes = [
   { path: 'simulador', component: SimuladorBaseComponent, canActivate: [AuthGuard] },
   { path: 'simulador_ext', component: SimuladorExternoComponent },
-  { path: 'encuesta_diferidos/:idEncuesta/:rutPersona/:idFecha', component: EncuestaDiferidosComponent },
-  { path: 'encuesta_empresas/:idEncuesta/:rutEmpresa/:email/:idFecha', component: EncuestaEmpresasComponent },
-  { path: 'desuscribir/:email', component: DesuscribirComponent },
   { path: 'simulacion_web', component: AdminSimulacionWebComponent, canActivate: [AuthGuard] },
   { path: 'empresa/:id', component: EmpresaComponent, canActivate: [AuthGuard] },
   { path: 'empresas', component: EmpresasComponent, canActivate: [AuthGuard] },
