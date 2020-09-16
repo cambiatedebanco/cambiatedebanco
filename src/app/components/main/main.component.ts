@@ -63,8 +63,8 @@ export class MainComponent implements OnInit {
     elem.setAttribute('rel','stylesheet');
     elem.setAttribute('type','text/css');
 
+   
     
- 
 
   this.postgresService.getBancos().subscribe(resp=>{
     this.bancos=resp;
