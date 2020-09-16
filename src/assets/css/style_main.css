@@ -371,13 +371,13 @@ header,
         margin-top: 100px;
     }
     #intro {
-        background: url(../../../assets/images/back_main.jpg) no-repeat;
-        background-position: -300px -1060px;
+        background: url(../../../assets/images/back_main_575.jpg) no-repeat;
+        background-position: 0px -250px;
     }
     #contenido {
         height: 1700px;
-        background: url(../../../assets/images/contenido.jpg) no-repeat;
-        background-position: -700px 0px;
+        background: url(../../../assets/images/contenido_575.jpg) no-repeat;
+        background-position: -300px 950px;
     }
     .navbar {
         transition: all 0.4s !important;
