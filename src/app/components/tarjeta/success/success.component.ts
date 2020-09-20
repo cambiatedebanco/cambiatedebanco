@@ -54,7 +54,7 @@ export class SuccessComponent implements OnInit, OnDestroy {
     this._postgresqlService.getStatusSuccess(data).subscribe(res=>{
 
       this.resultado= res[0];
-      console.log(this.resultado);
+
     }
       );
 

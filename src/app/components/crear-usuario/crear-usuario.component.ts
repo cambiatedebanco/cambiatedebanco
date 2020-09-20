@@ -1,14 +1,12 @@
 import { Component, OnInit, OnDestroy, ElementRef, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router, NavigationEnd } from '@angular/router';
 import Swal from 'sweetalert2';
-import { FirestoreService } from 'src/app/services/firestore/firestore.service';
-import { Subject, combineLatest, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { RutValidator } from '../../rut.validator';
 import { PostgresService } from 'src/app/services/postgres/postgres.service';
-import { tap } from 'rxjs/operators';
-import { getHeaders, getHeaderStts } from '../utility';
+import { getHeaderStts } from '../utility';
 
 @Component({
   selector: 'app-crear-usuario',
@@ -41,7 +39,6 @@ export class CrearUsuarioComponent implements OnInit, OnDestroy {
   user_cla = null;
   constructor(
     private formBuilder: FormBuilder,
-    public firestoreservice: FirestoreService,
     public authService: AuthService,
     private router: Router,
     private postgresService: PostgresService,

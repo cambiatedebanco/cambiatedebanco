@@ -1,13 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormBuilder, FormControl, Validators, NgForm, FormGroup, FormArray, ValidatorFn } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { FirestoreService } from 'src/app/services/firestore/firestore.service';
-import { Subject, combineLatest, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { PostgresService } from 'src/app/services/postgres/postgres.service';
-import { getHeaders, getHeaderStts } from '../utility';
-import { tap } from 'rxjs/operators';
+import { getHeaderStts } from '../utility';
 
 
 @Component({
@@ -23,7 +21,7 @@ export class ModificarUsuarioComponent implements OnInit, OnDestroy {
   nivelAcceso: any;
   selected: any;
   selectedBanco: any;
-  navigationSubscription: Subscription;;
+  navigationSubscription: Subscription;
   user: any;
   control: any = [];
   checked: boolean;
@@ -43,7 +41,6 @@ export class ModificarUsuarioComponent implements OnInit, OnDestroy {
   user_cla = null;
   constructor(
     private formBuilder: FormBuilder,
-    public firestoreservice: FirestoreService,
     public authService: AuthService,
     private router: Router,
     private route: ActivatedRoute,

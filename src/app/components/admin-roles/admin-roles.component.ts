@@ -2,11 +2,9 @@ import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Subscription } from 'rxjs';
-import { FirestoreService } from 'src/app/services/firestore/firestore.service';
 import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 import {ExportService} from '../../services/export-file/export.service';
-import { tap } from 'rxjs/operators';
-import { getHeaders, getHeaderStts } from '../utility';
+import { getHeaderStts } from '../utility';
 import { PostgresService } from 'src/app/services/postgres/postgres.service';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -31,7 +29,6 @@ export class AdminRolesComponent implements OnInit, OnDestroy {
 
 
   constructor(
-    public firestoreservice: FirestoreService,
     private router: Router,
     private excelService: ExportService,
     private postgresService: PostgresService,

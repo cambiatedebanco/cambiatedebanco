@@ -4,8 +4,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class FilterPipe implements PipeTransform {
   transform(value: any, searchValue:string): any {
-    console.log(value);
-    console.log(searchValue)
     
     if (!searchValue) return value;
     return value.filter((v) => 

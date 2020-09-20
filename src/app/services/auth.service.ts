@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Router } from "@angular/router";
 import { auth } from 'firebase/app';
 import { AngularFireAuth } from "@angular/fire/auth";
-import { FirestoreService } from './firestore/firestore.service';
 import { first } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment'
@@ -22,7 +21,6 @@ export class AuthService {
   constructor(
     public angularFireAuth: AngularFireAuth,
     public router: Router,
-    public _firestore: FirestoreService,
     private postgresService: PostgresService,
   ) {
     this.initClient()
@@ -50,7 +48,6 @@ export class AuthService {
     });
   }
   getestado() {
-console.log('En getestado()');
     this.angularFireAuth.authState.subscribe( userResponse => {
       if (userResponse && userResponse.isAnonymous == false) {
         let userStr = JSON.stringify(userResponse);
@@ -77,10 +74,8 @@ console.log('En getestado()');
   }
 
   async login(email: string, password: string) {
-    console.log('login(email: string, password: string) ');
     return await  this.angularFireAuth.auth.signInWithEmailAndPassword(email, password).then(
       response => {
-        console.log('response ==> ', response.user);
         if(response){
           localStorage.setItem('user', JSON.stringify(response.user))
           return true;

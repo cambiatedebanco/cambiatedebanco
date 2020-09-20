@@ -126,12 +126,6 @@ export class MainComponent implements OnInit {
     return  item.nombre ;
   }
 
-  addSupervisoresCampain(data, headers){
-    this.postgresService.addSupervisoresCampain(data, headers).subscribe(_=> {
-    }, error => {
-    });
-  }
-
   onSubmitPaso1(stepper: MatStepper) {
 
     if (this.firstFormGroup.invalid) {
@@ -279,8 +273,6 @@ this.postgresService.getBancos(form1.bancos).subscribe(resp=>{
     let extension=this.nombreArchivo.split('.');
     let nombre_archivo= String(timestamp)+ String(form3.rut).replace('-','').replace('.','') + '.' + extension[1];
     let archivo = this.datosFormulario.get('archivo');
-    console.log('nombre_archivo ==> ', nombre_archivo);
-    console.log('archivo ==> ', archivo);
     let tarea = this.firebaseStorage.tareaCloudStorage(nombre_archivo, archivo);
  
     const payload={
@@ -305,7 +297,6 @@ this.postgresService.getBancos(form1.bancos).subscribe(resp=>{
   
   let data= res[0];
   this.postgresService.sendEmail(data.nombre,data.id,data.email).subscribe( res=>{
-    console.log(res);
   });
  } 
   );
@@ -366,7 +357,6 @@ this.postgresService.getBancos(form1.bancos).subscribe(resp=>{
 
 
   this.postgresService.sendEmail_contacto(contacto.nombre,contacto.telefono,contacto.email,contacto.comentarios).subscribe( res=>{
-    console.log(res);
     this.showForm = false;
   });
   

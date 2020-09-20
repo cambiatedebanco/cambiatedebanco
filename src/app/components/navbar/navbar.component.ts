@@ -1,12 +1,8 @@
 import { Component, OnInit, OnDestroy, Input, ElementRef, ViewChild, EventEmitter, Output } from '@angular/core';
-import { FirestoreService } from '../../services/firestore/firestore.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { Subject, Subscription } from 'rxjs';
-import { combineLatest } from 'rxjs';
 import { FormControl } from '@angular/forms';
-import { NgForm } from '@angular/forms';
-import Swal from 'sweetalert2';
 import { PostgresService } from 'src/app/services/postgres/postgres.service';
 import { getHeaderStts } from '../utility';
 
@@ -59,7 +55,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
   defaultHome = "#"
   @Output() headerEmmiter = new EventEmitter();
   constructor(
-    public _firestoreservice: FirestoreService,
     private _route: Router,
     private _auth: AuthService,
     private postgresService: PostgresService

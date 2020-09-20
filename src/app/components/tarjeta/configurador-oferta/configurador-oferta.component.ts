@@ -54,7 +54,6 @@ export class ConfiguradorOfertaComponent implements OnInit, OnDestroy {
     this.cantidadMonedas = parseInt(params[2]) * this.cantidadBolsa;
     this.monto_compra = this.cantidadBolsa * parseInt(params[1]);
     this.userPerfil = JSON.parse(localStorage.getItem('user_perfil'));
-    console.log(this.monto_compra);
   }
 
 
@@ -73,7 +72,6 @@ export class ConfiguradorOfertaComponent implements OnInit, OnDestroy {
   
     this.subsFlow = this.postgresqlService.getFlow(this.items).subscribe(res=>{
        this.init_point = res.redirect;
-       console.log(this.init_point);
        window.open(this.init_point, '_blank');
        });
 

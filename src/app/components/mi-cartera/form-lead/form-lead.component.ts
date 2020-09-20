@@ -40,7 +40,7 @@ export class FormLeadComponent implements OnInit, OnDestroy {
                  private firebaseStorage: FirebaseStorageService) { }
 
   ngOnInit() {
-    window.scrollTo(0, 0);
+    window.scrollTo(0, 0);    
     const id = this.route.snapshot.paramMap.get('id');
     this.formGroup = this.formBuilder.group({
       id: new FormControl({value: '', disabled: true},  [Validators.required]),
@@ -63,7 +63,7 @@ export class FormLeadComponent implements OnInit, OnDestroy {
     if(Number(this.user_cla.id_cargo) !== 4){
       this.updatePendienteLead({fecha_gestion: new Date(), id: parseInt(id)});
     }
-    this.navbar.getTop11LeadsColaborador();
+    //
 
   }
 
@@ -100,6 +100,7 @@ export class FormLeadComponent implements OnInit, OnDestroy {
     this.formGroup.controls.id_estado.setValue(parseInt(lead.id_estado || 0));
     this.formGroup.controls.monto.setValue(parseInt(lead.monto || 0));
     this.formGroup.controls.observaciones.setValue(lead.observaciones);
+    this.navbar.getTop11LeadsColaborador();
 
 }
 

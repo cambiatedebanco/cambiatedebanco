@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FirestoreService } from '../../services/firestore/firestore.service';
 import { Router,NavigationEnd} from '@angular/router';
 import { Subscription } from 'rxjs';
 
@@ -13,7 +12,6 @@ export class LeftBarComponent implements OnInit {
   userPerfil: any;
 
   constructor(
-    public firestoreservice: FirestoreService,
     private route: Router) {
     this.navigationSubscription = this.route.events.subscribe((e: any) => {
       // If it is a NavigationEnd event re-initalise the component

@@ -132,15 +132,6 @@ export class EmailComponent implements OnInit, OnDestroy {
 
     this.closebuttonEmail.nativeElement.click();
 
-    this.postgresService.saveTimeLine(dataTimeline, this.headers).subscribe(res => console.log(res), 
-    err => {
-        console.log(err);
-    },
-    () => {
-      console.log('complete');
-      this.completeGestion.emit(true);
-      });
-
   }
 
 
